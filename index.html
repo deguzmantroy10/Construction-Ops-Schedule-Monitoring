@@ -1056,7 +1056,7 @@
             });
         }
 
-        /* FUNCTIONS PARA SA MIGRATION (EXPORT / IMPORT JSON BACKUP) */
+        /* JSON BACKUP & RESTORE FUNCTIONS */
         function exportSystemBackupJson() {
             const backupData = {
                 attendanceData: JSON.parse(localStorage.getItem("attendanceData")) || {},
@@ -1065,7 +1065,6 @@
                 exportDate: new Date().toISOString()
             };
             
-            // Hanapin din ang lahat ng mandays data sa local storage
             auditors.forEach(aud => {
                 const mKey = `mandaysData_${aud}`;
                 if(localStorage.getItem(mKey)) {
@@ -1104,7 +1103,6 @@
                             auditLogs = importedData.auditLogs;
                         }
                         
-                        // I-restore ang bawat mandays data ng mga auditor
                         Object.keys(importedData).forEach(key => {
                             if (key.startsWith("mandaysData_")) {
                                 localStorage.setItem(key, JSON.stringify(importedData[key]));
