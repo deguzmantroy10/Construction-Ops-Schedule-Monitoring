@@ -168,6 +168,15 @@
             color: #38bdf8;
         }
 
+        /* DINAGDAG NA STYE PARA SA PROFILE PICTURE ICON */
+        .user-info img.user-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #38bdf8;
+        }
+
         .user-info small {
             font-size: 10px;
             color: #94a3b8;
@@ -611,8 +620,8 @@
         </div>
 
         <div class="user-sidebar-footer">
-            <div class="user-info">
-                <i class="fa-solid fa-circle-user"></i>
+            <div class="user-info" id="userSidebarInfoContainer">
+                <i class="fa-solid fa-circle-user" id="userIconElement"></i>
                 <div>
                     <small>Logged in as:</small>
                     <h4 id="loggedAuditorName">Not Selected</h4>
@@ -633,12 +642,11 @@
 
         <!-- DASHBOARD PAGE -->
         <div id="dashboardPage">
-            <!-- DASHBOARD MONTH FILTER / SLICER -->
             <div class="controls" style="margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between;">
                 <div style="display: flex; align-items: center; gap: 10px;">
                     <label style="font-size: 12px; font-weight: 700; text-transform: uppercase; color: var(--primary);"><i class="fa-solid fa-filter"></i> Dashboard Filter (Month):</label>
                     <select id="dashboardMonthFilter" onchange="updateDashboardCards()" style="padding: 8px 14px; border-radius: 8px; border: 1px solid #cbd5e1; font-weight: 600;">
-                        <option value="ALL">-- All Months / Overall --</option>
+                        <option value="ALL">- All Months / Overall -</option>
                         <option value="2026-01">January 2026</option>
                         <option value="2026-02">February 2026</option>
                         <option value="2026-03">March 2026</option>
@@ -666,7 +674,7 @@
                     </select>
                 </div>
                 <div style="font-size: 12px; color: #64748b;">
-                    <i class="fa-solid fa-circle-info"></i> Slicer adjusts numbers safely without deleting saved scripts.
+                    <i class="fa-solid fa-circle-info"></i> Construction Ops 2026v1.
                 </div>
             </div>
 
@@ -693,10 +701,9 @@
                 </div>
             </div>
 
-            <!-- REPLACED MONTHLY OVERVIEW TREND GRAPH WITH AUDITORS BREAKDOWN GRAPH -->
             <div class="chart-grid">
                 <div class="chart-card">
-                    <h2><i class="fa-solid fa-chart-bar" style="color: #2563eb;"></i> Auditors Breakdown (WFA, WAHO, Site Visit, Leave, WFA/Leave, WAHO/Leave)</h2>
+                    <h2><i class="fa-solid fa-chart-bar" style="color: #2563eb;"></i> Auditors Breakdown</h2>
                     <canvas id="auditorsBreakdownChart" style="max-height: 250px;"></canvas>
                 </div>
                 <div class="chart-card">
@@ -711,13 +718,13 @@
                     <canvas id="attendanceChart" style="max-height: 230px;"></canvas>
                 </div>
                 <div class="chart-card">
-                    <h2><i class="fa-solid fa-trophy" style="color: #eab308;"></i> Top Auditors by WAHO (Most Home/Office Work)</h2>
+                    <h2><i class="fa-solid fa-trophy" style="color: #eab308;"></i> Top Auditors by WAHO (Most Work at Head Office)</h2>
                     <canvas id="topWahoChart" style="max-height: 230px;"></canvas>
                 </div>
             </div>
         </div>
 
-        <!-- WEEKLY PAGE (2026-2027) -->
+        <!-- WEEKLY PAGE -->
         <div id="weeklyPage" class="page-hidden">
             <div class="controls">
                 <div class="form-group" style="margin: 0;">
@@ -788,7 +795,7 @@
             </div>
         </div>
 
-        <!-- MONTHLY PAGE (2026-2027) -->
+        <!-- MONTHLY PAGE -->
         <div id="monthlyPage" class="page-hidden">
             <div class="monthly">
                 <h2 style="font-size: 18px; font-weight: 700; margin-bottom: 5px;"><i class="fa-solid fa-calendar-days"></i> Monthly View</h2>
@@ -847,7 +854,6 @@
                     <div style="display: flex; gap: 10px; align-items: center;">
                         <div style="display: flex; align-items: center; gap: 8px;">
                             <label style="font-size: 12px; font-weight: 600;">Auditor:</label>
-                            <!-- AUDITOR FILTER / SELECTOR -->
                             <select id="mandaysAuditorSelect" onchange="onMandaysAuditorChange()" style="padding: 8px 12px; border-radius: 8px; border: 1px solid #cbd5e1; font-weight: 600; background: var(--surface-light); color: var(--text-light);">
                             </select>
                         </div>
@@ -903,7 +909,7 @@
             </div>
         </div>
 
-        <!-- SETTINGS PAGE (2026-2027 Export Options) -->
+        <!-- SETTINGS PAGE -->
         <div id="settingsPage" class="page-hidden">
             <div class="settings-container">
                 <div class="settings-card" id="auditTrailCard">
@@ -1030,6 +1036,49 @@
         function updateLoggedUserDisplay() {
             const elem = document.getElementById("loggedAuditorName");
             if (elem) elem.textContent = currentLoggedAuditor || "Not Selected";
+            
+            // DYNAMIC PROFILE PICTURE MAPPING PARA SA MGA PANGALAN
+            const userContainer = document.getElementById("userSidebarInfoContainer");
+            if (userContainer) {
+                const existingIcon = document.getElementById("userIconElement");
+                if (existingIcon) existingIcon.remove();
+                const existingImg = userContainer.querySelector("img.user-avatar");
+                if (existingImg) existingImg.remove();
+
+                let imgElement = document.createElement("img");
+                imgElement.id = "userIconElement";
+                imgElement.className = "user-avatar";
+
+                // Pag-check kung sino ang naka-login para sa kanilang litrato
+                if (currentLoggedAuditor === "Catherine Rosales") {
+                    imgElement.src = "Catherine Rosales_3.jpg";
+                } else if (currentLoggedAuditor === "Joemel Perez") {
+                    imgElement.src = "Joemel Perez_3.jpg";
+                } else if (currentLoggedAuditor === "Troy De Guzman") {
+                    imgElement.src = "Troy De Guzman_3.jpg";
+                } else if (currentLoggedAuditor === "Dean Mark Soledad") {
+                    imgElement.src = "Dean Mark Soledad_3.jpg";
+                } else if (currentLoggedAuditor === "Cijay Castro") {
+                    imgElement.src = "Cijay Castro_3.jpg";
+                } else if (currentLoggedAuditor === "Dianne Armas") {
+                    imgElement.src = "Dianne Armas_3.jpg";
+                } else if (currentLoggedAuditor === "Bryan Panol") {
+                    imgElement.src = "Bryan Panol_3.jpg";
+                } else if (currentLoggedAuditor === "Elmar Baria") {
+                    imgElement.src = "Elmar Baria_3.jpg";
+                } else {
+                    // Default icon kung wala pa o iba
+                    let defaultI = document.createElement("i");
+                    defaultI.id = "userIconElement";
+                    defaultI.className = "fa-solid fa-circle-user";
+                    defaultI.style.fontSize = "24px";
+                    defaultI.style.color = "#38bdf8";
+                    userContainer.prepend(defaultI);
+                    return;
+                }
+                userContainer.prepend(imgElement);
+            }
+
             updateAuditTrailVisibility();
         }
         function updateAuditTrailVisibility() {
@@ -1760,7 +1809,7 @@
                 auditorsBreakdownChartInstance = new Chart(ctxBreakdown, {
                     type: 'bar',
                     data: {
-                        labels: auditors.map(name => name.split(" ")[0]), // First names for clean chart axis
+                        labels: auditors.map(name => name.split(" ")[0]),
                         datasets: [
                             { label: 'WFA', data: new Array(auditors.length).fill(0), backgroundColor: '#2563eb' },
                             { label: 'WAHO', data: new Array(auditors.length).fill(0), backgroundColor: '#16a34a' },
