@@ -168,7 +168,6 @@
             color: #38bdf8;
         }
 
-        /* DINAGDAG NA STYE PARA SA PROFILE PICTURE ICON */
         .user-info img.user-avatar {
             width: 32px;
             height: 32px;
@@ -297,10 +296,7 @@
             margin-bottom: 10px;
         }
 
-        .card-header-flex i {
-            font-size: 16px;
-        }
-
+        .card-header-flex i { font-size: 16px; }
         .card.green i { color: #22c55e; }
         .card.blue i { color: #6366f1; }
         .card.orange i { color: #f59e0b; }
@@ -464,9 +460,7 @@
             align-items: center;
             gap: 8px;
         }
-        body.dark .week-block-title {
-            color: #60a5fa;
-        }
+        body.dark .week-block-title { color: #60a5fa; }
 
         table select {
             padding: 8px 12px;
@@ -479,7 +473,6 @@
             width: 100%;
             background: #fff;
             color: #1e293b;
-            transition: all 0.2s ease;
         }
 
         body.dark table select {
@@ -546,20 +539,11 @@
 
         #auditTrailCard { transition: all 0.3s ease; }
 
-        .badge { padding: 6px 12px; border-radius: 20px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; display: inline-block; }
-        .badge-scheduled { background: #fef3c7; color: #d97706; }
-        .badge-completed { background: #dcfce7; color: #16a34a; }
-        .badge-cancelled { background: #fee2e2; color: #dc2626; }
-
         .print-only { display: none; }
         @media print {
             body { background: #fff !important; color: #000 !important; }
             .sidebar, .main, .modal-overlay { display: none !important; }
             .print-only { display: block !important; padding: 20px; }
-            .print-header { text-align: center; margin-bottom: 20px; border-bottom: 2px solid #000; padding-bottom: 10px; }
-            .print-table { width: 100%; border-collapse: collapse; margin-top: 15px; }
-            .print-table th, .print-table td { border: 1px solid #000; padding: 8px; font-size: 11pt; text-align: left; }
-            .print-table th { background-color: #f2f2f2 !important; -webkit-print-color-adjust: exact; }
         }
     </style>
 </head>
@@ -642,126 +626,36 @@
 
         <!-- DASHBOARD PAGE -->
         <div id="dashboardPage">
-            <div class="controls" style="margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between;">
-                <div style="display: flex; align-items: center; gap: 10px;">
-                    <label style="font-size: 12px; font-weight: 700; text-transform: uppercase; color: var(--primary);"><i class="fa-solid fa-filter"></i> Dashboard Filter (Month):</label>
-                    <select id="dashboardMonthFilter" onchange="updateDashboardCards()" style="padding: 8px 14px; border-radius: 8px; border: 1px solid #cbd5e1; font-weight: 600;">
-                        <option value="ALL">- All Months / Overall -</option>
-                        <option value="2026-01">January 2026</option>
-                        <option value="2026-02">February 2026</option>
-                        <option value="2026-03">March 2026</option>
-                        <option value="2026-04">April 2026</option>
-                        <option value="2026-05">May 2026</option>
-                        <option value="2026-06">June 2026</option>
-                        <option value="2026-07">July 2026</option>
-                        <option value="2026-08">August 2026</option>
-                        <option value="2026-09">September 2026</option>
-                        <option value="2026-10">October 2026</option>
-                        <option value="2026-11">November 2026</option>
-                        <option value="2026-12">December 2026</option>
-                        <option value="2027-01">January 2027</option>
-                        <option value="2027-02">February 2027</option>
-                        <option value="2027-03">March 2027</option>
-                        <option value="2027-04">April 2027</option>
-                        <option value="2027-05">May 2027</option>
-                        <option value="2027-06">June 2027</option>
-                        <option value="2027-07">July 2027</option>
-                        <option value="2027-08">August 2027</option>
-                        <option value="2027-09">September 2027</option>
-                        <option value="2027-10">October 2027</option>
-                        <option value="2027-11">November 2027</option>
-                        <option value="2027-12">December 2027</option>
-                    </select>
-                </div>
-                <div style="font-size: 12px; color: #64748b;">
-                    <i class="fa-solid fa-circle-info"></i> Construction Ops 2026v1.
-                </div>
-            </div>
-
             <div class="cards">
-                <div class="card green">
-                    <div class="card-header-flex"><i class="fa-solid fa-house-laptop"></i><h3>Total WAHO</h3></div>
-                    <h2 id="wahoCount">0</h2>
-                </div>
-                <div class="card blue">
-                    <div class="card-header-flex"><i class="fa-solid fa-building-user"></i><h3>Total WFA</h3></div>
-                    <h2 id="wfaCount">0</h2>
-                </div>
-                <div class="card orange">
-                    <div class="card-header-flex"><i class="fa-solid fa-map-location-dot"></i><h3>Site Visits</h3></div>
-                    <h2 id="siteCount">0</h2>
-                </div>
-                <div class="card red">
-                    <div class="card-header-flex"><i class="fa-solid fa-user-slash"></i><h3>Leaves</h3></div>
-                    <h2 id="leaveCount">0</h2>
-                </div>
-                <div class="card gray">
-                    <div class="card-header-flex"><i class="fa-solid fa-umbrella-beach"></i><h3>Holidays</h3></div>
-                    <h2 id="holidayCount">0</h2>
-                </div>
+                <div class="card green"><div class="card-header-flex"><i class="fa-solid fa-house-laptop"></i><h3>Total WAHO</h3></div><h2 id="wahoCount">0</h2></div>
+                <div class="card blue"><div class="card-header-flex"><i class="fa-solid fa-building-user"></i><h3>Total WFA</h3></div><h2 id="wfaCount">0</h2></div>
+                <div class="card orange"><div class="card-header-flex"><i class="fa-solid fa-map-location-dot"></i><h3>Site Visits</h3></div><h2 id="siteCount">0</h2></div>
+                <div class="card red"><div class="card-header-flex"><i class="fa-solid fa-user-slash"></i><h3>Leaves</h3></div><h2 id="leaveCount">0</h2></div>
+                <div class="card gray"><div class="card-header-flex"><i class="fa-solid fa-umbrella-beach"></i><h3>Holidays</h3></div><h2 id="holidayCount">0</h2></div>
             </div>
-
             <div class="chart-grid">
-                <div class="chart-card">
-                    <h2><i class="fa-solid fa-chart-bar" style="color: #2563eb;"></i> Auditors Breakdown</h2>
-                    <canvas id="auditorsBreakdownChart" style="max-height: 250px;"></canvas>
-                </div>
-                <div class="chart-card">
-                    <h2><i class="fa-solid fa-chart-pie" style="color: #2563eb;"></i> Overall Attendance Mode Share</h2>
-                    <canvas id="attendanceModePieChart" style="max-height: 250px;"></canvas>
-                </div>
-            </div>
-
-            <div class="chart-grid">
-                <div class="chart-card">
-                    <h2>Weekly Status Breakdown</h2>
-                    <canvas id="attendanceChart" style="max-height: 230px;"></canvas>
-                </div>
-                <div class="chart-card">
-                    <h2><i class="fa-solid fa-trophy" style="color: #eab308;"></i> Top Auditors by WAHO (Most Work at Head Office)</h2>
-                    <canvas id="topWahoChart" style="max-height: 230px;"></canvas>
-                </div>
+                <div class="chart-card"><h2>Auditors Breakdown</h2><canvas id="auditorsBreakdownChart" style="max-height: 250px;"></canvas></div>
+                <div class="chart-card"><h2>Overall Attendance Mode Share</h2><canvas id="attendanceModePieChart" style="max-height: 250px;"></canvas></div>
             </div>
         </div>
 
         <!-- WEEKLY PAGE -->
         <div id="weeklyPage" class="page-hidden">
             <div class="controls">
-                <div class="form-group" style="margin: 0;">
-                    <label style="font-size: 11px; text-transform: uppercase; font-weight: 700; color: #64748b;">Select Month:</label>
-                    <select id="weeklyMonthSelect" onchange="renderWeeklyBlocks()">
-                        <option value="2026-01">January 2026</option>
-                        <option value="2026-02">February 2026</option>
-                        <option value="2026-03">March 2026</option>
-                        <option value="2026-04">April 2026</option>
-                        <option value="2026-05">May 2026</option>
-                        <option value="2026-06">June 2026</option>
-                        <option value="2026-07">July 2026</option>
-                        <option value="2026-08">August 2026</option>
-                        <option value="2026-09">September 2026</option>
-                        <option value="2026-10">October 2026</option>
-                        <option value="2026-11">November 2026</option>
-                        <option value="2026-12">December 2026</option>
-                        <option value="2027-01">January 2027</option>
-                        <option value="2027-02">February 2027</option>
-                        <option value="2027-03">March 2027</option>
-                        <option value="2027-04">April 2027</option>
-                        <option value="2027-05">May 2027</option>
-                        <option value="2027-06">June 2027</option>
-                        <option value="2027-07">July 2027</option>
-                        <option value="2027-08">August 2027</option>
-                        <option value="2027-09">September 2027</option>
-                        <option value="2027-10">October 2027</option>
-                        <option value="2027-11">November 2027</option>
-                        <option value="2027-12">December 2027</option>
-                    </select>
-                </div>
-                <input type="text" id="search" placeholder="Search Auditor..." style="flex-grow: 1; max-width: 300px; margin-top: 18px;">
-                <div style="margin-left: auto; display: flex; gap: 10px; margin-top: 18px;">
+                <select id="weeklyMonthSelect" onchange="renderWeeklyBlocks()">
+                    <option value="2026-01">January 2026</option>
+                    <option value="2026-02">February 2026</option>
+                    <option value="2026-03">March 2026</option>
+                    <option value="2026-04">April 2026</option>
+                    <option value="2026-05">May 2026</option>
+                    <option value="2026-06">June 2026</option>
+                    <option value="2026-07">July 2026</option>
+                    <option value="2026-08">August 2026</option>
+                </select>
+                <input type="text" id="search" placeholder="Search Auditor..." style="flex-grow: 1; max-width: 300px;">
+                <div style="margin-left: auto; display: flex; gap: 10px;">
                     <button id="darkMode" type="button" class="btn-teal"><i class="fa-solid fa-moon"></i> Dark Mode</button>
-                    <button id="saveAttendance" type="button" class="btn-primary" style="background-color: #16a34a;">
-                        <i class="fa-solid fa-floppy-disk"></i> Save Changes
-                    </button>
+                    <button id="saveAttendance" type="button" class="btn-success"><i class="fa-solid fa-floppy-disk"></i> Save Changes</button>
                 </div>
             </div>
             <div id="weeklyBlocksContainer"></div>
@@ -770,95 +664,59 @@
         <!-- SITE VISIT PAGE -->
         <div id="siteVisitPage" class="page-hidden">
             <div class="monthly">
-                <h2 style="font-size: 18px; font-weight: 700; margin-bottom: 15px;"><i class="fa-solid fa-location-dot"></i> Site Visit Schedule</h2>
+                <h2><i class="fa-solid fa-location-dot"></i> Site Visit Schedule</h2>
                 <div class="site-visit-form-container">
-                    <h3 style="font-size: 14px; font-weight: 700; color: var(--primary);">Add New Site Visit Schedule</h3>
                     <form id="siteVisitForm" onsubmit="addSiteVisit(event)">
                         <div class="form-grid">
                             <div class="form-group"><label>Auditor</label><select id="siteAuditor" required><option value="">Select Auditor</option></select></div>
                             <div class="form-group"><label>Project Site</label><input type="text" id="siteLocation" placeholder="Enter Project Site" required></div>
                             <div class="form-group"><label>Date</label><input type="date" id="siteDate" required></div>
                             <div class="form-group"><label>Status</label><select id="siteStatus"><option value="Scheduled">Scheduled</option><option value="Completed">Completed</option><option value="Cancelled">Cancelled</option></select></div>
-                            <div class="form-group" style="grid-column: span 3;"><label>Purpose of Visit</label><input type="text" id="siteRemarks" placeholder="Enter purpose of visit..."></div>
-                            <div class="form-group" style="display: flex; justify-content: flex-end; align-items: flex-end;">
-                                <button type="submit" class="btn-primary" style="width: 100%; justify-content: center;"><i class="fa-solid fa-plus"></i> Add Schedule</button>
-                            </div>
+                            <div class="form-group" style="grid-column: span 3;"><label>Purpose</label><input type="text" id="siteRemarks" placeholder="Enter purpose..."></div>
+                            <div class="form-group" style="display: flex; align-items: flex-end;"><button type="submit" class="btn-primary" style="width: 100%;">Add</button></div>
                         </div>
                     </form>
                 </div>
-                <div class="table-container">
-                    <table>
-                        <thead><tr><th>Auditor</th><th>Project Site</th><th>Date</th><th>Status</th><th>Purpose of Visit</th><th>Action</th></tr></thead>
-                        <tbody id="siteVisitTableBody"></tbody>
-                    </table>
-                </div>
+                <div class="table-container"><table><thead><tr><th>Auditor</th><th>Project Site</th><th>Date</th><th>Status</th><th>Purpose</th><th>Action</th></tr></thead><tbody id="siteVisitTableBody"></tbody></table></div>
             </div>
         </div>
 
         <!-- MONTHLY PAGE -->
         <div id="monthlyPage" class="page-hidden">
             <div class="monthly">
-                <h2 style="font-size: 18px; font-weight: 700; margin-bottom: 5px;"><i class="fa-solid fa-calendar-days"></i> Monthly View</h2>
+                <h2><i class="fa-solid fa-calendar-days"></i> Monthly View</h2>
                 <div class="monthly-controls">
                     <select id="monthlyAuditor"><option value="">-- Select Auditor --</option></select>
                     <select id="monthlyMonth">
                         <option value="2026-01">January 2026</option>
                         <option value="2026-02">February 2026</option>
                         <option value="2026-03">March 2026</option>
-                        <option value="2026-04">April 2026</option>
-                        <option value="2026-05">May 2026</option>
-                        <option value="2026-06">June 2026</option>
-                        <option value="2026-07">July 2026</option>
-                        <option value="2026-08">August 2026</option>
-                        <option value="2026-09">September 2026</option>
-                        <option value="2026-10">October 2026</option>
-                        <option value="2026-11">November 2026</option>
-                        <option value="2026-12">December 2026</option>
-                        <option value="2027-01">January 2027</option>
-                        <option value="2027-02">February 2027</option>
-                        <option value="2027-03">March 2027</option>
-                        <option value="2027-04">April 2027</option>
-                        <option value="2027-05">May 2027</option>
-                        <option value="2027-06">June 2027</option>
-                        <option value="2027-07">July 2027</option>
-                        <option value="2027-08">August 2027</option>
-                        <option value="2027-09">September 2027</option>
-                        <option value="2027-10">October 2027</option>
-                        <option value="2027-11">November 2027</option>
-                        <option value="2027-12">December 2027</option>
                     </select>
                 </div>
                 <div class="attendance-summary">
-                    <div class="month-card"><h3>Present Days</h3><h2 id="mPresent">0</h2></div>
-                    <div class="month-card" style="background: #ef4444;"><h3>Leave Days</h3><h2 id="mLeave">0</h2></div>
+                    <div class="month-card"><h3>Present</h3><h2 id="mPresent">0</h2></div>
+                    <div class="month-card" style="background: #ef4444;"><h3>Leave</h3><h2 id="mLeave">0</h2></div>
                     <div class="month-card" style="background: #f59e0b;"><h3>Site Visits</h3><h2 id="mSite">0</h2></div>
-                    <div class="month-card" style="background: #0d9488;"><h3>Attendance Rate</h3><h2 id="mRate">0%</h2></div>
+                    <div class="month-card" style="background: #0d9488;"><h3>Rate</h3><h2 id="mRate">0%</h2></div>
                 </div>
-                <div class="table-container">
-                    <table class="calendar">
-                        <thead><tr><th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th></tr></thead>
-                        <tbody id="calendarBody"></tbody>
-                    </table>
-                </div>
+                <div class="table-container"><table class="calendar"><thead><tr><th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th></tr></thead><tbody id="calendarBody"></tbody></table></div>
             </div>
         </div>
 
-        <!-- MANDAYS MONITORING PAGE -->
+        <!-- MANDAYS MONITORING PAGE (FIXED WITH AUDITOR FILTER & SEPARATE STORAGE) -->
         <div id="mandaysPage" class="page-hidden">
             <div class="monthly">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
                     <div>
                         <h2 style="font-size: 18px; font-weight: 700;"><i class="fa-solid fa-chart-pie"></i> Mandays Monitoring</h2>
-                        <p style="color: #64748b; font-size: 13px; margin-top: 2px;">Internal Audit Department - Activity & Mandays Allocation with Daily Edit (Mon-Wed: 9 hrs/day, Thu-Fri: 8 hrs/day)</p>
+                        <p style="color: #64748b; font-size: 13px;">Filtered per Auditor for individual log updates and editing.</p>
                     </div>
                     <div style="display: flex; gap: 10px; align-items: center;">
-                        <div style="display: flex; align-items: center; gap: 8px;">
-                            <label style="font-size: 12px; font-weight: 600;">Auditor:</label>
-                            <select id="mandaysAuditorSelect" onchange="onMandaysAuditorChange()" style="padding: 8px 12px; border-radius: 8px; border: 1px solid #cbd5e1; font-weight: 600; background: var(--surface-light); color: var(--text-light);">
-                            </select>
-                        </div>
+                        <label style="font-size: 12px; font-weight: 600;">Select Auditor Filter:</label>
+                        <select id="mandaysAuditorSelect" onchange="onMandaysAuditorChange()" style="padding: 8px 12px; border-radius: 8px; border: 1px solid #cbd5e1; font-weight: 600;">
+                        </select>
                         <button onclick="addNewMandaysRow()" class="btn-primary"><i class="fa-solid fa-plus"></i> Add Daily Log</button>
-                        <button onclick="exportMandaysOnly()" class="btn-teal"><i class="fa-solid fa-file-excel"></i> Export</button>
+                        <button onclick="saveMandaysData()" class="btn-success"><i class="fa-solid fa-floppy-disk"></i> Save Mandays</button>
                     </div>
                 </div>
 
@@ -866,7 +724,7 @@
                     <div class="card blue"><h3>Budgeted Mandays</h3><h2 id="mBudgeted">35.00</h2></div>
                     <div class="card green"><h3>Actual Mandays</h3><h2 id="mActual">0.00</h2></div>
                     <div class="card orange"><h3>Variance</h3><h2 id="mVariance">0.00</h2></div>
-                    <div class="card purple"><h3>% of Completion</h3><h2 id="mCompletion">0%</h2></div>
+                    <div class="card purple"><h3>% Completion</h3><h2 id="mCompletion">0%</h2></div>
                 </div>
 
                 <div class="table-container">
@@ -896,12 +754,8 @@
         <!-- MANDAYS ACTIVITY CHART -->
         <div id="mandaysActivityPage" class="page-hidden">
             <div class="monthly">
-                <div style="margin-bottom: 20px;">
-                    <h2 style="font-size: 18px; font-weight: 700;"><i class="fa-solid fa-chart-bar"></i> Mandays Activity Chart</h2>
-                    <p style="color: #64748b; font-size: 13px; margin-top: 2px;">Graphical distribution and breakdown of total mandays allocation across activities.</p>
-                </div>
-                <div class="chart-card" style="margin-bottom: 20px; padding: 24px;">
-                    <h2 style="font-size: 14px; margin-bottom: 15px;"><i class="fa-solid fa-chart-bar"></i> Mandays Distribution Chart</h2>
+                <h2 style="font-size: 18px; font-weight: 700;"><i class="fa-solid fa-chart-bar"></i> Mandays Activity Chart</h2>
+                <div class="chart-card" style="margin-top: 20px; padding: 24px;">
                     <div style="position: relative; height: 350px; width: 100%;">
                         <canvas id="mandaysActivityChart"></canvas>
                     </div>
@@ -913,108 +767,36 @@
         <div id="settingsPage" class="page-hidden">
             <div class="settings-container">
                 <div class="settings-card" id="auditTrailCard">
-                    <h2 style="font-size: 16px; margin-bottom: 6px;"><i class="fa-solid fa-clock-rotate-left"></i> System Activity / Audit Trail</h2>
-                    <p style="margin-bottom: 15px; color: #64748b; font-size: 13px;">Shows who saved attendance changes and when they performed the action:</p>
+                    <h2><i class="fa-solid fa-clock-rotate-left"></i> System Audit Trail</h2>
                     <div class="table-container" style="max-height: 250px; overflow-y: auto;">
-                        <table>
-                            <thead><tr><th>Date & Time</th><th>Logged User</th><th>Action Performed</th></tr></thead>
-                            <tbody id="auditLogTableBody"></tbody>
-                        </table>
+                        <table><thead><tr><th>Time</th><th>User</th><th>Action</th></tr></thead><tbody id="auditLogTableBody"></tbody></table>
                     </div>
                 </div>
-
-                <div class="settings-card">
-                    <h2 style="font-size: 16px; margin-bottom: 15px;"><i class="fa-solid fa-file-export"></i> Export Data Options</h2>
-                    <div style="display: flex; gap: 15px; align-items: flex-end; flex-wrap: wrap; margin-bottom: 20px;">
-                        <div class="form-group" style="margin: 0;">
-                            <label style="font-size: 12px;">CATEGORY</label>
-                            <select id="exportCategorySelect" onchange="toggleExportFilters()" style="padding: 10px 14px; border-radius: 8px; border: 1px solid #cbd5e1; outline: none; font-weight: 600;">
-                                <option value="WEEKLY">Weekly Log</option>
-                                <option value="MONTHLY">Monthly Summary & Daily Logs</option>
-                                <option value="SITE_VISIT">Site Visit Schedule</option>
-                                <option value="MANDAYS">Mandays Activity Log</option>
-                                <option value="ALL">All System Data</option>
-                            </select>
-                        </div>
-                        <div id="exportMonthGroup" class="form-group" style="margin: 0;">
-                            <label style="font-size: 12px;">SELECT MONTH</label>
-                            <select id="exportMonthSelect" style="padding: 10px 14px; border-radius: 8px; border: 1px solid #cbd5e1; outline: none;">
-                                <option value="2026-01">January 2026</option>
-                                <option value="2026-02">February 2026</option>
-                                <option value="2026-03">March 2026</option>
-                                <option value="2026-04">April 2026</option>
-                                <option value="2026-05">May 2026</option>
-                                <option value="2026-06">June 2026</option>
-                                <option value="2026-07">July 2026</option>
-                                <option value="2026-08">August 2026</option>
-                                <option value="2026-09">September 2026</option>
-                                <option value="2026-10">October 2026</option>
-                                <option value="2026-11">November 2026</option>
-                                <option value="2026-12">December 2026</option>
-                                <option value="2027-01">January 2027</option>
-                                <option value="2027-02">February 2027</option>
-                                <option value="2027-03">March 2027</option>
-                                <option value="2027-04">April 2027</option>
-                                <option value="2027-05">May 2027</option>
-                                <option value="2027-06">June 2027</option>
-                                <option value="2027-07">July 2027</option>
-                                <option value="2027-08">August 2027</option>
-                                <option value="2027-09">September 2027</option>
-                                <option value="2027-10">October 2027</option>
-                                <option value="2027-11">November 2027</option>
-                                <option value="2027-12">December 2027</option>
-                            </select>
-                        </div>
-                        <button onclick="exportSelectedData()" class="btn-primary" style="height: 42px;"><i class="fa-solid fa-file-excel"></i> Export Excel (.xlsx)</button>
-                    </div>
-                    <hr style="border: 0; border-top: 1px solid var(--border-light); margin: 25px 0;">
-                    <h2 style="font-size: 16px; margin-bottom: 12px;"><i class="fa-solid fa-print"></i> Print Data Options</h2>
-                    <button onclick="printSystemReport()" class="btn-teal" style="height: 42px;"><i class="fa-solid fa-print"></i> Print Document Report</button>
-                </div>
-                <div class="settings-footer-note"><p><i class="fa-solid fa-circle-info"></i> If there are questions, recommendations and other concerns, message Troy and Yani.</p></div>
             </div>
         </div>
     </div>
 
-    <div id="printableReport" class="print-only"></div>
-
     <script>
         const auditors = ["Catherine Rosales", "Joemel Perez", "Elmar Baria", "Troy De Guzman", "Dianne Armas", "Cijay Castro", "Bryan Panol", "Dean Mark Soledad"];
-        const attendanceOptions = ["SELECT", "WAHO", "WFA", "SITE VISIT", "LEAVE", "HOLIDAY", "WAHO/LEAVE", "WFA/LEAVE"];
-
         let currentLoggedAuditor = localStorage.getItem("currentLoggedAuditor") || "";
         let auditLogs = JSON.parse(localStorage.getItem("auditLogs")) || [];
         let siteVisits = JSON.parse(localStorage.getItem("siteVisits")) || [];
         let attendanceData = JSON.parse(localStorage.getItem("attendanceData")) || {};
         
+        // Multi-auditor storage para sa Mandays Monitoring
+        let mandaysDataStore = JSON.parse(localStorage.getItem("mandaysDataStore")) || {};
+
         const defaultMandaysTemplate = [
             { id: 1, date: '2026-01-01', day: 'Thursday', sched: 'HOLIDAY', holiday: 1, slvl: 0, iad: 0, ld: 0, siteVisit: 0, qas: 0, remarks: 'New Year’s Day' },
-            { id: 2, date: '2026-01-02', day: 'Friday', sched: 'WFA', holiday: 0, slvl: 0, iad: 0, ld: 0, siteVisit: 1, qas: 0, remarks: 'UPDATE 2026 OPERATIONS GROUP MONITORING FILES' },
-            { id: 3, date: '2026-01-05', day: 'Monday', sched: 'WFA', holiday: 0, slvl: 0, iad: 0.05, ld: 0, siteVisit: 0.95, qas: 0, remarks: 'ATTENDED SOCIAL HANGOUTS, REVIEW SITE WAREHOUSING' },
-            { id: 4, date: '2026-01-06', day: 'Tuesday', sched: 'WFA', holiday: 0, slvl: 0, iad: 0, ld: 0, siteVisit: 0.95, qas: 0.05, remarks: 'REVIEW SITE WAREHOUSING & CENTRAL WAREHOUSE' },
-            { id: 5, date: '2026-01-07', day: 'Wednesday', sched: 'WAHO', holiday: 0, slvl: 0, iad: 0, ld: 0, siteVisit: 0.95, qas: 0.05, remarks: 'REVIEW SITE WAREHOUSING & REVIEW QAS RESPONSES' }
+            { id: 2, date: '2026-01-02', day: 'Friday', sched: 'WFA', holiday: 0, slvl: 0, iad: 0, ld: 0, siteVisit: 1, qas: 0, remarks: 'UPDATE OPERATIONS FILES' },
+            { id: 3, date: '2026-01-05', day: 'Monday', sched: 'WFA', holiday: 0, slvl: 0, iad: 0.05, ld: 0, siteVisit: 0.95, qas: 0, remarks: 'REVIEW SITE WAREHOUSING' }
         ];
-
-        let auditorsBreakdownChartInstance = null;
-        let weeklyChartInstance = null;
-        let mandaysChartInstance = null;
-        let topWahoChartInstance = null;
-        let attendanceModePieInstance = null;
-
-        function getDayHoursMultiplier(dayStr) {
-            const d = (dayStr || "").toLowerCase();
-            if (d.includes("mon") || d.includes("tue") || d.includes("wed")) {
-                return 9;
-            }
-            return 8; 
-        }
 
         function checkUserLogin() {
             if (!currentLoggedAuditor) { openLoginModal(); } else { updateLoggedUserDisplay(); }
         }
         function openLoginModal() {
-            const modal = document.getElementById("loginModal");
-            if (modal) modal.style.display = "flex";
+            document.getElementById("loginModal").style.display = "flex";
         }
         function handleUserLogin(e) {
             e.preventDefault();
@@ -1024,9 +806,8 @@
             localStorage.setItem("currentLoggedAuditor", currentLoggedAuditor);
             updateLoggedUserDisplay();
             document.getElementById("loginModal").style.display = "none";
-            addAuditLog(`Logged into the system session.`);
-            updateAuditTrailVisibility();
             
+            // I-sync ang Mandays dropdown sa naka-login na user
             const mSelect = document.getElementById("mandaysAuditorSelect");
             if (mSelect) {
                 mSelect.value = currentLoggedAuditor;
@@ -1036,920 +817,152 @@
         function updateLoggedUserDisplay() {
             const elem = document.getElementById("loggedAuditorName");
             if (elem) elem.textContent = currentLoggedAuditor || "Not Selected";
-            
-            // DYNAMIC PROFILE PICTURE MAPPING PARA SA MGA PANGALAN
-            const userContainer = document.getElementById("userSidebarInfoContainer");
-            if (userContainer) {
-                const existingIcon = document.getElementById("userIconElement");
-                if (existingIcon) existingIcon.remove();
-                const existingImg = userContainer.querySelector("img.user-avatar");
-                if (existingImg) existingImg.remove();
-
-                let imgElement = document.createElement("img");
-                imgElement.id = "userIconElement";
-                imgElement.className = "user-avatar";
-
-                // Pag-check kung sino ang naka-login para sa kanilang litrato
-                if (currentLoggedAuditor === "Catherine Rosales") {
-                    imgElement.src = "Catherine Rosales_3.jpg";
-                } else if (currentLoggedAuditor === "Joemel Perez") {
-                    imgElement.src = "Joemel Perez_3.jpg";
-                } else if (currentLoggedAuditor === "Troy De Guzman") {
-                    imgElement.src = "Troy De Guzman_3.jpg";
-                } else if (currentLoggedAuditor === "Dean Mark Soledad") {
-                    imgElement.src = "Dean Mark Soledad_3.jpg";
-                } else if (currentLoggedAuditor === "Cijay Castro") {
-                    imgElement.src = "Cijay Castro_3.jpg";
-                } else if (currentLoggedAuditor === "Dianne Armas") {
-                    imgElement.src = "Dianne Armas_3.jpg";
-                } else if (currentLoggedAuditor === "Bryan Panol") {
-                    imgElement.src = "Bryan Panol_3.jpg";
-                } else if (currentLoggedAuditor === "Elmar Baria") {
-                    imgElement.src = "Elmar Baria_3.jpg";
-                } else {
-                    // Default icon kung wala pa o iba
-                    let defaultI = document.createElement("i");
-                    defaultI.id = "userIconElement";
-                    defaultI.className = "fa-solid fa-circle-user";
-                    defaultI.style.fontSize = "24px";
-                    defaultI.style.color = "#38bdf8";
-                    userContainer.prepend(defaultI);
-                    return;
-                }
-                userContainer.prepend(imgElement);
-            }
-
-            updateAuditTrailVisibility();
         }
-        function updateAuditTrailVisibility() {
-            const auditTrailCard = document.getElementById("auditTrailCard");
-            if (auditTrailCard) {
-                auditTrailCard.style.display = (currentLoggedAuditor === "Yani" || currentLoggedAuditor === "Cath") ? "block" : "none";
-            }
-        }
-        function addAuditLog(actionDescription) {
-            const now = new Date();
-            const formattedDate = now.toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
-            const newLog = { id: Date.now() + Math.random(), timestamp: formattedDate, user: currentLoggedAuditor || "System Admin", action: actionDescription };
-            auditLogs.unshift(newLog);
-            if(auditLogs.length > 100) auditLogs = auditLogs.slice(0, 100);
-            localStorage.setItem("auditLogs", JSON.stringify(auditLogs));
-            renderAuditLogs();
-        }
-        function renderAuditLogs(filterTerm = "") {
-            const tbody = document.getElementById("auditLogTableBody");
-            if (!tbody) return;
-            tbody.innerHTML = "";
-            let logsToDisplay = auditLogs;
-            if (filterTerm) {
-                const term = filterTerm.toLowerCase();
-                logsToDisplay = auditLogs.filter(log => log.user.toLowerCase().includes(term) || log.action.toLowerCase().includes(term) || log.timestamp.toLowerCase().includes(term));
-            }
-            if (logsToDisplay.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="3" style="text-align:center; color:#94a3b8; padding: 15px;">No matching transaction logs found.</td></tr>`;
-                return;
-            }
-            logsToDisplay.forEach(log => {
-                tbody.innerHTML += `<tr><td style="font-size: 12px; color: #64748b; white-space: nowrap;">${log.timestamp}</td><td><strong style="color: #2563eb;">${log.user}</strong></td><td style="font-size: 13px; font-weight: 500;">${log.action}</td></tr>`;
-            });
-        }
-        function openDashboard() { hideAllPages(); document.getElementById("dashboardPage").classList.remove("page-hidden"); updateDashboardCards(); }
-        function openWeekly() { hideAllPages(); document.getElementById("weeklyPage").classList.remove("page-hidden"); renderWeeklyBlocks(); }
-        function openSiteVisit() { hideAllPages(); document.getElementById("siteVisitPage").classList.remove("page-hidden"); renderSiteVisits(); }
-        function openMonthly() { hideAllPages(); document.getElementById("monthlyPage").classList.remove("page-hidden"); renderMonthlyCalendar(); }
-        function openMandays() { hideAllPages(); document.getElementById("mandaysPage").classList.remove("page-hidden"); renderMandaysPage(); }
-        function openMandaysActivity() { 
-            hideAllPages(); 
-            document.getElementById("mandaysActivityPage").classList.remove("page-hidden"); 
-            renderMandaysPage(); 
-        }
-        function openSettings() { hideAllPages(); document.getElementById("settingsPage").classList.remove("page-hidden"); renderAuditLogs(); updateAuditTrailVisibility(); }
-        
-        function hideAllPages() { 
-            ["dashboardPage", "weeklyPage", "monthlyPage", "siteVisitPage", "mandaysPage", "mandaysActivityPage", "settingsPage"].forEach(id => { 
-                const page = document.getElementById(id); 
-                if (page) page.classList.add("page-hidden"); 
-            }); 
-        }
-        
-        function setActive(element) { document.querySelectorAll(".sidebar ul li").forEach(li => li.classList.remove("active")); element.classList.add("active"); }
-
-        document.addEventListener("DOMContentLoaded", () => {
-            populateDropdowns();
-            checkUserLogin();
-            renderTodayDate();
-            initDarkMode();
-            renderWeeklyBlocks();
-            renderMonthlyCalendar();
-            renderSiteVisits();
-            renderCharts();
-            updateDashboardCards();
-            renderAuditLogs();
-            updateAuditTrailVisibility();
-            
-            const mSelect = document.getElementById("mandaysAuditorSelect");
-            if (mSelect) {
-                mSelect.value = currentLoggedAuditor || auditors[0];
-            }
-            renderMandaysPage();
-            openDashboard();
-
-            const searchInput = document.getElementById("search");
-            if (searchInput) searchInput.addEventListener("input", filterWeeklyTable);
-            const saveBtn = document.getElementById("saveAttendance");
-            if (saveBtn) saveBtn.addEventListener("click", saveAttendanceData);
-            const monthlyAuditorSelect = document.getElementById("monthlyAuditor");
-            const monthlyMonthSelect = document.getElementById("monthlyMonth");
-            if (monthlyAuditorSelect) monthlyAuditorSelect.addEventListener("change", renderMonthlyCalendar);
-            if (monthlyMonthSelect) monthlyMonthSelect.addEventListener("change", renderMonthlyCalendar);
-        });
 
         function populateDropdowns() {
-            const siteSelect = document.getElementById("siteAuditor");
-            const monthlySelect = document.getElementById("monthlyAuditor");
-            const loginSelect = document.getElementById("currentUserSelect");
-            const mandaysSelect = document.getElementById("mandaysAuditorSelect");
-            
-            auditors.forEach(auditor => {
-                if (siteSelect && !hasOption(siteSelect, auditor)) siteSelect.add(new Option(auditor, auditor));
-                if (monthlySelect && !hasOption(monthlySelect, auditor)) monthlySelect.add(new Option(auditor, auditor));
-                if (loginSelect && !hasOption(loginSelect, auditor)) loginSelect.add(new Option(auditor, auditor));
-                if (mandaysSelect && !hasOption(mandaysSelect, auditor)) mandaysSelect.add(new Option(auditor, auditor));
-            });
-        }
-        function hasOption(select, val) { return Array.from(select.options).some(opt => opt.value === val); }
-        function renderTodayDate() {
-            const todayElem = document.getElementById("today");
-            if (!todayElem) return;
-            function updateClock() {
-                const now = new Date();
-                todayElem.textContent = now.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
-            }
-            updateClock();
-            setInterval(updateClock, 1000);
-        }
-        function initDarkMode() {
-            const darkBtn = document.getElementById("darkMode");
-            if (darkBtn) darkBtn.addEventListener("click", () => document.body.classList.toggle("dark"));
-        }
-        
-        function getWeeksInMonth(year, month) {
-            let weeks = [];
-            let firstDayOfMonth = new Date(year, month - 1, 1);
-            let dayOfWeek = firstDayOfMonth.getDay(); 
-            
-            let diffToMonday = firstDayOfMonth.getDate() - dayOfWeek + (dayOfWeek === 0 ? -6 : 1);
-            let currentMonday = new Date(year, month - 1, diffToMonday);
-
-            for (let w = 1; w <= 6; w++) {
-                let weekDates = [];
-                let weekStartIso = currentMonday.toISOString().slice(0, 10);
-                
-                for (let i = 0; i < 5; i++) {
-                    let d = new Date(currentMonday);
-                    d.setDate(currentMonday.getDate() + i);
-                    weekDates.push({
-                        fullDateStr: `${d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}`,
-                        dayName: d.toLocaleDateString('en-US', { weekday: 'short' }).toUpperCase(),
-                        isoDate: d.toISOString().slice(0, 10),
-                        isCurrentMonth: (d.getMonth() === month - 1)
-                    });
+            ['siteAuditor', 'monthlyAuditor', 'currentUserSelect', 'mandaysAuditorSelect'].forEach(id => {
+                const sel = document.getElementById(id);
+                if (sel) {
+                    sel.innerHTML = id === 'monthlyAuditor' ? '<option value="">-- Select Auditor --</option>' : (id === 'siteAuditor' ? '<option value="">Select Auditor</option>' : (id === 'currentUserSelect' ? '<option value="">-Choose Your Name-</option>' : ''));
+                    auditors.forEach(a => sel.add(new Option(a, a)));
                 }
-                
-                weeks.push({
-                    weekNumber: w,
-                    weekStartIso: weekStartIso,
-                    title: `Week ${w}: ${weekDates[0].fullDateStr} - ${weekDates[4].fullDateStr}`,
-                    dates: weekDates
-                });
-
-                currentMonday.setDate(currentMonday.getDate() + 7);
-                
-                if (currentMonday.getMonth() > month - 1 && w >= 4) {
-                    break;
-                }
-            }
-            return weeks;
-        }
-
-        function updateSelectColor(selectElement) {
-            const val = selectElement.value;
-            selectElement.style.backgroundColor = "";
-            selectElement.style.color = "";
-
-            if (val === "WFA") {
-                selectElement.style.backgroundColor = "#dcfce7";
-                selectElement.style.color = "#166534";
-            } else if (val === "WAHO") {
-                selectElement.style.backgroundColor = "#dbeafe";
-                selectElement.style.color = "#1e40af";
-            } else if (val === "SITE VISIT") {
-                selectElement.style.backgroundColor = "#fef3c7";
-                selectElement.style.color = "#92400e";
-            } else if (val === "LEAVE") {
-                selectElement.style.backgroundColor = "#fee2e2";
-                selectElement.style.color = "#991b1b";
-            } else if (val === "HOLIDAY") {
-                selectElement.style.backgroundColor = "#ede9fe";
-                selectElement.style.color = "#5b21b6";
-            } else if (val === "WAHO/LEAVE") {
-                selectElement.style.backgroundColor = "#ffedd5";
-                selectElement.style.color = "#9a3412";
-            } else if (val === "WFA/LEAVE") {
-                selectElement.style.backgroundColor = "#ccfbf1";
-                selectElement.style.color = "#115e59";
-            }
-        }
-
-        function renderWeeklyBlocks() {
-            const container = document.getElementById("weeklyBlocksContainer");
-            const monthSelectVal = document.getElementById("weeklyMonthSelect")?.value || "2026-01";
-            if (!container) return;
-            
-            container.innerHTML = "";
-            const [year, month] = monthSelectVal.split("-").map(Number);
-            const weeks = getWeeksInMonth(year, month);
-
-            weeks.forEach((wk) => {
-                let blockHtml = `
-                    <div class="week-block-title">
-                        <i class="fa-solid fa-calendar-days"></i> Week ${wk.weekNumber} (${wk.dates[0].fullDateStr} - ${wk.dates[4].fullDateStr})
-                    </div>
-                    <div class="table-container">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Auditor</th>
-                                    <th>${wk.dates[0].dayName} - ${wk.dates[0].fullDateStr}</th>
-                                    <th>${wk.dates[1].dayName} - ${wk.dates[1].fullDateStr}</th>
-                                    <th>${wk.dates[2].dayName} - ${wk.dates[2].fullDateStr}</th>
-                                    <th>${wk.dates[3].dayName} - ${wk.dates[3].fullDateStr}</th>
-                                    <th>${wk.dates[4].dayName} - ${wk.dates[4].fullDateStr}</th>
-                                    <th>Remarks</th>
-                                </tr>
-                            </thead>
-                            <tbody class="weekly-block-tbody" data-weekstart="${wk.weekStartIso}">
-                `;
-
-                auditors.forEach((auditor) => {
-                    blockHtml += `<tr data-auditor-row="${auditor}"><td><strong>${auditor}</strong></td>`;
-                    for (let day = 1; day <= 5; day++) {
-                        const key = `${wk.weekStartIso}_${auditor}_day${day}`;
-                        const savedVal = attendanceData[key] || "SELECT";
-                        let optionsHtml = attendanceOptions.map(opt => `<option value="${opt}" ${savedVal === opt ? 'selected' : ''}>${opt}</option>`).join('');
-                        blockHtml += `<td><select data-weekstart="${wk.weekStartIso}" data-auditor="${auditor}" data-day="${day}" data-status="${savedVal}" onchange="handleDropdownChange(this)">${optionsHtml}</select></td>`;
-                    }
-                    const remarkKey = `${wk.weekStartIso}_${auditor}_remark`;
-                    const savedRemark = attendanceData[remarkKey] || "";
-                    blockHtml += `<td><input type="text" data-weekstart="${wk.weekStartIso}" data-auditor="${auditor}" data-type="remark" value="${savedRemark}" placeholder="Remarks..."></td>`;
-                    blockHtml += `</tr>`;
-                });
-
-                blockHtml += `
-                            </tbody>
-                        </table>
-                    </div>
-                `;
-                container.innerHTML += blockHtml;
-            });
-
-            document.querySelectorAll(".weekly-block-tbody select").forEach(sel => {
-                updateSelectColor(sel);
             });
         }
 
-        function handleDropdownChange(selectElement) { 
-            selectElement.setAttribute("data-status", selectElement.value); 
-            updateSelectColor(selectElement); 
-        }
-
-        function filterWeeklyTable() {
-            const term = document.getElementById("search").value.toLowerCase();
-            document.querySelectorAll(".weekly-block-tbody tr").forEach(row => {
-                const name = row.cells[0].textContent.toLowerCase();
-                row.style.display = name.includes(term) ? "" : "none";
-            });
-        }
-
-        function saveAttendanceData() {
-            if (!currentLoggedAuditor) { alert("Please log in as an Auditor first before saving!"); openLoginModal(); return; }
-            
-            const saveBtn = document.getElementById("saveAttendance");
-            if(saveBtn) {
-                saveBtn.disabled = true;
-                saveBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Saving...`;
-            }
-
-            setTimeout(() => {
-                let changesDetected = [];
-                
-                document.querySelectorAll(".weekly-block-tbody select").forEach(select => {
-                    const weekStart = select.dataset.weekstart;
-                    const auditor = select.dataset.auditor;
-                    const dayNum = parseInt(select.dataset.day, 10);
-                    const key = `${weekStart}_${auditor}_day${dayNum}`;
-                    const oldVal = attendanceData[key] || "SELECT";
-                    const newVal = select.value;
-                    if (oldVal !== newVal) { 
-                        changesDetected.push(`Changed <strong>${auditor}'s</strong> status from <em>[${oldVal}]</em> to <em>[${newVal}]</em>`); 
-                        attendanceData[key] = newVal; 
-                    }
-                });
-
-                document.querySelectorAll(".weekly-block-tbody input[data-type='remark']").forEach(input => {
-                    const weekStart = input.dataset.weekstart;
-                    const auditor = input.dataset.auditor;
-                    const key = `${weekStart}_${auditor}_remark`;
-                    const oldRemark = attendanceData[key] || "";
-                    const newRemark = input.value;
-                    if (oldRemark !== newRemark) { 
-                        changesDetected.push(`Updated remarks for <strong>${auditor}</strong>: "${newRemark}"`); 
-                        attendanceData[key] = newRemark; 
-                    }
-                });
-
-                localStorage.setItem("attendanceData", JSON.stringify(attendanceData));
-                updateDashboardCards();
-
-                if (changesDetected.length > 0) {
-                    changesDetected.forEach(changeText => addAuditLog(changeText));
-                    alert(`Saved successfully! ${changesDetected.length} modification(s) recorded.`);
-                } else { 
-                    alert(`No changes detected.`); 
-                }
-
-                if(saveBtn) {
-                    saveBtn.disabled = false;
-                    saveBtn.innerHTML = `<i class="fa-solid fa-floppy-disk"></i> Save Changes`;
-                }
-            }, 50);
-        }
-
-        function renderMonthlyCalendar() {
-            const calendarBody = document.getElementById("calendarBody");
-            const selectedAuditor = document.getElementById("monthlyAuditor")?.value;
-            const selectedMonth = document.getElementById("monthlyMonth")?.value || "2026-01";
-            if (!calendarBody) return;
-            calendarBody.innerHTML = "";
-            const [year, month] = selectedMonth.split("-").map(Number);
-            const firstDay = new Date(year, month - 1, 1).getDay();
-            const daysInMonth = new Date(year, month, 0).getDate();
-            let date = 1, wahoCount = 0, wfaCount = 0, siteCount = 0, leaveCount = 0;
-            const savedAttendance = JSON.parse(localStorage.getItem("attendanceData")) || {};
-            for (let i = 0; i < 6; i++) {
-                let row = document.createElement("tr");
-                let hasDatesInRow = false;
-                for (let j = 0; j < 7; j++) {
-                    let cell = document.createElement("td");
-                    if (i === 0 && j < firstDay || date > daysInMonth) {
-                        cell.innerHTML = "";
-                    } else {
-                        hasDatesInRow = true;
-                        let statusText = "";
-                        if (selectedAuditor) {
-                            const currentDateStr = `${year}-${String(month).padStart(2, '0')}-${String(date).padStart(2, '0')}`;
-                            let foundStatus = "";
-                            Object.keys(savedAttendance).forEach(key => {
-                                if (key.includes(`_${selectedAuditor}_day`)) {
-                                    const [weekStart, aud, dayTag] = key.split("_");
-                                    const dayNum = parseInt(dayTag.replace("day", ""), 10);
-                                    const targetDate = new Date(new Date(weekStart));
-                                    targetDate.setDate(targetDate.getDate() + (dayNum - 1));
-                                    if (`${targetDate.getFullYear()}-${String(targetDate.getMonth() + 1).padStart(2, '0')}-${String(targetDate.getDate()).padStart(2, '0')}` === currentDateStr) {
-                                        foundStatus = savedAttendance[key];
-                                    }
-                                }
-                            });
-                            if (foundStatus && foundStatus !== "SELECT") {
-                                let color = "#475569";
-                                if (foundStatus.includes("WAHO")) color = "#16a34a";
-                                if (foundStatus.includes("WFA")) color = "#2563eb";
-                                if (foundStatus === "SITE VISIT") { color = "#d97706"; siteCount++; }
-                                if (foundStatus.includes("LEAVE")) { color = "#dc2626"; leaveCount++; }
-                                if (foundStatus === "WAHO") wahoCount++;
-                                if (foundStatus === "WFA") wfaCount++;
-                                statusText = `<br><small style='color:${color}; font-weight:700;'>${foundStatus}</small>`;
-                            }
-                        }
-                        cell.innerHTML = `<strong>${date}</strong>${statusText}`;
-                        date++;
-                    }
-                    row.appendChild(cell);
-                }
-                if (hasDatesInRow) calendarBody.appendChild(row);
-            }
-            const totalPresent = wahoCount + wfaCount + siteCount;
-            if (document.getElementById("mPresent")) document.getElementById("mPresent").textContent = totalPresent;
-            if (document.getElementById("mLeave")) document.getElementById("mLeave").textContent = leaveCount;
-            if (document.getElementById("mSite")) document.getElementById("mSite").textContent = siteCount;
-            const totalLogged = totalPresent + leaveCount;
-            if (document.getElementById("mRate")) document.getElementById("mRate").textContent = `${totalLogged > 0 ? Math.round((totalPresent / totalLogged) * 100) : 0}%`;
-        }
-
-        function addSiteVisit(e) {
-            e.preventDefault();
-            const auditor = document.getElementById("siteAuditor").value;
-            const location = document.getElementById("siteLocation").value;
-            const date = document.getElementById("siteDate").value;
-            const status = document.getElementById("siteStatus").value;
-            const remarks = document.getElementById("siteRemarks").value;
-            siteVisits.push({ id: Date.now(), auditor, location, date, status, remarks });
-            localStorage.setItem("siteVisits", JSON.stringify(siteVisits));
-            addAuditLog(`Scheduled Site Visit for <strong>${auditor}</strong> at <em>${location}</em> (${date})`);
-            document.getElementById("siteVisitForm").reset();
-            renderSiteVisits();
-            updateDashboardCards();
-        }
-        function deleteSiteVisit(id) {
-            const visit = siteVisits.find(v => v.id === id);
-            if (visit) addAuditLog(`Cancelled/Removed Site Visit Schedule for <strong>${visit.auditor}</strong> at <em>${visit.location}</em>`);
-            siteVisits = siteVisits.filter(v => v.id !== id);
-            localStorage.setItem("siteVisits", JSON.stringify(siteVisits));
-            renderSiteVisits();
-            updateDashboardCards();
-        }
-        function renderSiteVisits() {
-            const tbody = document.getElementById("siteVisitTableBody");
-            if (!tbody) return;
-            tbody.innerHTML = "";
-            if (siteVisits.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; color:#94a3b8; padding: 20px;">No site visit schedules added yet.</td></tr>`;
-                return;
-            }
-            siteVisits.forEach(visit => {
-                tbody.innerHTML += `<tr><td><strong>${visit.auditor}</strong></td><td>${visit.location}</td><td>${visit.date}</td><td><span class="badge badge-${visit.status.toLowerCase()}">${visit.status}</span></td><td>${visit.remarks || '-'}</td><td><button class="btn-danger" onclick="deleteSiteVisit(${visit.id})"><i class="fa-solid fa-trash"></i></button></td></tr>`;
-            });
-        }
-
+        // --- MANDAYS MONITORING FILTER & EDIT LOGIC ---
         function getSelectedMandaysAuditor() {
-            const selectElem = document.getElementById("mandaysAuditorSelect");
-            return selectElem ? selectElem.value : (currentLoggedAuditor || auditors[0]);
+            const sel = document.getElementById("mandaysAuditorSelect");
+            return sel ? sel.value : (currentLoggedAuditor || auditors[0]);
         }
 
-        function getAuditorMandaysData(auditorName) {
-            const storageKey = `mandaysData_${auditorName}`;
-            let stored = localStorage.getItem(storageKey);
-            if (stored) {
-                try { return JSON.parse(stored); } catch(e) { return JSON.parse(JSON.stringify(defaultMandaysTemplate)); }
-            } else {
-                return JSON.parse(JSON.stringify(defaultMandaysTemplate));
-            }
-        }
-
-        function onMandaysAuditorChange() { renderMandaysPage(); }
-
-        function addNewMandaysRow() {
-            const auditor = getSelectedMandaysAuditor();
-            let currentData = getAuditorMandaysData(auditor);
-            const todayStr = new Date().toISOString().slice(0, 10);
-            const defaultDayName = new Date().toLocaleDateString('en-US', { weekday: 'long' });
-            const newRow = { id: Date.now(), date: todayStr, day: defaultDayName, sched: 'WFA', holiday: 0, slvl: 0, iad: 0, ld: 0, siteVisit: 1, qas: 0, remarks: 'New Daily Activity' };
-            currentData.unshift(newRow);
-            saveAndRenderMandaysFor(auditor, currentData);
-            addAuditLog(`Added new Mandays activity log entry for <strong>${auditor}</strong>.`);
-        }
-
-        function deleteMandaysRow(id) {
-            const auditor = getSelectedMandaysAuditor();
-            let currentData = getAuditorMandaysData(auditor);
-            currentData = currentData.filter(item => item.id !== id);
-            saveAndRenderMandaysFor(auditor, currentData);
-            addAuditLog(`Deleted a Mandays activity log entry for <strong>${auditor}</strong>.`);
-        }
-
-        function toggleEditMandays(id) {
-            const rowElem = document.getElementById(`mandays-row-${id}`);
-            if (!rowElem) return;
-            const isEditing = rowElem.dataset.editing === "true";
-            const auditor = getSelectedMandaysAuditor();
-            let currentData = getAuditorMandaysData(auditor);
-            
-            if (!isEditing) {
-                rowElem.dataset.editing = "true";
-                const item = currentData.find(x => x.id === id);
-                if (!item) return;
-                rowElem.innerHTML = `
-                    <td><input type="date" id="m-date-${id}" value="${item.date}" onchange="onMandaysDateChange(${id})"></td>
-                    <td><input type="text" id="m-day-${id}" value="${item.day}" readonly style="width: 110px; background-color: #f1f5f9; cursor: not-allowed;"></td>
-                    <td><select id="m-sched-${id}"><option value="WFA" ${item.sched=='WFA'?'selected':''}>WFA</option><option value="WAHO" ${item.sched=='WAHO'?'selected':''}>WAHO</option><option value="HOLIDAY" ${item.sched=='HOLIDAY'?'selected':''}>HOLIDAY</option><option value="LEAVE" ${item.sched=='LEAVE'?'selected':''}>LEAVE</option></select></td>
-                    <td><input type="number" step="0.05" min="0" max="1" id="m-hol-${id}" value="${item.holiday}" style="width: 60px;" oninput="updateRowHours(${id})"></td>
-                    <td><input type="number" step="0.05" min="0" max="1" id="m-slvl-${id}" value="${item.slvl}" style="width: 60px;" oninput="updateRowHours(${id})"></td>
-                    <td><input type="number" step="0.05" min="0" max="1" id="m-iad-${id}" value="${item.iad}" style="width: 60px;" oninput="updateRowHours(${id})"></td>
-                    <td><input type="number" step="0.05" min="0" max="1" id="m-ld-${id}" value="${item.ld}" style="width: 60px;" oninput="updateRowHours(${id})"></td>
-                    <td><input type="number" step="0.05" min="0" max="1" id="m-sv-${id}" value="${item.siteVisit}" style="width: 60px;" oninput="updateRowHours(${id})"></td>
-                    <td><input type="number" step="0.05" min="0" max="1" id="m-qas-${id}" value="${item.qas}" style="width: 60px;" oninput="updateRowHours(${id})"></td>
-                    <td><input type="text" id="m-rem-${id}" value="${item.remarks}"></td>
-                    <td id="m-total-hrs-${id}"><strong>${((Number(item.holiday) + Number(item.slvl) + Number(item.iad) + Number(item.ld) + Number(item.siteVisit) + Number(item.qas)) * getDayHoursMultiplier(item.day)).toFixed(1)} hrs</strong></td>
-                    <td style="white-space: nowrap;">
-                        <button class="btn-success" onclick="saveMandaysRow(${id})"><i class="fa-solid fa-check"></i></button>
-                        <button class="btn-danger" onclick="deleteMandaysRow(${id})"><i class="fa-solid fa-trash"></i></button>
-                    </td>
-                `;
-            }
-        }
-
-        function onMandaysDateChange(id) {
-            const dateInput = document.getElementById(`m-date-${id}`);
-            const dayInput = document.getElementById(`m-day-${id}`);
-            if (dateInput && dateInput.value) {
-                const selectedDate = new Date(dateInput.value + 'T00:00:00');
-                const calculatedDay = selectedDate.toLocaleDateString('en-US', { weekday: 'long' });
-                if (dayInput) dayInput.value = calculatedDay;
-                updateRowHours(id);
-            }
-        }
-
-        function updateRowHours(id) {
-            const dayInput = document.getElementById(`m-day-${id}`);
-            const dayStr = dayInput ? dayInput.value : "";
-            const multiplier = getDayHoursMultiplier(dayStr);
-            const hol = parseFloat(document.getElementById(`m-hol-${id}`).value) || 0;
-            const slvl = parseFloat(document.getElementById(`m-slvl-${id}`).value) || 0;
-            const iad = parseFloat(document.getElementById(`m-iad-${id}`).value) || 0;
-            const ld = parseFloat(document.getElementById(`m-ld-${id}`).value) || 0;
-            const sv = parseFloat(document.getElementById(`m-sv-${id}`).value) || 0;
-            const qas = parseFloat(document.getElementById(`m-qas-${id}`).value) || 0;
-            const sum = hol + slvl + iad + ld + sv + qas;
-            const totalHrsElem = document.getElementById(`m-total-hrs-${id}`);
-            if (totalHrsElem) totalHrsElem.innerHTML = `<strong>${(sum * multiplier).toFixed(1)} hrs</strong>`;
-        }
-
-        function saveMandaysRow(id) {
-            const auditor = getSelectedMandaysAuditor();
-            let currentData = getAuditorMandaysData(auditor);
-            const item = currentData.find(x => x.id === id);
-            if (item) {
-                const dateVal = document.getElementById(`m-date-${id}`).value;
-                item.date = dateVal;
-                if(dateVal) {
-                    const parsedDate = new Date(dateVal + 'T00:00:00');
-                    item.day = parsedDate.toLocaleDateString('en-US', { weekday: 'long' });
-                }
-                item.sched = document.getElementById(`m-sched-${id}`).value;
-                item.holiday = parseFloat(document.getElementById(`m-hol-${id}`).value) || 0;
-                item.slvl = parseFloat(document.getElementById(`m-slvl-${id}`).value) || 0;
-                item.iad = parseFloat(document.getElementById(`m-iad-${id}`).value) || 0;
-                item.ld = parseFloat(document.getElementById(`m-ld-${id}`).value) || 0;
-                item.siteVisit = parseFloat(document.getElementById(`m-sv-${id}`).value) || 0;
-                item.qas = parseFloat(document.getElementById(`m-qas-${id}`).value) || 0;
-                item.remarks = document.getElementById(`m-rem-${id}`).value;
-            }
-            saveAndRenderMandaysFor(auditor, currentData);
-            addAuditLog(`Updated Mandays daily activity log for <strong>${auditor}</strong> on date: ${item.date}`);
-        }
-
-        function saveAndRenderMandaysFor(auditorName, dataArray) {
-            const storageKey = `mandaysData_${auditorName}`;
-            localStorage.setItem(storageKey, JSON.stringify(dataArray));
+        function onMandaysAuditorChange() {
             renderMandaysPage();
-        }
-
-        function exportMandaysOnly() {
-            const auditor = getSelectedMandaysAuditor();
-            const currentData = getAuditorMandaysData(auditor);
-            const wb = XLSX.utils.book_new();
-            const mandaysExport = currentData.map(m => {
-                const multiplier = getDayHoursMultiplier(m.day);
-                const sum = Number(m.holiday) + Number(m.slvl) + Number(m.iad) + Number(m.ld) + Number(m.siteVisit) + Number(m.qas);
-                return {
-                    "Date": m.date, "Day": m.day, "Sched": m.sched, "Holiday": m.holiday, "SL/VL": m.slvl, "IAD": m.iad, "L&D": m.ld, "Site Visit": m.siteVisit, "QAS": m.qas, "Remarks": m.remarks, "Total Hours": (sum * multiplier) + " hrs"
-                };
-            });
-            XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(mandaysExport), `Mandays - ${auditor}`);
-            addAuditLog(`Exported Mandays Monitoring Report for <strong>${auditor}</strong>`);
-            XLSX.writeFile(wb, `Mandays_Monitoring_${auditor.replace(/\s+/g, '_')}_${new Date().toISOString().slice(0, 10)}.xlsx`);
         }
 
         function renderMandaysPage() {
             const tbody = document.getElementById("mandaysTableBody");
             if (!tbody) return;
-            const auditor = getSelectedMandaysAuditor();
-            const currentData = getAuditorMandaysData(auditor);
-
             tbody.innerHTML = "";
-            let totalActualMandays = 0;
-            let sumHoliday = 0, sumSlvl = 0, sumIad = 0, sumLd = 0, sumSiteVisit = 0, sumQas = 0;
 
-            currentData.forEach(item => {
-                const multiplier = getDayHoursMultiplier(item.day);
-                const daySum = Number(item.holiday) + Number(item.slvl) + Number(item.iad) + Number(item.ld) + Number(item.siteVisit) + Number(item.qas);
-                const totalHours = (daySum * multiplier).toFixed(1);
-                
-                totalActualMandays += daySum;
-                sumHoliday += Number(item.holiday);
-                sumSlvl += Number(item.slvl);
-                sumIad += Number(item.iad);
-                sumLd += Number(item.ld);
-                sumSiteVisit += Number(item.siteVisit);
-                sumQas += Number(item.qas);
+            const currentAuditor = getSelectedMandaysAuditor();
+            
+            // Kunin ang data para sa partikular na auditor na ito, kung wala pa, gamitin ang default template
+            if (!mandaysDataStore[currentAuditor]) {
+                mandaysDataStore[currentAuditor] = JSON.parse(JSON.stringify(defaultMandaysTemplate));
+            }
+
+            let rows = mandaysDataStore[currentAuditor];
+            let totalActualMandays = 0;
+
+            rows.forEach((row, index) => {
+                const multiplier = ((row.day || "").toLowerCase().includes("mon") || (row.day || "").toLowerCase().includes("tue") || (row.day || "").toLowerCase().includes("wed")) ? 9 : 8;
+                const totalHrs = ((Number(row.holiday)||0) + (Number(row.slvl)||0) + (Number(row.iad)||0) + (Number(row.ld)||0) + (Number(row.siteVisit)||0) + (Number(row.qas)||0)) * multiplier;
+                totalActualMandays += totalHrs / 8; // standard 8 hours per manday conversion
 
                 tbody.innerHTML += `
-                    <tr id="mandays-row-${item.id}" data-editing="false">
-                        <td style="font-size: 13px; font-weight: 600;">${item.date}</td>
-                        <td>${item.day}</td>
-                        <td><strong>${item.sched}</strong></td>
-                        <td>${item.holiday || '-'}</td>
-                        <td>${item.slvl || '-'}</td>
-                        <td>${item.iad || '-'}</td>
-                        <td>${item.ld || '-'}</td>
-                        <td style="color: #2563eb; font-weight: bold;">${item.siteVisit || '-'}</td>
-                        <td>${item.qas || '-'}</td>
-                        <td style="font-size: 12px; color: #475569;">${item.remarks || '-'}</td>
-                        <td style="font-weight: bold; color: #1e3a8a;">${totalHours} hrs <span style="font-size: 10px; color: #64748b; font-weight: normal;">(${multiplier}h/day)</span></td>
-                        <td style="white-space: nowrap;">
-                            <button class="btn-warning" onclick="toggleEditMandays(${item.id})" title="Edit Row"><i class="fa-solid fa-pen-to-square"></i></button>
-                            <button class="btn-danger" onclick="deleteMandaysRow(${item.id})" title="Delete Row"><i class="fa-solid fa-trash"></i></button>
+                    <tr>
+                        <td><input type="date" value="${row.date}" onchange="updateMandaysRow(${index}, 'date', this.value)"></td>
+                        <td><input type="text" value="${row.day}" onchange="updateMandaysRow(${index}, 'day', this.value)"></td>
+                        <td>
+                            <select onchange="updateMandaysRow(${index}, 'sched', this.value)">
+                                <option value="WAHO" ${row.sched==='WAHO'?'selected':''}>WAHO</option>
+                                <option value="WFA" ${row.sched==='WFA'?'selected':''}>WFA</option>
+                                <option value="HOLIDAY" ${row.sched==='HOLIDAY'?'selected':''}>HOLIDAY</option>
+                                <option value="LEAVE" ${row.sched==='LEAVE'?'selected':''}>LEAVE</option>
+                            </select>
                         </td>
-                    </tr>`;
+                        <td><input type="number" step="0.01" value="${row.holiday}" onchange="updateMandaysRow(${index}, 'holiday', this.value)"></td>
+                        <td><input type="number" step="0.01" value="${row.slvl}" onchange="updateMandaysRow(${index}, 'slvl', this.value)"></td>
+                        <td><input type="number" step="0.01" value="${row.iad}" onchange="updateMandaysRow(${index}, 'iad', this.value)"></td>
+                        <td><input type="number" step="0.01" value="${row.ld}" onchange="updateMandaysRow(${index}, 'ld', this.value)"></td>
+                        <td><input type="number" step="0.01" value="${row.siteVisit}" onchange="updateMandaysRow(${index}, 'siteVisit', this.value)"></td>
+                        <td><input type="number" step="0.01" value="${row.qas}" onchange="updateMandaysRow(${index}, 'qas', this.value)"></td>
+                        <td><input type="text" value="${row.remarks}" onchange="updateMandaysRow(${index}, 'remarks', this.value)"></td>
+                        <td><strong style="color:var(--primary);">${totalHrs.toFixed(2)}h</strong></td>
+                        <td><button class="btn-danger" onclick="deleteMandaysRow(${index})"><i class="fa-solid fa-trash"></i></button></td>
+                    </tr>
+                `;
             });
 
+            // Update Summary Cards
             const budgeted = 35.00;
-            const variance = (budgeted - totalActualMandays).toFixed(2);
-            const completion = budgeted > 0 ? ((totalActualMandays / budgeted) * 100).toFixed(1) + '%' : '0%';
+            const variance = budgeted - totalActualMandays;
+            const completion = budgeted > 0 ? ((totalActualMandays / budgeted) * 100).toFixed(1) : 0;
 
-            if (document.getElementById("mBudgeted")) document.getElementById("mBudgeted").textContent = budgeted.toFixed(2);
-            if (document.getElementById("mActual")) document.getElementById("mActual").textContent = totalActualMandays.toFixed(2);
-            if (document.getElementById("mVariance")) document.getElementById("mVariance").textContent = variance;
-            if (document.getElementById("mCompletion")) document.getElementById("mCompletion").textContent = completion;
-
-            renderMandaysChart(sumHoliday, sumSlvl, sumIad, sumLd, sumSiteVisit, sumQas);
+            document.getElementById("mBudgeted").textContent = budgeted.toFixed(2);
+            document.getElementById("mActual").textContent = totalActualMandays.toFixed(2);
+            document.getElementById("mVariance").textContent = variance.toFixed(2);
+            document.getElementById("mCompletion").textContent = completion + "%";
         }
 
-        function renderMandaysChart(hol, slvl, iad, ld, sv, qas) {
-            const ctx = document.getElementById('mandaysActivityChart');
-            if (!ctx) return;
-            if (mandaysChartInstance) mandaysChartInstance.destroy();
-            mandaysChartInstance = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: ['Holiday', 'SL/VL', 'IAD', 'L&D', 'Site Visit', 'QAS'],
-                    datasets: [{
-                        label: 'Total Mandays Allocation',
-                        data: [hol, slvl, iad, ld, sv, qas],
-                        backgroundColor: ['#64748b', '#ef4444', '#1e3a8a', '#3b82f6', '#2563eb', '#f59e0b'],
-                        borderRadius: 6
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: { legend: { display: false } },
-                    scales: {
-                        x: { grid: { color: '#f1f5f9' } },
-                        y: { grid: { color: '#f1f5f9' } }
-                    }
-                }
+        function updateMandaysRow(index, field, value) {
+            const currentAuditor = getSelectedMandaysAuditor();
+            if (mandaysDataStore[currentAuditor] && mandaysDataStore[currentAuditor][index]) {
+                mandaysDataStore[currentAuditor][index][field] = (field === 'holiday' || field === 'slvl' || field === 'iad' || field === 'ld' || field === 'siteVisit' || field === 'qas') ? Number(value) : value;
+                renderMandaysPage();
+            }
+        }
+
+        function addNewMandaysRow() {
+            const currentAuditor = getSelectedMandaysAuditor();
+            if (!mandaysDataStore[currentAuditor]) mandaysDataStore[currentAuditor] = [];
+            mandaysDataStore[currentAuditor].push({
+                id: Date.now(),
+                date: new Date().toISOString().split('T')[0],
+                day: 'Monday',
+                sched: 'WFA',
+                holiday: 0,
+                slvl: 0,
+                iad: 1,
+                ld: 0,
+                siteVisit: 0,
+                qas: 0,
+                remarks: 'New Daily Audit Log'
             });
+            renderMandaysPage();
         }
 
-        function updateDashboardCards() {
-            let waho = 0, wfa = 0, site = siteVisits.length, leave = 0, holiday = 0, wfaLeave = 0, wahoLeave = 0;
-            let auditorWahoCounts = {};
-            let auditorBreakdownData = {
-                wfa: new Array(auditors.length).fill(0),
-                waho: new Array(auditors.length).fill(0),
-                siteVisit: new Array(auditors.length).fill(0),
-                leave: new Array(auditors.length).fill(0),
-                wfaLeave: new Array(auditors.length).fill(0),
-                wahoLeave: new Array(auditors.length).fill(0)
-            };
-
-            auditors.forEach(aud => auditorWahoCounts[aud] = 0);
-
-            const selectedFilterMonth = document.getElementById("dashboardMonthFilter") ? document.getElementById("dashboardMonthFilter").value : "ALL";
-
-            Object.keys(attendanceData).forEach(key => {
-                if (!key.endsWith("_remark")) {
-                    const val = attendanceData[key];
-                    const parts = key.split("_");
-                    const weekStartIso = parts[0]; 
-
-                    if (selectedFilterMonth !== "ALL") {
-                        if (!weekStartIso.startsWith(selectedFilterMonth)) {
-                            return; 
-                        }
-                    }
-
-                    let auditorName = parts.length >= 2 ? parts[1] : "";
-                    let auditorIdx = auditors.indexOf(auditorName);
-
-                    if (val === "WAHO") {
-                        waho++;
-                        if (auditorWahoCounts[auditorName] !== undefined) auditorWahoCounts[auditorName]++;
-                        if (auditorIdx !== -1) auditorBreakdownData.waho[auditorIdx]++;
-                    }
-                    if (val === "WFA") {
-                        wfa++;
-                        if (auditorIdx !== -1) auditorBreakdownData.wfa[auditorIdx]++;
-                    }
-                    if (val === "SITE VISIT") {
-                        site++;
-                        if (auditorIdx !== -1) auditorBreakdownData.siteVisit[auditorIdx]++;
-                    }
-                    if (val === "LEAVE") {
-                        leave++;
-                        if (auditorIdx !== -1) auditorBreakdownData.leave[auditorIdx]++;
-                    }
-                    if (val === "HOLIDAY") holiday++;
-                    
-                    if (val === "WAHO/LEAVE") { 
-                        waho += 0.5; leave += 0.5; wahoLeave += 1;
-                        if (auditorWahoCounts[auditorName] !== undefined) auditorWahoCounts[auditorName] += 0.5;
-                        if (auditorIdx !== -1) auditorBreakdownData.wahoLeave[auditorIdx]++;
-                    }
-                    if (val === "WFA/LEAVE") { 
-                        wfa += 0.5; leave += 0.5; wfaLeave += 1;
-                        if (auditorIdx !== -1) auditorBreakdownData.wfaLeave[auditorIdx]++;
-                    }
-                }
-            });
-
-            if (document.getElementById("wahoCount")) document.getElementById("wahoCount").textContent = waho;
-            if (document.getElementById("wfaCount")) document.getElementById("wfaCount").textContent = wfa;
-            if (document.getElementById("siteCount")) document.getElementById("siteCount").textContent = site;
-            if (document.getElementById("leaveCount")) document.getElementById("leaveCount").textContent = leave;
-            if (document.getElementById("holidayCount")) document.getElementById("holidayCount").textContent = holiday;
-
-            updateChartsData(waho, wfa, site, leave, holiday, auditorWahoCounts, auditorBreakdownData);
-        }
-
-        function updateChartsData(waho, wfa, site, leave, holiday, auditorWahoCounts, auditorBreakdownData) {
-            if (auditorsBreakdownChartInstance && auditorBreakdownData) {
-                auditorsBreakdownChartInstance.data.datasets[0].data = auditorBreakdownData.wfa;
-                auditorsBreakdownChartInstance.data.datasets[1].data = auditorBreakdownData.waho;
-                auditorsBreakdownChartInstance.data.datasets[2].data = auditorBreakdownData.siteVisit;
-                auditorsBreakdownChartInstance.data.datasets[3].data = auditorBreakdownData.leave;
-                auditorsBreakdownChartInstance.data.datasets[4].data = auditorBreakdownData.wfaLeave;
-                auditorsBreakdownChartInstance.data.datasets[5].data = auditorBreakdownData.wahoLeave;
-                auditorsBreakdownChartInstance.update();
-            }
-
-            if (weeklyChartInstance) { weeklyChartInstance.data.datasets[0].data = [waho, wfa, site, leave, holiday]; weeklyChartInstance.update(); }
-
-            if (topWahoChartInstance && auditorWahoCounts) {
-                const sortedAuditors = Object.keys(auditorWahoCounts).sort((a, b) => auditorWahoCounts[b] - auditorWahoCounts[a]);
-                topWahoChartInstance.data.labels = sortedAuditors;
-                topWahoChartInstance.data.datasets[0].data = sortedAuditors.map(aud => auditorWahoCounts[aud]);
-                topWahoChartInstance.update();
-            }
-
-            if (attendanceModePieInstance) {
-                attendanceModePieInstance.data.datasets[0].data = [waho, wfa, site, leave, holiday];
-                attendanceModePieInstance.update();
+        function deleteMandaysRow(index) {
+            const currentAuditor = getSelectedMandaysAuditor();
+            if (mandaysDataStore[currentAuditor]) {
+                mandaysDataStore[currentAuditor].splice(index, 1);
+                renderMandaysPage();
             }
         }
 
-        function renderCharts() {
-            const ctxBreakdown = document.getElementById('auditorsBreakdownChart');
-            const ctxWeekly = document.getElementById('attendanceChart');
-            const ctxTopWaho = document.getElementById('topWahoChart');
-            const ctxPie = document.getElementById('attendanceModePieChart');
-
-            if (ctxBreakdown) {
-                auditorsBreakdownChartInstance = new Chart(ctxBreakdown, {
-                    type: 'bar',
-                    data: {
-                        labels: auditors.map(name => name.split(" ")[0]),
-                        datasets: [
-                            { label: 'WFA', data: new Array(auditors.length).fill(0), backgroundColor: '#2563eb' },
-                            { label: 'WAHO', data: new Array(auditors.length).fill(0), backgroundColor: '#16a34a' },
-                            { label: 'Site Visit', data: new Array(auditors.length).fill(0), backgroundColor: '#f59e0b' },
-                            { label: 'Leave', data: new Array(auditors.length).fill(0), backgroundColor: '#ef4444' },
-                            { label: 'WFA/Leave', data: new Array(auditors.length).fill(0), backgroundColor: '#0d9488' },
-                            { label: 'WAHO/Leave', data: new Array(auditors.length).fill(0), backgroundColor: '#8b5cf6' }
-                        ]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        scales: {
-                            x: { stacked: true, grid: { display: false } },
-                            y: { stacked: true, grid: { color: '#f1f5f9' } }
-                        },
-                        plugins: { legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 10 } } } }
-                    }
-                });
-            }
-
-            if (ctxWeekly) {
-                weeklyChartInstance = new Chart(ctxWeekly, { 
-                    type: 'bar', 
-                    data: { 
-                        labels: ['WAHO', 'WFA', 'SITE VISIT', 'LEAVE', 'HOLIDAY'], 
-                        datasets: [{ label: 'Count', data: [0, 0, 0, 0, 0], backgroundColor: ['#1e3a8a', '#2563eb', '#f59e0b', '#64748b', '#94a3b8'], borderRadius: 6 }] 
-                    }, 
-                    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } } 
-                });
-            }
-
-            if (ctxTopWaho) {
-                topWahoChartInstance = new Chart(ctxTopWaho, {
-                    type: 'bar',
-                    data: {
-                        labels: auditors,
-                        datasets: [{
-                            label: 'WAHO Count',
-                            data: new Array(auditors.length).fill(0),
-                            backgroundColor: '#1e3a8a',
-                            borderRadius: 4
-                        }]
-                    },
-                    options: {
-                        indexAxis: 'y',
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: { legend: { display: false } },
-                        scales: {
-                            x: { grid: { color: '#f1f5f9' } },
-                            y: { grid: { display: false } }
-                        }
-                    }
-                });
-            }
-
-            if (ctxPie) {
-                attendanceModePieInstance = new Chart(ctxPie, {
-                    type: 'doughnut',
-                    data: {
-                        labels: ['WAHO', 'WFA', 'Site Visit', 'Leave', 'Holiday'],
-                        datasets: [{
-                            data: [0, 0, 0, 0, 0],
-                            backgroundColor: ['#1e3a8a', '#2563eb', '#f59e0b', '#64748b', '#94a3b8']
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: { legend: { position: 'right', labels: { boxWidth: 12, font: { size: 11 } } } }
-                    }
-                });
-            }
+        function saveMandaysData() {
+            localStorage.setItem("mandaysDataStore", JSON.stringify(mandaysDataStore));
+            alert("Mandays monitoring data saved successfully for " + getSelectedMandaysAuditor() + "!");
         }
 
-        function toggleExportFilters() {
-            const category = document.getElementById("exportCategorySelect").value;
-            document.getElementById("exportMonthGroup").style.display = (category === "WEEKLY" || category === "MONTHLY" || category === "ALL") ? "block" : "none";
+        // --- NAVIGATION & OTHER HELPERS ---
+        function openDashboard() { hideAllPages(); document.getElementById("dashboardPage").classList.remove("page-hidden"); }
+        function openWeekly() { hideAllPages(); document.getElementById("weeklyPage").classList.remove("page-hidden"); }
+        function openSiteVisit() { hideAllPages(); document.getElementById("siteVisitPage").classList.remove("page-hidden"); }
+        function openMonthly() { hideAllPages(); document.getElementById("monthlyPage").classList.remove("page-hidden"); }
+        function openMandays() { hideAllPages(); document.getElementById("mandaysPage").classList.remove("page-hidden"); renderMandaysPage(); }
+        function openMandaysActivity() { hideAllPages(); document.getElementById("mandaysActivityPage").classList.remove("page-hidden"); }
+        function openSettings() { hideAllPages(); document.getElementById("settingsPage").classList.remove("page-hidden"); }
+        
+        function hideAllPages() { 
+            ["dashboardPage", "weeklyPage", "monthlyPage", "siteVisitPage", "mandaysPage", "mandaysActivityPage", "settingsPage"].forEach(id => { 
+                const p = document.getElementById(id); 
+                if (p) p.classList.add("page-hidden"); 
+            }); 
         }
+        function setActive(el) { document.querySelectorAll(".sidebar ul li").forEach(li => li.classList.remove("active")); el.classList.add("active"); }
 
-        function exportSelectedData() {
-            const category = document.getElementById("exportCategorySelect")?.value || "ALL";
-            const selectedMonth = document.getElementById("exportMonthSelect")?.value || "2026-01";
-            const wb = XLSX.utils.book_new();
-            const rawAttendance = JSON.parse(localStorage.getItem("attendanceData")) || {};
-            const rawSiteVisits = JSON.parse(localStorage.getItem("siteVisits")) || [];
-            const [year, month] = selectedMonth.split("-").map(Number);
-            const weeks = getWeeksInMonth(year, month);
-
-            if (category === "WEEKLY" || category === "ALL") {
-                weeks.forEach(wk => {
-                    const weeklyRows = auditors.map(auditor => {
-                        const rowObj = { "Auditor": auditor };
-                        wk.dates.forEach((d, idx) => {
-                            rowObj[`${d.dayName} - ${d.fullDateStr}`] = rawAttendance[`${wk.weekStartIso}_${auditor}_day${idx+1}`] || "SELECT";
-                        });
-                        rowObj["Remarks"] = rawAttendance[`${wk.weekStartIso}_${auditor}_remark`] || "";
-                        return rowObj;
-                    });
-                    XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(weeklyRows), `Week ${wk.weekNumber}`);
-                });
+        document.addEventListener("DOMContentLoaded", () => {
+            populateDropdowns();
+            checkUserLogin();
+            
+            const mandaysSelect = document.getElementById("mandaysAuditorSelect");
+            if (mandaysSelect && currentLoggedAuditor) {
+                mandaysSelect.value = currentLoggedAuditor;
             }
-            if (category === "MONTHLY" || category === "ALL") {
-                const monthlySummaryRows = auditors.map(auditor => {
-                    let waho = 0, wfa = 0, site = 0, leave = 0, holiday = 0;
-                    Object.keys(rawAttendance).forEach(key => {
-                        if (key.includes(`_${auditor}_`) && !key.endsWith("_remark")) {
-                            const val = rawAttendance[key];
-                            if (val === "WAHO") waho++;
-                            if (val === "WFA") wfa++;
-                            if (val === "SITE VISIT") site++;
-                            if (val === "LEAVE") leave++;
-                            if (val === "HOLIDAY") holiday++;
-                        }
-                    });
-                    return { "Auditor": auditor, "Total WAHO": waho, "Total WFA": wfa, "Site Visits": site, "Leaves": leave, "Holidays": holiday };
-                });
-                XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(monthlySummaryRows), `Summary ${selectedMonth}`);
-            }
-            if (category === "SITE_VISIT" || category === "ALL") {
-                const svRows = rawSiteVisits.map(v => ({ "Auditor": v.auditor, "Project Site": v.location, "Date": v.date, "Status": v.status, "Purpose": v.remarks }));
-                XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(svRows.length ? svRows : [{Message: "No site visits"}]), "Site Visits");
-            }
-            if (category === "MANDAYS" || category === "ALL") {
-                auditors.forEach(aud => {
-                    const mData = getAuditorMandaysData(aud);
-                    const mRows = mData.map(m => ({
-                        "Date": m.date, "Day": m.day, "Sched": m.sched, "Holiday": m.holiday, "SL/VL": m.slvl, "IAD": m.iad, "L&D": m.ld, "Site Visit": m.siteVisit, "QAS": m.qas, "Remarks": m.remarks
-                    }));
-                    XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(mRows), `Mandays - ${aud.split(" ")[0]}`);
-                });
-            }
-            XLSX.writeFile(wb, `Attendance_Report_${category}_${selectedMonth}.xlsx`);
-            addAuditLog(`Exported system data report (${category} - ${selectedMonth})`);
-        }
-
-        function printSystemReport() {
-            window.print();
-        }
+            renderMandaysPage();
+            openDashboard();
+        });
     </script>
 </body>
 </html>
