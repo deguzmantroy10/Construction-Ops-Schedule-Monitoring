@@ -1402,7 +1402,7 @@
             if (changesDetected.length > 0) {
                 await saveToFirestore("attendance", "values", attendanceData);
                 changesDetected.forEach(changeText => addAuditLog(changeText));
-                alert(`Saved successfully to Cloud! ${changesDetected.length} modification(s) recorded.`);
+                alert(`Saved successfully! ${changesDetected.length} modification(s) recorded.`);
             } else { 
                 alert(`No changes detected.`); 
             }
