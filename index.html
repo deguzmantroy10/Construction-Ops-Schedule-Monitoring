@@ -530,8 +530,11 @@
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
         }
 
-        .monthly-controls { display: flex; gap: 15px; margin: 20px 0; }
+        .monthly-controls { display: flex; gap: 15px; margin: 20px 0; align-items: center; justify-content: space-between; flex-wrap: wrap; }
+        .monthly-controls-group { display: flex; gap: 15px; align-items: center; }
         .monthly-controls select { padding: 10px 15px; border-radius: 8px; border: 1px solid #cbd5e1; font-weight: 500; }
+        body.dark .monthly-controls select { background: #0f172a; color: #fff; border-color: #475569; }
+        
         .attendance-summary { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 20px; }
         
         .month-card { background: var(--primary); color: #fff; padding: 20px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2); }
@@ -792,21 +795,28 @@
             <div class="monthly">
                 <h2 style="font-size: 18px; font-weight: 700; margin-bottom: 5px;"><i class="fa-solid fa-calendar-days"></i> Monthly View</h2>
                 <div class="monthly-controls">
-                    <select id="monthlyAuditor"><option value="">-- Select Auditor --</option></select>
-                    <select id="monthlyMonth">
-                        <option value="2026-01">January 2026</option>
-                        <option value="2026-02">February 2026</option>
-                        <option value="2026-03">March 2026</option>
-                        <option value="2026-04">April 2026</option>
-                        <option value="2026-05">May 2026</option>
-                        <option value="2026-06">June 2026</option>
-                        <option value="2026-07">July 2026</option>
-                        <option value="2026-08">August 2026</option>
-                        <option value="2026-09">September 2026</option>
-                        <option value="2026-10">October 2026</option>
-                        <option value="2026-11">November 2026</option>
-                        <option value="2026-12">December 2026</option>
-                    </select>
+                    <div class="monthly-controls-group">
+                        <select id="monthlyAuditor">
+                            <option value="ALL">🌐 All Auditors</option>
+                        </select>
+                        <select id="monthlyMonth">
+                            <option value="2026-01">January 2026</option>
+                            <option value="2026-02">February 2026</option>
+                            <option value="2026-03">March 2026</option>
+                            <option value="2026-04">April 2026</option>
+                            <option value="2026-05">May 2026</option>
+                            <option value="2026-06">June 2026</option>
+                            <option value="2026-07">July 2026</option>
+                            <option value="2026-08">August 2026</option>
+                            <option value="2026-09">September 2026</option>
+                            <option value="2026-10">October 2026</option>
+                            <option value="2026-11">November 2026</option>
+                            <option value="2026-12">December 2026</option>
+                        </select>
+                    </div>
+                    <div>
+                        <button onclick="exportMonthlyViewExcel()" class="btn-teal"><i class="fa-solid fa-file-excel"></i> Export Monthly View</button>
+                    </div>
                 </div>
                 <div class="attendance-summary">
                     <div class="month-card"><h3>Present Days</h3><h2 id="mPresent">0</h2></div>
@@ -950,7 +960,8 @@
 
     <script>
         const auditors = ["Catherine Rosales", "Joemel Perez", "Elmar Baria", "Troy De Guzman", "Dianne Armas", "Cijay Castro", "Bryan Panol", "Dean Mark Soledad"];
-        const attendanceOptions = ["SELECT", "WAHO", "WFA", "SITE VISIT", "LEAVE", "HOLIDAY", "WAHO/LEAVE", "WFA/LEAVE"];
+        
+        const attendanceOptions = ["SELECT", "WAHO", "WFA", "SITE VISIT", "LEAVE", "HOLIDAY", "WAHO/LEAVE", "WFA/LEAVE", "SITE VISIT / LEAVE"];
 
         let currentLoggedAuditor = localStorage.getItem("currentLoggedAuditor") || "";
         let auditLogs = [];
@@ -1291,6 +1302,7 @@
             else if (val === "HOLIDAY") { selectElement.style.backgroundColor = "#ede9fe"; selectElement.style.color = "#5b21b6"; } 
             else if (val === "WAHO/LEAVE") { selectElement.style.backgroundColor = "#ffedd5"; selectElement.style.color = "#9a3412"; } 
             else if (val === "WFA/LEAVE") { selectElement.style.backgroundColor = "#ccfbf1"; selectElement.style.color = "#115e59"; }
+            else if (val === "SITE VISIT / LEAVE") { selectElement.style.backgroundColor = "#fce7f3"; selectElement.style.color = "#9d174d"; }
         }
 
         function renderWeeklyBlocks() {
@@ -1400,7 +1412,7 @@
 
         function renderMonthlyCalendar() {
             const calendarBody = document.getElementById("calendarBody");
-            const selectedAuditor = document.getElementById("monthlyAuditor")?.value;
+            const selectedAuditor = document.getElementById("monthlyAuditor")?.value || "ALL";
             const selectedMonth = document.getElementById("monthlyMonth")?.value || "2026-01";
             if (!calendarBody) return;
             calendarBody.innerHTML = "";
@@ -1418,9 +1430,40 @@
                         cell.innerHTML = "";
                     } else {
                         hasDatesInRow = true;
-                        let statusText = "";
-                        if (selectedAuditor) {
-                            const currentDateStr = `${year}-${String(month).padStart(2, '0')}-${String(date).padStart(2, '0')}`;
+                        let statusHtml = "";
+                        const currentDateStr = `${year}-${String(month).padStart(2, '0')}-${String(date).padStart(2, '0')}`;
+
+                        if (selectedAuditor === "ALL") {
+                            let daySummaryHtml = `<div style="margin-top: 4px; font-size: 11px; line-height: 1.3;">`;
+                            auditors.forEach(aud => {
+                                let foundStatus = "";
+                                Object.keys(attendanceData).forEach(key => {
+                                    if (key.includes(`_${aud}_day`)) {
+                                        const [weekStart, aName, dayTag] = key.split("_");
+                                        const dayNum = parseInt(dayTag.replace("day", ""), 10);
+                                        const targetDate = new Date(new Date(weekStart));
+                                        targetDate.setDate(targetDate.getDate() + (dayNum - 1));
+                                        if (`${targetDate.getFullYear()}-${String(targetDate.getMonth() + 1).padStart(2, '0')}-${String(targetDate.getDate()).padStart(2, '0')}` === currentDateStr) {
+                                            foundStatus = attendanceData[key];
+                                        }
+                                    }
+                                });
+
+                                if (foundStatus && foundStatus !== "SELECT") {
+                                    let color = "#475569";
+                                    if (foundStatus.includes("WAHO")) { color = "#16a34a"; wahoCount++; }
+                                    if (foundStatus.includes("WFA")) { color = "#2563eb"; wfaCount++; }
+                                    if (foundStatus.includes("SITE VISIT")) { color = "#d97706"; siteCount++; }
+                                    if (foundStatus.includes("LEAVE")) { color = "#dc2626"; leaveCount++; }
+                                    if (foundStatus === "SITE VISIT / LEAVE") { color = "#9d174d"; siteCount++; leaveCount += 0.5; }
+                                    if (foundStatus === "HOLIDAY") { color = "#5b21b6"; }
+                                    
+                                    daySummaryHtml += `<div><span style="font-weight:600; color:#0f172a;">${aud.split(" ")[0]}:</span> <span style="color:${color}; font-weight:700;">${foundStatus}</span></div>`;
+                                }
+                            });
+                            daySummaryHtml += `</div>`;
+                            statusHtml = daySummaryHtml;
+                        } else {
                             let foundStatus = "";
                             Object.keys(attendanceData).forEach(key => {
                                 if (key.includes(`_${selectedAuditor}_day`)) {
@@ -1435,16 +1478,16 @@
                             });
                             if (foundStatus && foundStatus !== "SELECT") {
                                 let color = "#475569";
-                                if (foundStatus.includes("WAHO")) color = "#16a34a";
-                                if (foundStatus.includes("WFA")) color = "#2563eb";
+                                if (foundStatus.includes("WAHO")) { color = "#16a34a"; wahoCount++; }
+                                if (foundStatus.includes("WFA")) { color = "#2563eb"; wfaCount++; }
                                 if (foundStatus === "SITE VISIT") { color = "#d97706"; siteCount++; }
                                 if (foundStatus.includes("LEAVE")) { color = "#dc2626"; leaveCount++; }
-                                if (foundStatus === "WAHO") wahoCount++;
-                                if (foundStatus === "WFA") wfaCount++;
-                                statusText = `<br><small style='color:${color}; font-weight:700;'>${foundStatus}</small>`;
+                                if (foundStatus === "SITE VISIT / LEAVE") { color = "#9d174d"; siteCount++; leaveCount += 0.5; }
+                                statusHtml = `<br><small style='color:${color}; font-weight:700;'>${foundStatus}</small>`;
                             }
                         }
-                        cell.innerHTML = `<strong>${date}</strong>${statusText}`;
+
+                        cell.innerHTML = `<strong>${date}</strong>${statusHtml}`;
                         date++;
                     }
                     row.appendChild(cell);
@@ -1457,6 +1500,81 @@
             if (document.getElementById("mSite")) document.getElementById("mSite").textContent = siteCount;
             const totalLogged = totalPresent + leaveCount;
             if (document.getElementById("mRate")) document.getElementById("mRate").textContent = `${totalLogged > 0 ? Math.round((totalPresent / totalLogged) * 100) : 0}%`;
+        }
+
+        // BAGONG FUNCTION PARA SA EXPORT NG MONTHLY VIEW
+        function exportMonthlyViewExcel() {
+            const selectedAuditor = document.getElementById("monthlyAuditor")?.value || "ALL";
+            const selectedMonth = document.getElementById("monthlyMonth")?.value || "2026-01";
+            const wb = XLSX.utils.book_new();
+
+            // Sheet 1: Summary Stats
+            const presentDays = document.getElementById("mPresent")?.textContent || "0";
+            const leaveDays = document.getElementById("mLeave")?.textContent || "0";
+            const siteVisitsCount = document.getElementById("mSite")?.textContent || "0";
+            const attendanceRate = document.getElementById("mRate")?.textContent || "0%";
+
+            const summaryData = [
+                { "Metric": "Selected Auditor / Scope", "Value": selectedAuditor },
+                { "Metric": "Month & Year", "Value": selectedMonth },
+                { "Metric": "Total Present Days", "Value": presentDays },
+                { "Metric": "Total Leave Days", "Value": leaveDays },
+                { "Metric": "Total Site Visits", "Value": siteVisitsCount },
+                { "Metric": "Attendance Rate", "Value": attendanceRate }
+            ];
+            const wsSummary = XLSX.utils.json_to_sheet(summaryData);
+            XLSX.utils.book_append_sheet(wb, wsSummary, "Monthly Summary");
+
+            // Sheet 2: Daily Breakdown Table para sa buwang ito
+            const [year, month] = selectedMonth.split("-").map(Number);
+            const daysInMonth = new Date(year, month, 0).getDate();
+            let dailyRows = [];
+
+            for (let d = 1; d <= daysInMonth; d++) {
+                const currentDateStr = `${year}-${String(month).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+                let dateObj = new Date(currentDateStr + 'T00:00:00');
+                let dayName = dateObj.toLocaleDateString('en-US', { weekday: 'long' });
+
+                if (selectedAuditor === "ALL") {
+                    auditors.forEach(aud => {
+                        let foundStatus = "SELECT";
+                        Object.keys(attendanceData).forEach(key => {
+                            if (key.includes(`_${aud}_day`)) {
+                                const [weekStart, aName, dayTag] = key.split("_");
+                                const dayNum = parseInt(dayTag.replace("day", ""), 10);
+                                const targetDate = new Date(new Date(weekStart));
+                                targetDate.setDate(targetDate.getDate() + (dayNum - 1));
+                                if (`${targetDate.getFullYear()}-${String(targetDate.getMonth() + 1).padStart(2, '0')}-${String(targetDate.getDate()).padStart(2, '0')}` === currentDateStr) {
+                                    foundStatus = attendanceData[key];
+                                }
+                            }
+                        });
+                        if (foundStatus !== "SELECT") {
+                            dailyRows.push({ "Date": currentDateStr, "Day": dayName, "Auditor": aud, "Status": foundStatus });
+                        }
+                    });
+                } else {
+                    let foundStatus = "SELECT";
+                    Object.keys(attendanceData).forEach(key => {
+                        if (key.includes(`_${selectedAuditor}_day`)) {
+                            const [weekStart, aud, dayTag] = key.split("_");
+                            const dayNum = parseInt(dayTag.replace("day", ""), 10);
+                            const targetDate = new Date(new Date(weekStart));
+                            targetDate.setDate(targetDate.getDate() + (dayNum - 1));
+                            if (`${targetDate.getFullYear()}-${String(targetDate.getMonth() + 1).padStart(2, '0')}-${String(targetDate.getDate()).padStart(2, '0')}` === currentDateStr) {
+                                foundStatus = attendanceData[key];
+                            }
+                        }
+                    });
+                    dailyRows.push({ "Date": currentDateStr, "Day": dayName, "Auditor": selectedAuditor, "Status": foundStatus });
+                }
+            }
+
+            const wsDaily = XLSX.utils.json_to_sheet(dailyRows);
+            XLSX.utils.book_append_sheet(wb, wsDaily, "Daily Status Log");
+
+            XLSX.writeFile(wb, `Monthly_View_Report_${selectedAuditor}_${selectedMonth}.xlsx`);
+            addAuditLog(`Exported Monthly View report for ${selectedAuditor} (${selectedMonth})`);
         }
 
         async function addSiteVisit(e) {
@@ -1692,9 +1810,18 @@
         }
 
         function updateDashboardCards() {
-            let waho = 0, wfa = 0, site = siteVisits.length, leave = 0, holiday = 0, wfaLeave = 0, wahoLeave = 0;
+            let waho = 0, wfa = 0, site = siteVisits.length, leave = 0, holiday = 0;
             let auditorWahoCounts = {};
-            let auditorBreakdownData = { wfa: new Array(auditors.length).fill(0), waho: new Array(auditors.length).fill(0), siteVisit: new Array(auditors.length).fill(0), leave: new Array(auditors.length).fill(0), wfaLeave: new Array(auditors.length).fill(0), wahoLeave: new Array(auditors.length).fill(0) };
+            
+            let auditorBreakdownData = { 
+                wfa: new Array(auditors.length).fill(0), 
+                waho: new Array(auditors.length).fill(0), 
+                siteVisit: new Array(auditors.length).fill(0), 
+                leave: new Array(auditors.length).fill(0), 
+                wfaLeave: new Array(auditors.length).fill(0), 
+                wahoLeave: new Array(auditors.length).fill(0),
+                siteVisitLeave: new Array(auditors.length).fill(0) 
+            };
 
             auditors.forEach(aud => auditorWahoCounts[aud] = 0);
             const selectedFilterMonth = document.getElementById("dashboardMonthFilter") ? document.getElementById("dashboardMonthFilter").value : "ALL";
@@ -1716,6 +1843,7 @@
                     if (val === "HOLIDAY") holiday++;
                     if (val === "WAHO/LEAVE") { waho += 0.5; leave += 0.5; if (auditorWahoCounts[auditorName] !== undefined) auditorWahoCounts[auditorName] += 0.5; if (auditorIdx !== -1) auditorBreakdownData.wahoLeave[auditorIdx]++; }
                     if (val === "WFA/LEAVE") { wfa += 0.5; leave += 0.5; if (auditorIdx !== -1) auditorBreakdownData.wfaLeave[auditorIdx]++; }
+                    if (val === "SITE VISIT / LEAVE") { site += 0.5; leave += 0.5; if (auditorIdx !== -1) auditorBreakdownData.siteVisitLeave[auditorIdx]++; }
                 }
             });
 
@@ -1736,6 +1864,7 @@
                 auditorsBreakdownChartInstance.data.datasets[3].data = auditorBreakdownData.leave;
                 auditorsBreakdownChartInstance.data.datasets[4].data = auditorBreakdownData.wfaLeave;
                 auditorsBreakdownChartInstance.data.datasets[5].data = auditorBreakdownData.wahoLeave;
+                auditorsBreakdownChartInstance.data.datasets[6].data = auditorBreakdownData.siteVisitLeave;
                 auditorsBreakdownChartInstance.update();
             }
             if (weeklyChartInstance) { weeklyChartInstance.data.datasets[0].data = [waho, wfa, site, leave, holiday]; weeklyChartInstance.update(); }
@@ -1768,7 +1897,8 @@
                             { label: 'Site Visit', data: new Array(auditors.length).fill(0), backgroundColor: '#f59e0b' },
                             { label: 'Leave', data: new Array(auditors.length).fill(0), backgroundColor: '#ef4444' },
                             { label: 'WFA/Leave', data: new Array(auditors.length).fill(0), backgroundColor: '#0d9488' },
-                            { label: 'WAHO/Leave', data: new Array(auditors.length).fill(0), backgroundColor: '#8b5cf6' }
+                            { label: 'WAHO/Leave', data: new Array(auditors.length).fill(0), backgroundColor: '#8b5cf6' },
+                            { label: 'Site Visit / Leave', data: new Array(auditors.length).fill(0), backgroundColor: '#db2777' }
                         ]
                     },
                     options: { responsive: true, maintainAspectRatio: false, scales: { x: { stacked: true }, y: { stacked: true } } }
