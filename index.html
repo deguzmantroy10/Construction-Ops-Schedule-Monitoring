@@ -7,6 +7,28 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+    
+    <!-- FIREBASE SDKs (Modular) -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, collection, doc, setDoc, getDoc, onSnapshot, getDocs } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCko6WQ4ox3VgWIco06CqVX8i573Ee3q9c",
+            authDomain: "attendance-monitoring-sy-832b8.firebaseapp.com",
+            projectId: "attendance-monitoring-sy-832b8",
+            storageBucket: "attendance-monitoring-sy-832b8.firebasestorage.app",
+            messagingSenderId: "217151172479",
+            appId: "G-G9K9F6B4RS"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        window.db = db;
+        window.firebaseModules = { collection, doc, setDoc, getDoc, onSnapshot, getDocs };
+    </script>
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
@@ -630,7 +652,7 @@
     <!-- MAIN CONTENT AREA -->
     <div class="main">
         <div class="topbar">
-            <h1 id="pageTitle" style="font-size: 20px; font-weight: 700; letter-spacing: -0.3px;">Attendance Monitoring</h1>
+            <h1 id="pageTitle" style="font-size: 20px; font-weight: 700; letter-spacing: -0.3px;">Infographic Dashboard & Attendance Monitoring</h1>
             <div id="today">Loading date and time...</div>
         </div>
 
@@ -656,7 +678,7 @@
                     </select>
                 </div>
                 <div style="font-size: 12px; color: #64748b;">
-                    <i class="fa-solid fa-circle-info"></i> Construction Ops 2026v1 Beta.
+                    <i class="fa-solid fa-circle-info"></i> Construction Ops 2026v1 (Firestore Real-time).
                 </div>
             </div>
 
@@ -860,8 +882,8 @@
             <div class="settings-container">
                 <!-- DATA MIGRATION CARD -->
                 <div class="settings-card" style="border-left: 5px solid #2563eb;">
-                    <h2 style="font-size: 16px; margin-bottom: 6px;"><i class="fa-solid fa-cloud-arrow-up"></i> Local Storage & Cloud Migration</h2>
-                    <p style="margin-bottom: 15px; color: #64748b; font-size: 13px;">Since this site is deployed on GitHub, back up or restore your edited data using a JSON file to ensure that your data is not lost..</p>
+                    <h2 style="font-size: 16px; margin-bottom: 6px;"><i class="fa-solid fa-cloud-arrow-up"></i> Cloud Sync & Local Storage Backup</h2>
+                    <p style="margin-bottom: 15px; color: #64748b; font-size: 13px;">Naka-connect na ito sa Firebase Firestore para sa Real-time Sync. Maaari ka ring mag-download ng JSON backup kung kinakailangan.</p>
                     
                     <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px;">
                         <button onclick="exportSystemBackupJson()" class="btn-primary"><i class="fa-solid fa-download"></i> Download Backup (.json)</button>
@@ -931,9 +953,9 @@
         const attendanceOptions = ["SELECT", "WAHO", "WFA", "SITE VISIT", "LEAVE", "HOLIDAY", "WAHO/LEAVE", "WFA/LEAVE"];
 
         let currentLoggedAuditor = localStorage.getItem("currentLoggedAuditor") || "";
-        let auditLogs = JSON.parse(localStorage.getItem("auditLogs")) || [];
-        let siteVisits = JSON.parse(localStorage.getItem("siteVisits")) || [];
-        let attendanceData = JSON.parse(localStorage.getItem("attendanceData")) || {};
+        let auditLogs = [];
+        let siteVisits = [];
+        let attendanceData = {};
         
         const defaultMandaysTemplate = [
             { id: 1, date: '2026-01-01', day: 'Thursday', sched: 'HOLIDAY', holiday: 1, slvl: 0, iad: 0, ld: 0, siteVisit: 0, qas: 0, remarks: 'New Year’s Day' },
@@ -948,6 +970,48 @@
         let mandaysChartInstance = null;
         let topWahoChartInstance = null;
         let attendanceModePieInstance = null;
+
+        function initFirebaseListeners() {
+            if (!window.db) {
+                setTimeout(initFirebaseListeners, 500);
+                return;
+            }
+            const { doc, onSnapshot } = window.firebaseModules;
+
+            onSnapshot(doc(window.db, "appData", "attendance"), (docSnap) => {
+                if (docSnap.exists()) {
+                    attendanceData = docSnap.data().values || {};
+                    renderWeeklyBlocks();
+                    updateDashboardCards();
+                    renderMonthlyCalendar();
+                }
+            });
+
+            onSnapshot(doc(window.db, "appData", "siteVisits"), (docSnap) => {
+                if (docSnap.exists()) {
+                    siteVisits = docSnap.data().list || [];
+                    renderSiteVisits();
+                    updateDashboardCards();
+                }
+            });
+
+            onSnapshot(doc(window.db, "appData", "auditLogs"), (docSnap) => {
+                if (docSnap.exists()) {
+                    auditLogs = docSnap.data().logs || [];
+                    renderAuditLogs();
+                }
+            });
+        }
+
+        async function saveToFirestore(docId, dataField, dataValue) {
+            const { doc, setDoc } = window.firebaseModules;
+            try {
+                await setDoc(doc(window.db, "appData", docId), { [dataField]: dataValue }, { merge: true });
+            } catch (error) {
+                console.error("Error saving to Firestore: ", error);
+                alert("Network error: Hindi nai-save sa cloud. Subukang muli.");
+            }
+        }
 
         function getDayHoursMultiplier(dayStr) {
             const d = (dayStr || "").toLowerCase();
@@ -1035,7 +1099,7 @@
             const newLog = { id: Date.now() + Math.random(), timestamp: formattedDate, user: currentLoggedAuditor || "System Admin", action: actionDescription };
             auditLogs.unshift(newLog);
             if(auditLogs.length > 100) auditLogs = auditLogs.slice(0, 100);
-            localStorage.setItem("auditLogs", JSON.stringify(auditLogs));
+            saveToFirestore("auditLogs", "logs", auditLogs);
             renderAuditLogs();
         }
         function renderAuditLogs(filterTerm = "") {
@@ -1056,12 +1120,11 @@
             });
         }
 
-        /* JSON BACKUP & RESTORE FUNCTIONS */
         function exportSystemBackupJson() {
             const backupData = {
-                attendanceData: JSON.parse(localStorage.getItem("attendanceData")) || {},
-                siteVisits: JSON.parse(localStorage.getItem("siteVisits")) || [],
-                auditLogs: JSON.parse(localStorage.getItem("auditLogs")) || [],
+                attendanceData: attendanceData,
+                siteVisits: siteVisits,
+                auditLogs: auditLogs,
                 exportDate: new Date().toISOString()
             };
             
@@ -1080,27 +1143,24 @@
             downloadAnchor.click();
             downloadAnchor.remove();
             addAuditLog("Exported full system local storage backup (.json)");
-            alert("Backup successfully generated and downloaded! Keep this file safe.");
+            alert("Backup successfully generated and downloaded!");
         }
 
         function importSystemBackupJson(event) {
             const fileReader = new FileReader();
             if (event.target.files[0]) {
                 fileReader.readAsText(event.target.files[0], "UTF-8");
-                fileReader.onload = function (e) {
+                fileReader.onload = async function (e) {
                     try {
                         const importedData = JSON.parse(e.target.result);
                         if (importedData.attendanceData) {
-                            localStorage.setItem("attendanceData", JSON.stringify(importedData.attendanceData));
-                            attendanceData = importedData.attendanceData;
+                            await saveToFirestore("attendance", "values", importedData.attendanceData);
                         }
                         if (importedData.siteVisits) {
-                            localStorage.setItem("siteVisits", JSON.stringify(importedData.siteVisits));
-                            siteVisits = importedData.siteVisits;
+                            await saveToFirestore("siteVisits", "list", importedData.siteVisits);
                         }
                         if (importedData.auditLogs) {
-                            localStorage.setItem("auditLogs", JSON.stringify(importedData.auditLogs));
-                            auditLogs = importedData.auditLogs;
+                            await saveToFirestore("auditLogs", "logs", importedData.auditLogs);
                         }
                         
                         Object.keys(importedData).forEach(key => {
@@ -1109,10 +1169,10 @@
                             }
                         });
 
-                        alert("Data successfully restored from cloud/local backup! No changes, codes, or graphs were broken.");
+                        alert("Data successfully restored to Firestore cloud database!");
                         location.reload();
                     } catch (error) {
-                        alert("Error parsing JSON file. Make sure it's a valid system backup file.");
+                        alert("Error parsing JSON file.");
                         console.error(error);
                     }
                 }
@@ -1141,13 +1201,8 @@
             checkUserLogin();
             renderTodayDate();
             initDarkMode();
-            renderWeeklyBlocks();
-            renderMonthlyCalendar();
-            renderSiteVisits();
             renderCharts();
-            updateDashboardCards();
-            renderAuditLogs();
-            updateAuditTrailVisibility();
+            initFirebaseListeners();
             
             const mSelect = document.getElementById("mandaysAuditorSelect");
             if (mSelect) {
@@ -1300,49 +1355,47 @@
             });
         }
 
-        function saveAttendanceData() {
+        async function saveAttendanceData() {
             if (!currentLoggedAuditor) { alert("Please log in as an Auditor first before saving!"); openLoginModal(); return; }
             
             const saveBtn = document.getElementById("saveAttendance");
             if(saveBtn) { saveBtn.disabled = true; saveBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Saving...`; }
 
-            setTimeout(() => {
-                let changesDetected = [];
-                document.querySelectorAll(".weekly-block-tbody select").forEach(select => {
-                    const weekStart = select.dataset.weekstart;
-                    const auditor = select.dataset.auditor;
-                    const dayNum = parseInt(select.dataset.day, 10);
-                    const key = `${weekStart}_${auditor}_day${dayNum}`;
-                    const oldVal = attendanceData[key] || "SELECT";
-                    const newVal = select.value;
-                    if (oldVal !== newVal) { 
-                        changesDetected.push(`Changed <strong>${auditor}'s</strong> status from <em>[${oldVal}]</em> to <em>[${newVal}]</em>`); 
-                        attendanceData[key] = newVal; 
-                    }
-                });
+            let changesDetected = [];
+            document.querySelectorAll(".weekly-block-tbody select").forEach(select => {
+                const weekStart = select.dataset.weekstart;
+                const auditor = select.dataset.auditor;
+                const dayNum = parseInt(select.dataset.day, 10);
+                const key = `${weekStart}_${auditor}_day${dayNum}`;
+                const oldVal = attendanceData[key] || "SELECT";
+                const newVal = select.value;
+                if (oldVal !== newVal) { 
+                    changesDetected.push(`Changed <strong>${auditor}'s</strong> status from <em>[${oldVal}]</em> to <em>[${newVal}]</em>`); 
+                    attendanceData[key] = newVal; 
+                }
+            });
 
-                document.querySelectorAll(".weekly-block-tbody input[data-type='remark']").forEach(input => {
-                    const weekStart = input.dataset.weekstart;
-                    const auditor = input.dataset.auditor;
-                    const key = `${weekStart}_${auditor}_remark`;
-                    const oldRemark = attendanceData[key] || "";
-                    const newRemark = input.value;
-                    if (oldRemark !== newRemark) { 
-                        changesDetected.push(`Updated remarks for <strong>${auditor}</strong>: "${newRemark}"`); 
-                        attendanceData[key] = newRemark; 
-                    }
-                });
+            document.querySelectorAll(".weekly-block-tbody input[data-type='remark']").forEach(input => {
+                const weekStart = input.dataset.weekstart;
+                const auditor = input.dataset.auditor;
+                const key = `${weekStart}_${auditor}_remark`;
+                const oldRemark = attendanceData[key] || "";
+                const newRemark = input.value;
+                if (oldRemark !== newRemark) { 
+                    changesDetected.push(`Updated remarks for <strong>${auditor}</strong>: "${newRemark}"`); 
+                    attendanceData[key] = newRemark; 
+                }
+            });
 
-                localStorage.setItem("attendanceData", JSON.stringify(attendanceData));
-                updateDashboardCards();
+            if (changesDetected.length > 0) {
+                await saveToFirestore("attendance", "values", attendanceData);
+                changesDetected.forEach(changeText => addAuditLog(changeText));
+                alert(`Saved successfully to Cloud! ${changesDetected.length} modification(s) recorded.`);
+            } else { 
+                alert(`No changes detected.`); 
+            }
 
-                if (changesDetected.length > 0) {
-                    changesDetected.forEach(changeText => addAuditLog(changeText));
-                    alert(`Saved successfully! ${changesDetected.length} modification(s) recorded.`);
-                } else { alert(`No changes detected.`); }
-
-                if(saveBtn) { saveBtn.disabled = false; saveBtn.innerHTML = `<i class="fa-solid fa-floppy-disk"></i> Save Changes`; }
-            }, 50);
+            if(saveBtn) { saveBtn.disabled = false; saveBtn.innerHTML = `<i class="fa-solid fa-floppy-disk"></i> Save Changes`; }
         }
 
         function renderMonthlyCalendar() {
@@ -1355,7 +1408,7 @@
             const firstDay = new Date(year, month - 1, 1).getDay();
             const daysInMonth = new Date(year, month, 0).getDate();
             let date = 1, wahoCount = 0, wfaCount = 0, siteCount = 0, leaveCount = 0;
-            const savedAttendance = JSON.parse(localStorage.getItem("attendanceData")) || {};
+            
             for (let i = 0; i < 6; i++) {
                 let row = document.createElement("tr");
                 let hasDatesInRow = false;
@@ -1369,14 +1422,14 @@
                         if (selectedAuditor) {
                             const currentDateStr = `${year}-${String(month).padStart(2, '0')}-${String(date).padStart(2, '0')}`;
                             let foundStatus = "";
-                            Object.keys(savedAttendance).forEach(key => {
+                            Object.keys(attendanceData).forEach(key => {
                                 if (key.includes(`_${selectedAuditor}_day`)) {
                                     const [weekStart, aud, dayTag] = key.split("_");
                                     const dayNum = parseInt(dayTag.replace("day", ""), 10);
                                     const targetDate = new Date(new Date(weekStart));
                                     targetDate.setDate(targetDate.getDate() + (dayNum - 1));
                                     if (`${targetDate.getFullYear()}-${String(targetDate.getMonth() + 1).padStart(2, '0')}-${String(targetDate.getDate()).padStart(2, '0')}` === currentDateStr) {
-                                        foundStatus = savedAttendance[key];
+                                        foundStatus = attendanceData[key];
                                     }
                                 }
                             });
@@ -1406,28 +1459,27 @@
             if (document.getElementById("mRate")) document.getElementById("mRate").textContent = `${totalLogged > 0 ? Math.round((totalPresent / totalLogged) * 100) : 0}%`;
         }
 
-        function addSiteVisit(e) {
+        async function addSiteVisit(e) {
             e.preventDefault();
             const auditor = document.getElementById("siteAuditor").value;
             const location = document.getElementById("siteLocation").value;
             const date = document.getElementById("siteDate").value;
             const status = document.getElementById("siteStatus").value;
             const remarks = document.getElementById("siteRemarks").value;
+            
             siteVisits.push({ id: Date.now(), auditor, location, date, status, remarks });
-            localStorage.setItem("siteVisits", JSON.stringify(siteVisits));
+            await saveToFirestore("siteVisits", "list", siteVisits);
             addAuditLog(`Scheduled Site Visit for <strong>${auditor}</strong> at <em>${location}</em> (${date})`);
             document.getElementById("siteVisitForm").reset();
-            renderSiteVisits();
-            updateDashboardCards();
         }
-        function deleteSiteVisit(id) {
+
+        async function deleteSiteVisit(id) {
             const visit = siteVisits.find(v => v.id === id);
             if (visit) addAuditLog(`Cancelled/Removed Site Visit Schedule for <strong>${visit.auditor}</strong> at <em>${visit.location}</em>`);
             siteVisits = siteVisits.filter(v => v.id !== id);
-            localStorage.setItem("siteVisits", JSON.stringify(siteVisits));
-            renderSiteVisits();
-            updateDashboardCards();
+            await saveToFirestore("siteVisits", "list", siteVisits);
         }
+
         function renderSiteVisits() {
             const tbody = document.getElementById("siteVisitTableBody");
             if (!tbody) return;
@@ -1742,8 +1794,6 @@
             const category = document.getElementById("exportCategorySelect")?.value || "ALL";
             const selectedMonth = document.getElementById("exportMonthSelect")?.value || "2026-01";
             const wb = XLSX.utils.book_new();
-            const rawAttendance = JSON.parse(localStorage.getItem("attendanceData")) || {};
-            const rawSiteVisits = JSON.parse(localStorage.getItem("siteVisits")) || [];
             const [year, month] = selectedMonth.split("-").map(Number);
             const weeks = getWeeksInMonth(year, month);
 
@@ -1751,8 +1801,8 @@
                 weeks.forEach(wk => {
                     const weeklyRows = auditors.map(auditor => {
                         const rowObj = { "Auditor": auditor };
-                        wk.dates.forEach((d, idx) => { rowObj[`${d.dayName} - ${d.fullDateStr}`] = rawAttendance[`${wk.weekStartIso}_${auditor}_day${idx+1}`] || "SELECT"; });
-                        rowObj["Remarks"] = rawAttendance[`${wk.weekStartIso}_${auditor}_remark`] || "";
+                        wk.dates.forEach((d, idx) => { rowObj[`${d.dayName} - ${d.fullDateStr}`] = attendanceData[`${wk.weekStartIso}_${auditor}_day${idx+1}`] || "SELECT"; });
+                        rowObj["Remarks"] = attendanceData[`${wk.weekStartIso}_${auditor}_remark`] || "";
                         return rowObj;
                     });
                     XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(weeklyRows), `Week ${wk.weekNumber}`);
@@ -1761,9 +1811,9 @@
             if (category === "MONTHLY" || category === "ALL") {
                 const monthlySummaryRows = auditors.map(auditor => {
                     let waho = 0, wfa = 0, site = 0, leave = 0, holiday = 0;
-                    Object.keys(rawAttendance).forEach(key => {
+                    Object.keys(attendanceData).forEach(key => {
                         if (key.includes(`_${auditor}_`) && !key.endsWith("_remark")) {
-                            const val = rawAttendance[key];
+                            const val = attendanceData[key];
                             if (val === "WAHO") waho++; if (val === "WFA") wfa++; if (val === "SITE VISIT") site++; if (val === "LEAVE") leave++; if (val === "HOLIDAY") holiday++;
                         }
                     });
@@ -1772,7 +1822,7 @@
                 XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(monthlySummaryRows), `Summary ${selectedMonth}`);
             }
             if (category === "SITE_VISIT" || category === "ALL") {
-                const svRows = rawSiteVisits.map(v => ({ "Auditor": v.auditor, "Project Site": v.location, "Date": v.date, "Status": v.status, "Purpose": v.remarks }));
+                const svRows = siteVisits.map(v => ({ "Auditor": v.auditor, "Project Site": v.location, "Date": v.date, "Status": v.status, "Purpose": v.remarks }));
                 XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(svRows.length ? svRows : [{Message: "No site visits"}]), "Site Visits");
             }
             if (category === "MANDAYS" || category === "ALL") {
