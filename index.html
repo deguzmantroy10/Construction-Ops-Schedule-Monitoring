@@ -304,11 +304,12 @@
             border-color: var(--border-dark);
         }
 
-        .card.green { border-color: #22c55e; }
-        .card.blue { border-color: #6366f1; }
-        .card.orange { border-color: #f59e0b; }
-        .card.red { border-color: #ef4444; }
-        .card.gray { border-color: #94a3b8; }
+        /* UPDATED CARD BORDER COLORS ACCORDING TO SPECIFICATIONS */
+        .card.green { border-color: #22c55e; } /* WAHO - GREEN */
+        .card.blue { border-color: #2563eb; }  /* TOTAL WFA - BLUE */
+        .card.orange { border-color: #f59e0b; }/* SITE VISIT - YELLOW */
+        .card.red { border-color: #ef4444; }   /* LEAVE - RED */
+        .card.gray { border-color: #8b5cf6; }  /* HOLIDAY - VIOLET */
         .card.purple { border-color: #8b5cf6; }
 
         .card-header-flex {
@@ -320,10 +321,10 @@
 
         .card-header-flex i { font-size: 16px; }
         .card.green i { color: #22c55e; }
-        .card.blue i { color: #6366f1; }
+        .card.blue i { color: #2563eb; }
         .card.orange i { color: #f59e0b; }
         .card.red i { color: #ef4444; }
-        .card.gray i { color: #94a3b8; }
+        .card.gray i { color: #8b5cf6; }
 
         .card h3 {
             font-size: 11px;
@@ -721,11 +722,11 @@
 
             <div class="chart-grid">
                 <div class="chart-card">
-                    <h2>Weekly Status Breakdown</h2>
+                    <h2>Attendance Mode & Productivity Rate Chart</h2>
                     <canvas id="attendanceChart" style="max-height: 230px;"></canvas>
                 </div>
                 <div class="chart-card">
-                    <h2><i class="fa-solid fa-trophy" style="color: #eab308;"></i> Top Auditors by WAHO</h2>
+                    <h2><i class="fa-solid fa-trophy" style="color: #1d4ed8;"></i> Top Auditors by WAHO (Side Bar Graph)</h2>
                     <canvas id="topWahoChart" style="max-height: 230px;"></canvas>
                 </div>
             </div>
@@ -765,13 +766,28 @@
         <!-- SITE VISIT PAGE -->
         <div id="siteVisitPage" class="page-hidden">
             <div class="monthly">
-                <h2 style="font-size: 18px; font-weight: 700; margin-bottom: 15px;"><i class="fa-solid fa-location-dot"></i> Site Visit Schedule</h2>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; flex-wrap: wrap; gap: 10px;">
+                    <h2 style="font-size: 18px; font-weight: 700;"><i class="fa-solid fa-location-dot"></i> Site Visit Schedule & Project Sites</h2>
+                    <div style="display: flex; gap: 10px; align-items: center;">
+                        <button onclick="openManageProjectsModal()" class="btn-teal"><i class="fa-solid fa-building-ngo"></i> Manage Project Sites</button>
+                        <label class="btn-primary" style="cursor: pointer; display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 8px; font-size: 13px; font-weight: 600; margin: 0;">
+                            <i class="fa-solid fa-file-excel"></i> Import Project List (.xlsx)
+                            <input type="file" id="importProjectExcelFile" accept=".xlsx, .xls, .csv" onchange="importProjectSitesExcel(event)" style="display: none;">
+                        </label>
+                    </div>
+                </div>
+
                 <div class="site-visit-form-container">
                     <h3 style="font-size: 14px; font-weight: 700; color: var(--primary);">Add New Site Visit Schedule</h3>
                     <form id="siteVisitForm" onsubmit="addSiteVisit(event)">
                         <div class="form-grid">
                             <div class="form-group"><label>Auditor</label><select id="siteAuditor" required><option value="">Select Auditor</option></select></div>
-                            <div class="form-group"><label>Project Site</label><input type="text" id="siteLocation" placeholder="Enter Project Site" required></div>
+                            <div class="form-group">
+                                <label>Project Site</label>
+                                <select id="siteLocation" required>
+                                    <option value="">Select Project Site</option>
+                                </select>
+                            </div>
                             <div class="form-group"><label>Date</label><input type="date" id="siteDate" required></div>
                             <div class="form-group"><label>Status</label><select id="siteStatus"><option value="Scheduled">Scheduled</option><option value="Completed">Completed</option><option value="Cancelled">Cancelled</option></select></div>
                             <div class="form-group" style="grid-column: span 3;"><label>Purpose of Visit</label><input type="text" id="siteRemarks" placeholder="Enter purpose of visit..."></div>
@@ -887,13 +903,13 @@
             </div>
         </div>
 
-        <!-- SETTINGS PAGE (MIGRATION & BACKUP) -->
+        <!-- SETTINGS PAGE (MIGRATION & ACTIVITY LOG) -->
         <div id="settingsPage" class="page-hidden">
             <div class="settings-container">
                 <!-- DATA MIGRATION CARD -->
                 <div class="settings-card" style="border-left: 5px solid #2563eb;">
                     <h2 style="font-size: 16px; margin-bottom: 6px;"><i class="fa-solid fa-cloud-arrow-up"></i> Cloud Sync & Local Storage Backup</h2>
-                    <p style="margin-bottom: 15px; color: #64748b; font-size: 13px;">Naka-connect na ito sa Firebase Firestore para sa Real-time Sync. Maaari ka ring mag-download ng JSON backup kung kinakailangan.</p>
+                    <p style="margin-bottom: 15px; color: #64748b; font-size: 13px;">Connected to Firebase Firestore for real-time synchronization. You can also download or restore JSON backups.</p>
                     
                     <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px;">
                         <button onclick="exportSystemBackupJson()" class="btn-primary"><i class="fa-solid fa-download"></i> Download Backup (.json)</button>
@@ -904,10 +920,11 @@
                     </div>
                 </div>
 
+                <!-- ACTIVITY LOG / AUDIT TRAIL CARD -->
                 <div class="settings-card" id="auditTrailCard">
-                    <h2 style="font-size: 16px; margin-bottom: 6px;"><i class="fa-solid fa-clock-rotate-left"></i> System Activity / Audit Trail</h2>
-                    <p style="margin-bottom: 15px; color: #64748b; font-size: 13px;">Shows who saved attendance changes and when they performed the action:</p>
-                    <div class="table-container" style="max-height: 250px; overflow-y: auto;">
+                    <h2 style="font-size: 16px; margin-bottom: 6px;"><i class="fa-solid fa-clock-rotate-left"></i> System Activity Log & Real-Time Tracing</h2>
+                    <p style="margin-bottom: 15px; color: #64748b; font-size: 13px;">Real-time tracking of users who accessed, edited, or modified data, dates, and settings:</p>
+                    <div class="table-container" style="max-height: 280px; overflow-y: auto;">
                         <table>
                             <thead><tr><th>Date & Time</th><th>Logged User</th><th>Action Performed</th></tr></thead>
                             <tbody id="auditLogTableBody"></tbody>
@@ -920,7 +937,7 @@
                     <div style="display: flex; gap: 15px; align-items: flex-end; flex-wrap: wrap; margin-bottom: 20px;">
                         <div class="form-group" style="margin: 0;">
                             <label style="font-size: 12px;">CATEGORY</label>
-                            <select id="exportCategorySelect" onchange="toggleExportFilters()" style="padding: 10px 14px; border-radius: 8px; border: 1px solid #cbd5e1; outline: none; font-weight: 600;">
+                            <select id="exportCategorySelect" style="padding: 10px 14px; border-radius: 8px; border: 1px solid #cbd5e1; outline: none; font-weight: 600;">
                                 <option value="WEEKLY">Weekly Log</option>
                                 <option value="MONTHLY">Monthly Summary & Daily Logs</option>
                                 <option value="SITE_VISIT">Site Visit Schedule</option>
@@ -956,12 +973,49 @@
         </div>
     </div>
 
+    <!-- MANAGE PROJECT SITES MODAL -->
+    <div id="manageProjectsModal" class="modal-overlay" style="display: none;">
+        <div class="modal-box" style="width: 500px; text-align: left;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                <h3 style="font-size: 16px; color: var(--primary);"><i class="fa-solid fa-building-ngo"></i> Manage Project Sites List</h3>
+                <button onclick="closeManageProjectsModal()" style="background: none; border: none; font-size: 16px; cursor: pointer; color: #64748b;"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <p style="font-size: 12px; color: #64748b; margin-bottom: 15px;">Add, edit, or remove project sites available in the dropdown selection.</p>
+            
+            <div style="display: flex; gap: 8px; margin-bottom: 15px;">
+                <input type="text" id="newProjectSiteInput" placeholder="Enter new project site name..." style="flex-grow: 1; padding: 9px 12px; border-radius: 8px; border: 1px solid #cbd5e1;">
+                <button onclick="addNewProjectSite()" class="btn-primary" style="padding: 9px 15px;"><i class="fa-solid fa-plus"></i> Add</button>
+            </div>
+
+            <div class="table-container" style="max-height: 200px; overflow-y: auto; margin-bottom: 15px;">
+                <table>
+                    <thead><tr><th>Project Site Name</th><th style="width: 80px; text-align: center;">Action</th></tr></thead>
+                    <tbody id="manageProjectsTableBody"></tbody>
+                </table>
+            </div>
+
+            <div style="display: flex; justify-content: flex-end;">
+                <button onclick="closeManageProjectsModal()" class="btn-primary" style="padding: 8px 16px;">Done</button>
+            </div>
+        </div>
+    </div>
+
     <div id="printableReport" class="print-only"></div>
 
     <script>
         const auditors = ["Catherine Rosales", "Joemel Perez", "Elmar Baria", "Troy De Guzman", "Dianne Armas", "Cijay Castro", "Bryan Panol", "Dean Mark Soledad"];
         
         const attendanceOptions = ["SELECT", "WAHO", "WFA", "SITE VISIT", "LEAVE", "HOLIDAY", "WAHO/LEAVE", "WFA/LEAVE", "SITE VISIT / LEAVE"];
+
+        let projectSitesList = JSON.parse(localStorage.getItem("projectSitesList")) || [
+            "Sage Residences",
+            "Solmera Coast",
+            "Kalea Heights",
+            "Anissa Heights",
+            "ESG Scrapyard",
+            "Central Warehouse",
+            "Westbank Project"
+        ];
 
         let currentLoggedAuditor = localStorage.getItem("currentLoggedAuditor") || "";
         let auditLogs = [];
@@ -1020,7 +1074,6 @@
                 await setDoc(doc(window.db, "appData", docId), { [dataField]: dataValue }, { merge: true });
             } catch (error) {
                 console.error("Error saving to Firestore: ", error);
-                alert("Network error: Hindi nai-save sa cloud. Subukang muli.");
             }
         }
 
@@ -1046,7 +1099,6 @@
             updateLoggedUserDisplay();
             document.getElementById("loginModal").style.display = "none";
             addAuditLog(`Logged into the system session.`);
-            updateAuditTrailVisibility();
             
             const mSelect = document.getElementById("mandaysAuditorSelect");
             if (mSelect) {
@@ -1096,23 +1148,18 @@
                 }
                 userContainer.prepend(imgElement);
             }
-            updateAuditTrailVisibility();
         }
-        function updateAuditTrailVisibility() {
-            const auditTrailCard = document.getElementById("auditTrailCard");
-            if (auditTrailCard) {
-                auditTrailCard.style.display = (currentLoggedAuditor === "Yani" || currentLoggedAuditor === "Cath") ? "block" : "none";
-            }
-        }
+
         function addAuditLog(actionDescription) {
             const now = new Date();
             const formattedDate = now.toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
             const newLog = { id: Date.now() + Math.random(), timestamp: formattedDate, user: currentLoggedAuditor || "System Admin", action: actionDescription };
             auditLogs.unshift(newLog);
-            if(auditLogs.length > 100) auditLogs = auditLogs.slice(0, 100);
+            if(auditLogs.length > 150) auditLogs = auditLogs.slice(0, 150);
             saveToFirestore("auditLogs", "logs", auditLogs);
             renderAuditLogs();
         }
+
         function renderAuditLogs(filterTerm = "") {
             const tbody = document.getElementById("auditLogTableBody");
             if (!tbody) return;
@@ -1123,7 +1170,7 @@
                 logsToDisplay = auditLogs.filter(log => log.user.toLowerCase().includes(term) || log.action.toLowerCase().includes(term) || log.timestamp.toLowerCase().includes(term));
             }
             if (logsToDisplay.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="3" style="text-align:center; color:#94a3b8; padding: 15px;">No matching transaction logs found.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="3" style="text-align:center; color:#94a3b8; padding: 15px;">No activity logs recorded yet.</td></tr>`;
                 return;
             }
             logsToDisplay.forEach(log => {
@@ -1136,6 +1183,7 @@
                 attendanceData: attendanceData,
                 siteVisits: siteVisits,
                 auditLogs: auditLogs,
+                projectSitesList: projectSitesList,
                 exportDate: new Date().toISOString()
             };
             
@@ -1153,7 +1201,7 @@
             document.body.appendChild(downloadAnchor);
             downloadAnchor.click();
             downloadAnchor.remove();
-            addAuditLog("Exported full system local storage backup (.json)");
+            addAuditLog("Exported system local storage backup (.json)");
             alert("Backup successfully generated and downloaded!");
         }
 
@@ -1173,6 +1221,10 @@
                         if (importedData.auditLogs) {
                             await saveToFirestore("auditLogs", "logs", importedData.auditLogs);
                         }
+                        if (importedData.projectSitesList) {
+                            projectSitesList = importedData.projectSitesList;
+                            localStorage.setItem("projectSitesList", JSON.stringify(projectSitesList));
+                        }
                         
                         Object.keys(importedData).forEach(key => {
                             if (key.startsWith("mandaysData_")) {
@@ -1180,11 +1232,11 @@
                             }
                         });
 
+                        addAuditLog("Restored system backup from uploaded JSON file.");
                         alert("Data successfully restored to Firestore cloud database!");
                         location.reload();
                     } catch (error) {
                         alert("Error parsing JSON file.");
-                        console.error(error);
                     }
                 }
             }
@@ -1192,11 +1244,11 @@
 
         function openDashboard() { hideAllPages(); document.getElementById("dashboardPage").classList.remove("page-hidden"); updateDashboardCards(); }
         function openWeekly() { hideAllPages(); document.getElementById("weeklyPage").classList.remove("page-hidden"); renderWeeklyBlocks(); }
-        function openSiteVisit() { hideAllPages(); document.getElementById("siteVisitPage").classList.remove("page-hidden"); renderSiteVisits(); }
+        function openSiteVisit() { hideAllPages(); document.getElementById("siteVisitPage").classList.remove("page-hidden"); populateProjectSitesDropdown(); renderSiteVisits(); }
         function openMonthly() { hideAllPages(); document.getElementById("monthlyPage").classList.remove("page-hidden"); renderMonthlyCalendar(); }
         function openMandays() { hideAllPages(); document.getElementById("mandaysPage").classList.remove("page-hidden"); renderMandaysPage(); }
         function openMandaysActivity() { hideAllPages(); document.getElementById("mandaysActivityPage").classList.remove("page-hidden"); renderMandaysPage(); }
-        function openSettings() { hideAllPages(); document.getElementById("settingsPage").classList.remove("page-hidden"); renderAuditLogs(); updateAuditTrailVisibility(); }
+        function openSettings() { hideAllPages(); document.getElementById("settingsPage").classList.remove("page-hidden"); renderAuditLogs(); }
         
         function hideAllPages() { 
             ["dashboardPage", "weeklyPage", "monthlyPage", "siteVisitPage", "mandaysPage", "mandaysActivityPage", "settingsPage"].forEach(id => { 
@@ -1212,7 +1264,6 @@
             checkUserLogin();
             renderTodayDate();
             initDarkMode();
-            renderCharts();
             initFirebaseListeners();
             
             const mSelect = document.getElementById("mandaysAuditorSelect");
@@ -1220,6 +1271,7 @@
                 mSelect.value = currentLoggedAuditor || auditors[0];
             }
             renderMandaysPage();
+            populateProjectSitesDropdown();
             openDashboard();
 
             const searchInput = document.getElementById("search");
@@ -1244,7 +1296,108 @@
                 if (loginSelect && !hasOption(loginSelect, auditor)) loginSelect.add(new Option(auditor, auditor));
                 if (mandaysSelect && !hasOption(mandaysSelect, auditor)) mandaysSelect.add(new Option(auditor, auditor));
             });
+            populateProjectSitesDropdown();
         }
+
+        function populateProjectSitesDropdown() {
+            const siteLocSelect = document.getElementById("siteLocation");
+            if (!siteLocSelect) return;
+            const currentVal = siteLocSelect.value;
+            siteLocSelect.innerHTML = '<option value="">-Select Project Site-</option>';
+            projectSitesList.forEach(proj => {
+                siteLocSelect.add(new Option(proj, proj));
+            });
+            siteLocSelect.value = currentVal;
+        }
+
+        function openManageProjectsModal() {
+            renderManageProjectsTable();
+            document.getElementById("manageProjectsModal").style.display = "flex";
+        }
+        function closeManageProjectsModal() {
+            document.getElementById("manageProjectsModal").style.display = "none";
+            populateProjectSitesDropdown();
+        }
+        function renderManageProjectsTable() {
+            const tbody = document.getElementById("manageProjectsTableBody");
+            if (!tbody) return;
+            tbody.innerHTML = "";
+            projectSitesList.forEach((proj, idx) => {
+                tbody.innerHTML += `
+                    <tr>
+                        <td><input type="text" id="edit-proj-${idx}" value="${proj}" style="padding: 6px 10px; border-radius: 6px; border: 1px solid #cbd5e1; width: 100%;"></td>
+                        <td style="text-align: center; white-space: nowrap;">
+                            <button class="btn-success" onclick="updateProjectSite(${idx})" style="padding: 5px 8px;" title="Save"><i class="fa-solid fa-check"></i></button>
+                            <button class="btn-danger" onclick="deleteProjectSite(${idx})" style="padding: 5px 8px;" title="Delete"><i class="fa-solid fa-trash"></i></button>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+        function addNewProjectSite() {
+            const input = document.getElementById("newProjectSiteInput");
+            if (!input || !input.value.trim()) { alert("Please enter a project site name."); return; }
+            const val = input.value.trim();
+            if (projectSitesList.includes(val)) { alert("Project site already exists!"); return; }
+            projectSitesList.push(val);
+            localStorage.setItem("projectSitesList", JSON.stringify(projectSitesList));
+            input.value = "";
+            renderManageProjectsTable();
+            populateProjectSitesDropdown();
+            addAuditLog(`Added new Project Site: <strong>${val}</strong>`);
+        }
+        function updateProjectSite(idx) {
+            const input = document.getElementById(`edit-proj-${idx}`);
+            if (!input || !input.value.trim()) return;
+            const newVal = input.value.trim();
+            const oldVal = projectSitesList[idx];
+            projectSitesList[idx] = newVal;
+            localStorage.setItem("projectSitesList", JSON.stringify(projectSitesList));
+            renderManageProjectsTable();
+            populateProjectSitesDropdown();
+            addAuditLog(`Updated Project Site from <em>${oldVal}</em> to <strong>${newVal}</strong>`);
+            alert("Project site updated successfully!");
+        }
+        function deleteProjectSite(idx) {
+            const removed = projectSitesList.splice(idx, 1)[0];
+            localStorage.setItem("projectSitesList", JSON.stringify(projectSitesList));
+            renderManageProjectsTable();
+            populateProjectSitesDropdown();
+            addAuditLog(`Removed Project Site: <strong>${removed}</strong>`);
+        }
+        function importProjectSitesExcel(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const data = new Uint8Array(e.target.result);
+                    const workbook = XLSX.read(data, { type: 'array' });
+                    const firstSheetName = workbook.SheetNames[0];
+                    const worksheet = workbook.Sheets[firstSheetName];
+                    const json = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+                    
+                    let countAdded = 0;
+                    json.forEach(row => {
+                        if (row && row[0]) {
+                            const val = String(row[0]).trim();
+                            if (val && val !== "Project Site" && !projectSitesList.includes(val)) {
+                                projectSitesList.push(val);
+                                countAdded++;
+                            }
+                        }
+                    });
+                    localStorage.setItem("projectSitesList", JSON.stringify(projectSitesList));
+                    populateProjectSitesDropdown();
+                    addAuditLog(`Imported ${countAdded} project sites from Excel file.`);
+                    alert(`Successfully imported ${countAdded} new project sites from Excel!`);
+                } catch (err) {
+                    alert("Error reading Excel file format.");
+                }
+            };
+            reader.readAsArrayBuffer(file);
+        }
+
         function hasOption(select, val) { return Array.from(select.options).some(opt => opt.value === val); }
         function renderTodayDate() {
             const todayElem = document.getElementById("today");
@@ -1295,13 +1448,13 @@
             selectElement.style.backgroundColor = "";
             selectElement.style.color = "";
 
-            if (val === "WFA") { selectElement.style.backgroundColor = "#dcfce7"; selectElement.style.color = "#166534"; } 
-            else if (val === "WAHO") { selectElement.style.backgroundColor = "#dbeafe"; selectElement.style.color = "#1e40af"; } 
+            if (val === "WFA") { selectElement.style.backgroundColor = "#dbeafe"; selectElement.style.color = "#1e40af"; } 
+            else if (val === "WAHO") { selectElement.style.backgroundColor = "#dcfce7"; selectElement.style.color = "#166534"; } 
             else if (val === "SITE VISIT") { selectElement.style.backgroundColor = "#fef3c7"; selectElement.style.color = "#92400e"; } 
             else if (val === "LEAVE") { selectElement.style.backgroundColor = "#fee2e2"; selectElement.style.color = "#991b1b"; } 
             else if (val === "HOLIDAY") { selectElement.style.backgroundColor = "#ede9fe"; selectElement.style.color = "#5b21b6"; } 
-            else if (val === "WAHO/LEAVE") { selectElement.style.backgroundColor = "#ffedd5"; selectElement.style.color = "#9a3412"; } 
-            else if (val === "WFA/LEAVE") { selectElement.style.backgroundColor = "#ccfbf1"; selectElement.style.color = "#115e59"; }
+            else if (val === "WAHO/LEAVE") { selectElement.style.backgroundColor = "#d1fae5"; selectElement.style.color = "#065f46"; } 
+            else if (val === "WFA/LEAVE") { selectElement.style.backgroundColor = "#e0e7ff"; selectElement.style.color = "#3730a3"; }
             else if (val === "SITE VISIT / LEAVE") { selectElement.style.backgroundColor = "#fce7f3"; selectElement.style.color = "#9d174d"; }
         }
 
@@ -1382,7 +1535,7 @@
                 const oldVal = attendanceData[key] || "SELECT";
                 const newVal = select.value;
                 if (oldVal !== newVal) { 
-                    changesDetected.push(`Changed <strong>${auditor}'s</strong> status from <em>[${oldVal}]</em> to <em>[${newVal}]</em>`); 
+                    changesDetected.push(`Changed <strong>${auditor}'s</strong> attendance status from <em>[${oldVal}]</em> to <em>[${newVal}]</em>`); 
                     attendanceData[key] = newVal; 
                 }
             });
@@ -1394,7 +1547,7 @@
                 const oldRemark = attendanceData[key] || "";
                 const newRemark = input.value;
                 if (oldRemark !== newRemark) { 
-                    changesDetected.push(`Updated remarks for <strong>${auditor}</strong>: "${newRemark}"`); 
+                    changesDetected.push(`Updated weekly remarks for <strong>${auditor}</strong>: "${newRemark}"`); 
                     attendanceData[key] = newRemark; 
                 }
             });
@@ -1402,12 +1555,172 @@
             if (changesDetected.length > 0) {
                 await saveToFirestore("attendance", "values", attendanceData);
                 changesDetected.forEach(changeText => addAuditLog(changeText));
-                alert(`Saved successfully! ${changesDetected.length} modification(s) recorded.`);
+                alert(`Saved successfully to Cloud! ${changesDetected.length} modification(s) recorded.`);
             } else { 
                 alert(`No changes detected.`); 
             }
 
             if(saveBtn) { saveBtn.disabled = false; saveBtn.innerHTML = `<i class="fa-solid fa-floppy-disk"></i> Save Changes`; }
+        }
+
+        /* UPDATED DASHBOARD CARDS & CHARTS WITH EXACT COLOR MAPPING */
+        function updateDashboardCards() {
+            const filterMonth = document.getElementById("dashboardMonthFilter")?.value || "ALL";
+            let waho = 0, wfa = 0, site = 0, leave = 0, holiday = 0;
+            let auditorStats = {};
+            auditors.forEach(a => auditorStats[a] = { waho: 0, wfa: 0, site: 0, leave: 0, holiday: 0 });
+
+            Object.keys(attendanceData).forEach(key => {
+                if (key.includes("_day")) {
+                    const parts = key.split("_");
+                    const weekStart = parts[0];
+                    const aud = parts[1];
+                    const dayTag = parts[2];
+                    const dayNum = parseInt(dayTag.replace("day", ""), 10);
+
+                    const targetDate = new Date(weekStart);
+                    targetDate.setDate(targetDate.getDate() + (dayNum - 1));
+                    const isoMonth = `${targetDate.getFullYear()}-${String(targetDate.getMonth() + 1).padStart(2, '0')}`;
+
+                    if (filterMonth === "ALL" || filterMonth === isoMonth) {
+                        const status = attendanceData[key];
+                        if (status === "WAHO") { waho++; if(auditorStats[aud]) auditorStats[aud].waho++; }
+                        else if (status === "WFA") { wfa++; if(auditorStats[aud]) auditorStats[aud].wfa++; }
+                        else if (status === "SITE VISIT") { site++; if(auditorStats[aud]) auditorStats[aud].site++; }
+                        else if (status === "LEAVE") { leave++; if(auditorStats[aud]) auditorStats[aud].leave++; }
+                        else if (status === "HOLIDAY") { holiday++; if(auditorStats[aud]) auditorStats[aud].holiday++; }
+                        else if (status === "WAHO/LEAVE") { waho += 0.5; leave += 0.5; if(auditorStats[aud]) { auditorStats[aud].waho += 0.5; auditorStats[aud].leave += 0.5; } }
+                        else if (status === "WFA/LEAVE") { wfa += 0.5; leave += 0.5; if(auditorStats[aud]) { auditorStats[aud].wfa += 0.5; auditorStats[aud].leave += 0.5; } }
+                        else if (status === "SITE VISIT / LEAVE") { site += 0.5; leave += 0.5; if(auditorStats[aud]) { auditorStats[aud].site += 0.5; auditorStats[aud].leave += 0.5; } }
+                    }
+                }
+            });
+
+            document.getElementById("wahoCount").textContent = Math.round(waho);
+            document.getElementById("wfaCount").textContent = Math.round(wfa);
+            document.getElementById("siteCount").textContent = Math.round(site);
+            document.getElementById("leaveCount").textContent = Math.round(leave);
+            document.getElementById("holidayCount").textContent = Math.round(holiday);
+
+            renderCharts(auditorStats, waho, wfa, site, leave, holiday);
+        }
+
+        function renderCharts(auditorStats = {}, totalWaho = 0, totalWfa = 0, totalSite = 0, totalLeave = 0, totalHoliday = 0) {
+            // 1. AUDITORS BREAKDOWN CHART (MAINTAINED ORIGINAL COLOR & DESIGN)
+            const ctxBreakdown = document.getElementById("auditorsBreakdownChart")?.getContext("2d");
+            if (ctxBreakdown) {
+                if (auditorsBreakdownChartInstance) auditorsBreakdownChartInstance.destroy();
+                auditorsBreakdownChartInstance = new Chart(ctxBreakdown, {
+                    type: 'bar',
+                    data: {
+                        labels: auditors.map(a => a.split(" ")[0]),
+                        datasets: [
+                            { label: 'WAHO', data: auditors.map(a => auditorStats[a]?.waho || 0), backgroundColor: '#22c55e' },
+                            { label: 'WFA', data: auditors.map(a => auditorStats[a]?.wfa || 0), backgroundColor: '#2563eb' },
+                            { label: 'Site Visit', data: auditors.map(a => auditorStats[a]?.site || 0), backgroundColor: '#f59e0b' },
+                            { label: 'Leave', data: auditors.map(a => auditorStats[a]?.leave || 0), backgroundColor: '#ef4444' }
+                        ]
+                    },
+                    options: { responsive: true, maintainAspectRatio: false, scales: { x: { stacked: true }, y: { stacked: true } } }
+                });
+            }
+
+            // 2. OVERALL MODE SHARE (PIE CHART - MAINTAINED ORIGINAL DESIGN)
+            const ctxPie = document.getElementById("attendanceModePieChart")?.getContext("2d");
+            if (ctxPie) {
+                if (attendanceModePieInstance) attendanceModePieInstance.destroy();
+                attendanceModePieInstance = new Chart(ctxPie, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['WAHO', 'WFA', 'Site Visit', 'Leave', 'Holiday'],
+                        datasets: [{
+                            data: [totalWaho, totalWfa, totalSite, totalLeave, totalHoliday],
+                            backgroundColor: ['#22c55e', '#2563eb', '#f59e0b', '#ef4444', '#8b5cf6']
+                        }]
+                    },
+                    options: { responsive: true, maintainAspectRatio: false }
+                });
+            }
+
+            // 3. MAIN ATTENDANCE CHART (UPDATED COLORS ACCORDING TO SPECIFICATIONS)
+            // WAHO: GREEN (#22c55e), TOTAL WFA: BLUE (#2563eb), SITE VISIT: YELLOW (#f59e0b), LEAVE: RED (#ef4444), HOLIDAY: VIOLET (#8b5cf6), PRODUCTIVITY RATE: GREEN (#16a34a)
+            const ctxAttendance = document.getElementById("attendanceChart")?.getContext("2d");
+            if (ctxAttendance) {
+                if (weeklyChartInstance) weeklyChartInstance.destroy();
+                
+                // Calculating Productivity Rate %
+                const totalWorkDays = totalWaho + totalWfa + totalSite;
+                const grandTotal = totalWorkDays + totalLeave;
+                const prodRate = grandTotal > 0 ? Math.round((totalWorkDays / grandTotal) * 100) : 0;
+
+                weeklyChartInstance = new Chart(ctxAttendance, {
+                    type: 'bar',
+                    data: {
+                        labels: ['WAHO', 'TOTAL WFA', 'SITE VISIT', 'LEAVE', 'HOLIDAY'],
+                        datasets: [
+                            {
+                                type: 'bar',
+                                label: 'Total Days',
+                                data: [totalWaho, totalWfa, totalSite, totalLeave, totalHoliday],
+                                backgroundColor: [
+                                    '#22c55e', // WAHO - GREEN
+                                    '#2563eb', // TOTAL WFA - BLUE
+                                    '#f59e0b', // SITE VISIT - YELLOW
+                                    '#ef4444', // LEAVE - RED
+                                    '#8b5cf6'  // HOLIDAY - VIOLET / PURPLE
+                                ],
+                                borderRadius: 6,
+                                yAxisID: 'y'
+                            },
+                            {
+                                type: 'line',
+                                label: 'Productivity Rate (%)',
+                                data: [prodRate, prodRate, prodRate, prodRate, prodRate],
+                                borderColor: '#16a34a', // PRODUCTIVITY RATE - GREEN
+                                backgroundColor: '#16a34a',
+                                borderWidth: 3,
+                                pointRadius: 5,
+                                fill: false,
+                                yAxisID: 'y1'
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: { beginAtZero: true, position: 'left', title: { display: true, text: 'Days' } },
+                            y1: { beginAtZero: true, max: 100, position: 'right', grid: { drawOnChartArea: false }, title: { display: true, text: 'Percentage (%)' } }
+                        }
+                    }
+                });
+            }
+
+            // 4. TOP AUDITORS BY WAHO (SIDE BAR GRAPH - MAINTAINED ORIGINAL DESIGN)
+            const ctxTopWaho = document.getElementById("topWahoChart")?.getContext("2d");
+            if (ctxTopWaho) {
+                if (topWahoChartInstance) topWahoChartInstance.destroy();
+                
+                let sortedAuditors = auditors.slice().sort((a, b) => (auditorStats[b]?.waho || 0) - (auditorStats[a]?.waho || 0));
+
+                topWahoChartInstance = new Chart(ctxTopWaho, {
+                    type: 'bar',
+                    data: {
+                        labels: sortedAuditors.map(a => a.split(" ")[0]),
+                        datasets: [{
+                            label: 'WAHO Count',
+                            data: sortedAuditors.map(a => auditorStats[a]?.waho || 0),
+                            backgroundColor: '#1d4ed8'
+                        }]
+                    },
+                    options: {
+                        indexAxis: 'y',
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: { x: { beginAtZero: true } }
+                    }
+                });
+            }
         }
 
         function renderMonthlyCalendar() {
@@ -1456,7 +1769,7 @@
                                     if (foundStatus.includes("SITE VISIT")) { color = "#d97706"; siteCount++; }
                                     if (foundStatus.includes("LEAVE")) { color = "#dc2626"; leaveCount++; }
                                     if (foundStatus === "SITE VISIT / LEAVE") { color = "#9d174d"; siteCount++; leaveCount += 0.5; }
-                                    if (foundStatus === "HOLIDAY") { color = "#5b21b6"; }
+                                    if (foundStatus === "HOLIDAY") { color = "#8b5cf6"; }
                                     
                                     daySummaryHtml += `<div><span style="font-weight:600; color:#0f172a;">${aud.split(" ")[0]}:</span> <span style="color:${color}; font-weight:700;">${foundStatus}</span></div>`;
                                 }
@@ -1502,13 +1815,11 @@
             if (document.getElementById("mRate")) document.getElementById("mRate").textContent = `${totalLogged > 0 ? Math.round((totalPresent / totalLogged) * 100) : 0}%`;
         }
 
-        // BAGONG FUNCTION PARA SA EXPORT NG MONTHLY VIEW
         function exportMonthlyViewExcel() {
             const selectedAuditor = document.getElementById("monthlyAuditor")?.value || "ALL";
             const selectedMonth = document.getElementById("monthlyMonth")?.value || "2026-01";
             const wb = XLSX.utils.book_new();
 
-            // Sheet 1: Summary Stats
             const presentDays = document.getElementById("mPresent")?.textContent || "0";
             const leaveDays = document.getElementById("mLeave")?.textContent || "0";
             const siteVisitsCount = document.getElementById("mSite")?.textContent || "0";
@@ -1525,7 +1836,6 @@
             const wsSummary = XLSX.utils.json_to_sheet(summaryData);
             XLSX.utils.book_append_sheet(wb, wsSummary, "Monthly Summary");
 
-            // Sheet 2: Daily Breakdown Table para sa buwang ito
             const [year, month] = selectedMonth.split("-").map(Number);
             const daysInMonth = new Date(year, month, 0).getDate();
             let dailyRows = [];
@@ -1598,6 +1908,55 @@
             await saveToFirestore("siteVisits", "list", siteVisits);
         }
 
+        function toggleEditSiteVisit(id) {
+            const rowElem = document.getElementById(`site-visit-row-${id}`);
+            if (!rowElem) return;
+            const isEditing = rowElem.dataset.editing === "true";
+            const visit = siteVisits.find(v => v.id === id);
+            if (!visit) return;
+
+            if (!isEditing) {
+                rowElem.dataset.editing = "true";
+                let auditorOptions = auditors.map(a => `<option value="${a}" ${visit.auditor === a ? 'selected' : ''}>${a}</option>`).join('');
+                let locationOptions = projectSitesList.map(p => `<option value="${p}" ${visit.location === p ? 'selected' : ''}>${p}</option>`).join('');
+                let statusOptions = ["Scheduled", "Completed", "Cancelled"].map(s => `<option value="${s}" ${visit.status === s ? 'selected' : ''}>${s}</option>`).join('');
+
+                rowElem.innerHTML = `
+                    <td><select id="edit-sv-auditor-${id}" style="padding:6px; border-radius:6px;">${auditorOptions}</select></td>
+                    <td><select id="edit-sv-location-${id}" style="padding:6px; border-radius:6px;">${locationOptions}</select></td>
+                    <td><input type="date" id="edit-sv-date-${id}" value="${visit.date}" style="padding:6px;"></td>
+                    <td><select id="edit-sv-status-${id}" style="padding:6px; border-radius:6px;">${statusOptions}</select></td>
+                    <td><input type="text" id="edit-sv-remarks-${id}" value="${visit.remarks || ''}" style="padding:6px;"></td>
+                    <td style="white-space: nowrap;">
+                        <button class="btn-success" onclick="saveSiteVisitEdit(${id})" style="padding:6px 10px;" title="Save"><i class="fa-solid fa-check"></i></button>
+                        <button class="btn-danger" onclick="renderSiteVisits()" style="padding:6px 10px;" title="Cancel"><i class="fa-solid fa-xmark"></i></button>
+                    </td>
+                `;
+            }
+        }
+
+        async function saveSiteVisitEdit(id) {
+            const visit = siteVisits.find(v => v.id === id);
+            if (!visit) return;
+
+            const newAuditor = document.getElementById(`edit-sv-auditor-${id}`).value;
+            const newLocation = document.getElementById(`edit-sv-location-${id}`).value;
+            const newDate = document.getElementById(`edit-sv-date-${id}`).value;
+            const newStatus = document.getElementById(`edit-sv-status-${id}`).value;
+            const newRemarks = document.getElementById(`edit-sv-remarks-${id}`).value;
+
+            visit.auditor = newAuditor;
+            visit.location = newLocation;
+            visit.date = newDate;
+            visit.status = newStatus;
+            visit.remarks = newRemarks;
+
+            await saveToFirestore("siteVisits", "list", siteVisits);
+            addAuditLog(`Updated Site Visit for <strong>${newAuditor}</strong> at <em>${newLocation}</em>. Status changed to <strong>[${newStatus}]</strong>.`);
+            renderSiteVisits();
+            alert("Site visit schedule updated successfully!");
+        }
+
         function renderSiteVisits() {
             const tbody = document.getElementById("siteVisitTableBody");
             if (!tbody) return;
@@ -1607,7 +1966,18 @@
                 return;
             }
             siteVisits.forEach(visit => {
-                tbody.innerHTML += `<tr><td><strong>${visit.auditor}</strong></td><td>${visit.location}</td><td>${visit.date}</td><td><span class="badge badge-${visit.status.toLowerCase()}">${visit.status}</span></td><td>${visit.remarks || '-'}</td><td><button class="btn-danger" onclick="deleteSiteVisit(${visit.id})"><i class="fa-solid fa-trash"></i></button></td></tr>`;
+                tbody.innerHTML += `
+                    <tr id="site-visit-row-${visit.id}" data-editing="false">
+                        <td><strong>${visit.auditor}</strong></td>
+                        <td>${visit.location}</td>
+                        <td>${visit.date}</td>
+                        <td><span class="badge badge-${visit.status.toLowerCase()}">${visit.status}</span></td>
+                        <td>${visit.remarks || '-'}</td>
+                        <td style="white-space: nowrap;">
+                            <button class="btn-warning" onclick="toggleEditSiteVisit(${visit.id})" title="Edit Status / Details" style="padding:6px 10px;"><i class="fa-solid fa-pen-to-square"></i></button>
+                            <button class="btn-danger" onclick="deleteSiteVisit(${visit.id})" title="Delete" style="padding:6px 10px;"><i class="fa-solid fa-trash"></i></button>
+                        </td>
+                    </tr>`;
             });
         }
 
@@ -1753,8 +2123,6 @@
             currentData.forEach(item => {
                 const multiplier = getDayHoursMultiplier(item.day);
                 const daySum = Number(item.holiday) + Number(item.slvl) + Number(item.iad) + Number(item.ld) + Number(item.siteVisit) + Number(item.qas);
-                const totalHours = (daySum * multiplier).toFixed(1);
-                
                 totalActualMandays += daySum;
                 sumHoliday += Number(item.holiday);
                 sumSlvl += Number(item.slvl);
@@ -1765,208 +2133,113 @@
 
                 tbody.innerHTML += `
                     <tr id="mandays-row-${item.id}" data-editing="false">
-                        <td style="font-size: 13px; font-weight: 600;">${item.date}</td>
+                        <td>${item.date}</td>
                         <td>${item.day}</td>
                         <td><strong>${item.sched}</strong></td>
-                        <td>${item.holiday || '-'}</td>
-                        <td>${item.slvl || '-'}</td>
-                        <td>${item.iad || '-'}</td>
-                        <td>${item.ld || '-'}</td>
-                        <td style="color: #2563eb; font-weight: bold;">${item.siteVisit || '-'}</td>
-                        <td>${item.qas || '-'}</td>
-                        <td style="font-size: 12px; color: #475569;">${item.remarks || '-'}</td>
-                        <td style="font-weight: bold; color: #1e3a8a;">${totalHours} hrs</td>
+                        <td>${item.holiday}</td>
+                        <td>${item.slvl}</td>
+                        <td>${item.iad}</td>
+                        <td>${item.ld}</td>
+                        <td>${item.siteVisit}</td>
+                        <td>${item.qas}</td>
+                        <td>${item.remarks || '-'}</td>
+                        <td><strong>${(daySum * multiplier).toFixed(1)} hrs</strong></td>
                         <td style="white-space: nowrap;">
-                            <button class="btn-warning" onclick="toggleEditMandays(${item.id})"><i class="fa-solid fa-pen-to-square"></i></button>
-                            <button class="btn-danger" onclick="deleteMandaysRow(${item.id})"><i class="fa-solid fa-trash"></i></button>
+                            <button class="btn-warning" onclick="toggleEditMandays(${item.id})" style="padding: 5px 8px;"><i class="fa-solid fa-pen-to-square"></i></button>
+                            <button class="btn-danger" onclick="deleteMandaysRow(${item.id})" style="padding: 5px 8px;"><i class="fa-solid fa-trash"></i></button>
                         </td>
-                    </tr>`;
+                    </tr>
+                `;
             });
 
             const budgeted = 35.00;
-            const variance = (budgeted - totalActualMandays).toFixed(2);
-            const completion = budgeted > 0 ? ((totalActualMandays / budgeted) * 100).toFixed(1) + '%' : '0%';
+            const variance = totalActualMandays - budgeted;
+            const completion = budgeted > 0 ? Math.round((totalActualMandays / budgeted) * 100) : 0;
 
             if (document.getElementById("mBudgeted")) document.getElementById("mBudgeted").textContent = budgeted.toFixed(2);
             if (document.getElementById("mActual")) document.getElementById("mActual").textContent = totalActualMandays.toFixed(2);
-            if (document.getElementById("mVariance")) document.getElementById("mVariance").textContent = variance;
-            if (document.getElementById("mCompletion")) document.getElementById("mCompletion").textContent = completion;
+            if (document.getElementById("mVariance")) document.getElementById("mVariance").textContent = variance.toFixed(2);
+            if (document.getElementById("mCompletion")) document.getElementById("mCompletion").textContent = `${completion}%`;
 
             renderMandaysChart(sumHoliday, sumSlvl, sumIad, sumLd, sumSiteVisit, sumQas);
         }
 
         function renderMandaysChart(hol, slvl, iad, ld, sv, qas) {
-            const ctx = document.getElementById('mandaysActivityChart');
+            const ctx = document.getElementById("mandaysActivityChart")?.getContext("2d");
             if (!ctx) return;
             if (mandaysChartInstance) mandaysChartInstance.destroy();
+
             mandaysChartInstance = new Chart(ctx, {
                 type: 'bar',
                 data: {
-                    labels: ['Holiday', 'SL/VL', 'IAD', 'L&D', 'Site Visit', 'QAS'],
-                    datasets: [{ label: 'Total Mandays Allocation', data: [hol, slvl, iad, ld, sv, qas], backgroundColor: ['#64748b', '#ef4444', '#1e3a8a', '#3b82f6', '#2563eb', '#f59e0b'], borderRadius: 6 }]
+                    labels: ['Holiday', 'SL / VL', 'IAD', 'L & D', 'Site Visit', 'QAS'],
+                    datasets: [{
+                        label: 'Mandays Allocation',
+                        data: [hol, slvl, iad, ld, sv, qas],
+                        backgroundColor: ['#8b5cf6', '#ef4444', '#2563eb', '#38bdf8', '#f59e0b', '#10b981'],
+                        borderRadius: 6
+                    }]
                 },
-                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
+                options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true } } }
             });
-        }
-
-        function updateDashboardCards() {
-            let waho = 0, wfa = 0, site = siteVisits.length, leave = 0, holiday = 0;
-            let auditorWahoCounts = {};
-            
-            let auditorBreakdownData = { 
-                wfa: new Array(auditors.length).fill(0), 
-                waho: new Array(auditors.length).fill(0), 
-                siteVisit: new Array(auditors.length).fill(0), 
-                leave: new Array(auditors.length).fill(0), 
-                wfaLeave: new Array(auditors.length).fill(0), 
-                wahoLeave: new Array(auditors.length).fill(0),
-                siteVisitLeave: new Array(auditors.length).fill(0) 
-            };
-
-            auditors.forEach(aud => auditorWahoCounts[aud] = 0);
-            const selectedFilterMonth = document.getElementById("dashboardMonthFilter") ? document.getElementById("dashboardMonthFilter").value : "ALL";
-
-            Object.keys(attendanceData).forEach(key => {
-                if (!key.endsWith("_remark")) {
-                    const val = attendanceData[key];
-                    const parts = key.split("_");
-                    const weekStartIso = parts[0]; 
-                    if (selectedFilterMonth !== "ALL" && !weekStartIso.startsWith(selectedFilterMonth)) return;
-
-                    let auditorName = parts.length >= 2 ? parts[1] : "";
-                    let auditorIdx = auditors.indexOf(auditorName);
-
-                    if (val === "WAHO") { waho++; if (auditorWahoCounts[auditorName] !== undefined) auditorWahoCounts[auditorName]++; if (auditorIdx !== -1) auditorBreakdownData.waho[auditorIdx]++; }
-                    if (val === "WFA") { wfa++; if (auditorIdx !== -1) auditorBreakdownData.wfa[auditorIdx]++; }
-                    if (val === "SITE VISIT") { site++; if (auditorIdx !== -1) auditorBreakdownData.siteVisit[auditorIdx]++; }
-                    if (val === "LEAVE") { leave++; if (auditorIdx !== -1) auditorBreakdownData.leave[auditorIdx]++; }
-                    if (val === "HOLIDAY") holiday++;
-                    if (val === "WAHO/LEAVE") { waho += 0.5; leave += 0.5; if (auditorWahoCounts[auditorName] !== undefined) auditorWahoCounts[auditorName] += 0.5; if (auditorIdx !== -1) auditorBreakdownData.wahoLeave[auditorIdx]++; }
-                    if (val === "WFA/LEAVE") { wfa += 0.5; leave += 0.5; if (auditorIdx !== -1) auditorBreakdownData.wfaLeave[auditorIdx]++; }
-                    if (val === "SITE VISIT / LEAVE") { site += 0.5; leave += 0.5; if (auditorIdx !== -1) auditorBreakdownData.siteVisitLeave[auditorIdx]++; }
-                }
-            });
-
-            if (document.getElementById("wahoCount")) document.getElementById("wahoCount").textContent = waho;
-            if (document.getElementById("wfaCount")) document.getElementById("wfaCount").textContent = wfa;
-            if (document.getElementById("siteCount")) document.getElementById("siteCount").textContent = site;
-            if (document.getElementById("leaveCount")) document.getElementById("leaveCount").textContent = leave;
-            if (document.getElementById("holidayCount")) document.getElementById("holidayCount").textContent = holiday;
-
-            updateChartsData(waho, wfa, site, leave, holiday, auditorWahoCounts, auditorBreakdownData);
-        }
-
-        function updateChartsData(waho, wfa, site, leave, holiday, auditorWahoCounts, auditorBreakdownData) {
-            if (auditorsBreakdownChartInstance && auditorBreakdownData) {
-                auditorsBreakdownChartInstance.data.datasets[0].data = auditorBreakdownData.wfa;
-                auditorsBreakdownChartInstance.data.datasets[1].data = auditorBreakdownData.waho;
-                auditorsBreakdownChartInstance.data.datasets[2].data = auditorBreakdownData.siteVisit;
-                auditorsBreakdownChartInstance.data.datasets[3].data = auditorBreakdownData.leave;
-                auditorsBreakdownChartInstance.data.datasets[4].data = auditorBreakdownData.wfaLeave;
-                auditorsBreakdownChartInstance.data.datasets[5].data = auditorBreakdownData.wahoLeave;
-                auditorsBreakdownChartInstance.data.datasets[6].data = auditorBreakdownData.siteVisitLeave;
-                auditorsBreakdownChartInstance.update();
-            }
-            if (weeklyChartInstance) { weeklyChartInstance.data.datasets[0].data = [waho, wfa, site, leave, holiday]; weeklyChartInstance.update(); }
-            if (topWahoChartInstance && auditorWahoCounts) {
-                const sortedAuditors = Object.keys(auditorWahoCounts).sort((a, b) => auditorWahoCounts[b] - auditorWahoCounts[a]);
-                topWahoChartInstance.data.labels = sortedAuditors;
-                topWahoChartInstance.data.datasets[0].data = sortedAuditors.map(aud => auditorWahoCounts[aud]);
-                topWahoChartInstance.update();
-            }
-            if (attendanceModePieInstance) {
-                attendanceModePieInstance.data.datasets[0].data = [waho, wfa, site, leave, holiday];
-                attendanceModePieInstance.update();
-            }
-        }
-
-        function renderCharts() {
-            const ctxBreakdown = document.getElementById('auditorsBreakdownChart');
-            const ctxWeekly = document.getElementById('attendanceChart');
-            const ctxTopWaho = document.getElementById('topWahoChart');
-            const ctxPie = document.getElementById('attendanceModePieChart');
-
-            if (ctxBreakdown) {
-                auditorsBreakdownChartInstance = new Chart(ctxBreakdown, {
-                    type: 'bar',
-                    data: {
-                        labels: auditors.map(name => name.split(" ")[0]),
-                        datasets: [
-                            { label: 'WFA', data: new Array(auditors.length).fill(0), backgroundColor: '#2563eb' },
-                            { label: 'WAHO', data: new Array(auditors.length).fill(0), backgroundColor: '#16a34a' },
-                            { label: 'Site Visit', data: new Array(auditors.length).fill(0), backgroundColor: '#f59e0b' },
-                            { label: 'Leave', data: new Array(auditors.length).fill(0), backgroundColor: '#ef4444' },
-                            { label: 'WFA/Leave', data: new Array(auditors.length).fill(0), backgroundColor: '#0d9488' },
-                            { label: 'WAHO/Leave', data: new Array(auditors.length).fill(0), backgroundColor: '#8b5cf6' },
-                            { label: 'Site Visit / Leave', data: new Array(auditors.length).fill(0), backgroundColor: '#db2777' }
-                        ]
-                    },
-                    options: { responsive: true, maintainAspectRatio: false, scales: { x: { stacked: true }, y: { stacked: true } } }
-                });
-            }
-            if (ctxWeekly) {
-                weeklyChartInstance = new Chart(ctxWeekly, { type: 'bar', data: { labels: ['WAHO', 'WFA', 'SITE VISIT', 'LEAVE', 'HOLIDAY'], datasets: [{ label: 'Count', data: [0, 0, 0, 0, 0], backgroundColor: ['#1e3a8a', '#2563eb', '#f59e0b', '#64748b', '#94a3b8'] }] }, options: { responsive: true, maintainAspectRatio: false } });
-            }
-            if (ctxTopWaho) {
-                topWahoChartInstance = new Chart(ctxTopWaho, { type: 'bar', data: { labels: auditors, datasets: [{ label: 'WAHO Count', data: new Array(auditors.length).fill(0), backgroundColor: '#1e3a8a' }] }, options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false } });
-            }
-            if (ctxPie) {
-                attendanceModePieInstance = new Chart(ctxPie, { type: 'doughnut', data: { labels: ['WAHO', 'WFA', 'Site Visit', 'Leave', 'Holiday'], datasets: [{ data: [0, 0, 0, 0, 0], backgroundColor: ['#1e3a8a', '#2563eb', '#f59e0b', '#64748b', '#94a3b8'] }] }, options: { responsive: true, maintainAspectRatio: false } });
-            }
-        }
-
-        function toggleExportFilters() {
-            const category = document.getElementById("exportCategorySelect").value;
-            document.getElementById("exportMonthGroup").style.display = (category === "WEEKLY" || category === "MONTHLY" || category === "ALL") ? "block" : "none";
         }
 
         function exportSelectedData() {
-            const category = document.getElementById("exportCategorySelect")?.value || "ALL";
-            const selectedMonth = document.getElementById("exportMonthSelect")?.value || "2026-01";
+            const category = document.getElementById("exportCategorySelect").value;
+            const selectedMonth = document.getElementById("exportMonthSelect").value;
             const wb = XLSX.utils.book_new();
-            const [year, month] = selectedMonth.split("-").map(Number);
-            const weeks = getWeeksInMonth(year, month);
 
             if (category === "WEEKLY" || category === "ALL") {
-                weeks.forEach(wk => {
-                    const weeklyRows = auditors.map(auditor => {
-                        const rowObj = { "Auditor": auditor };
-                        wk.dates.forEach((d, idx) => { rowObj[`${d.dayName} - ${d.fullDateStr}`] = attendanceData[`${wk.weekStartIso}_${auditor}_day${idx+1}`] || "SELECT"; });
-                        rowObj["Remarks"] = attendanceData[`${wk.weekStartIso}_${auditor}_remark`] || "";
-                        return rowObj;
-                    });
-                    XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(weeklyRows), `Week ${wk.weekNumber}`);
+                let weeklyData = [];
+                Object.keys(attendanceData).forEach(key => {
+                    if (key.includes("_day")) {
+                        const [weekStart, aud, dayTag] = key.split("_");
+                        weeklyData.push({ "Week Start": weekStart, "Auditor": aud, "Day": dayTag, "Status": attendanceData[key] });
+                    }
                 });
+                XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(weeklyData), "Weekly Logs");
             }
-            if (category === "MONTHLY" || category === "ALL") {
-                const monthlySummaryRows = auditors.map(auditor => {
-                    let waho = 0, wfa = 0, site = 0, leave = 0, holiday = 0;
-                    Object.keys(attendanceData).forEach(key => {
-                        if (key.includes(`_${auditor}_`) && !key.endsWith("_remark")) {
-                            const val = attendanceData[key];
-                            if (val === "WAHO") waho++; if (val === "WFA") wfa++; if (val === "SITE VISIT") site++; if (val === "LEAVE") leave++; if (val === "HOLIDAY") holiday++;
-                        }
-                    });
-                    return { "Auditor": auditor, "Total WAHO": waho, "Total WFA": wfa, "Site Visits": site, "Leaves": leave, "Holidays": holiday };
-                });
-                XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(monthlySummaryRows), `Summary ${selectedMonth}`);
-            }
+
             if (category === "SITE_VISIT" || category === "ALL") {
-                const svRows = siteVisits.map(v => ({ "Auditor": v.auditor, "Project Site": v.location, "Date": v.date, "Status": v.status, "Purpose": v.remarks }));
-                XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(svRows.length ? svRows : [{Message: "No site visits"}]), "Site Visits");
+                XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(siteVisits), "Site Visits");
             }
+
             if (category === "MANDAYS" || category === "ALL") {
                 auditors.forEach(aud => {
-                    const mData = getAuditorMandaysData(aud);
-                    const mRows = mData.map(m => ({ "Date": m.date, "Day": m.day, "Sched": m.sched, "Holiday": m.holiday, "SL/VL": m.slvl, "IAD": m.iad, "L&D": m.ld, "Site Visit": m.siteVisit, "QAS": m.qas, "Remarks": m.remarks }));
-                    XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(mRows), `Mandays - ${aud.split(" ")[0]}`);
+                    const data = getAuditorMandaysData(aud);
+                    XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(data), `Mandays-${aud.split(" ")[0]}`);
                 });
             }
-            XLSX.writeFile(wb, `Attendance_Report_${category}_${selectedMonth}.xlsx`);
-            addAuditLog(`Exported system data report (${category} - ${selectedMonth})`);
+
+            XLSX.writeFile(wb, `System_Export_${category}_${selectedMonth}.xlsx`);
+            addAuditLog(`Exported system data for category: <strong>${category}</strong>`);
         }
 
-        function printSystemReport() { window.print(); }
+        function printSystemReport() {
+            const printContainer = document.getElementById("printableReport");
+            if (!printContainer) return;
+            
+            const now = new Date().toLocaleString();
+            let html = `
+                <div class="print-header">
+                    <h2>Construction Operations Attendance & Mandays Report</h2>
+                    <p>Generated on: ${now} | Requested by: ${currentLoggedAuditor || "System Admin"}</p>
+                </div>
+                <h3>Site Visit Schedule</h3>
+                <table class="print-table">
+                    <thead><tr><th>Auditor</th><th>Project Site</th><th>Date</th><th>Status</th><th>Purpose</th></tr></thead>
+                    <tbody>
+            `;
+
+            siteVisits.forEach(v => {
+                html += `<tr><td>${v.auditor}</td><td>${v.location}</td><td>${v.date}</td><td>${v.status}</td><td>${v.remarks || '-'}</td></tr>`;
+            });
+
+            html += `</tbody></table>`;
+            printContainer.innerHTML = html;
+            window.print();
+            addAuditLog(`Printed system report document.`);
+        }
     </script>
 </body>
 </html>
