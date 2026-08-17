@@ -542,9 +542,25 @@
             .attendance-summary { grid-template-columns: repeat(2, 1fr); }
         }
         
-        .month-card { background: var(--primary); color: #fff; padding: 20px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2); }
-        .month-card h3 { font-size: 12px; opacity: 0.9; text-transform: uppercase; letter-spacing: 0.5px; }
-        .month-card h2 { font-size: 24px; margin-top: 6px; font-weight: 700; }
+        .month-card {  background: var(--surface-light);color: var(--text-light);padding: 20px;border-radius: 20px;border: 1px solid var(--border-light);border-left: 5px solid;box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02); }
+
+         body.dark .month-card {  background: var(--surface-dark);color: var(--text-dark);border-color: var(--border-dark);  }
+        .month-card h3 { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: #64748b;display: flex;gap: 8px;margin: 0;align-items: center; }
+        .month-card h3 i { font-size: 14px; }
+        .month-card h2 { font-size: 26px; margin-top: 12px; font-weight: 700;color: #0f172a; }
+        .month-card.teal {  border: 1px solid #0d9488;border-left: 7px solid #0d9488; }
+        .month-card.blue i { color: #2563eb; }
+        .month-card.red i { color: #ef4444; }
+        .month-card.orange i { color: #f59e0b; }
+        .month-card.teal i { color: #0d9488; }
+        .month-card.blue {  border: 1px solid #2563eb;border-left: 7px solid #2563eb; }
+        .month-card.red {  border: 1px solid #ef4444;border-left: 7px solid #ef4444; }
+        .month-card.orange {  border: 1px solid #f59e0b;border-left: 7px solid #f59e0b; }
+        .month-card { transition: all 0.2s ease; }
+        .month-card:hover { transform: translateY(-3px);box-shadow: 0 8px 20px rgba(0,0,0,0.08); }
+        body.dark .month-card h2 { color: #f8fafc; }
+        body.dark .month-card h3 { color: #94a3b8; }
+
 
         .calendar { width: 100%; border-collapse: collapse; min-width: 700px; }
         .calendar th { text-align: center; background: #1e293b; color: #fff; padding: 12px; }
@@ -954,10 +970,10 @@
                     </div>
                 </div>
                 <div class="attendance-summary">
-                    <div class="month-card"><h3>Present Days</h3><h2 id="mPresent">0</h2></div>
-                    <div class="month-card" style="background: #ef4444;"><h3>Leave Days</h3><h2 id="mLeave">0</h2></div>
-                    <div class="month-card" style="background: #f59e0b;"><h3>Site Visits</h3><h2 id="mSite">0</h2></div>
-                    <div class="month-card" style="background: #0d9488;"><h3>Attendance Rate</h3><h2 id="mRate">0%</h2></div>
+                    <div class="month-card blue"><h3><i class="fa-solid fa-calendar-check"></i> PRESENT DAYS</h3><h2 id="mPresent">0</h2></div>
+                    <div class="month-card red"><h3><i class="fa-solid fa-bed"></i> LEAVE DAYS</h3><h2 id="mLeave">0</h2></div>
+                    <div class="month-card orange"><h3><i class="fa-solid fa-location-dot"></i> SITE VISITS</h3><h2 id="mSite">0</h2></div>
+                    <div class="month-card teal"><h3><i class="fa-solid fa-chart-line"></i> ATTENDANCE %</h3><h2 id="mRate">0%</h2></div>
                 </div>
                 <div class="table-container">
                     <table class="calendar">
