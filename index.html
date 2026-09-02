@@ -806,7 +806,12 @@
                         <option value="2027-12">December 2027</option>
                     </select>
                 </div>
-                <input type="text" id="search" placeholder="Search Auditor..." style="flex-grow: 1; min-width: 200px;">
+                <div class="form-group" style="margin: 0; flex-grow: 1; min-width: 200px;">
+                        <label style="font-size: 11px; text-transform: uppercase; font-weight: 700; color: #64748b;">
+                       Search Auditor:
+                        </label>
+                        <input type="text" id="search" placeholder="Search Auditor...">
+                </div>
                 <div style="margin-left: auto; display: flex; gap: 10px; flex-wrap: wrap;">
                     <!-- EXPORT BUTTON SA WEEKLY LOG -->
                     <button onclick="exportWeeklyLogExcel()" type="button" class="btn-teal">
