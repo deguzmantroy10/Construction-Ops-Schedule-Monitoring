@@ -135,7 +135,7 @@
 
         .sidebar .logo i {
             font-size: 26px;
-            color: #29A8FF;
+            color: #0A5DB3;
         }
 
         .sidebar .logo h2 {
@@ -2431,7 +2431,8 @@
                             onclick="toggleMandaysLock(${idx})"
                             style="padding:4px 8px; margin-right:4px;">
 
-                            ${row.locked ? 'Unlock' : 'Save'}
+                            ${row.locked ? '<i class="fa-solid fa-pen-to-square"></i>' : '<i class="fa-solid fa-floppy-disk"></i>'}
+
                         </button>
                         <button class="btn-danger"
                             onclick="deleteMandaysRow(${idx})"
