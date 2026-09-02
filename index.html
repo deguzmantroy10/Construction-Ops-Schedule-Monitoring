@@ -1515,7 +1515,7 @@
             const siteLocSelect = document.getElementById("siteLocation");
             if (!siteLocSelect) return;
             const currentVal = siteLocSelect.value;
-            siteLocSelect.innerHTML = '<option value="">-Select Location-</option>';
+            siteLocSelect.innerHTML = '<option value="">Select Location</option>';
             projectSitesList.forEach(proj => {
                 siteLocSelect.add(new Option(proj, proj));
             });
