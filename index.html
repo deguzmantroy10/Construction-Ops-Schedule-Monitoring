@@ -33,8 +33,8 @@
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
         :root {
-            --primary: #2563eb;
-            --primary-dark: #1d4ed8;
+            --primary: #0A5DB3;
+            --primary-dark: #084A90;
             --bg-light: #f8fafc;
             --bg-dark: #0f172a;
             --surface-light: #ffffff;
@@ -114,7 +114,7 @@
         .sidebar {
             width: 260px;
             height: 100vh;
-            background: #0f172a;
+            background: #05153D;
             color: #fff;
             position: fixed;
             padding: 20px;
@@ -135,7 +135,7 @@
 
         .sidebar .logo i {
             font-size: 26px;
-            color: #38bdf8;
+            color: #29A8FF;
         }
 
         .sidebar .logo h2 {
@@ -163,9 +163,8 @@
         }
 
         .sidebar ul li:hover, .sidebar ul li.active {
-            background: var(--primary);
+            background: linear-gradient(90deg,#0A5DB3,#2563eb);
             color: #fff;
-            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
         }
 
         /* USER SIDEBAR FOOTER */
@@ -195,7 +194,7 @@
             height: 32px;
             border-radius: 50%;
             object-fit: cover;
-            border: 2px solid #38bdf8;
+            border: 2px solid #29A8FF;
         }
 
         .user-info small {
@@ -441,6 +440,9 @@
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
             border: 1px solid var(--border-light);
             margin-bottom: 20px;
+        }
+        #mandaysPage table {
+            min-width: 1400px;
         }
 
         table {
@@ -1018,18 +1020,18 @@
                     <table>
                         <thead>
                             <tr>
-                                <th style="width: 170px;">Date</th>
-                                <th style="width: 170px;">Day</th>
-                                <th style="width: 170px;">Sched</th>
-                                <th style="width: 170px; text-align: center;">Holiday</th>
-                                <th style="width: 170px; text-align: center;">SL/VL</th>
-                                <th style="width: 170px; text-align: center;">IAD</th>
-                                <th style="width: 170px; text-align: center;">L&D</th>
-                                <th style="width: 170px; text-align: center;">Site Visit</th>
-                                <th style="width: 170px; text-align: center;">QAS</th>
-                                <th style="min-width: 250px;">Remarks</th>
+                                <th style="width: 130px;">Date</th>
+                                <th style="width: 90px;">Day</th>
+                                <th style="width: 90px;">Sched</th>
+                                <th style="width: 80px; text-align: center;">Holiday</th>
+                                <th style="width: 80px; text-align: center;">SL/VL</th>
+                                <th style="width: 80px; text-align: center;">IAD</th>
+                                <th style="width: 80px; text-align: center;">L&D</th>
+                                <th style="width: 80px; text-align: center;">Site Visit</th>
+                                <th style="width: 80px; text-align: center;">QAS</th>
+                                <th style="min-width: 180px;">Remarks</th>
                                 <th style="width: 80px; text-align: center;">Total Hrs</th>
-                                <th style="width: 80px; text-align: center;">Action</th>
+                                <th style="width: 140px; text-align: center;">Action</th>
                             </tr>
                         </thead>
                         <tbody id="mandaysTableBody"></tbody>
@@ -1461,7 +1463,25 @@
         }
 
         function openDashboard() { hideAllPages(); document.getElementById("dashboardPage").classList.remove("page-hidden"); updateDashboardCards(); }
-        function openWeekly() { hideAllPages(); document.getElementById("weeklyPage").classList.remove("page-hidden"); renderWeeklyBlocks(); }
+        function openWeekly() {
+           hideAllPages();
+
+           const today = new Date();
+           const currentMonth =
+               today.getFullYear() + "-" +
+               String(today.getMonth() + 1).padStart(2, "0");
+
+           const monthSelect = document.getElementById("weeklyMonthSelect");
+
+           if (monthSelect) {
+               monthSelect.value = currentMonth;
+           }
+
+           document.getElementById("weeklyPage")
+               .classList.remove("page-hidden");
+
+           renderWeeklyBlocks();
+        }
         function openSiteVisit() { hideAllPages(); document.getElementById("siteVisitPage").classList.remove("page-hidden"); populateProjectSitesDropdown(); checkAndAutoCompleteVisits(); renderSiteVisits(); }
         function openMonthly() { hideAllPages(); document.getElementById("monthlyPage").classList.remove("page-hidden"); renderMonthlyCalendar(); }
         function openMandays() { hideAllPages(); document.getElementById("mandaysPage").classList.remove("page-hidden"); renderMandaysPage(); }
@@ -2395,18 +2415,32 @@
                 tbody.innerHTML += `
                     <tr>
                         <td><input type="date" value="${row.date || ''}" onchange="updateMandaysRow(${idx}, 'date', this.value)"></td>
-                        <td><input type="text" value="${row.day || ''}" onchange="updateMandaysRow(${idx}, 'day', this.value)"></td>
+                        <td><input type="text" value="${row.day || ''}" readonly
+                        style="background:#f8fafc; text-align:center;"></td>
                         <td><input type="text" value="${row.sched || ''}" onchange="updateMandaysRow(${idx}, 'sched', this.value)"></td>
-                        <td style="text-align:center;"><input type="number" step="0.5" min="0" max="24" value="${row.holiday || 0}" onchange="updateMandaysRow(${idx}, 'holiday', parseFloat(this.value)||0)" style="width:60px; text-align:center;"></td>
-                        <td style="text-align:center;"><input type="number" step="0.5" min="0" max="24" value="${row.slvl || 0}" onchange="updateMandaysRow(${idx}, 'slvl', parseFloat(this.value)||0)" style="width:60px; text-align:center;"></td>
-                        <td style="text-align:center;"><input type="number" step="0.5" min="0" max="24" value="${row.iad || 0}" onchange="updateMandaysRow(${idx}, 'iad', parseFloat(this.value)||0)" style="width:60px; text-align:center;"></td>
-                        <td style="text-align:center;"><input type="number" step="0.5" min="0" max="24" value="${row.ld || 0}" onchange="updateMandaysRow(${idx}, 'ld', parseFloat(this.value)||0)" style="width:60px; text-align:center;"></td>
-                        <td style="text-align:center;"><input type="number" step="0.5" min="0" max="24" value="${row.siteVisit || 0}" onchange="updateMandaysRow(${idx}, 'siteVisit', parseFloat(this.value)||0)" style="width:60px; text-align:center;"></td>
-                        <td style="text-align:center;"><input type="number" step="0.5" min="0" max="24" value="${row.qas || 0}" onchange="updateMandaysRow(${idx}, 'qas', parseFloat(this.value)||0)" style="width:60px; text-align:center;"></td>
-                        <td><input type="text" value="${row.remarks || ''}" onchange="updateMandaysRow(${idx}, 'remarks', this.value)"></td>
+                        <td style="text-align:center;"><input type="number" step="0.5" min="0" max="24" value="${row.holiday || 0}" onchange="updateMandaysRow(${idx}, 'holiday', parseFloat(this.value)||0)" style="width:50px; text-align:center;"></td>
+                        <td style="text-align:center;"><input type="number" step="0.5" min="0" max="24" value="${row.slvl || 0}" onchange="updateMandaysRow(${idx}, 'slvl', parseFloat(this.value)||0)" style="width:50px; text-align:center;"></td>
+                        <td style="text-align:center;"><input type="number" step="0.5" min="0" max="24" value="${row.iad || 0}" ${row.locked ? 'readonly' : ''} onchange="updateMandaysRow(${idx}, 'iad', parseFloat(this.value)||0)"></td>
+                        <td style="text-align:center;"><input type="number" step="0.5" min="0" max="24" value="${row.ld || 0}" ${row.locked ? 'readonly' : ''} onchange="updateMandaysRow(${idx}, 'ld', parseFloat(this.value)||0)"></td>
+                        <td style="text-align:center;"><input type="number" step="0.5" min="0" max="24" value="${row.siteVisit || 0}" ${row.locked ? 'readonly' : ''} onchange="updateMandaysRow(${idx}, 'siteVisit', parseFloat(this.value)||0)"></td>
+                        <td style="text-align:center;"><input type="number" step="0.5" min="0" max="24" value="${row.qas || 0}" ${row.locked ? 'readonly' : ''} onchange="updateMandaysRow(${idx}, 'qas', parseFloat(this.value)||0)"></td>
+                        <td><input type="text" value="${row.remarks || ''}" ${row.locked ? 'readonly' : ''} onchange="updateMandaysRow(${idx}, 'remarks', this.value)"></td>
                         <td style="text-align:center; font-weight:700;">${totalRowHrs}</td>
-                        <td style="text-align:center;">
-                            <button class="btn-danger" onclick="deleteMandaysRow(${idx})" style="padding:4px 8px;"><i class="fa-solid fa-trash"></i></button>
+                        <td style="text-align:center; white-space:nowrap;">
+                            <button class="btn-success"
+                            onclick="toggleMandaysLock(${idx})"
+                            style="padding:4px 8px; margin-right:4px;">
+
+                            ${row.locked ? 'Unlock' : 'Save'}
+                        </button>
+                        <button class="btn-danger"
+                            onclick="deleteMandaysRow(${idx})"
+                            style="padding:4px 8px;">
+
+                            <i class="fa-solid fa-trash"></i>
+
+                        </button>
+
                         </td>
                     </tr>
                 `;
@@ -2450,17 +2484,34 @@
             data.splice(idx, 1);
             saveMandaysData(data);
             renderMandaysPage();
-            addAuditLog(`Deleted Mandays log entry for ${currentLoggedAuditor}`);
         }
+
+        function toggleMandaysLock(idx) {
+            const data = getMandaysData();
+
+            if (data[idx]) {
+            data[idx].locked = !data[idx].locked;
+
+           saveMandaysData(data);
+           renderMandaysPage();
+        }
+     }
 
         function updateMandaysRow(idx, field, value) {
             const data = getMandaysData();
             if (data[idx]) {
                 data[idx][field] = value;
-                saveMandaysData(data);
-                renderMandaysPage();
-            }
+ 
+            if (field === "date") {
+               const d = new Date(value);
+               const days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+               data[idx].day = days[d.getDay()];
         }
+
+            saveMandaysData(data);
+            renderMandaysPage();
+        }
+     }
 
         function renderMandaysChart(data) {
             const ctx = document.getElementById("mandaysActivityChart")?.getContext("2d");
