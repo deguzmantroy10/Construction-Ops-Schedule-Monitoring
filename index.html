@@ -55,6 +55,7 @@
         body {
             display: flex;
             background-color: var(--bg-light);
+            background: #f1f5f9;
             color: var(--text-light);
             transition: background-color 0.3s ease, color 0.3s ease;
         }
@@ -112,7 +113,7 @@
 
         /* SIDEBAR */
         .sidebar {
-            width: 260px;
+            width: 290px;
             height: 100vh;
             background: #05153D;
             color: #fff;
@@ -229,8 +230,8 @@
 
         /* MAIN CONTENT */
         .main {
-            margin-left: 260px;
-            width: calc(100% - 260px);
+            margin-left: 280px;
+            width: calc(100% - 280px);
             padding: 30px;
             min-height: 100vh;
         }
@@ -253,13 +254,19 @@
         }
 
         #today {
-            color: var(--primary);
-            font-weight: 600;
-            font-size: 13.5px;
-            background: #eff6ff;
-            padding: 8px 14px;
-            border-radius: 8px;
-            border: 1px solid #bfdbfe;
+            color: #0A5DB3;
+            font-weight: 700;
+            font-size: 12px;
+
+            background: #f8fbff;
+
+            padding: 10px 18px;
+ 
+            border-radius: 999px;
+
+            border: 1px solid #cfe3ff;
+ 
+            box-shadow: 0 4px 12px rgba(10,93,179,.10);
         }
 
         body.dark #today {
@@ -281,10 +288,11 @@
         }
 
         .card {
-            background: var(--surface-light);
+            min-height: 100px;
+            background: linear-gradient(135deg,#ffffff,#f8fafc);
             padding: 20px;
-            border-radius: 14px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+            border-radius: 18px;
+            box-shadow: 0 10px 25px rgba(0,0,0,.08);
             border: 1px solid var(--border-light);
             border-left: 5px solid;
             display: flex;
@@ -333,8 +341,8 @@
         }
 
         .card h2 {
-            font-size: 26px;
-            font-weight: 700;
+            font-size: 40px;
+            font-weight: 800;
             color: #0f172a;
         }
 
@@ -354,11 +362,19 @@
         }
 
         .chart-card {
-            background: var(--surface-light);
-            padding: 24px;
-            border-radius: 14px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
-            border: 1px solid var(--border-light);
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 20px;
+            border: none;
+            min-height: 430px;
+            box-shadow: 0 8px 24px rgba(0,0,0,.08);
+            transition: all .3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .chart-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 32px rgba(0,0,0,.15);
         }
 
         .chart-card h2 {
@@ -686,7 +702,7 @@
     <!-- MAIN CONTENT AREA -->
     <div class="main">
         <div class="topbar">
-            <h1 id="pageTitle" style="font-size: 20px; font-weight: 700; letter-spacing: -0.3px;">Infographic Dashboard & Attendance Monitoring</h1>
+            <h1 id="pageTitle" style="font-size: 28px; font-weight: 700; letter-spacing: -0.3px;">Executive Attendance Dashboard</h1>
             <div id="today">Loading date and time...</div>
         </div>
 
@@ -756,22 +772,22 @@
             <div class="chart-grid">
                 <div class="chart-card">
                     <h2><i class="fa-solid fa-chart-bar" style="color: #2563eb;"></i> Auditors Breakdown</h2>
-                    <canvas id="auditorsBreakdownChart" style="max-height: 250px;"></canvas>
+                    <canvas id="auditorsBreakdownChart" style="max-height: 300px;"></canvas>
                 </div>
                 <div class="chart-card">
                     <h2><i class="fa-solid fa-chart-pie" style="color: #2563eb;"></i> Overall Attendance Mode Share</h2>
-                    <canvas id="attendanceModePieChart" style="max-height: 250px;"></canvas>
+                    <canvas id="attendanceModePieChart" style="max-height: 300px;"></canvas>
                 </div>
             </div>
 
             <div class="chart-grid">
                 <div class="chart-card">
                     <h2><i class="fa-solid fa-chart-bar" style="color: #2563eb;"></i> Attendance Mode & Productivity Rate Chart</h2>
-                    <canvas id="attendanceChart" style="max-height: 230px;"></canvas>
+                    <canvas id="attendanceChart" style="max-height: 300px;"></canvas>
                 </div>
                 <div class="chart-card">
                     <h2><i class="fa-solid fa-trophy" style="color: #1d4ed8;"></i> Head Office Monitoring (WAHO & Official Business)</h2>
-                    <canvas id="topWahoChart" style="max-height: 230px;"></canvas>
+                    <canvas id="topWahoChart" style="max-height: 300px;"></canvas>
                 </div>
             </div>
         </div>
@@ -1935,10 +1951,10 @@
                     data: {
                         labels: auditors.map(a => a.split(" ")[0]),
                         datasets: [
-                            { label: 'WAHO', data: auditors.map(a => auditorStats[a]?.waho || 0), backgroundColor: '#22c55e' },
-                            { label: 'WFA', data: auditors.map(a => auditorStats[a]?.wfa || 0), backgroundColor: '#2563eb' },
-                            { label: 'Site Visit', data: auditors.map(a => auditorStats[a]?.site || 0), backgroundColor: '#f59e0b' },
-                            { label: 'Leave', data: auditors.map(a => auditorStats[a]?.leave || 0), backgroundColor: '#ef4444' }
+                            { label: 'WAHO', data: auditors.map(a => auditorStats[a]?.waho || 0), backgroundColor: '#22c55e', borderRadius: 12, borderSkipped: false },
+                            { label: 'WFA', data: auditors.map(a => auditorStats[a]?.wfa || 0), backgroundColor: '#2563eb', borderRadius: 12, borderSkipped: false },
+                            { label: 'Site Visit', data: auditors.map(a => auditorStats[a]?.site || 0), backgroundColor: '#f59e0b', borderRadius: 12, borderSkipped: false },
+                            { label: 'Leave', data: auditors.map(a => auditorStats[a]?.leave || 0), backgroundColor: '#ef4444', borderRadius: 0, borderSkipped: false }
                         ]
                     },
                     options: { responsive: true, maintainAspectRatio: false, scales: { x: { stacked: true }, y: { stacked: true } } }
@@ -1954,10 +1970,19 @@
                         labels: ['WAHO', 'WFA', 'Site Visit', 'Leave', 'Holiday'],
                         datasets: [{
                             data: [totalWaho, totalWfa, totalSite, totalLeave, totalHoliday],
-                            backgroundColor: ['#22c55e', '#2563eb', '#f59e0b', '#ef4444', '#8b5cf6']
+                            backgroundColor: ['#22c55e', '#2563eb', '#f59e0b', '#ef4444', '#8b5cf6'],
+                            borderWidth: 3,
+                            borderColor: '#ffffff',
+                            hoverOffset: 15
                         }]
                     },
-                    options: { responsive: true, maintainAspectRatio: false }
+                    options: { responsive: true, maintainAspectRatio: false, cutout: '75%', 
+                            plugins: {
+                                 legend: {
+                                     position: 'top' 
+                                 }
+                            }
+                    }  
                 });
             }
 
@@ -2630,7 +2655,7 @@
 
             printable.innerHTML = `
                 <div class="print-header">
-                    <h2>Construction Operations Attendance Monitoring System</h2>
+                    <h2>Construction Ops Attendance Monitoring System</h2>
                     <p>Generated Report Date: ${new Date().toLocaleString()}</p>
                     <p>Generated By: ${currentLoggedAuditor || 'System Admin'}</p>
                 </div>
