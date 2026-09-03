@@ -663,8 +663,301 @@
             .print-table th, .print-table td { border: 1px solid #000; padding: 8px; font-size: 11pt; text-align: left; }
             .print-table th { background-color: #f2f2f2 !important; -webkit-print-color-adjust: exact; }
         }
-    </style>
-</head>
+
+/* WEEK TITLE */
+.week-block-title{
+    background:#ffffff;
+    border:1px solid #e2e8f0;
+    padding:10px 14px;
+    border-radius:10px;
+    margin:14px 0 8px 0;
+    box-shadow:0 2px 6px rgba(15,23,42,.04);
+}
+
+/* TABLE CARD */
+#weeklyBlocksContainer .table-container{
+    border-radius:14px;
+    overflow:auto;
+    border:1px solid #e2e8f0;
+    box-shadow:0 4px 14px rgba(15,23,42,.05);
+}
+
+/* HEADER */
+#weeklyBlocksContainer th{
+    background:#f8fafc;
+    color:#475569;
+    font-size:10px;
+    font-weight:800;
+    letter-spacing:.5px;
+    padding:11px 12px;
+    border-bottom:1px solid #dbe3ee;
+}
+
+/* ROWS */
+#weeklyBlocksContainer td{
+    padding:9px 12px;
+    height:48px;
+    background:#ffffff;
+    border-bottom:1px solid #edf2f7;
+    transition:background .15s ease;
+}
+
+/* HOVER */
+#weeklyBlocksContainer tbody tr:hover td{
+    background:#f8fbff;
+}
+
+/* AUDITOR NAME */
+#weeklyBlocksContainer td:first-child{
+    font-size:12px;
+    font-weight:750;
+    color:#0f172a;
+    white-space:nowrap;
+}
+
+/* STICKY AUDITOR */
+#weeklyBlocksContainer th:first-child,
+#weeklyBlocksContainer td:first-child{
+    position:sticky;
+    left:0;
+    z-index:3;
+}
+
+#weeklyBlocksContainer th:first-child{
+    background:#f8fafc;
+}
+
+#weeklyBlocksContainer td:first-child{
+    background:#ffffff;
+    box-shadow:3px 0 5px rgba(15,23,42,.03);
+}
+
+/* DROPDOWNS */
+#weeklyBlocksContainer select{
+    height:36px;
+    border-radius:9px;
+    padding:5px 10px;
+    font-size:11px;
+    font-weight:700;
+    border:1px solid #cbd5e1;
+    box-shadow:none;
+    transition:all .15s ease;
+}
+
+#weeklyBlocksContainer select:hover{
+    border-color:#94a3b8;
+}
+
+/* REMARKS */
+#weeklyBlocksContainer input[type="text"]{
+    height:36px;
+    border-radius:9px;
+    font-size:11px;
+    padding:5px 10px;
+    border:1px solid #cbd5e1;
+}
+
+/* FOCUS */
+#weeklyBlocksContainer select:focus,
+#weeklyBlocksContainer input[type="text"]:focus{
+    outline:none;
+    border-color:#2563eb;
+    box-shadow:0 0 0 3px rgba(37,99,235,.08);
+}
+
+/* DARK MODE */
+body.dark #weeklyBlocksContainer td{
+    background:#1e293b;
+}
+
+body.dark #weeklyBlocksContainer th{
+    background:#0f172a;
+}
+
+body.dark #weeklyBlocksContainer tbody tr:hover td{
+    background:#263449;
+}
+#weeklyBlocksContainer .table-container{
+    border-radius:14px;
+    border:1px solid #e2e8f0;
+    overflow:auto;
+    box-shadow:0 4px 14px rgba(15,23,42,.05);
+}
+
+#weeklyBlocksContainer table{
+    border-collapse:separate;
+    border-spacing:0;
+}
+
+/* WEEK TITLE */
+.week-block-title{
+    background:#fff;
+    border:1px solid #e2e8f0;
+    border-radius:12px;
+    padding:10px 14px;
+    margin:16px 0 8px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+    box-shadow:0 2px 8px rgba(15,23,42,.04);
+}
+
+.week-title-left{
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.week-progress{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-size:10px;
+    font-weight:700;
+    color:#64748b;
+}
+
+.week-progress-bar{
+    width:90px;
+    height:6px;
+    background:#e2e8f0;
+    border-radius:999px;
+    overflow:hidden;
+}
+
+.week-progress-fill{
+    height:100%;
+    background:#22c55e;
+    border-radius:999px;
+}
+
+/* HEADER */
+#weeklyBlocksContainer th{
+    background:#f8fafc;
+    color:#475569;
+    font-size:10px;
+    font-weight:800;
+    padding:10px 12px;
+    letter-spacing:.4px;
+    border-bottom:1px solid #e2e8f0;
+}
+
+/* ROW */
+#weeklyBlocksContainer td{
+    background:#fff;
+    padding:8px 12px;
+    height:52px;
+    border-bottom:1px solid #edf2f7;
+    transition:.15s;
+}
+
+#weeklyBlocksContainer tbody tr:hover td{
+    background:#f8fbff;
+}
+
+/* AUDITOR WITH PHOTO */
+.weekly-auditor{
+    display:flex;
+    align-items:center;
+    gap:9px;
+    min-width:150px;
+}
+
+.weekly-auditor img{
+    width:32px;
+    height:32px;
+    border-radius:50%;
+    object-fit:cover;
+    border:2px solid #2563eb;
+    flex-shrink:0;
+    background:#f1f5f9;
+}
+
+.weekly-auditor-name{
+    font-size:11px;
+    font-weight:750;
+    color:#0f172a;
+    line-height:1.15;
+    white-space:nowrap;
+}
+
+/* STICKY AUDITOR COLUMN */
+#weeklyBlocksContainer th:first-child,
+#weeklyBlocksContainer td:first-child{
+    position:sticky;
+    left:0;
+    z-index:4;
+}
+
+#weeklyBlocksContainer th:first-child{
+    background:#f8fafc;
+}
+
+#weeklyBlocksContainer td:first-child{
+    background:#fff;
+    box-shadow:4px 0 8px rgba(15,23,42,.04);
+}
+
+/* DROPDOWN */
+#weeklyBlocksContainer select{
+    height:35px;
+    padding:5px 10px;
+    border-radius:9px;
+    font-size:11px;
+    font-weight:700;
+}
+
+/* REMARKS */
+/* TODAY COLUMN - TEAL / CYAN */
+#weeklyBlocksContainer th.today-col{
+    background:#ccfbf1 !important;
+    color:#0f766e !important;
+    position:relative;
+    border-left:2px solid #14b8a6;
+    border-right:2px solid #14b8a6;
+}
+
+#weeklyBlocksContainer th.today-col::after{
+    content:"TODAY";
+    display:block;
+    font-size:8px;
+    font-weight:800;
+    margin-top:3px;
+    color:#0d9488;
+}
+
+#weeklyBlocksContainer td.today-col{
+    background:#f0fdfa;
+    box-shadow:
+        inset 1px 0 #5eead4,
+        inset -1px 0 #5eead4;
+}
+
+#weeklyBlocksContainer tbody tr:hover td.today-col{
+    background:#ccfbf1;
+}
+
+/* DARK MODE */
+body.dark .week-block-title,
+body.dark #weeklyBlocksContainer td{
+    background:#1e293b;
+}
+
+body.dark #weeklyBlocksContainer th{
+    background:#0f172a;
+    color:#cbd5e1;
+}
+
+body.dark #weeklyBlocksContainer td.today-col{
+    background:#172554;
+}
+
+body.dark .weekly-auditor-name{
+    color:#f8fafc;
+}
+</style>
+
 <body>
 
     <!-- USER LOGIN MODAL PROMPT -->
@@ -1001,7 +1294,7 @@
                                 <option value="2026-05">May 2026</option>
                                 <option value="2026-06">June 2026</option>
                                 <option value="2026-07">July 2026</option>
-                                <option value="2026-08" selected>August 2026</option>
+                                <option value="2026-08">August 2026</option>
                                 <option value="2026-09">September 2026</option>
                                 <option value="2026-10">October 2026</option>
                                 <option value="2026-11">November 2026</option>
@@ -2163,55 +2456,347 @@ const typeText = isMeeting ? "MEETING" : "SITE VISIT";
             else if (val === "SITE VISIT / LEAVE") { selectElement.style.backgroundColor = "#fce7f3"; selectElement.style.color = "#9d174d"; }
         }
 
-        function renderWeeklyBlocks() {
-            const container = document.getElementById("weeklyBlocksContainer");
-            const monthSelectVal = document.getElementById("weeklyMonthSelect")?.value || "2026-01";
-            if (!container) return;
-            
-            container.innerHTML = "";
-            const [year, month] = monthSelectVal.split("-").map(Number);
-            const weeks = getWeeksInMonth(year, month);
+ function renderWeeklyBlocks() {
 
-            weeks.forEach((wk) => {
-                let blockHtml = `
-                    <div class="week-block-title"><i class="fa-solid fa-calendar-days"></i> Week ${wk.weekNumber} (${wk.dates[0].fullDateStr} - ${wk.dates[4].fullDateStr})</div>
-                    <div class="table-container">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Auditor</th>
-                                    <th>${wk.dates[0].dayName} - ${wk.dates[0].fullDateStr}</th>
-                                    <th>${wk.dates[1].dayName} - ${wk.dates[1].fullDateStr}</th>
-                                    <th>${wk.dates[2].dayName} - ${wk.dates[2].fullDateStr}</th>
-                                    <th>${wk.dates[3].dayName} - ${wk.dates[3].fullDateStr}</th>
-                                    <th>${wk.dates[4].dayName} - ${wk.dates[4].fullDateStr}</th>
-                                    <th>Remarks</th>
-                                </tr>
-                            </thead>
-                            <tbody class="weekly-block-tbody" data-weekstart="${wk.weekStartIso}">
+    const container =
+        document.getElementById("weeklyBlocksContainer");
+
+    const monthSelectVal =
+        document.getElementById("weeklyMonthSelect")?.value ||
+        "2026-01";
+
+    if (!container) return;
+
+    container.innerHTML = "";
+
+    const [year, month] =
+        monthSelectVal.split("-").map(Number);
+
+    const weeks =
+        getWeeksInMonth(year, month);
+
+    // CURRENT DATE
+    const todayIso =
+        getIsoDate(new Date());
+
+
+    // AUDITOR PHOTO FUNCTION
+    function getAuditorPhoto(auditor) {
+
+        if (auditor === "Catherine Rosales")
+            return "Catherine Rosales_3.jpg";
+
+        if (auditor === "Joemel Perez")
+            return "Joemel Perez_3.jpg";
+
+        if (auditor === "Troy De Guzman")
+            return "Troy De Guzman_3.jpg";
+
+        if (auditor === "Dean Mark Soledad")
+            return "Dean Mark Soledad_3.jpg";
+
+        if (auditor === "Cijay Castro")
+            return "Cijay Castro_3.jpg";
+
+        if (auditor === "Dianne Armas")
+            return "Dianne Armas_3.jpg";
+
+        if (auditor === "Bryan Panol")
+            return "Bryan Panol_3.jpg";
+
+        if (auditor === "Elmar Baria")
+            return "Elmar Baria_3.jpg";
+
+        return "default-user.png";
+    }
+
+
+    weeks.forEach((wk) => {
+
+        // ==========================
+        // WEEK COMPLETION
+        // ==========================
+
+        let completedEntries = 0;
+
+        const totalEntries =
+            auditors.length * 5;
+
+        auditors.forEach(auditor => {
+
+            for (let day = 1; day <= 5; day++) {
+
+                const key =
+                    `${wk.weekStartIso}_${auditor}_day${day}`;
+
+                const value =
+                    attendanceData[key] || "SELECT";
+
+                if (value !== "SELECT") {
+                    completedEntries++;
+                }
+            }
+
+        });
+
+
+        const completionRate =
+            totalEntries > 0
+            ? Math.round(
+                (completedEntries / totalEntries) * 100
+              )
+            : 0;
+
+
+        let blockHtml = `
+
+            <div class="week-block-title">
+
+                <div class="week-title-left">
+
+                    <i class="fa-solid fa-calendar-days"></i>
+
+                    <span>
+                        Week ${wk.weekNumber}
+                        (${wk.dates[0].fullDateStr}
+                        -
+                        ${wk.dates[4].fullDateStr})
+                    </span>
+
+                </div>
+
+
+                <div class="week-progress">
+
+                    <span>
+                        ${completedEntries}/${totalEntries}
+                        Complete
+                    </span>
+
+                    <div class="week-progress-bar">
+
+                        <div
+                            class="week-progress-fill"
+                            style="
+                                width:${completionRate}%;
+                            ">
+                        </div>
+
+                    </div>
+
+                    <span>
+                        ${completionRate}%
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Auditor</th>
+
+                            ${wk.dates.map(d => {
+
+                                const isToday =
+                                    d.isoDate === todayIso;
+
+                                return `
+                                    <th class="
+                                        ${isToday
+                                            ? "today-col"
+                                            : ""}
+                                    ">
+                                        ${d.dayName}
+                                        -
+                                        ${d.fullDateStr}
+                                    </th>
+                                `;
+
+                            }).join("")}
+
+                            <th>Remarks</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody
+                        class="weekly-block-tbody"
+                        data-weekstart="${wk.weekStartIso}">
+        `;
+
+
+        auditors.forEach((auditor) => {
+
+            const photo =
+                getAuditorPhoto(auditor);
+
+
+            blockHtml += `
+
+                <tr data-auditor-row="${auditor}">
+
+                    <td>
+
+                        <div class="weekly-auditor">
+
+                            <img
+                                src="${photo}"
+                                loading="lazy"
+                                onerror="
+                                    this.src='default-user.png'
+                                "
+                            >
+
+                            <div class="weekly-auditor-name">
+                                ${auditor}
+                            </div>
+
+                        </div>
+
+                    </td>
+            `;
+
+
+            for (let day = 1; day <= 5; day++) {
+
+                const key =
+                    `${wk.weekStartIso}_${auditor}_day${day}`;
+
+                const savedVal =
+                    attendanceData[key] || "SELECT";
+
+
+                const optionsHtml =
+                    attendanceOptions.map(opt => `
+
+                        <option
+                            value="${opt}"
+                            ${savedVal === opt
+                                ? "selected"
+                                : ""}
+                        >
+                            ${opt}
+                        </option>
+
+                    `).join("");
+
+
+                const dayObject =
+                    wk.dates[day - 1];
+
+
+                const todayClass =
+                    dayObject.isoDate === todayIso
+                    ? "today-col"
+                    : "";
+
+
+                blockHtml += `
+
+                    <td class="${todayClass}">
+
+                        <select
+
+                            data-weekstart="
+                                ${wk.weekStartIso}
+                            "
+
+                            data-auditor="
+                                ${auditor}
+                            "
+
+                            data-day="
+                                ${day}
+                            "
+
+                            data-status="
+                                ${savedVal}
+                            "
+
+                            onchange="
+                                handleDropdownChange(this)
+                            "
+                        >
+
+                            ${optionsHtml}
+
+                        </select>
+
+                    </td>
                 `;
+            }
 
-                auditors.forEach((auditor) => {
-                    blockHtml += `<tr data-auditor-row="${auditor}"><td><strong>${auditor}</strong></td>`;
-                    for (let day = 1; day <= 5; day++) {
-                        const key = `${wk.weekStartIso}_${auditor}_day${day}`;
-                        const savedVal = attendanceData[key] || "SELECT";
-                        let optionsHtml = attendanceOptions.map(opt => `<option value="${opt}" ${savedVal === opt ? 'selected' : ''}>${opt}</option>`).join('');
-                        blockHtml += `<td><select data-weekstart="${wk.weekStartIso}" data-auditor="${auditor}" data-day="${day}" data-status="${savedVal}" onchange="handleDropdownChange(this)">${optionsHtml}</select></td>`;
-                    }
-                    const remarkKey = `${wk.weekStartIso}_${auditor}_remark`;
-                    const savedRemark = attendanceData[remarkKey] || "";
-                    blockHtml += `<td><input type="text" data-weekstart="${wk.weekStartIso}" data-auditor="${auditor}" data-type="remark" value="${savedRemark}" placeholder="Remarks..."></td>`;
-                    blockHtml += `</tr>`;
-                });
 
-                blockHtml += `</tbody></table></div>`;
-                container.innerHTML += blockHtml;
-            });
+            const remarkKey =
+                `${wk.weekStartIso}_${auditor}_remark`;
 
-            document.querySelectorAll(".weekly-block-tbody select").forEach(sel => updateSelectColor(sel));
-        }
+            const savedRemark =
+                attendanceData[remarkKey] || "";
 
+
+            blockHtml += `
+
+                    <td>
+
+                        <input
+                            type="text"
+
+                            data-weekstart="
+                                ${wk.weekStartIso}
+                            "
+
+                            data-auditor="
+                                ${auditor}
+                            "
+
+                            data-type="remark"
+
+                            value="${savedRemark}"
+
+                            placeholder="Add note..."
+                        >
+
+                    </td>
+
+                </tr>
+            `;
+
+        });
+
+
+        blockHtml += `
+
+                    </tbody>
+
+                </table>
+
+            </div>
+        `;
+
+
+        container.innerHTML += blockHtml;
+
+    });
+
+
+    document
+        .querySelectorAll(
+            ".weekly-block-tbody select"
+        )
+        .forEach(sel =>
+            updateSelectColor(sel)
+        );
+}
         function handleDropdownChange(selectElement) { 
             selectElement.setAttribute("data-status", selectElement.value); 
             updateSelectColor(selectElement); 
@@ -3036,7 +3621,16 @@ if (ctxAttendance) {
 
         function renderSiteVisitMiniCalendar() {
             const miniCalBody = document.getElementById("siteVisitMiniCalendarBody");
-            const monthFilter = document.getElementById("miniCalendarMonthFilter")?.value || "2026-08";
+            const now = new Date();
+const currentMonth = now.getFullYear() + "-" + String(now.getMonth() + 1).padStart(2, "0");
+
+const monthSelect = document.getElementById("miniCalendarMonthFilter");
+
+if (monthSelect && !monthSelect.dataset.initialized) {
+    monthSelect.value = currentMonth;
+    monthSelect.dataset.initialized = "true";
+}
+const monthFilter = monthSelect?.value || currentMonth;
             const monthLabel = document.getElementById("miniCalendarCurrentMonthLabel");
             if (!miniCalBody) return;
 
