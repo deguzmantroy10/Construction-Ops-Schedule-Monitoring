@@ -872,7 +872,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Location</label>
-                                <select id="siteLocation">
+                                <select id="siteLocation"required>
                                     <option value="">Select Location</option>
                                 </select>
                             </div>
@@ -880,7 +880,7 @@
                             <div class="form-group"><label>Start Time</label><input type="time" id="siteStartTime" value="08:00" required></div>
                             <div class="form-group"><label>End Time</label><input type="time" id="siteEndTime" value="17:00" required></div>
                             <div class="form-group"><label>Status</label><select id="siteStatus"><option value="Scheduled">Scheduled</option><option value="Completed">Completed</option><option value="Cancelled">Cancelled</option></select></div>
-                            <div class="form-group" style="grid-column: 1 / -1;"><label>Purpose / Agenda / Remarks</label><input type="text" id="siteRemarks" placeholder="Enter purpose of visit or meeting agenda..."></div>
+                            <div class="form-group" style="grid-column: 1 / -1;"><label>Purpose / Agenda / Remarks</label><input type="text" id="siteRemarks" placeholder="Enter purpose of visit or meeting agenda..."required></div>
                             <div class="form-group" style="grid-column: 1 / -1; display: flex; justify-content: flex-end;">
                                 <button type="submit" class="btn-primary" style="width: 250px; justify-content: center;"><i class="fa-solid fa-plus"></i> Add Schedule</button>
                             </div>
@@ -1038,7 +1038,7 @@
                             <tr>
                                 <th style="width: 130px;">Date</th>
                                 <th style="width: 90px;">Day</th>
-                                <th style="width: 90px;">Sched</th>
+                                <th style="width: 120px;">Sched</th>
                                 <th style="width: 80px; text-align: center;">Holiday</th>
                                 <th style="width: 80px; text-align: center;">SL/VL</th>
                                 <th style="width: 80px; text-align: center;">IAD</th>
@@ -2256,6 +2256,12 @@
             };
 
             siteVisits.unshift(newVisit);
+
+            siteVisits.sort((a, b) =>
+                       new Date(`${b.date}T${b.startTime}`) -
+                       new Date(`${a.date}T${a.startTime}`)
+            );
+
             await saveToFirestore("siteVisits", "list", siteVisits);
             addAuditLog(`Added schedule: <strong>${type}</strong> for <strong>${auditor}</strong> at <strong>${location || 'N/A'}</strong> on <strong>${date}</strong>`);
             
@@ -2442,7 +2448,15 @@
                         <td><input type="date" value="${row.date || ''}" onchange="updateMandaysRow(${idx}, 'date', this.value)"></td>
                         <td><input type="text" value="${row.day || ''}" readonly
                         style="background:#f8fafc; text-align:center;"></td>
-                        <td><input type="text" value="${row.sched || ''}" onchange="updateMandaysRow(${idx}, 'sched', this.value)"></td>
+                        <td><select onchange="updateMandaysRow(${idx}, 'sched', this.value)" style="width:120px;">
+                        <option value="WAHO" ${row.sched==='WAHO'?'selected':''}>WAHO</option>
+                        <option value="WFA" ${row.sched==='WFA'?'selected':''}>WFA</option>
+                        <option value="SITE VISIT" ${row.sched==='SITE VISIT'?'selected':''}>SITE VISIT</option>
+                        <option value="LEAVE" ${row.sched==='LEAVE'?'selected':''}>LEAVE</option>
+                        <option value="HOLIDAY" ${row.sched==='HOLIDAY'?'selected':''}>HOLIDAY</option>
+                        <option value="WFA/LEAVE" ${row.sched==='WFA/LEAVE'?'selected':''}>WFA/LEAVE</option>
+                        <option value="WAHO/LEAVE" ${row.sched==='WAHO/LEAVE'?'selected':''}>WAHO/LEAVE</option>
+                        </select></td>
                         <td style="text-align:center;"><input type="number" step="0.5" min="0" max="24" value="${row.holiday || 0}" onchange="updateMandaysRow(${idx}, 'holiday', parseFloat(this.value)||0)" style="width:50px; text-align:center;"></td>
                         <td style="text-align:center;"><input type="number" step="0.5" min="0" max="24" value="${row.slvl || 0}" onchange="updateMandaysRow(${idx}, 'slvl', parseFloat(this.value)||0)" style="width:50px; text-align:center;"></td>
                         <td style="text-align:center;"><input type="number" step="0.5" min="0" max="24" value="${row.iad || 0}" ${row.locked ? 'readonly' : ''} onchange="updateMandaysRow(${idx}, 'iad', parseFloat(this.value)||0)"></td>
