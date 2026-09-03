@@ -2446,8 +2446,9 @@
                 tbody.innerHTML += `
                     <tr>
                         <td><input type="date" value="${row.date || ''}" onchange="updateMandaysRow(${idx}, 'date', this.value)"></td>
-                        <td><input type="text" value="${row.day || ''}" readonly
-                        style="background:#f8fafc; text-align:center;"></td>
+                        <td><input type="text" value="${new 
+                        Date(row.date).toLocaleDateString('en-US',{weekday:'short'})}"
+                        readonly style="background:#f8fafc;text-align:center;"></td>
                         <td><select onchange="updateMandaysRow(${idx}, 'sched', this.value)" style="width:120px;">
                         <option value="WAHO" ${row.sched==='WAHO'?'selected':''}>WAHO</option>
                         <option value="WFA" ${row.sched==='WFA'?'selected':''}>WFA</option>
