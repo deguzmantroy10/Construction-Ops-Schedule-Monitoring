@@ -145,54 +145,96 @@ overflow-x: hidden;
 /* =========================================================
    BRAND / LOGO AREA
 ========================================================= */
-
-.sidebar .logo {
+ .sidebar .logo {
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 14px;
 
-    margin-bottom: 28px;
+    margin-bottom: 24px;
 
     padding:
-        4px 10px
-        22px 10px;
+        2px 8px
+        20px 8px;
 
     border-bottom:
-        1px solid rgba(255,255,255,0.15);
+        1px solid rgba(255,255,255,0.12);
 }
 
 
-/* LOGO BOX */
+.sidebar-brand-text h2 {
+    margin: 0;
+    color: #FFFFFF;
 
-.sidebar-logo-box {
-    width: 102px;
-    height: 44px;
+    font-size: 18px;
+    line-height: 1.08;
 
-    background: #ffffff;
+    font-weight: 800;
+    letter-spacing: -0.35px;
+}
 
-    border-radius: 9px;
+/* SIDEBAR HELMET BRAND ICON */
+/* PREMIUM SIDEBAR BRAND ICON */
+
+.sidebar-helmet-icon {
+    position: relative;
+
+    width: 48px;
+    height: 48px;
+    flex: 0 0 48px;
 
     display: flex;
     align-items: center;
     justify-content: center;
 
-    padding: 8px 10px;
+    background: transparent;
+    border: none;
+    box-shadow: none;
 
-    flex-shrink: 0;
+    overflow: visible;
+
+    transition: transform .2s ease;
+}
+
+/* SOFT PREMIUM ACCENT */
+.sidebar-helmet-icon::before {
+    content: "";
+
+    position: absolute;
+
+    width: 40px;
+    height: 40px;
+
+    border-radius: 12px;
+
+    background: #EFF6FF;
+
+    border: 1px solid #93C5FD;
 
     box-shadow:
-        0 3px 10px rgba(0,0,0,0.10);
+        0 4px 10px rgba(0,20,70,.15);
 }
 
 
-.sidebar-logo-box img {
-    width: 100%;
-    height: auto;
-    max-height: 28px;
+/* HELMET */
+.sidebar-helmet-icon i {
+    position: relative;
+    z-index: 1;
 
-    object-fit: contain;
+    font-size: 24px;
+    color: #2563EB;
+
+    filter:
+        drop-shadow(0 2px 2px rgba(37,99,235,.15));
 }
 
+/* SUBTLE HOVER */
+.sidebar-helmet-icon:hover {
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 10px 24px rgba(0,31,92,.26),
+        inset 0 1px 0 rgba(255,255,255,1);
+}
 
 /* BRAND TEXT */
 
@@ -200,37 +242,18 @@ overflow-x: hidden;
     min-width: 0;
 }
 
-
-.sidebar-brand-text h2 {
-    margin: 0;
-
-    color: #ffffff;
-
-    font-size: 20px;
-    line-height: 1.15;
-
-    font-weight: 800;
-
-    letter-spacing: -0.3px;
-}
-
-
 .sidebar-brand-text p {
-    margin-top: 6px;
+    margin: 5px 0 0;
 
-    color: #bfdbfe;
+    color: #BFDBFE;
 
-    font-size: 10px;
+    font-size: 9.5px;
+    line-height: 1.25;
 
-    font-weight: 500;
+    font-weight: 600;
+    letter-spacing: .15px;
 }
 
-
-/* HIDE OLD HELMET ICON */
-
-.sidebar .logo > i {
-    display: none;
-}
 
 
 /* =========================================================
@@ -6338,7 +6361,7 @@ body.dark #siteVisitSearch {
                 <i class="fa-solid fa-helmet-safety"></i>
                 <h2>Hello! Welcome</h2>
             </div>
-            <p style="color: #64748b; font-size: 13.5px; margin-bottom: 15px;">Who is accessing the attendance monitoring system?</p>
+            <p style="color: #64748b; font-size: 13.5px; margin-bottom: 15px;">Who is accessing the attendance monitoring System?</p>
             <form onsubmit="handleUserLogin(event)">
                 <div class="form-group" style="margin: 15px 0; text-align: left;">
                     <label>Select Auditor Name:</label>
@@ -6358,12 +6381,9 @@ body.dark #siteVisitSearch {
         <div>
           <div class="logo">
 
-    <div class="sidebar-logo-box">
-
-        <img src="dmci-homes-logo.png"
-             alt="DMCI Homes">
-
-    </div>
+  <div class="sidebar-helmet-icon">
+    <i class="fa-solid fa-helmet-safety"></i>
+</div>
 
     <div class="sidebar-brand-text">
 
@@ -6373,7 +6393,7 @@ body.dark #siteVisitSearch {
         </h2>
 
         <p>
-            Attendance Monitoring
+            Attendance Monitoring System
         </p>
 
     </div>
