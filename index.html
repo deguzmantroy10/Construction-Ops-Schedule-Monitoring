@@ -1523,171 +1523,375 @@
             }
         }
 
-        function renderUpcomingSchedules() {
+        let upcomingScheduleFilter = "ALL";
 
-            const container = document.getElementById("upcomingSchedules");
-
-            if (!container) return;
-
-            const today = getIsoDate(new Date());
-
-            const upcoming = siteVisits
-.filter(v =>
-v.date >= today &&
-v.status !== "Completed" &&
-v.status !== "Cancelled"
-)
-.sort((a, b) =>
-new Date(`${a.date}T${a.startTime}`) -
-new Date(`${b.date}T${b.startTime}`)
-            )
-            .slice(0, 5);
-
-            if (upcoming.length === 0) {
-                container.innerHTML =
-                    '<p style="color:#64748b;">No schedules today.</p>';
-                return;
-            }
-
-            container.innerHTML = upcoming.map(v => {
-
-    const color =
-v.type === "Meeting"
-? "#2563eb"
-: "#ea580c";
- 
-const badgeBg =
-v.type === "Meeting"
-? "#dbeafe"
-: "#fef3c7";
- 
-const badgeColor =
-v.type === "Meeting"
-? "#1e40af"
-: "#92400e";
- 
-const statusBg =
-v.status === "Scheduled"
-? "#dcfce7"
-: v.status === "Completed"
-? "#dcfce7"
-: "#fee2e2";
- 
-const statusColor =
-v.status === "Scheduled"
-? "#166534"
-: v.status === "Completed"
-? "#166534"
-: "#991b1b";
- 
-const formattedDate = new Date(v.date).toLocaleDateString(
-"en-US",
-{
-month: "short",
-day: "numeric",
-year: "numeric"
+function setUpcomingFilter(filter) {
+    upcomingScheduleFilter = filter;
+    renderUpcomingSchedules();
 }
-);
 
+function renderUpcomingSchedules() {
 
-let photo = "default-user.png";
- 
-if (v.auditor === "Catherine Rosales") photo = "Catherine Rosales_3.jpg";
-else if (v.auditor === "Joemel Perez") photo = "Joemel Perez_3.jpg";
-else if (v.auditor === "Troy De Guzman") photo = "Troy De Guzman_3.jpg";
-else if (v.auditor === "Dean Mark Soledad") photo = "Dean Mark Soledad_3.jpg";
-else if (v.auditor === "Cijay Castro") photo = "Cijay Castro_3.jpg";
-else if (v.auditor === "Dianne Armas") photo = "Dianne Armas_3.jpg";
-else if (v.auditor === "Bryan Panol") photo = "Bryan Panol_3.jpg";
-else if (v.auditor === "Elmar Baria") photo = "Elmar Baria_3.jpg";
- 
-return `
+    const container = document.getElementById("upcomingSchedules");
+    if (!container) return;
 
-<div style="
-padding:6px 10px;
-border-left:5px solid ${color};
-margin-bottom:6px;
-background:#ffffff;
-border-radius:10px;
-box-shadow:0 2px 6px rgba(0,0,0,.04);">
- 
-<div style="
-font-size:18px;
-font-weight:700;
-color:#1e293b;
-margin-bottom:2px;">
- 
-<img src="${photo}" style="
-width:28px;
-height:28px;
-border-radius:50%;
-object-fit:cover;
-border:2px solid #2563eb;
-margin-right:8px;
-vertical-align:middle;">
- 
-${v.auditor}
- 
-</div>
- 
-<div style="
-font-size:14px;
-font-weight:600;
-color:#475569;
-margin-bottom:2px;">
- 
-<i class="fa-solid fa-clock" style="color:${color};"></i>
-${formattedDate} | ${v.startTime} - ${v.endTime}
- 
-</div>
- 
-<div style="
-color:#64748b;
-font-size:13px;
-margin-bottom:4px;">
- 
-<i class="fa-solid fa-location-dot" style="color:${color};"></i>
-${v.location || "N/A"}
- 
-</div>
- 
-<div style="display:flex;gap:4px;">
- 
-<span style="
-background:${badgeBg};
-color:${badgeColor};
-padding:3px 8px;
-border-radius:999px;
-font-size:13px;
-font-weight:700;">
- 
-${
-v.type === "Meeting"
-? '<i class="fa-solid fa-users"></i> MEETING'
-: '<i class="fa-solid fa-location-dot"></i> SITE VISIT'
+    const todayDate = new Date();
+    todayDate.setHours(0,0,0,0);
+
+    const tomorrowDate = new Date(todayDate);
+    tomorrowDate.setDate(tomorrowDate.getDate() + 1);
+
+    const weekEnd = new Date(todayDate);
+    weekEnd.setDate(weekEnd.getDate() + 7);
+
+    const activeSchedules = siteVisits
+        .filter(v =>
+            v.status !== "Completed" &&
+            v.status !== "Cancelled"
+        )
+        .sort((a,b) =>
+            new Date(`${a.date}T${a.startTime || "00:00"}`) -
+            new Date(`${b.date}T${b.startTime || "00:00"}`)
+        );
+
+    const getDateOnly = value => {
+        const d = new Date(value + "T00:00:00");
+        d.setHours(0,0,0,0);
+        return d;
+    };
+
+    const todayCount = activeSchedules.filter(v =>
+        getDateOnly(v.date).getTime() === todayDate.getTime()
+    ).length;
+
+    const tomorrowCount = activeSchedules.filter(v =>
+        getDateOnly(v.date).getTime() === tomorrowDate.getTime()
+    ).length;
+
+    const thisWeekCount = activeSchedules.filter(v => {
+        const d = getDateOnly(v.date);
+        return d > tomorrowDate && d <= weekEnd;
+    }).length;
+
+    const completedCount = siteVisits.filter(v =>
+    v.status === "Completed"
+).length;
+
+    let filtered = activeSchedules;
+
+    if (upcomingScheduleFilter === "TODAY") {
+        filtered = activeSchedules.filter(v =>
+            getDateOnly(v.date).getTime() === todayDate.getTime()
+        );
+    }
+
+    if (upcomingScheduleFilter === "TOMORROW") {
+        filtered = activeSchedules.filter(v =>
+            getDateOnly(v.date).getTime() === tomorrowDate.getTime()
+        );
+    }
+
+    if (upcomingScheduleFilter === "WEEK") {
+        filtered = activeSchedules.filter(v => {
+            const d = getDateOnly(v.date);
+            return d >= todayDate && d <= weekEnd;
+        });
+    }
+
+    if (upcomingScheduleFilter === "COMPLETED") {
+    filtered = siteVisits
+        .filter(v => v.status === "Completed")
+        .sort((a,b) =>
+            new Date(`${b.date}T${b.startTime || "00:00"}`) -
+            new Date(`${a.date}T${a.startTime || "00:00"}`)
+        );
 }
- 
-</span>
- 
-<span style="
-background:${statusBg};
-color:${statusColor};
-padding:3px 8px;
-border-radius:999px;
-font-size:13px;
-font-weight:700;">
- 
-${v.status.toUpperCase()}
- 
-</span>
- 
-</div>
- 
+
+    const buttonStyle = filter => `
+        padding:6px 12px;
+        border-radius:999px;
+        border:1px solid ${upcomingScheduleFilter === filter ? "#2563eb" : "#dbe3ee"};
+        background:${upcomingScheduleFilter === filter ? "#eff6ff" : "#ffffff"};
+        color:${upcomingScheduleFilter === filter ? "#1d4ed8" : "#64748b"};
+        font-size:11px;
+        font-weight:700;
+        cursor:pointer;
+    `;
+
+    const header = `
+        <div style="
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            gap:12px;
+            margin-bottom:14px;
+            flex-wrap:wrap;
+        ">
+
+            <div style="display:flex;gap:7px;flex-wrap:wrap;">
+
+                <button style="${buttonStyle("ALL")}"
+                    onclick="setUpcomingFilter('ALL')">
+                    All ${activeSchedules.length}
+                </button>
+
+                <button style="${buttonStyle("TODAY")}"
+                    onclick="setUpcomingFilter('TODAY')">
+                    Today ${todayCount}
+                </button>
+
+                <button style="${buttonStyle("TOMORROW")}"
+                    onclick="setUpcomingFilter('TOMORROW')">
+                    Tomorrow ${tomorrowCount}
+                </button>
+
+                <button style="${buttonStyle("WEEK")}"
+                    onclick="setUpcomingFilter('WEEK')">
+                    This Week ${thisWeekCount}
+                </button>
+
+                <button style="${buttonStyle("COMPLETED")}"
+    onclick="setUpcomingFilter('COMPLETED')">
+    Completed ${completedCount}
+</button>
+
+            </div>
+
+            <button onclick="openSiteVisit()" style="
+                background:none;
+                color:#2563eb;
+                border:none;
+                padding:4px;
+                font-size:11px;
+                font-weight:700;
+                cursor:pointer;
+            ">
+                View Calendar →
+            </button>
+
+        </div>
+    `;
+
+    if (filtered.length === 0) {
+        container.innerHTML = header + `
+            <div style="
+                padding:30px;
+                text-align:center;
+                color:#94a3b8;
+                font-size:13px;
+            ">
+                <i class="fa-regular fa-calendar-check"
+                   style="font-size:25px;margin-bottom:8px;"></i>
+                <div>No activities found.</div>
+            </div>
+        `;
+        return;
+    }
+
+    const cards = filtered.slice(0,8).map(v => {
+
+        const scheduleDate = getDateOnly(v.date);
+
+        const diffDays = Math.ceil(
+            (scheduleDate - todayDate) / 86400000
+        );
+
+        let urgencyText = "";
+        let urgencyColor = "#2563eb";
+        let urgencyBg = "#dbeafe";
+
+        if (diffDays < 0) {
+            urgencyText = `${Math.abs(diffDays)} DAY${Math.abs(diffDays) > 1 ? "S" : ""} OVERDUE`;
+            urgencyColor = "#b91c1c";
+            urgencyBg = "#fee2e2";
+        } else if (diffDays === 0) {
+            urgencyText = "TODAY";
+            urgencyColor = "#c2410c";
+            urgencyBg = "#ffedd5";
+        } else if (diffDays === 1) {
+            urgencyText = "TOMORROW";
+            urgencyColor = "#a16207";
+            urgencyBg = "#fef3c7";
+        } else {
+            urgencyText = `${diffDays} DAYS LEFT`;
+            urgencyColor = "#1d4ed8";
+            urgencyBg = "#dbeafe";
+        }
+
+       const isMeeting = v.type === "Meeting";
+const accentColor = isMeeting ? "#2563eb" : "#f59e0b";
+const typeBg = isMeeting ? "#dbeafe" : "#fef3c7";
+const typeColor = isMeeting ? "#1d4ed8" : "#92400e";
+const typeIcon = isMeeting ? "fa-users" : "fa-location-dot";
+const typeText = isMeeting ? "MEETING" : "SITE VISIT";
+
+        let photo = "default-user.png";
+
+        if (v.auditor === "Catherine Rosales") photo = "Catherine Rosales_3.jpg";
+        else if (v.auditor === "Joemel Perez") photo = "Joemel Perez_3.jpg";
+        else if (v.auditor === "Troy De Guzman") photo = "Troy De Guzman_3.jpg";
+        else if (v.auditor === "Dean Mark Soledad") photo = "Dean Mark Soledad_3.jpg";
+        else if (v.auditor === "Cijay Castro") photo = "Cijay Castro_3.jpg";
+        else if (v.auditor === "Dianne Armas") photo = "Dianne Armas_3.jpg";
+        else if (v.auditor === "Bryan Panol") photo = "Bryan Panol_3.jpg";
+        else if (v.auditor === "Elmar Baria") photo = "Elmar Baria_3.jpg";
+
+        const formattedDate =
+            new Date(v.date + "T00:00:00")
+            .toLocaleDateString("en-US", {
+                month:"short",
+                day:"numeric",
+                year:"numeric"
+            });
+
+        return `
+<div style="
+    border-left:4px solid ${accentColor};
+    background:#fff;
+    border-radius:12px;
+    padding:10px 14px;
+    margin-bottom:8px;
+    box-shadow:0 2px 8px rgba(15,23,42,.05);
+    border-top:1px solid #f1f5f9;
+    border-right:1px solid #f1f5f9;
+    border-bottom:1px solid #f1f5f9;
+">
+
+    <div style="
+        display:flex;
+        align-items:center;
+        gap:14px;
+        width:100%;
+    ">
+
+        <!-- IMAGE -->
+        <img src="${photo}"
+             onerror="this.src='default-user.png'"
+             style="
+                width:36px;
+                height:36px;
+                border-radius:50%;
+                object-fit:cover;
+                border:2px solid ${accentColor};
+                flex-shrink:0;
+             ">
+
+        <!-- AUDITOR -->
+        <div style="width:170px; flex-shrink:0;">
+            <div style="
+                font-size:13px;
+                font-weight:750;
+                color:#0f172a;
+                line-height:1.2;
+            ">
+                ${v.auditor}
+            </div>
+
+            <div style="
+                font-size:10px;
+                color:#64748b;
+                margin-top:3px;
+            ">
+                ${formattedDate}
+            </div>
+        </div>
+
+        <!-- TYPE -->
+        <div style="
+            width:110px;
+            flex-shrink:0;
+        ">
+            <span style="
+                display:inline-flex;
+                align-items:center;
+                gap:4px;
+                background:${typeBg};
+                color:${typeColor};
+                padding:4px 8px;
+                border-radius:999px;
+                font-size:10px;
+                font-weight:800;
+                white-space:nowrap;
+            ">
+                <i class="fa-solid ${typeIcon}"></i>
+                ${typeText}
+            </span>
+        </div>
+
+        <!-- LOCATION -->
+        <div style="
+            width:220px;
+            font-size:11px;
+            color:#64748b;
+            white-space:nowrap;
+            overflow:hidden;
+            text-overflow:ellipsis;
+        ">
+            <i class="fa-solid fa-location-dot"
+               style="color:${accentColor};margin-right:5px;"></i>
+            ${v.location || "N/A"}
+        </div>
+
+        <!-- TIME -->
+        <div style="
+            width:110px;
+            font-size:11px;
+            color:#64748b;
+            white-space:nowrap;
+        ">
+            <i class="fa-solid fa-clock"
+               style="color:${accentColor};margin-right:5px;"></i>
+            ${v.startTime || "--:--"}–${v.endTime || "--:--"}
+        </div>
+
+        <!-- COUNTDOWN -->
+        <span style="
+            background:${urgencyBg};
+            color:${urgencyColor};
+            padding:5px 9px;
+            border-radius:999px;
+            font-size:9px;
+            font-weight:800;
+            white-space:nowrap;
+        ">
+            ${urgencyText}
+        </span>
+
+        <!-- STATUS -->
+        <span style="
+            background:#dcfce7;
+            color:#166534;
+            padding:5px 9px;
+            border-radius:999px;
+            font-size:9px;
+            font-weight:800;
+            white-space:nowrap;
+        ">
+            ${v.status.toUpperCase()}
+        </span>
+
+    </div>
+
+    ${v.remarks ? `
+        <div style="
+            margin-left:50px;
+            margin-top:6px;
+            font-size:10px;
+            color:#94a3b8;
+        ">
+            <i class="fa-solid fa-note-sticky"
+               style="margin-right:5px;"></i>
+            ${v.remarks}
+        </div>
+    ` : ""}
+
 </div>
 `;
+
 }).join("");
 
-        }
+    container.innerHTML = header + cards;
+}
 
         /* REFRESH & ALIGNMENT ALL MODULES */
         function refreshAllViews() {
@@ -2207,11 +2411,11 @@ ${v.status.toUpperCase()}
                     data: {
                         labels: auditors.map(a => a.split(" ")[0]),
                         datasets: [
-                            { label: 'WAHO', data: auditors.map(a => auditorStats[a]?.waho || 0), backgroundColor: '#22c55e', borderRadius: 12, borderSkipped: false },
-                            { label: 'WFA', data: auditors.map(a => auditorStats[a]?.wfa || 0), backgroundColor: '#2563eb', borderRadius: 12, borderSkipped: false },
-                            { label: 'Site Visit', data: auditors.map(a => auditorStats[a]?.site || 0), backgroundColor: '#f59e0b', borderRadius: 12, borderSkipped: false },
-                            { label: 'Leave', data: auditors.map(a => auditorStats[a]?.leave || 0), backgroundColor: '#ef4444', borderRadius: 0, borderSkipped: false }
-                        ]
+    { label:'WAHO', data:auditors.map(a=>auditorStats[a]?.waho||0), backgroundColor:'#22c55e', borderRadius:0, borderSkipped:false },
+    { label:'WFA', data:auditors.map(a=>auditorStats[a]?.wfa||0), backgroundColor:'#2563eb', borderRadius:0, borderSkipped:false },
+    { label:'Site Visit', data:auditors.map(a=>auditorStats[a]?.site||0), backgroundColor:'#f59e0b', borderRadius:0, borderSkipped:false },
+    { label:'Leave', data:auditors.map(a=>auditorStats[a]?.leave||0), backgroundColor:'#ef4444', borderRadius:0, borderSkipped:false }
+]
                     },
                     options: { responsive: true, maintainAspectRatio: false, scales: { x: { stacked: true, grid: { display: false } }, y: { stacked: true, grid: { display: false } } } }
                 });
