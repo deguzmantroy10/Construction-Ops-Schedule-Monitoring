@@ -112,60 +112,358 @@
         .modal-header i { font-size: 30px; }
 
         /* SIDEBAR */
-        .sidebar {
-            width: 290px;
-            height: 100vh;
-            background: #05153D;
-            color: #fff;
-            position: fixed;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            border-right: 1px solid #1e293b;
-        }
+/* =========================================================
+   PREMIUM DMCI SIDEBAR
+========================================================= */
 
-        .sidebar .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 30px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid #1e293b;
-        }
+.sidebar {
+    width: 300px;
+    height: 100vh;
+    background: #063487;
+    color: #ffffff;
 
-        .sidebar .logo i {
-            font-size: 26px;
-            color: #0A5DB3;
-        }
+    position: fixed;
+    left: 0;
+    top: 0;
 
-        .sidebar .logo h2 {
-            font-size: 14px;
-            font-weight: 700;
-            line-height: 1.3;
-        }
+    padding: 24px 20px;
 
-        .sidebar ul {
-            list-style: none;
-        }
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 
-        .sidebar ul li {
-            padding: 12px 15px;
-            margin-bottom: 8px;
-            border-radius: 10px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            transition: all 0.2s ease;
-            color: #94a3b8;
-            font-weight: 600;
-            font-size: 13.5px;
-        }
+    border-right: 1px solid rgba(255,255,255,0.08);
 
-        .sidebar ul li:hover, .sidebar ul li.active {
-            background: linear-gradient(90deg,#0A5DB3,#2563eb);
-            color: #fff;
+    box-shadow:
+        4px 0 20px rgba(15, 23, 42, 0.08);
+
+    z-index: 100;
+}
+
+
+/* =========================================================
+   BRAND / LOGO AREA
+========================================================= */
+
+.sidebar .logo {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    margin-bottom: 28px;
+
+    padding:
+        4px 10px
+        22px 10px;
+
+    border-bottom:
+        1px solid rgba(255,255,255,0.15);
+}
+
+
+/* LOGO BOX */
+
+.sidebar-logo-box {
+    width: 102px;
+    height: 44px;
+
+    background: #ffffff;
+
+    border-radius: 9px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 8px 10px;
+
+    flex-shrink: 0;
+
+    box-shadow:
+        0 3px 10px rgba(0,0,0,0.10);
+}
+
+
+.sidebar-logo-box img {
+    width: 100%;
+    height: auto;
+    max-height: 28px;
+
+    object-fit: contain;
+}
+
+
+/* BRAND TEXT */
+
+.sidebar-brand-text {
+    min-width: 0;
+}
+
+
+.sidebar-brand-text h2 {
+    margin: 0;
+
+    color: #ffffff;
+
+    font-size: 20px;
+    line-height: 1.15;
+
+    font-weight: 800;
+
+    letter-spacing: -0.3px;
+}
+
+
+.sidebar-brand-text p {
+    margin-top: 6px;
+
+    color: #bfdbfe;
+
+    font-size: 10px;
+
+    font-weight: 500;
+}
+
+
+/* HIDE OLD HELMET ICON */
+
+.sidebar .logo > i {
+    display: none;
+}
+
+
+/* =========================================================
+   NAVIGATION TITLE
+========================================================= */
+
+.sidebar-nav-title {
+    display: block;
+
+    padding: 6px 11px 10px;
+
+    color: #93c5fd;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.7px;
+
+    text-transform: uppercase;
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+.sidebar ul {
+    list-style: none;
+
+    padding: 0;
+    margin: 0;
+}
+
+
+.sidebar ul li {
+    min-height: 48px;
+
+    padding: 12px 14px;
+
+    margin-bottom: 7px;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+
+    gap: 13px;
+
+    color: #dbeafe;
+
+    font-weight: 650;
+
+    font-size: 13px;
+
+    transition:
+        background-color 0.18s ease,
+        color 0.18s ease,
+        transform 0.18s ease;
+}
+
+
+/* ICON */
+
+.sidebar ul li i {
+    width: 22px;
+
+    text-align: center;
+
+    font-size: 15px;
+
+    color: #dbeafe;
+
+    flex-shrink: 0;
+}
+
+
+/* TEXT */
+
+.sidebar ul li span {
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+
+/* HOVER */
+
+.sidebar ul li:hover {
+    background: rgba(255,255,255,0.09);
+
+    color: #ffffff;
+
+    transform: translateX(2px);
+}
+
+
+.sidebar ul li:hover i {
+    color: #ffffff;
+}
+
+
+/* ACTIVE PAGE */
+
+.sidebar ul li.active {
+    background: #0755c9;
+
+    color: #ffffff;
+
+    box-shadow:
+        inset 3px 0 0 #60a5fa,
+        0 5px 14px rgba(0, 31, 92, 0.20);
+}
+
+
+.sidebar ul li.active i {
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   USER FOOTER
+========================================================= */
+
+.user-sidebar-footer {
+    background: rgba(0, 31, 92, 0.55);
+
+    padding: 12px;
+
+    border-radius: 11px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 8px;
+
+    border:
+        1px solid rgba(255,255,255,0.12);
+}
+
+
+.user-info {
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    min-width: 0;
+}
+
+
+.user-info i {
+    font-size: 25px;
+
+    color: #bfdbfe;
+}
+
+
+.user-info img.user-avatar {
+    width: 34px;
+    height: 34px;
+
+    border-radius: 50%;
+
+    object-fit: cover;
+
+    border: 2px solid #60a5fa;
+
+    flex-shrink: 0;
+}
+
+
+.user-info small {
+    display: block;
+
+    color: #93c5fd;
+
+    font-size: 8px;
+
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.5px;
+}
+
+
+.user-info h4 {
+    max-width: 120px;
+
+    color: #ffffff;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+
+.switch-user-btn {
+    background: rgba(255,255,255,0.10);
+
+    border: 1px solid rgba(255,255,255,0.10);
+
+    color: #dbeafe;
+
+    padding: 7px 9px;
+
+    border-radius: 7px;
+
+    font-size: 10px;
+
+    cursor: pointer;
+
+    flex-shrink: 0;
+}
+
+
+.switch-user-btn:hover {
+    background: #0755c9;
+
+    color: #ffffff;
+}
         }
 
         /* USER SIDEBAR FOOTER */
@@ -230,50 +528,344 @@
 
         /* MAIN CONTENT */
         .main {
-            margin-left: 280px;
-            width: calc(100% - 280px);
-            padding: 30px;
-            min-height: 100vh;
-        }
+    margin-left: 300px;
+    width: calc(100% - 300px);
 
-        .topbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 25px;
-            background: var(--surface-light);
-            padding: 18px 25px;
-            border-radius: 14px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
-            border: 1px solid var(--border-light);
-        }
+    padding: 30px;
 
-        body.dark .topbar {
-            background: var(--surface-dark);
-            border-color: var(--border-dark);
-        }
+    min-height: 100vh;
+}
 
-        #today {
-            color: #0A5DB3;
-            font-weight: 700;
-            font-size: 12px;
+/* =========================================================
+   PREMIUM EXECUTIVE TOP BAR
+========================================================= */
 
-            background: #f8fbff;
+.topbar {
+    position: relative;
 
-            padding: 10px 18px;
- 
-            border-radius: 999px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
-            border: 1px solid #cfe3ff;
- 
-            box-shadow: 0 4px 12px rgba(10,93,179,.10);
-        }
+    gap: 24px;
 
-        body.dark #today {
-            color: #60a5fa;
-            background: #1e293b;
-            border-color: #334155;
-        }
+    margin-bottom: 26px;
+
+    padding: 20px 24px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffffff 0%,
+            #fbfdff 55%,
+            #f3f8ff 100%
+        );
+
+    border: 1px solid #dbe5f1;
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 6px 20px rgba(15,23,42,0.06);
+
+    overflow: hidden;
+}
+
+
+/* BLUE ACCENT LINE */
+
+.topbar::before {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    width: 5px;
+    height: 100%;
+
+    background:
+        linear-gradient(
+            180deg,
+            #003399,
+            #0A5DB3,
+            #60a5fa
+        );
+}
+
+
+/* LEFT SIDE */
+
+.topbar-left {
+    display: flex;
+    align-items: center;
+
+    gap: 16px;
+
+    min-width: 0;
+}
+
+
+/* PAGE ICON */
+
+.topbar-icon {
+    width: 50px;
+    height: 50px;
+
+    border-radius: 14px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #eaf3ff,
+            #ffffff
+        );
+
+    border: 1px solid #cbdcf5;
+
+    color: #003399;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 19px;
+
+    flex-shrink: 0;
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.9),
+        0 4px 12px rgba(0,51,153,0.08);
+}
+
+
+/* TITLE GROUP */
+
+.topbar-title-group {
+    min-width: 0;
+}
+
+
+.topbar-eyebrow {
+    margin-bottom: 4px;
+
+    color: #0A5DB3;
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.3px;
+
+    text-transform: uppercase;
+}
+
+
+#pageTitle {
+    margin: 0;
+
+    color: #0f2747;
+
+    font-size: 25px;
+
+    line-height: 1.15;
+
+    font-weight: 800;
+
+    letter-spacing: -0.5px;
+}
+
+
+#pageSubtitle {
+    margin-top: 5px;
+
+    color: #64748b;
+
+    font-size: 10.5px;
+
+    font-weight: 500;
+
+    line-height: 1.4;
+}
+
+
+/* RIGHT SIDE */
+
+.topbar-right {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    flex-shrink: 0;
+}
+
+
+/* LIVE BADGE */
+
+.topbar-live-badge {
+    min-height: 35px;
+
+    display: inline-flex;
+    align-items: center;
+
+    gap: 7px;
+
+    padding: 0 12px;
+
+    border-radius: 999px;
+
+    background: #ecfdf5;
+
+    border: 1px solid #bbf7d0;
+
+    color: #15803d;
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.5px;
+}
+
+
+.topbar-live-dot {
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: #22c55e;
+
+    box-shadow:
+        0 0 0 4px rgba(34,197,94,0.12);
+}
+
+
+/* DATE CARD */
+
+.topbar-date-card {
+    min-height: 48px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 8px 13px;
+
+    background: #ffffff;
+
+    border: 1px solid #cfe0f5;
+
+    border-radius: 11px;
+
+    box-shadow:
+        0 3px 10px rgba(15,23,42,0.04);
+}
+
+
+.topbar-date-icon {
+    width: 30px;
+    height: 30px;
+
+    border-radius: 8px;
+
+    background: #eff6ff;
+
+    color: #0755c9;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 11px;
+}
+
+
+.topbar-date-label {
+    margin-bottom: 2px;
+
+    color: #94a3b8;
+
+    font-size: 8px;
+
+    font-weight: 800;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.5px;
+}
+
+
+#today {
+    color: #0755c9;
+
+    background: transparent;
+
+    border: none;
+
+    padding: 0;
+
+    box-shadow: none;
+
+    border-radius: 0;
+
+    font-size: 10.5px;
+
+    font-weight: 800;
+
+    white-space: nowrap;
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width: 900px) {
+
+    .topbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .topbar-right {
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+
+}
+
+
+/* DARK MODE */
+
+body.dark .topbar {
+    background: #172033;
+
+    border-color: #334155;
+}
+
+
+body.dark #pageTitle {
+    color: #f8fafc;
+}
+
+
+body.dark #pageSubtitle {
+    color: #94a3b8;
+}
+
+
+body.dark .topbar-date-card {
+    background: #1e293b;
+
+    border-color: #334155;
+}
+
+
+body.dark #today {
+    color: #60a5fa;
+}
 
         /* CARDS */
         .cards {
@@ -576,6 +1168,244 @@
             color: #fff;
             border-color: #475569;
         }
+/* =========================================================
+   PREMIUM PAGE TOOLBARS / SECTION CARDS
+========================================================= */
+
+.page-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 16px;
+
+    padding: 15px 17px;
+
+    margin-bottom: 18px;
+
+    background: #ffffff;
+
+    border: 1px solid #dbe5f1;
+
+    border-radius: 14px;
+
+    box-shadow: 0 4px 14px rgba(15,23,42,0.045);
+}
+
+
+.page-toolbar-left {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    min-width: 0;
+}
+
+
+.page-toolbar-icon {
+    width: 34px;
+    height: 34px;
+
+    border-radius: 9px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    background: #eff6ff;
+
+    border: 1px solid #dbeafe;
+
+    color: #0755c9;
+
+    font-size: 12px;
+}
+
+
+.page-toolbar-text {
+    min-width: 0;
+}
+
+
+.page-toolbar-label {
+    color: #64748b;
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    text-transform: uppercase;
+
+    letter-spacing: .8px;
+
+    margin-bottom: 2px;
+}
+
+
+.page-toolbar-note {
+    color: #0f2747;
+
+    font-size: 12px;
+
+    font-weight: 700;
+}
+
+
+.page-toolbar-actions {
+    display: flex;
+    align-items: center;
+
+    gap: 9px;
+
+    flex-wrap: wrap;
+}
+
+
+/* PREMIUM FILTER FIELDS */
+
+.premium-filter-group {
+    display: flex;
+    align-items: flex-end;
+
+    gap: 12px;
+
+    flex-wrap: wrap;
+}
+
+
+.premium-filter {
+    display: flex;
+    flex-direction: column;
+
+    gap: 5px;
+
+    min-width: 175px;
+}
+
+
+.premium-filter.wide {
+    flex: 1;
+    min-width: 260px;
+}
+
+
+.premium-filter label {
+    color: #64748b;
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    text-transform: uppercase;
+
+    letter-spacing: .65px;
+}
+
+
+.premium-filter select,
+.premium-filter input {
+    height: 40px;
+
+    padding: 0 13px;
+
+    border: 1px solid #cbd8e8;
+
+    border-radius: 9px;
+
+    background: #ffffff;
+
+    color: #172033;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    outline: none;
+}
+
+
+.premium-filter select:focus,
+.premium-filter input:focus {
+    border-color: #60a5fa;
+
+    box-shadow: 0 0 0 3px rgba(37,99,235,.08);
+}
+
+
+/* CLEAN BUTTONS */
+
+.page-toolbar-actions button,
+.page-toolbar-actions .btn-primary,
+.page-toolbar-actions .btn-teal,
+.page-toolbar-actions .btn-success {
+    min-height: 39px;
+
+    border-radius: 9px;
+
+    padding: 0 14px;
+
+    font-size: 10.5px;
+
+    box-shadow: none;
+}
+
+
+/* SETTINGS SUB CARDS */
+
+.settings-card {
+    border: 1px solid #dbe5f1 !important;
+
+    border-radius: 14px !important;
+
+    padding: 18px !important;
+
+    box-shadow: 0 4px 14px rgba(15,23,42,.045) !important;
+}
+
+
+.settings-card h2 {
+    color: #172033;
+
+    font-size: 14px !important;
+
+    font-weight: 800;
+
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+}
+
+
+.settings-card h2 i {
+    color: #0755c9;
+}
+
+
+.settings-card p {
+    font-size: 11px !important;
+
+    line-height: 1.5;
+
+    color: #64748b !important;
+}
+
+
+@media (max-width: 850px) {
+
+    .page-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .page-toolbar-actions {
+        width: 100%;
+    }
+
+}
 
         /* MONTHLY VIEW */
         .monthly {
@@ -616,10 +1446,232 @@
         body.dark .month-card h3 { color: #94a3b8; }
 
 
-        .calendar { width: 100%; border-collapse: collapse; min-width: 700px; }
-        .calendar th { text-align: center; background: #1e293b; color: #fff; padding: 12px; }
-        .calendar td { height: 90px; vertical-align: top; border: 1px solid var(--border-light); padding: 10px; width: 20%; }
-        body.dark .calendar td { border-color: var(--border-dark); }
+/* =========================================================
+   PREMIUM MONTHLY CALENDAR
+========================================================= */
+
+.calendar {
+    width: 100%;
+    min-width: 700px;
+
+    border-collapse: separate;
+    border-spacing: 0;
+
+    background: #ffffff;
+
+    border: 1px solid #dbe5f1;
+
+    border-radius: 14px;
+
+    overflow: hidden;
+}
+
+
+/* DAY HEADERS */
+
+.calendar th {
+    text-align: center;
+
+    background: #f4f8ff;
+
+    color: #0b3a82;
+
+    padding: 13px 12px;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.8px;
+
+    text-transform: uppercase;
+
+    border-bottom: 2px solid #cbdcf5;
+
+    border-right: 1px solid #e2e8f0;
+}
+
+
+.calendar th:last-child {
+    border-right: none;
+}
+
+
+/* CALENDAR CELLS */
+
+.calendar td {
+    height: 125px;
+
+    vertical-align: top;
+
+    padding: 12px;
+
+    width: 20%;
+
+    background: #ffffff;
+
+    border-right: 1px solid #e7edf5;
+
+    border-bottom: 1px solid #e7edf5;
+
+    transition:
+        background-color 0.15s ease,
+        box-shadow 0.15s ease;
+}
+
+
+.calendar td:last-child {
+    border-right: none;
+}
+
+
+/* HOVER */
+
+.calendar tbody tr:hover td {
+    background: #fbfdff;
+}
+
+
+.calendar td:hover {
+    background: #f7faff !important;
+
+    box-shadow:
+        inset 0 0 0 1px #bfdbfe;
+}
+
+
+/* DATE NUMBER */
+
+.calendar td > strong {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-width: 27px;
+    height: 27px;
+
+    padding: 0 7px;
+
+    border-radius: 8px;
+
+    background: #eff6ff;
+
+    color: #003399;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    margin-bottom: 8px;
+}
+
+
+/* EMPLOYEE / STATUS LINES */
+
+#calendarBody td div {
+    line-height: 1.55;
+
+    font-size: 10px;
+}
+
+
+/* EMPTY CELLS */
+
+#calendarBody td:empty {
+    background: #f8fafc;
+}
+
+
+/* DARK MODE */
+
+body.dark .calendar {
+    background: #1e293b;
+
+    border-color: #334155;
+}
+
+
+body.dark .calendar th {
+    background: #172554;
+
+    color: #dbeafe;
+
+    border-color: #334155;
+}
+
+
+body.dark .calendar td {
+    background: #1e293b;
+
+    color: #f8fafc;
+
+    border-color: #334155;
+}
+
+
+body.dark .calendar td > strong {
+    background: #1e3a8a;
+
+    color: #dbeafe;
+}
+/* =========================================================
+   MINI CALENDAR ENHANCEMENT
+========================================================= */
+
+.mini-calendar th {
+    background: #f4f8ff;
+    color: #0b3a82;
+    padding: 11px 8px;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.7px;
+    text-transform: uppercase;
+    border-bottom: 2px solid #cbdcf5;
+}
+
+.mini-calendar td {
+    height: 105px;
+    padding: 10px;
+    vertical-align: top;
+    background: #ffffff;
+    border-right: 1px solid #e7edf5;
+    border-bottom: 1px solid #e7edf5;
+}
+
+.mini-calendar td > strong {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 25px;
+    height: 25px;
+    padding: 0 6px;
+
+    background: #eff6ff;
+    color: #003399;
+
+    border-radius: 7px;
+
+    font-size: 10px;
+    font-weight: 800;
+
+    margin-bottom: 6px;
+}
+
+#siteVisitMiniCalendarBody td div {
+    font-size: 9.5px;
+    line-height: 1.45;
+}
+
+.mini-calendar td:hover {
+    background: #f7faff !important;
+    box-shadow: inset 0 0 0 1px #bfdbfe;
+}
+
+#siteVisitMiniCalendarBody td:empty {
+    background: #f8fafc;
+}
 
         /* SITE VISIT FORM */
         .site-visit-form-container { background: var(--surface-light); padding: 24px; border-radius: 14px; margin-bottom: 20px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02); border: 1px solid var(--border-light); }
@@ -873,10 +1925,33 @@ body.dark .weekly-auditor-name{
     <!-- SIDEBAR NAVIGATION -->
     <div class="sidebar">
         <div>
-            <div class="logo">
-                <i class="fa-solid fa-helmet-safety"></i>
-                <h2>Construction Operations Attendance Monitoring</h2>
-            </div>
+          <div class="logo">
+
+    <div class="sidebar-logo-box">
+
+        <img src="dmci-homes-logo.png"
+             alt="DMCI Homes">
+
+    </div>
+
+    <div class="sidebar-brand-text">
+
+        <h2>
+            Construction<br>
+            Operations
+        </h2>
+
+        <p>
+            Attendance Monitoring
+        </p>
+
+    </div>
+
+
+</div>
+<span class="sidebar-nav-title">
+    Navigation Views
+</span>
             <ul>
                 <li class="active" onclick="setActive(this); openDashboard();">
                     <i class="fa-solid fa-chart-line"></i> <span>Dashboard</span>
@@ -918,10 +1993,63 @@ body.dark .weekly-auditor-name{
 
     <!-- MAIN CONTENT AREA -->
     <div class="main">
-        <div class="topbar">
-            <h1 id="pageTitle" style="font-size: 28px; font-weight: 700; letter-spacing: -0.3px;">Executive Attendance Dashboard</h1>
-            <div id="today">Loading date and time...</div>
+     <div class="topbar">
+
+    <!-- LEFT -->
+    <div class="topbar-left">
+
+        <div class="topbar-icon" id="topbarIcon">
+            <i class="fa-solid fa-chart-line"></i>
         </div>
+
+        <div class="topbar-title-group">
+
+            <div class="topbar-eyebrow">
+                Construction Operations
+            </div>
+
+            <h1 id="pageTitle">
+                Executive Attendance Dashboard
+            </h1>
+
+            <p id="pageSubtitle">
+                Real-time attendance, workforce availability and activity overview
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- RIGHT -->
+    <div class="topbar-right">
+
+        <div class="topbar-live-badge">
+            <span class="topbar-live-dot"></span>
+            LIVE SYSTEM
+        </div>
+
+        <div class="topbar-date-card">
+
+            <div class="topbar-date-icon">
+                <i class="fa-regular fa-calendar"></i>
+            </div>
+
+            <div>
+                <div class="topbar-date-label">
+                    Current Date & Time
+                </div>
+
+                <div id="today">
+                    Loading date and time...
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
 
         <!-- DASHBOARD PAGE -->
         <div id="dashboardPage">
@@ -1049,9 +2177,9 @@ body.dark .weekly-auditor-name{
  
         <!-- WEEKLY PAGE -->
         <div id="weeklyPage" class="page-hidden">
-            <div class="controls">
-                <div class="form-group" style="margin: 0; min-width: 180px;">
-                    <label style="font-size: 11px; text-transform: uppercase; font-weight: 700; color: #64748b;">Select Month:</label>
+           <div class="page-toolbar">
+    <div class="premium-filter">
+                   <label>Select Month</label>
                     <select id="weeklyMonthSelect" onchange="renderWeeklyBlocks()">
                         <option value="2026-01">January 2026</option>
                         <option value="2026-02">February 2026</option>
@@ -1078,6 +2206,7 @@ body.dark .weekly-auditor-name{
                         <option value="2027-11">November 2027</option>
                         <option value="2027-12">December 2027</option>
                     </select>
+
                 </div>
                 <div class="form-group" style="margin: 0; flex-grow: 1; min-width: 200px;">
                         <label style="font-size: 11px; text-transform: uppercase; font-weight: 700; color: #64748b;">
@@ -1102,16 +2231,39 @@ body.dark .weekly-auditor-name{
         <!-- SITE VISIT & MEETING SCHEDULE PAGE -->
         <div id="siteVisitPage" class="page-hidden">
             <div class="monthly">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; flex-wrap: wrap; gap: 10px;">
-                    <h2 style="font-size: 18px; font-weight: 700;"><i class="fa-solid fa-location-dot"></i> Auditors Meeting & Site Visit Schedule</h2>
-                    <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
-                        <button onclick="openManageProjectsModal()" class="btn-teal"><i class="fa-solid fa-building-ngo"></i> Manage Location</button>
-                        <label class="btn-primary" style="display:none;">
-                            <i class="fa-solid fa-file-excel"></i> Import Project List (.xlsx)
-                            <input type="file" id="importProjectExcelFile" accept=".xlsx, .xls, .csv" onchange="importProjectSitesExcel(event)" style="display: none;">
-                        </label>
-                    </div>
-                </div>
+              <div class="page-toolbar">
+
+    <div class="page-toolbar-left">
+
+        <div class="page-toolbar-icon">
+            <i class="fa-solid fa-location-dot"></i>
+        </div>
+
+        <div class="page-toolbar-text">
+            <div class="page-toolbar-label">
+                Schedule Controls
+            </div>
+
+            <div class="page-toolbar-note">
+                Manage field locations and meeting destinations
+            </div>
+        </div>
+
+    </div>
+
+    <div class="page-toolbar-actions">
+
+        <button onclick="openManageProjectsModal()"
+                class="btn-teal">
+
+            <i class="fa-solid fa-location-crosshairs"></i>
+            Manage Location
+
+        </button>
+
+    </div>
+
+</div>
 
                 <div class="site-visit-form-container">
                     <h3 style="font-size: 14px; font-weight: 700; color: var(--primary);">Add New Schedule</h3>
@@ -1200,11 +2352,10 @@ body.dark .weekly-auditor-name{
                                 <option value="2027-11">November 2027</option>
                                 <option value="2027-12">December 2027</option>
                             </select>
-                            <div id="miniCalendarCurrentMonthLabel" style="font-weight: 600; font-size: 13.5px; color: var(--primary);"></div>
-                        </div>
+                                                    </div>
                     </div>
                     <div class="table-container" style="margin-bottom: 0;">
-                        <table class="calendar">
+                     <table class="calendar mini-calendar">
                             <thead><tr><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th></tr></thead>
                             <tbody id="siteVisitMiniCalendarBody"></tbody>
                         </table>
@@ -1215,59 +2366,139 @@ body.dark .weekly-auditor-name{
         </div>
 
         <!-- MONTHLY PAGE -->
-        <div id="monthlyPage" class="page-hidden">
-            <div class="monthly">
-                <h2 style="font-size: 18px; font-weight: 700; margin-bottom: 5px;"><i class="fa-solid fa-calendar-days"></i> Monthly View</h2>
-                <div class="monthly-controls">
-                    <div class="monthly-controls-group">
-                        <select id="monthlyAuditor">
-                            <option value="ALL">All Auditors</option>
-                        </select>
-                        <select id="monthlyMonth">
-                            <option value="2026-01">January 2026</option>
-                            <option value="2026-02">February 2026</option>
-                            <option value="2026-03">March 2026</option>
-                            <option value="2026-04">April 2026</option>
-                            <option value="2026-05">May 2026</option>
-                            <option value="2026-06">June 2026</option>
-                            <option value="2026-07">July 2026</option>
-                            <option value="2026-08">August 2026</option>
-                            <option value="2026-09">September 2026</option>
-                            <option value="2026-10">October 2026</option>
-                            <option value="2026-11">November 2026</option>
-                            <option value="2026-12">December 2026</option>
-                            <option value="2027-01">January 2027</option>
-                            <option value="2027-02">February 2027</option>
-                            <option value="2027-03">March 2027</option>
-                            <option value="2027-04">April 2027</option>
-                            <option value="2027-05">May 2027</option>
-                            <option value="2027-06">June 2027</option>
-                            <option value="2027-07">July 2027</option>
-                            <option value="2027-08">August 2027</option>
-                            <option value="2027-09">September 2027</option>
-                            <option value="2027-10">October 2027</option>
-                            <option value="2027-11">November 2027</option>
-                            <option value="2027-12">December 2027</option>
-                        </select>
-                    </div>
-                    <div>
-                        <button onclick="exportMonthlyViewExcel()" class="btn-teal"><i class="fa-solid fa-file-excel"></i> Export Monthly View</button>
-                    </div>
+<div id="monthlyPage" class="page-hidden">
+
+    <div class="monthly">
+
+        <div class="page-toolbar">
+
+            <div class="premium-filter-group">
+
+                <div class="premium-filter">
+
+                    <label>Auditor</label>
+
+                    <select id="monthlyAuditor">
+                        <option value="ALL">All Auditors</option>
+                    </select>
+
                 </div>
-                <div class="attendance-summary">
-                    <div class="month-card blue"><h3><i class="fa-solid fa-calendar-check"></i> PRESENT DAYS</h3><h2 id="mPresent">0</h2></div>
-                    <div class="month-card red"><h3><i class="fa-solid fa-bed"></i> LEAVE DAYS</h3><h2 id="mLeave">0</h2></div>
-                    <div class="month-card orange"><h3><i class="fa-solid fa-location-dot"></i> SITE VISITS</h3><h2 id="mSite">0</h2></div>
-                    <div class="month-card teal"><h3><i class="fa-solid fa-chart-line"></i> ATTENDANCE %</h3><h2 id="mRate">0%</h2></div>
+
+
+                <div class="premium-filter">
+
+                    <label>Month</label>
+
+                    <select id="monthlyMonth">
+
+                        <option value="2026-01">January 2026</option>
+                        <option value="2026-02">February 2026</option>
+                        <option value="2026-03">March 2026</option>
+                        <option value="2026-04">April 2026</option>
+                        <option value="2026-05">May 2026</option>
+                        <option value="2026-06">June 2026</option>
+                        <option value="2026-07">July 2026</option>
+                        <option value="2026-08">August 2026</option>
+                        <option value="2026-09">September 2026</option>
+                        <option value="2026-10">October 2026</option>
+                        <option value="2026-11">November 2026</option>
+                        <option value="2026-12">December 2026</option>
+
+                        <option value="2027-01">January 2027</option>
+                        <option value="2027-02">February 2027</option>
+                        <option value="2027-03">March 2027</option>
+                        <option value="2027-04">April 2027</option>
+                        <option value="2027-05">May 2027</option>
+                        <option value="2027-06">June 2027</option>
+                        <option value="2027-07">July 2027</option>
+                        <option value="2027-08">August 2027</option>
+                        <option value="2027-09">September 2027</option>
+                        <option value="2027-10">October 2027</option>
+                        <option value="2027-11">November 2027</option>
+                        <option value="2027-12">December 2027</option>
+
+                    </select>
+
                 </div>
-                <div class="table-container">
-                    <table class="calendar">
-                        <thead><tr><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th></tr></thead>
-                        <tbody id="calendarBody"></tbody>
-                    </table>
-                </div>
+
             </div>
+
+
+            <div class="page-toolbar-actions">
+
+                <button onclick="exportMonthlyViewExcel()"
+                        class="btn-teal">
+
+                    <i class="fa-solid fa-file-excel"></i>
+                    Export Monthly View
+
+                </button>
+
+            </div>
+
         </div>
+
+
+        <div class="attendance-summary">
+
+            <div class="month-card blue">
+                <h3>
+                    <i class="fa-solid fa-calendar-check"></i>
+                    PRESENT DAYS
+                </h3>
+                <h2 id="mPresent">0</h2>
+            </div>
+
+            <div class="month-card red">
+                <h3>
+                    <i class="fa-solid fa-bed"></i>
+                    LEAVE DAYS
+                </h3>
+                <h2 id="mLeave">0</h2>
+            </div>
+
+            <div class="month-card orange">
+                <h3>
+                    <i class="fa-solid fa-location-dot"></i>
+                    SITE VISITS
+                </h3>
+                <h2 id="mSite">0</h2>
+            </div>
+
+            <div class="month-card teal">
+                <h3>
+                    <i class="fa-solid fa-chart-line"></i>
+                    ATTENDANCE %
+                </h3>
+                <h2 id="mRate">0%</h2>
+            </div>
+
+        </div>
+
+
+        <div class="table-container">
+
+            <table class="calendar">
+
+                <thead>
+                    <tr>
+                        <th>Mon</th>
+                        <th>Tue</th>
+                        <th>Wed</th>
+                        <th>Thu</th>
+                        <th>Fri</th>
+                    </tr>
+                </thead>
+
+                <tbody id="calendarBody"></tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
 
         <!-- MANDAYS MONITORING PAGE -->
         <div id="mandaysPage" class="page-hidden">
@@ -1352,7 +2583,7 @@ body.dark .weekly-auditor-name{
                 </div>
 
                 <!-- DATA MIGRATION CARD -->
-                <div class="settings-card" style="border-left: 5px solid #2563eb;">
+           <div class="settings-card">
                     <h2 style="font-size: 16px; margin-bottom: 6px;"><i class="fa-solid fa-cloud-arrow-up"></i> Cloud Sync & Local Storage Backup</h2>
                     <p style="margin-bottom: 15px; color: #64748b; font-size: 13px;">Connected to Firebase Firestore for real-time synchronization. You can also download or restore JSON backups.</p>
                     
@@ -2178,7 +3409,122 @@ const typeText = isMeeting ? "MEETING" : "SITE VISIT";
             }); 
         }
         
-        function setActive(element) { document.querySelectorAll(".sidebar ul li").forEach(li => li.classList.remove("active")); element.classList.add("active"); }
+function setActive(element) {
+
+    document
+        .querySelectorAll(".sidebar ul li")
+        .forEach(li =>
+            li.classList.remove("active")
+        );
+
+
+    element.classList.add("active");
+
+
+    const label =
+        element.querySelector("span")?.textContent.trim() || "";
+
+
+    const title =
+        document.getElementById("pageTitle");
+
+
+    const subtitle =
+        document.getElementById("pageSubtitle");
+
+
+    const iconBox =
+        document.getElementById("topbarIcon");
+
+
+    const pageConfig = {
+
+        "Dashboard": {
+            title: "Executive Attendance Dashboard",
+            subtitle:
+                "Real-time attendance, workforce availability and activity overview",
+            icon:
+                "fa-solid fa-chart-line"
+        },
+
+        "Weekly Log": {
+            title: "Weekly Attendance Monitoring",
+            subtitle:
+                "Daily workforce attendance, work mode and weekly activity tracking",
+            icon:
+                "fa-solid fa-calendar-week"
+        },
+
+        "Site & Meeting Schedule": {
+            title: "Site & Meeting Schedule",
+            subtitle:
+                "Auditor site visits, meetings, locations and upcoming field activities",
+            icon:
+                "fa-solid fa-location-dot"
+        },
+
+        "Monthly View": {
+            title: "Monthly Attendance Overview",
+            subtitle:
+                "Consolidated attendance, leave, site visit and monthly performance summary",
+            icon:
+                "fa-solid fa-calendar-days"
+        },
+
+        "Mandays Monitoring": {
+            title: "Mandays Monitoring",
+            subtitle:
+                "Budgeted versus actual mandays, utilization and activity allocation",
+            icon:
+                "fa-solid fa-chart-pie"
+        },
+
+        "Mandays Activity Chart": {
+            title: "Mandays Activity Analysis",
+            subtitle:
+                "Visual distribution of audit hours across major activity categories",
+            icon:
+                "fa-solid fa-chart-column"
+        },
+
+        "Settings & Logs": {
+            title: "System Settings & Audit Logs",
+            subtitle:
+                "System configuration, activity history and administrative controls",
+            icon:
+                "fa-solid fa-gear"
+        }
+
+    };
+
+
+    const config =
+        pageConfig[label];
+
+
+    if (!config) return;
+
+
+    if (title) {
+        title.textContent =
+            config.title;
+    }
+
+
+    if (subtitle) {
+        subtitle.textContent =
+            config.subtitle;
+    }
+
+
+    if (iconBox) {
+
+        iconBox.innerHTML =
+            `<i class="${config.icon}"></i>`;
+
+    }
+
+}
 
         document.addEventListener("DOMContentLoaded", () => {
             populateDropdowns();
@@ -2738,8 +4084,8 @@ const typeText = isMeeting ? "MEETING" : "SITE VISIT";
 
             let changesDetected = [];
             document.querySelectorAll(".weekly-block-tbody select").forEach(select => {
-                const weekStart = select.dataset.weekstart;
-                const auditor = select.dataset.auditor;
+const weekStart = select.dataset.weekstart.trim();
+const auditor = select.dataset.auditor.trim();
                 const dayNum = parseInt(select.dataset.day, 10);
                 const key = `${weekStart}_${auditor}_day${dayNum}`;
                 const oldVal = attendanceData[key] || "SELECT";
@@ -2751,8 +4097,8 @@ const typeText = isMeeting ? "MEETING" : "SITE VISIT";
             });
 
             document.querySelectorAll(".weekly-block-tbody input[data-type='remark']").forEach(input => {
-                const weekStart = input.dataset.weekstart;
-                const auditor = input.dataset.auditor;
+const weekStart = input.dataset.weekstart.trim();
+const auditor = input.dataset.auditor.trim();
                 const key = `${weekStart}_${auditor}_remark`;
                 const oldRemark = attendanceData[key] || "";
                 const newRemark = input.value;
