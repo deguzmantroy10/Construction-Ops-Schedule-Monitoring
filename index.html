@@ -118,7 +118,7 @@
 .sidebar {
     width: 300px;
     height: 100vh;
-    background: #063487;
+background: #1E40AF;
     color: #ffffff;
 
     position: fixed;
@@ -574,7 +574,7 @@ color: #2563EB;
 
     box-shadow:
         inset 0 1px 0 rgba(255,255,255,0.9),
-        0 4px 12px rgba(0,51,153,0.08);
+        0 4px 12px rgba(37,99,235,0.08);
 }
 
 
@@ -1086,16 +1086,12 @@ body.dark #today {
         height: 380px;
 }
 
-      .chart-card:hover {
+ .chart-card:hover {
     transform: translateY(-2px);
-
-    border-color: #bfdbfe;
-
+    border-color: #BFDBFE;
     box-shadow:
-        0 10px 24px rgba(15,23,42,0.08)
-
- 
-        }
+        0 10px 24px rgba(15,23,42,0.08);
+}
 
         body.dark .chart-card h2 { color: #f8fafc; }
 
@@ -2418,9 +2414,9 @@ body.dark .weekly-auditor-name{
     background:
         linear-gradient(
             180deg,
-            #003399,
-            #0A5DB3,
-            #60a5fa
+            #1E40AF,
+            #2563EB,
+            #60A5FA
         );
 }
 
@@ -2458,18 +2454,17 @@ body.dark .weekly-auditor-name{
     background:
         linear-gradient(
             135deg,
-            #0755c9,
-            #0A5DB3
+       #2563EB,
+            #1D4ED8
         );
-
-    border: 1px solid #0755c9;
+border: 1px solid #2563EB;
 
     border-radius: 9px;
 
     color: #ffffff;
 
     box-shadow:
-        0 4px 10px rgba(7,85,201,.13);
+        0 4px 10px rgba(37,99,235,.13);
 
     transition:
         transform .18s ease,
@@ -2488,7 +2483,7 @@ body.dark .weekly-auditor-name{
         );
 
     box-shadow:
-        0 7px 16px rgba(7,85,201,.18);
+        0 7px 16px rgba(37,99,235,.18);
 }
 
 
@@ -2508,7 +2503,7 @@ body.dark .weekly-auditor-name{
     border-radius: 9px;
 
     box-shadow:
-        0 3px 8px rgba(15,118,110,.06);
+     rgba(37,99,235,.08)
 
     transition:
         transform .18s ease,
@@ -2519,9 +2514,8 @@ body.dark .weekly-auditor-name{
 #mandaysPage .mandays-export-btn:hover {
     transform: translateY(-2px);
 
-    background: #f0fdfa;
-
-    border-color: #5eead4;
+background: #EFF6FF;
+border-color: #93C5FD;;
 }
 
 
@@ -2635,9 +2629,9 @@ body.dark #mandaysPage #mandaysUserDisplay {
     background:
         linear-gradient(
             180deg,
-            #003399,
-            #0A5DB3,
-            #60a5fa
+         #1E40AF,
+            #2563EB,
+            #60A5FA
         );
 }
 
@@ -2692,16 +2686,16 @@ body.dark #mandaysPage #mandaysUserDisplay {
 
 
 .settings-panel-icon.export {
-    color: #0d9488;
+   color: #2563EB;
 
     background:
         linear-gradient(
             145deg,
             #ffffff,
-            #ecfdf5
+            #EFF6FF
         );
 
-    border-color: #ccfbf1;
+border-color: #BFDBFE;
 }
 
 
@@ -2736,7 +2730,7 @@ body.dark #mandaysPage #mandaysUserDisplay {
 .settings-panel-eyebrow {
     margin-bottom: 3px;
 
-    color: #0A5DB3;
+color: #2563EB;
 
     font-size: 8.5px;
     font-weight: 800;
@@ -2817,16 +2811,16 @@ body.dark #mandaysPage #mandaysUserDisplay {
 
 
 .settings-primary-btn {
-    background:
-        linear-gradient(
-            135deg,
-            #0755c9,
-            #0A5DB3
-        );
+background:
+    linear-gradient(
+        135deg,
+        #2563EB,
+        #1D4ED8
+    );
 
     color: #ffffff;
 
-    border: 1px solid #0755c9;
+ border: 1px solid #2563EB;
 
     box-shadow:
         0 5px 12px rgba(7,85,201,.14);
@@ -2834,13 +2828,10 @@ body.dark #mandaysPage #mandaysUserDisplay {
 
 
 .settings-upload-btn {
-    background: #f0fdfa;
-
-    border: 1px solid #99f6e4;
-
-    color: #0f766e;
+    background: #EFF6FF;
+    border: 1px solid #93C5FD;
+    color: #1D4ED8;
 }
-
 
 .settings-upload-btn input {
     display: none;
@@ -3807,7 +3798,7 @@ body.dark #mandaysActivityPage .chart-card > h2 {
             #ffffff
         );
 
-    color: #0755c9;
+color: #2563EB;
 
     border: 1px solid #bfdbfe;
 
@@ -5070,7 +5061,7 @@ body.dark #weeklyBlocksContainer tbody tr:hover td {
     letter-spacing: .15px;
 
     box-shadow:
-        0 5px 13px rgba(7,85,201,.16);
+        0 5px 13px rgba(37,99,235,.16);
 
     transition:
         transform .18s ease,
@@ -5299,7 +5290,7 @@ td:nth-child(1) {
 /* TYPE */
 #siteVisitPage .table-container > table:not(.calendar)
 td:nth-child(2) {
-    color: #0755c9;
+    color: #2563EB;
 
     font-weight: 750;
 }
@@ -6245,6 +6236,49 @@ body.dark #siteVisitSearch {
     }
 
 }
+/* WEEKLY LOG SECONDARY BUTTONS */
+.weekly-outline-btn {
+    background: #FFFFFF;
+    color: #2563EB;
+    border: 1px solid #93C5FD;
+
+    min-height: 40px;
+    padding: 0 16px;
+
+    border-radius: 10px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    box-shadow:
+        0 3px 10px rgba(37,99,235,.06);
+
+    transition: all .2s ease;
+}
+
+.weekly-outline-btn i {
+    color: #2563EB;
+}
+
+.weekly-outline-btn:hover {
+    background: #EFF6FF;
+    border-color: #60A5FA;
+    color: #1D4ED8;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 5px 14px rgba(37,99,235,.12);
+}
+
+.weekly-outline-btn:hover i {
+    color: #1D4ED8;
+}
 
 </style>
 
@@ -6656,13 +6690,17 @@ body.dark #siteVisitSearch {
                 </div>
                 <div style="margin-left: auto; display: flex; gap: 10px; flex-wrap: wrap;">
                     <!-- EXPORT BUTTON SA WEEKLY LOG -->
-                    <button onclick="exportWeeklyLogExcel()" type="button" class="btn-teal">
-                        <i class="fa-solid fa-file-excel"></i> Export Weekly Log
-                    </button>
-                    <button id="darkMode" type="button" class="btn-teal"><i class="fa-solid fa-moon"></i> Dark Mode</button>
-            <button id="saveAttendance" type="button" class="btn-primary">
-                        <i class="fa-solid fa-floppy-disk"></i> Save Changes
-                    </button>
+                  <button onclick="exportWeeklyLogExcel()" type="button" class="weekly-outline-btn">
+    <i class="fa-solid fa-file-excel"></i> Export Weekly Log
+</button>
+
+<button id="darkMode" type="button" class="weekly-outline-btn">
+    <i class="fa-solid fa-moon"></i> Dark Mode
+</button>
+
+<button id="saveAttendance" type="button" class="btn-primary">
+    <i class="fa-solid fa-floppy-disk"></i> Save Changes
+</button>
                 </div>
             </div>
             <div id="weeklyBlocksContainer"></div>
