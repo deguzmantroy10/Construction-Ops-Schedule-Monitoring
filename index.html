@@ -883,6 +883,92 @@ color: #2563EB;
 
     font-size: 10px;
 }
+.online-user-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 9px 8px;
+
+    border-radius: 10px;
+
+    transition: background .15s ease;
+}
+
+.online-user-row:hover {
+    background: #F8FAFC;
+}
+
+.online-user-avatar {
+    position: relative;
+
+    width: 34px;
+    height: 34px;
+
+    flex: 0 0 34px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #EFF6FF;
+
+    border: 1px solid #BFDBFE;
+
+    overflow: hidden;
+
+    color: #2563EB;
+
+    font-size: 9px;
+    font-weight: 800;
+}
+
+.online-user-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.online-user-dot {
+    position: absolute;
+
+    right: 0;
+    bottom: 0;
+
+    width: 8px;
+    height: 8px;
+
+    background: #22C55E;
+
+    border: 2px solid #FFFFFF;
+
+    border-radius: 50%;
+}
+
+.online-user-details {
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.online-user-details strong {
+    color: #172033;
+
+    font-size: 10px;
+    font-weight: 800;
+}
+
+.online-user-details span {
+    margin-top: 2px;
+
+    color: #94A3B8;
+
+    font-size: 8.5px;
+    font-weight: 600;
+}
 /* TOPBAR STATUS INSIDE DATE CARD */
 .topbar-date-content {
     min-width: 0;
@@ -6788,8 +6874,7 @@ body.dark #siteVisitSearch {
                                 0 Online
                             </span>
 
-                            <i class="fa-solid fa-chevron-down"></i>
-                        </button>
+                                 </button>
 
                         <div
                             class="online-users-panel"
@@ -7868,7 +7953,279 @@ body.dark #siteVisitSearch {
         throw error;
     }
 }
+/* =========================================================
+   REAL-TIME ONLINE PRESENCE
+========================================================= */
 
+let onlinePresenceInterval = null;
+let onlinePresenceUnsubscribe = null;
+
+function getCurrentPageName() {
+    const visiblePage = document.querySelector(
+        "#dashboardPage:not(.page-hidden), " +
+        "#weeklyPage:not(.page-hidden), " +
+        "#siteVisitPage:not(.page-hidden), " +
+        "#monthlyPage:not(.page-hidden), " +
+        "#mandaysPage:not(.page-hidden), " +
+        "#mandaysActivityPage:not(.page-hidden), " +
+        "#settingsPage:not(.page-hidden)"
+    );
+
+    if (!visiblePage) return "System";
+
+    const pageMap = {
+        dashboardPage: "Dashboard",
+        weeklyPage: "Weekly Log",
+        siteVisitPage: "Site & Meeting Schedule",
+        monthlyPage: "Monthly View",
+        mandaysPage: "Mandays Monitoring",
+        mandaysActivityPage: "Mandays Activity Chart",
+        settingsPage: "Settings & Logs"
+    };
+
+    return pageMap[visiblePage.id] || "System";
+}
+
+
+function getAuditorPhoto(name) {
+    const photoMap = {
+        "Catherine Rosales": "Catherine Rosales_3.jpg",
+        "Joemel Perez": "Joemel Perez_3.jpg",
+        "Troy De Guzman": "Troy De Guzman_3.jpg",
+        "Dean Mark Soledad": "Dean Mark Soledad_3.jpg",
+        "Cijay Castro": "Cijay Castro_3.jpg",
+        "Dianne Armas": "Dianne Armas_3.jpg",
+        "Bryan Panol": "Bryan Panol_3.jpg",
+        "Elmar Baria": "Elmar Baria_3.jpg"
+    };
+
+    return photoMap[name] || "";
+}
+
+
+function getInitials(name) {
+    return (name || "")
+        .split(" ")
+        .filter(Boolean)
+        .map(part => part[0])
+        .join("")
+        .substring(0, 2)
+        .toUpperCase();
+}
+
+
+async function updateOnlinePresence() {
+
+    if (!currentLoggedAuditor) return;
+
+    if (!window.db || !window.firebaseModules) return;
+
+    const { doc, setDoc } = window.firebaseModules;
+
+    try {
+
+        const safeId = currentLoggedAuditor
+            .trim()
+            .toLowerCase()
+            .replace(/[^a-z0-9]+/g, "_");
+
+        await setDoc(
+            doc(window.db, "onlineUsers", safeId),
+            {
+                name: currentLoggedAuditor,
+                page: getCurrentPageName(),
+                photo: getAuditorPhoto(currentLoggedAuditor),
+                lastSeen: Date.now()
+            },
+            { merge: true }
+        );
+
+    } catch (error) {
+        console.error("Online presence update failed:", error);
+    }
+}
+
+
+function startOnlinePresence() {
+
+    if (!currentLoggedAuditor) return;
+
+    updateOnlinePresence();
+
+    if (onlinePresenceInterval) {
+        clearInterval(onlinePresenceInterval);
+    }
+
+    onlinePresenceInterval = setInterval(
+        updateOnlinePresence,
+        20000
+    );
+}
+
+
+function listenToOnlineUsers() {
+
+    if (!window.db || !window.firebaseModules) {
+        setTimeout(listenToOnlineUsers, 500);
+        return;
+    }
+
+    if (onlinePresenceUnsubscribe) {
+        onlinePresenceUnsubscribe();
+    }
+
+    const {
+        collection,
+        onSnapshot
+    } = window.firebaseModules;
+
+    onlinePresenceUnsubscribe = onSnapshot(
+        collection(window.db, "onlineUsers"),
+        snapshot => {
+
+            const now = Date.now();
+
+            const activeUsers = [];
+
+            snapshot.forEach(docSnap => {
+
+                const data = docSnap.data();
+
+                if (!data || !data.lastSeen) return;
+
+                const secondsAgo =
+                    (now - data.lastSeen) / 1000;
+
+                if (secondsAgo <= 70) {
+                    activeUsers.push(data);
+                }
+            });
+
+            renderOnlineUsers(activeUsers);
+        },
+        error => {
+            console.error(
+                "Online users listener failed:",
+                error
+            );
+        }
+    );
+}
+
+
+function renderOnlineUsers(users) {
+
+    const countEl =
+        document.getElementById("onlineUsersCount");
+
+    const panelCountEl =
+        document.getElementById("onlinePanelCount");
+
+    const listEl =
+        document.getElementById("onlineUsersList");
+
+    const avatarStack =
+        document.getElementById("onlineAvatarStack");
+
+    if (countEl) {
+        countEl.textContent =
+            `${users.length} Online`;
+    }
+
+    if (panelCountEl) {
+        panelCountEl.textContent =
+            users.length;
+    }
+
+
+    if (avatarStack) {
+
+        avatarStack.innerHTML = "";
+
+        users
+            .slice(0, 3)
+            .forEach(user => {
+
+                const avatar =
+                    document.createElement("div");
+
+                avatar.className =
+                    "online-avatar";
+
+                avatar.title =
+                    `${user.name} • ${user.page || "System"}`;
+
+                if (user.photo) {
+
+                    const img =
+                        document.createElement("img");
+
+                    img.src = user.photo;
+
+                    img.alt = user.name;
+
+                    avatar.appendChild(img);
+
+                } else {
+
+                    avatar.textContent =
+                        getInitials(user.name);
+                }
+
+                avatarStack.appendChild(avatar);
+            });
+    }
+
+
+    if (!listEl) return;
+
+    if (users.length === 0) {
+
+        listEl.innerHTML =
+            `<div class="online-users-empty">
+                No active users
+            </div>`;
+
+        return;
+    }
+
+
+    listEl.innerHTML = users
+        .sort((a, b) =>
+            (a.name || "").localeCompare(b.name || "")
+        )
+        .map(user => {
+
+            const photoHtml =
+                user.photo
+                    ? `<img src="${user.photo}" alt="${user.name}">`
+                    : `<span>${getInitials(user.name)}</span>`;
+
+            return `
+                <div class="online-user-row">
+
+                    <div class="online-user-avatar">
+                        ${photoHtml}
+                        <span class="online-user-dot"></span>
+                    </div>
+
+                    <div class="online-user-details">
+
+                        <strong>
+                            ${user.name || "Unknown User"}
+                        </strong>
+
+                        <span>
+                            ${user.page || "System"}
+                        </span>
+
+                    </div>
+
+                </div>
+            `;
+        })
+        .join("");
+}
         function toggleOnlineUsersPanel() {
     const panel = document.getElementById("onlineUsersPanel");
     if (!panel) return;
@@ -7887,8 +8244,19 @@ document.addEventListener("click", function (event) {
 });
 
         function checkUserLogin() {
-            if (!currentLoggedAuditor) { openLoginModal(); } else { updateLoggedUserDisplay(); }
-        }
+
+    if (!currentLoggedAuditor) {
+
+        openLoginModal();
+
+    } else {
+
+        updateLoggedUserDisplay();
+
+        startOnlinePresence();
+        listenToOnlineUsers();
+    }
+}
         function openLoginModal() {
             const modal = document.getElementById("loginModal");
             if (modal) modal.style.display = "flex";
@@ -7900,6 +8268,8 @@ document.addEventListener("click", function (event) {
             currentLoggedAuditor = select.value;
             localStorage.setItem("currentLoggedAuditor", currentLoggedAuditor);
             updateLoggedUserDisplay();
+startOnlinePresence();
+listenToOnlineUsers();
             document.getElementById("loginModal").style.display = "none";
             addAuditLog(`Logged into the system session.`);
             renderMandaysPage();
