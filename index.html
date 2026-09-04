@@ -665,32 +665,6 @@ color: #2563EB;
 
 /* LIVE BADGE */
 
-.topbar-live-badge {
-    min-height: 35px;
-
-    display: inline-flex;
-    align-items: center;
-
-    gap: 7px;
-
-    padding: 0 12px;
-
-    border-radius: 999px;
-
-    background: #ecfdf5;
-
-    border: 1px solid #bbf7d0;
-
-    color: #15803d;
-
-    font-size: 9px;
-
-    font-weight: 800;
-
-    letter-spacing: 0.5px;
-}
-
-
 .topbar-live-dot {
     width: 7px;
     height: 7px;
@@ -702,8 +676,267 @@ color: #2563EB;
     box-shadow:
         0 0 0 4px rgba(34,197,94,0.12);
 }
+/* =========================================================
+   REAL-TIME ONLINE USERS
+========================================================= */
+
+.online-users-wrap {
+    position: relative;
+}
+
+.online-users-trigger {
+    min-height: 40px;
+    padding: 4px 10px 4px 7px;
+
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    background: #FFFFFF;
+
+    border: 1px solid #D5E1F0;
+    border-radius: 999px;
+
+    color: #334155;
+
+    box-shadow:
+        0 3px 10px rgba(15,23,42,.05);
+}
+
+.online-users-trigger:hover {
+    background: #F8FBFF;
+    border-color: #BFDBFE;
+}
+
+.online-avatar-stack {
+    display: flex;
+    align-items: center;
+    padding-left: 3px;
+}
+
+.online-avatar {
+    position: relative;
+
+    width: 30px;
+    height: 30px;
+
+    margin-left: -6px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    border-radius: 50%;
+    border: 2px solid #FFFFFF;
+
+    background:
+        linear-gradient(
+            135deg,
+            #DBEAFE,
+            #BFDBFE
+        );
+
+    color: #1D4ED8;
+
+    font-size: 9px;
+    font-weight: 800;
+
+    box-shadow:
+        0 2px 6px rgba(15,23,42,.12);
+}
+
+.online-avatar:first-child {
+    margin-left: 0;
+}
+
+.online-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.online-avatar::after {
+    content: "";
+
+    position: absolute;
+
+    right: 0;
+    bottom: 0;
+
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: #22C55E;
+    border: 2px solid #FFFFFF;
+}
+
+.online-users-count {
+    color: #334155;
+
+    font-size: 9.5px;
+    font-weight: 800;
+
+    white-space: nowrap;
+}
+
+.online-users-trigger > i {
+    color: #94A3B8;
+    font-size: 8px;
+}
 
 
+/* DROPDOWN PANEL */
+
+.online-users-panel {
+    display: none;
+
+    position: absolute;
+
+    top: calc(100% + 10px);
+    right: 0;
+
+    width: 310px;
+
+    padding: 10px;
+
+    background: #FFFFFF;
+
+    border: 1px solid #D8E2EF;
+    border-radius: 15px;
+
+    box-shadow:
+        0 18px 45px rgba(15,23,42,.16);
+
+    z-index: 1000;
+}
+
+.online-users-panel.show {
+    display: block;
+}
+
+.online-panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 8px 8px 12px;
+
+    border-bottom: 1px solid #EDF2F7;
+}
+
+.online-panel-header strong {
+    display: block;
+
+    color: #172033;
+
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.online-panel-header span:not(.online-panel-count) {
+    display: block;
+
+    margin-top: 2px;
+
+    color: #94A3B8;
+
+    font-size: 8.5px;
+    font-weight: 600;
+}
+
+.online-panel-count {
+    min-width: 26px;
+    height: 26px;
+
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+
+    background: #ECFDF5;
+
+    border: 1px solid #BBF7D0;
+    border-radius: 999px;
+
+    color: #15803D !important;
+
+    font-size: 9px !important;
+    font-weight: 800 !important;
+}
+
+.online-users-list {
+    max-height: 290px;
+    overflow-y: auto;
+
+    padding-top: 6px;
+}
+
+.online-users-empty {
+    padding: 18px;
+
+    text-align: center;
+
+    color: #94A3B8;
+
+    font-size: 10px;
+}
+/* TOPBAR STATUS INSIDE DATE CARD */
+.topbar-date-content {
+    min-width: 0;
+}
+
+.topbar-status-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    margin-top: 6px;
+}
+
+.topbar-date-card .online-users-trigger {
+    min-height: 0;
+
+    padding: 0;
+
+    gap: 5px;
+
+    background: transparent;
+    border: none;
+
+    box-shadow: none;
+
+    color: #334155;
+}
+
+.topbar-date-card .online-users-trigger:hover {
+    background: transparent;
+    border: none;
+
+    transform: none;
+}
+
+.topbar-date-card .online-users-count {
+    font-size: 8px;
+    font-weight: 800;
+
+    color: #2563EB;
+}
+
+.topbar-date-card .online-users-trigger > i {
+    font-size: 7px;
+    color: #94A3B8;
+}
+
+.topbar-status-row .topbar-live-dot {
+    width: 6px;
+    height: 6px;
+
+    box-shadow:
+        0 0 0 3px rgba(34,197,94,.10);
+}
 /* DATE CARD */
 
 .topbar-date-card {
@@ -4945,26 +5178,26 @@ body.dark #weeklyBlocksContainer tbody tr:hover td {
 #siteVisitPage form {
     position: relative;
 
-    padding: 22px !important;
+    padding: 28px !important;
 
     background:
         linear-gradient(
             145deg,
-            #ffffff 0%,
-            #fbfdff 60%,
-            #f5f9ff 100%
+            #FFFFFF 0%,
+            #FBFDFF 58%,
+            #F3F7FD 100%
         );
 
-    border: 1px solid #d9e4f2;
+    border: 1px solid #D5E1F0;
 
-    border-radius: 18px;
+    border-radius: 22px;
 
     box-shadow:
-        0 8px 24px rgba(15,23,42,.055);
+        0 14px 34px rgba(15,23,42,.07),
+        inset 0 1px 0 rgba(255,255,255,.95);
 
     overflow: hidden;
 }
-
 
 /* BLUE EXECUTIVE ACCENT */
 #siteVisitPage form::before {
@@ -4972,75 +5205,57 @@ body.dark #weeklyBlocksContainer tbody tr:hover td {
 
     position: absolute;
 
-    top: 18px;
-    bottom: 18px;
+    top: 22px;
+    bottom: 22px;
     left: 0;
 
-    width: 3px;
+    width: 4px;
 
-    border-radius: 0 5px 5px 0;
+    border-radius: 0 6px 6px 0;
 
     background:
         linear-gradient(
             180deg,
-          #1E40AF,
-#2563EB,
-#60A5FA
+            #1E40AF,
+            #2563EB,
+            #60A5FA
         );
-}
 
+    box-shadow:
+        0 0 14px rgba(37,99,235,.18);
+}
 
 /* FORM LABELS */
 #siteVisitPage form .form-group label {
     display: block;
 
-    margin-bottom: 6px;
+    margin-bottom: 7px;
 
-    color: #64748b;
+    color: #52647C;
 
     font-size: 8.5px;
     font-weight: 850;
 
     text-transform: uppercase;
-
-    letter-spacing: .65px;
+    letter-spacing: .75px;
 }
 
-
 /* INPUTS / SELECTS */
-#siteVisitPage form input,
-#siteVisitPage form select {
-    width: 100%;
+#siteVisitPage form input:hover,
+#siteVisitPage form select:hover {
+    border-color: #AFC6E5;
+}
 
-    height: 42px;
+#siteVisitPage form input:focus,
+#siteVisitPage form select:focus {
+    background: #FFFFFF;
 
-    padding: 0 12px;
-
-    background:
-        linear-gradient(
-            180deg,
-            #ffffff,
-            #fbfdff
-        );
-
-    color: #25344b;
-
-    border: 1px solid #ccd9e8;
-
-    border-radius: 9px;
-
-    outline: none;
-
-    font-size: 10.5px;
-    font-weight: 600;
+    border-color: #2563EB;
 
     box-shadow:
-        inset 0 1px 2px rgba(15,23,42,.018);
-
-    transition:
-        border-color .16s ease,
-        box-shadow .16s ease,
-        background .16s ease;
+        0 0 0 3px rgba(37,99,235,.08),
+        0 5px 14px rgba(37,99,235,.06);
+}
 }
 
 
@@ -5089,6 +5304,20 @@ body.dark #weeklyBlocksContainer tbody tr:hover td {
     transition:
         transform .18s ease,
         box-shadow .18s ease;
+#siteVisitPage form input:hover,
+#siteVisitPage form select:hover {
+    border-color: #AFC6E5;
+}
+
+#siteVisitPage form input:focus,
+#siteVisitPage form select:focus {
+    background: #FFFFFF;
+
+    border-color: #2563EB;
+
+    box-shadow:
+        0 0 0 3px rgba(37,99,235,.08),
+        0 5px 14px rgba(37,99,235,.06);
 }
 
 
@@ -6518,18 +6747,14 @@ body.dark #siteVisitSearch {
     <!-- RIGHT -->
     <div class="topbar-right">
 
-        <div class="topbar-live-badge">
-            <span class="topbar-live-dot"></span>
-            LIVE SYSTEM
-        </div>
-
         <div class="topbar-date-card">
 
             <div class="topbar-date-icon">
                 <i class="fa-regular fa-calendar"></i>
             </div>
 
-            <div>
+            <div class="topbar-date-content">
+
                 <div class="topbar-date-label">
                     Current Date & Time
                 </div>
@@ -6537,6 +6762,67 @@ body.dark #siteVisitSearch {
                 <div id="today">
                     Loading date and time...
                 </div>
+
+                <div class="topbar-status-row">
+
+                    <div class="online-users-wrap" id="onlineUsersWrap">
+
+                        <button
+                            type="button"
+                            class="online-users-trigger"
+                            id="onlineUsersTrigger"
+                            onclick="toggleOnlineUsersPanel()"
+                            title="Users currently online"
+                        >
+                            <span class="topbar-live-dot"></span>
+
+                            <div
+                                class="online-avatar-stack"
+                                id="onlineAvatarStack"
+                            ></div>
+
+                            <span
+                                class="online-users-count"
+                                id="onlineUsersCount"
+                            >
+                                0 Online
+                            </span>
+
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+
+                        <div
+                            class="online-users-panel"
+                            id="onlineUsersPanel"
+                        >
+                            <div class="online-panel-header">
+                                <div>
+                                    <strong>Online Now</strong>
+                                    <span>Active system users</span>
+                                </div>
+
+                                <span
+                                    class="online-panel-count"
+                                    id="onlinePanelCount"
+                                >
+                                    0
+                                </span>
+                            </div>
+
+                            <div
+                                class="online-users-list"
+                                id="onlineUsersList"
+                            >
+                                <div class="online-users-empty">
+                                    Checking active users...
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
             </div>
 
         </div>
@@ -7582,6 +7868,23 @@ body.dark #siteVisitSearch {
         throw error;
     }
 }
+
+        function toggleOnlineUsersPanel() {
+    const panel = document.getElementById("onlineUsersPanel");
+    if (!panel) return;
+    panel.classList.toggle("show");
+}
+
+document.addEventListener("click", function (event) {
+    const wrap = document.getElementById("onlineUsersWrap");
+    const panel = document.getElementById("onlineUsersPanel");
+
+    if (!wrap || !panel) return;
+
+    if (!wrap.contains(event.target)) {
+        panel.classList.remove("show");
+    }
+});
 
         function checkUserLogin() {
             if (!currentLoggedAuditor) { openLoginModal(); } else { updateLoggedUserDisplay(); }
