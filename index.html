@@ -5390,6 +5390,7 @@ body.dark #weeklyBlocksContainer tbody tr:hover td {
     transition:
         transform .18s ease,
         box-shadow .18s ease;
+}
 #siteVisitPage form input:hover,
 #siteVisitPage form select:hover {
     border-color: #AFC6E5;
@@ -6617,7 +6618,366 @@ body.dark #siteVisitSearch {
 .weekly-outline-btn:hover i {
     color: #1D4ED8;
 }
+/* =========================================================
+   PREMIUM MONTHLY KPI CARDS
+========================================================= */
 
+#monthlyPage .attendance-summary {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+    margin-bottom: 22px;
+}
+
+#monthlyPage .month-card {
+    position: relative;
+
+    min-height: 118px;
+
+    padding: 18px 20px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #FFFFFF 0%,
+            #FBFDFF 68%,
+            #F5F9FF 100%
+        );
+
+    border: 1px solid #DCE6F2;
+    border-left: 4px solid #2563EB;
+    border-radius: 16px;
+
+    box-shadow:
+        0 5px 16px rgba(15,23,42,.045);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    overflow: hidden;
+
+    transition:
+        transform .18s ease,
+        box-shadow .18s ease,
+        border-color .18s ease;
+}
+
+#monthlyPage .month-card:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 9px 24px rgba(15,23,42,.075);
+}
+
+#monthlyPage .month-card::after {
+    content: "";
+
+    position: absolute;
+
+    top: -28px;
+    right: -28px;
+
+    width: 95px;
+    height: 95px;
+
+    border-radius: 50%;
+
+    background: rgba(37,99,235,.035);
+}
+
+#monthlyPage .month-card h3 {
+    margin: 0;
+
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    color: #64748B;
+
+    font-size: 9.5px;
+    font-weight: 800;
+
+    letter-spacing: .65px;
+    text-transform: uppercase;
+
+    position: relative;
+    z-index: 1;
+}
+
+#monthlyPage .month-card h3 i {
+    width: 28px;
+    height: 28px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 8px;
+
+    background: #EFF6FF;
+
+    font-size: 12px;
+}
+
+#monthlyPage .month-card h2 {
+    margin: 8px 0 0;
+
+    color: #0F172A;
+
+    font-size: 30px;
+    line-height: 1;
+
+    font-weight: 800;
+
+    letter-spacing: -.8px;
+
+    position: relative;
+    z-index: 1;
+}
+
+
+/* PRESENT */
+#monthlyPage .month-card.blue {
+    border-left-color: #2563EB;
+}
+
+#monthlyPage .month-card.blue h3 i {
+    color: #2563EB;
+    background: #EFF6FF;
+}
+
+
+/* LEAVE */
+#monthlyPage .month-card.red {
+    border-left-color: #EF4444;
+}
+
+#monthlyPage .month-card.red h3 i {
+    color: #EF4444;
+    background: #FEF2F2;
+}
+
+
+/* SITE VISITS */
+#monthlyPage .month-card.orange {
+    border-left-color: #F59E0B;
+}
+
+#monthlyPage .month-card.orange h3 i {
+    color: #F59E0B;
+    background: #FFFBEB;
+}
+
+
+/* ATTENDANCE RATE */
+#monthlyPage .month-card.teal {
+    border-left-color: #2563EB;
+}
+
+#monthlyPage .month-card.teal h3 i {
+    color: #2563EB;
+    background: #EFF6FF;
+}
+
+
+/* RESPONSIVE */
+@media (max-width: 1000px) {
+    #monthlyPage .attendance-summary {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    #monthlyPage .attendance-summary {
+        grid-template-columns: 1fr;
+    }
+}
+/* =========================================================
+   PREMIUM MANDAYS KPI CARDS
+========================================================= */
+
+#mandaysPage .mandays-kpi-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 16px;
+
+    margin-bottom: 22px;
+}
+
+
+#mandaysPage .mandays-kpi-card {
+    position: relative;
+
+    min-height: 118px;
+
+    padding: 18px 20px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #FFFFFF 0%,
+            #FBFDFF 68%,
+            #F5F9FF 100%
+        );
+
+    border: 1px solid #DCE6F2;
+    border-left: 4px solid #2563EB;
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 5px 16px rgba(15,23,42,.045);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    overflow: hidden;
+
+    transition:
+        transform .18s ease,
+        box-shadow .18s ease;
+}
+
+
+#mandaysPage .mandays-kpi-card:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 9px 24px rgba(15,23,42,.075);
+}
+
+
+#mandaysPage .mandays-kpi-card::after {
+    content: "";
+
+    position: absolute;
+
+    top: -30px;
+    right: -30px;
+
+    width: 100px;
+    height: 100px;
+
+    border-radius: 50%;
+
+    background: rgba(37,99,235,.035);
+}
+
+
+#mandaysPage .mandays-kpi-header {
+    display: flex;
+    align-items: center;
+
+    gap: 9px;
+
+    position: relative;
+    z-index: 1;
+}
+
+
+#mandaysPage .mandays-kpi-header span {
+    color: #64748B;
+
+    font-size: 9.5px;
+    font-weight: 800;
+
+    letter-spacing: .65px;
+
+    text-transform: uppercase;
+}
+
+
+#mandaysPage .mandays-kpi-icon {
+    width: 28px;
+    height: 28px;
+
+    flex: 0 0 28px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 8px;
+
+    background: #EFF6FF;
+
+    color: #2563EB;
+
+    font-size: 11px;
+}
+
+
+#mandaysPage .mandays-kpi-card h2 {
+    margin: 8px 0 0;
+
+    color: #0F172A;
+
+    font-size: 30px;
+    line-height: 1;
+
+    font-weight: 800;
+
+    letter-spacing: -.8px;
+
+    position: relative;
+    z-index: 1;
+}
+
+
+/* BUDGET */
+#mandaysPage .mandays-kpi-card.budget {
+    border-left-color: #2563EB;
+}
+
+
+/* ACTUAL */
+#mandaysPage .mandays-kpi-card.actual {
+    border-left-color: #22C55E;
+}
+
+#mandaysPage .mandays-kpi-card.actual .mandays-kpi-icon {
+    background: #F0FDF4;
+    color: #16A34A;
+}
+
+
+/* VARIANCE */
+#mandaysPage .mandays-kpi-card.variance {
+    border-left-color: #F59E0B;
+}
+
+#mandaysPage .mandays-kpi-card.variance .mandays-kpi-icon {
+    background: #FFFBEB;
+    color: #D97706;
+}
+
+
+/* COMPLETION */
+#mandaysPage .mandays-kpi-card.completion {
+    border-left-color: #2563EB;
+}
+
+
+/* RESPONSIVE */
+@media (max-width: 1000px) {
+
+    #mandaysPage .mandays-kpi-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+
+    #mandaysPage .mandays-kpi-grid {
+        grid-template-columns: 1fr;
+    }
+}
 </style>
 
 <body>
@@ -7418,13 +7778,61 @@ body.dark #siteVisitSearch {
 
         </div>
 
-                <div class="cards" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin-bottom: 20px;">
-                    <div class="card blue"><h3>Budgeted Mandays</h3><h2 id="mBudgeted">35.00</h2></div>
-                    <div class="card green"><h3>Actual Mandays</h3><h2 id="mActual">0.00</h2></div>
-                    <div class="card orange"><h3>Variance</h3><h2 id="mVariance">0.00</h2></div>
-                    <div class="card purple"><h3>% of Completion</h3><h2 id="mCompletion">0%</h2></div>
-                </div>
+               <div class="mandays-kpi-grid">
 
+    <div class="mandays-kpi-card budget">
+        <div class="mandays-kpi-header">
+            <div class="mandays-kpi-icon">
+                <i class="fa-solid fa-calendar-days"></i>
+            </div>
+
+            <span>Budgeted Mandays</span>
+        </div>
+
+        <h2 id="mBudgeted">35.00</h2>
+    </div>
+
+
+    <div class="mandays-kpi-card actual">
+        <div class="mandays-kpi-header">
+            <div class="mandays-kpi-icon">
+                <i class="fa-solid fa-user-check"></i>
+            </div>
+
+            <span>Actual Mandays</span>
+        </div>
+
+        <h2 id="mActual">0.00</h2>
+    </div>
+
+
+    <div class="mandays-kpi-card variance">
+        <div class="mandays-kpi-header">
+            <div class="mandays-kpi-icon">
+                <i class="fa-solid fa-scale-balanced"></i>
+            </div>
+
+            <span>Variance</span>
+        </div>
+
+        <h2 id="mVariance">0.00</h2>
+    </div>
+
+
+    <div class="mandays-kpi-card completion">
+        <div class="mandays-kpi-header">
+            <div class="mandays-kpi-icon">
+                <i class="fa-solid fa-chart-line"></i>
+            </div>
+
+            <span>% of Completion</span>
+        </div>
+
+        <h2 id="mCompletion">0%</h2>
+    </div>
+
+</div>
+ 
                 <div class="table-container">
                     <table>
                         <thead>
