@@ -565,6 +565,7 @@ background: #2563EB;
     gap: 16px;
 
     min-width: 0;
+margin-right: auto;
 }
 
 
@@ -654,10 +655,14 @@ color: #2563EB;
 /* RIGHT SIDE */
 
 .topbar-right {
+    margin-left: auto;
+
     display: flex;
     align-items: center;
-
+    justify-content: flex-end;
     gap: 10px;
+
+    position: static;
 
     flex-shrink: 0;
 }
@@ -1022,6 +1027,48 @@ color: #2563EB;
 
     box-shadow:
         0 0 0 3px rgba(34,197,94,.10);
+}
+/* TOPBAR DARK MODE BUTTON */
+.topbar-dark-mode-btn {
+    min-height: 40px;
+
+    padding: 0 13px;
+
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+
+    background: #FFFFFF;
+
+    border: 1px solid #CFE0F5;
+    border-radius: 10px;
+
+    color: #2563EB;
+
+    font-size: 10px;
+    font-weight: 800;
+
+    box-shadow:
+        0 3px 10px rgba(15,23,42,.04);
+}
+
+.topbar-dark-mode-btn i {
+    font-size: 11px;
+}
+
+.topbar-dark-mode-btn:hover {
+    background: #EFF6FF;
+    border-color: #93C5FD;
+
+    transform: translateY(-1px);
+}
+
+body.dark .topbar-dark-mode-btn {
+    background: #1E293B;
+
+    border-color: #334155;
+
+    color: #93C5FD;
 }
 /* DATE CARD */
 
@@ -7386,7 +7433,7 @@ body.dark #siteVisitSearch {
 
     <!-- MAIN CONTENT AREA -->
     <div class="main">
-     <div class="topbar">
+   <div class="topbar">
 
     <!-- LEFT -->
     <div class="topbar-left">
@@ -7413,9 +7460,18 @@ body.dark #siteVisitSearch {
 
     </div>
 
-
     <!-- RIGHT -->
     <div class="topbar-right">
+
+        <button
+            id="darkMode"
+            type="button"
+            class="topbar-dark-mode-btn"
+            title="Toggle Dark Mode"
+        >
+            <i class="fa-solid fa-moon"></i>
+            <span>Dark Mode</span>
+        </button>
 
         <div class="topbar-date-card">
 
@@ -7445,7 +7501,6 @@ body.dark #siteVisitSearch {
                             title="Users currently online"
                         >
 
-
                             <div
                                 class="online-avatar-stack"
                                 id="onlineAvatarStack"
@@ -7458,13 +7513,15 @@ body.dark #siteVisitSearch {
                                 0 Online
                             </span>
 
-                                 </button>
+                        </button>
 
                         <div
                             class="online-users-panel"
                             id="onlineUsersPanel"
                         >
+
                             <div class="online-panel-header">
+
                                 <div>
                                     <strong>Online Now</strong>
                                     <span>Active system users</span>
@@ -7476,6 +7533,7 @@ body.dark #siteVisitSearch {
                                 >
                                     0
                                 </span>
+
                             </div>
 
                             <div
@@ -7486,6 +7544,7 @@ body.dark #siteVisitSearch {
                                     Checking active users...
                                 </div>
                             </div>
+
                         </div>
 
                     </div>
@@ -7499,9 +7558,11 @@ body.dark #siteVisitSearch {
     </div>
 
 </div>
+     
 
-        <!-- DASHBOARD PAGE -->
-        <div id="dashboardPage">
+   
+      <!-- DASHBOARD PAGE -->
+<div id="dashboardPage">
             <div class="controls" style="margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between;">
                 <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
                     <label style="font-size: 12px; font-weight: 700; text-transform: uppercase; color: var(--primary);"><i class="fa-solid fa-filter"></i> Dashboard Filter (Month):</label>
@@ -7664,19 +7725,16 @@ body.dark #siteVisitSearch {
                         <input type="text" id="search" placeholder="Search Auditor...">
                 </div>
                 <div style="margin-left: auto; display: flex; gap: 10px; flex-wrap: wrap;">
-                    <!-- EXPORT BUTTON SA WEEKLY LOG -->
-                  <button onclick="exportWeeklyLogExcel()" type="button" class="weekly-outline-btn">
-    <i class="fa-solid fa-file-excel"></i> Export Weekly Log
-</button>
 
-<button id="darkMode" type="button" class="weekly-outline-btn">
-    <i class="fa-solid fa-moon"></i> Dark Mode
-</button>
+    <button id="saveAttendance" type="button" class="btn-primary">
+        <i class="fa-solid fa-floppy-disk"></i> Save Changes
+    </button>
 
-<button id="saveAttendance" type="button" class="btn-primary">
-    <i class="fa-solid fa-floppy-disk"></i> Save Changes
-</button>
-                </div>
+    <button onclick="exportWeeklyLogExcel()" type="button" class="weekly-outline-btn">
+        <i class="fa-solid fa-file-excel"></i> Export Weekly Log
+    </button>
+
+</div>
             </div>
             <div id="weeklyBlocksContainer"></div>
         </div>
