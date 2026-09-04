@@ -6978,6 +6978,230 @@ body.dark #siteVisitSearch {
         grid-template-columns: 1fr;
     }
 }
+/* =========================================================
+   EXECUTIVE KPI CARDS - MONTHLY + MANDAYS
+========================================================= */
+
+.executive-kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 18px;
+    margin-bottom: 22px;
+}
+
+
+/* CARD */
+.executive-kpi-card {
+    --accent: #2563EB;
+    --tint: #EFF6FF;
+
+    position: relative;
+
+    min-height: 155px;
+
+    padding: 22px 24px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #FFFFFF 0%,
+            #FBFDFF 62%,
+            var(--tint) 150%
+        );
+
+    border: 1px solid #D9E4F1;
+    border-radius: 18px;
+
+    box-shadow:
+        0 7px 20px rgba(15,23,42,.055);
+
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    transition:
+        transform .20s ease,
+        box-shadow .20s ease,
+        border-color .20s ease;
+}
+
+
+/* LEFT ACCENT */
+.executive-kpi-card::before {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    width: 4px;
+    height: 100%;
+
+    background: var(--accent);
+}
+
+
+/* SOFT DECORATIVE GLOW */
+.executive-kpi-card::after {
+    content: "";
+
+    position: absolute;
+
+    width: 110px;
+    height: 110px;
+
+    right: -42px;
+    top: -42px;
+
+    border-radius: 50%;
+
+    background: var(--tint);
+
+    opacity: .75;
+}
+
+
+/* HOVER */
+.executive-kpi-card:hover {
+    transform: translateY(-3px);
+
+    border-color: #C7D8EC;
+
+    box-shadow:
+        0 13px 30px rgba(15,23,42,.09);
+}
+
+
+/* TOP LABEL */
+.executive-kpi-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    position: relative;
+    z-index: 1;
+}
+
+
+/* ICON BOX */
+.executive-kpi-icon {
+    width: 46px;
+    height: 46px;
+
+    flex: 0 0 46px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 13px;
+
+    background: var(--tint);
+
+    color: var(--accent);
+
+    font-size: 17px;
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.9);
+}
+
+
+/* LABEL */
+.executive-kpi-label {
+    color: #64748B;
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: .65px;
+    text-transform: uppercase;
+}
+
+
+/* VALUE */
+.executive-kpi-value {
+    margin: 18px 0 0;
+
+    color: #0B1739;
+
+    font-size: 38px;
+    line-height: 1;
+
+    font-weight: 800;
+
+    letter-spacing: -1.2px;
+
+    position: relative;
+    z-index: 1;
+}
+
+
+/* SMALL LINE BELOW VALUE */
+.executive-kpi-line {
+    width: 32px;
+    height: 3px;
+
+    margin-top: 14px;
+
+    border-radius: 999px;
+
+    background: var(--accent);
+
+    opacity: .75;
+
+    position: relative;
+    z-index: 1;
+}
+
+
+/* COLORS */
+
+.executive-kpi-card.blue {
+    --accent: #2563EB;
+    --tint: #EFF6FF;
+}
+
+.executive-kpi-card.green {
+    --accent: #22C55E;
+    --tint: #F0FDF4;
+}
+
+.executive-kpi-card.orange {
+    --accent: #F59E0B;
+    --tint: #FFFBEB;
+}
+
+.executive-kpi-card.red {
+    --accent: #EF4444;
+    --tint: #FEF2F2;
+}
+
+.executive-kpi-card.purple {
+    --accent: #8B5CF6;
+    --tint: #F5F3FF;
+}
+
+
+/* RESPONSIVE */
+@media (max-width: 1100px) {
+
+    .executive-kpi-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 650px) {
+
+    .executive-kpi-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
 </style>
 
 <body>
@@ -7671,67 +7895,108 @@ body.dark #siteVisitSearch {
         </div>
 
 
-        <div class="attendance-summary">
+        <div class="executive-kpi-grid">
 
-            <div class="month-card blue">
-                <h3>
-                    <i class="fa-solid fa-calendar-check"></i>
-                    PRESENT DAYS
-                </h3>
-                <h2 id="mPresent">0</h2>
+    <div class="executive-kpi-card blue">
+
+        <div class="executive-kpi-head">
+            <div class="executive-kpi-icon">
+                <i class="fa-solid fa-calendar-check"></i>
             </div>
 
-            <div class="month-card red">
-                <h3>
-                    <i class="fa-solid fa-bed"></i>
-                    LEAVE DAYS
-                </h3>
-                <h2 id="mLeave">0</h2>
+            <div class="executive-kpi-label">
+                Present Days
             </div>
-
-            <div class="month-card orange">
-                <h3>
-                    <i class="fa-solid fa-location-dot"></i>
-                    SITE VISITS
-                </h3>
-                <h2 id="mSite">0</h2>
-            </div>
-
-            <div class="month-card teal">
-                <h3>
-                    <i class="fa-solid fa-chart-line"></i>
-                    ATTENDANCE %
-                </h3>
-                <h2 id="mRate">0%</h2>
-            </div>
-
         </div>
 
+        <div>
+            <h2 class="executive-kpi-value" id="mPresent">0</h2>
+            <div class="executive-kpi-line"></div>
+        </div>
 
-        <div class="table-container">
+    </div>
 
-            <table class="calendar">
 
-                <thead>
-                    <tr>
-                        <th>Mon</th>
-                        <th>Tue</th>
-                        <th>Wed</th>
-                        <th>Thu</th>
-                        <th>Fri</th>
-                    </tr>
-                </thead>
+    <div class="executive-kpi-card red">
 
-                <tbody id="calendarBody"></tbody>
+        <div class="executive-kpi-head">
+            <div class="executive-kpi-icon">
+                <i class="fa-solid fa-bed"></i>
+            </div>
 
-            </table>
+            <div class="executive-kpi-label">
+                Leave Days
+            </div>
+        </div>
 
+        <div>
+            <h2 class="executive-kpi-value" id="mLeave">0</h2>
+            <div class="executive-kpi-line"></div>
+        </div>
+
+    </div>
+
+
+    <div class="executive-kpi-card orange">
+
+        <div class="executive-kpi-head">
+            <div class="executive-kpi-icon">
+                <i class="fa-solid fa-location-dot"></i>
+            </div>
+
+            <div class="executive-kpi-label">
+                Site Visits
+            </div>
+        </div>
+
+        <div>
+            <h2 class="executive-kpi-value" id="mSite">0</h2>
+            <div class="executive-kpi-line"></div>
+        </div>
+
+    </div>
+
+
+    <div class="executive-kpi-card purple">
+
+        <div class="executive-kpi-head">
+            <div class="executive-kpi-icon">
+                <i class="fa-solid fa-chart-line"></i>
+            </div>
+
+            <div class="executive-kpi-label">
+                Attendance %
+            </div>
+        </div>
+
+        <div>
+            <h2 class="executive-kpi-value" id="mRate">0%</h2>
+            <div class="executive-kpi-line"></div>
         </div>
 
     </div>
 
 </div>
+<div class="table-container">
 
+    <table class="calendar">
+        <thead>
+            <tr>
+                <th>Mon</th>
+                <th>Tue</th>
+                <th>Wed</th>
+                <th>Thu</th>
+                <th>Fri</th>
+            </tr>
+        </thead>
+
+        <tbody id="calendarBody"></tbody>
+    </table>
+
+</div>
+
+</div>
+</div>
         <!-- MANDAYS MONITORING PAGE -->
         <div id="mandaysPage" class="page-hidden">
     <div class="monthly">
@@ -7778,57 +8043,85 @@ body.dark #siteVisitSearch {
 
         </div>
 
-               <div class="mandays-kpi-grid">
+              <div class="executive-kpi-grid">
 
-    <div class="mandays-kpi-card budget">
-        <div class="mandays-kpi-header">
-            <div class="mandays-kpi-icon">
+    <div class="executive-kpi-card blue">
+
+        <div class="executive-kpi-head">
+            <div class="executive-kpi-icon">
                 <i class="fa-solid fa-calendar-days"></i>
             </div>
 
-            <span>Budgeted Mandays</span>
+            <div class="executive-kpi-label">
+                Budgeted Mandays
+            </div>
         </div>
 
-        <h2 id="mBudgeted">35.00</h2>
+        <div>
+            <h2 class="executive-kpi-value" id="mBudgeted">35.00</h2>
+            <div class="executive-kpi-line"></div>
+        </div>
+
     </div>
 
 
-    <div class="mandays-kpi-card actual">
-        <div class="mandays-kpi-header">
-            <div class="mandays-kpi-icon">
+    <div class="executive-kpi-card green">
+
+        <div class="executive-kpi-head">
+            <div class="executive-kpi-icon">
                 <i class="fa-solid fa-user-check"></i>
             </div>
 
-            <span>Actual Mandays</span>
+            <div class="executive-kpi-label">
+                Actual Mandays
+            </div>
         </div>
 
-        <h2 id="mActual">0.00</h2>
+        <div>
+            <h2 class="executive-kpi-value" id="mActual">0.00</h2>
+            <div class="executive-kpi-line"></div>
+        </div>
+
     </div>
 
 
-    <div class="mandays-kpi-card variance">
-        <div class="mandays-kpi-header">
-            <div class="mandays-kpi-icon">
+    <div class="executive-kpi-card orange">
+
+        <div class="executive-kpi-head">
+            <div class="executive-kpi-icon">
                 <i class="fa-solid fa-scale-balanced"></i>
             </div>
 
-            <span>Variance</span>
+            <div class="executive-kpi-label">
+                Variance
+            </div>
         </div>
 
-        <h2 id="mVariance">0.00</h2>
+        <div>
+            <h2 class="executive-kpi-value" id="mVariance">0.00</h2>
+            <div class="executive-kpi-line"></div>
+        </div>
+
     </div>
 
 
-    <div class="mandays-kpi-card completion">
-        <div class="mandays-kpi-header">
-            <div class="mandays-kpi-icon">
+    <div class="executive-kpi-card purple">
+
+        <div class="executive-kpi-head">
+            <div class="executive-kpi-icon">
                 <i class="fa-solid fa-chart-line"></i>
             </div>
 
-            <span>% of Completion</span>
+            <div class="executive-kpi-label">
+                % of Completion
+            </div>
         </div>
 
-        <h2 id="mCompletion">0%</h2>
+        <div>
+            <h2 class="executive-kpi-value" id="mCompletion">0%</h2>
+            <div class="executive-kpi-line"></div>
+        </div>
+
     </div>
 
 </div>
