@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="en">
+<html class="auth-lock" lang="en">
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
@@ -6877,6 +6877,16 @@ body>.modal-overlay,.weekly-team-manager-modal-v25,.org-branch-modal-v1{z-index:
   .sidebar-dmci-wordmark{display:none!important;}
 }
 
+
+/* ===== STRICT AUTHENTICATION SHELL LOCK =====
+   Fail-closed: before Firebase Auth verification, only the existing login
+   container can render. The application shell remains display:none. */
+html.auth-lock,
+body.auth-lock{min-height:100%;}
+body.auth-lock{overflow:hidden!important;background:#f7f9fc!important;}
+body.auth-lock > *:not(#loginModal):not(script){display:none!important;}
+body.auth-lock > #loginModal{display:flex!important;visibility:visible!important;opacity:1!important;}
+
 </style>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
@@ -6987,7 +6997,7 @@ body>.modal-overlay,.weekly-team-manager-modal-v25,.org-branch-modal-v1{z-index:
 
 <template id="dmciOrganizationChartModuleV1" data-extracted-style-anchor="true"></template>
 </head>
-<body>
+<body class="auth-lock">
 
 <!-- USER LOGIN MODAL PROMPT -->
 <!-- PREMIUM FULL SCREEN LOGIN -->
@@ -7180,7 +7190,7 @@ body>.modal-overlay,.weekly-team-manager-modal-v25,.org-branch-modal-v1{z-index:
 </div>
 </div>
 <!-- DASHBOARD PAGE -->
-<div class="fluent-refactor constructa-dashboard" id="dashboardPage">
+<div class="fluent-refactor constructa-dashboard page-hidden" id="dashboardPage">
 <!-- V25 COMPACT EXECUTIVE KPI STRIP
          Safety: all original KPI/trend IDs are intentionally retained because
          updateDashboardCards() writes directly to these elements. -->
@@ -8470,6 +8480,40 @@ body>.modal-overlay,.weekly-team-manager-modal-v25,.org-branch-modal-v1{z-index:
 
 <script>
 /* ===== extracted custom script 0: inline-script-1 ===== */
+
+/* ===== STRICT AUTHENTICATION REMEDIATION ===== */
+window.__APP_AUTH_VERIFIED__ = false;
+window.__APP_AUTH_LOCK_ACTIVE__ = true;
+console.log("AUTH LOCK ACTIVE");
+
+function isApplicationAuthVerified() {
+    return window.__APP_AUTH_VERIFIED__ === true &&
+           !!window.auth &&
+           !!window.auth.currentUser;
+}
+
+function activateApplicationAuthLock() {
+    window.__APP_AUTH_VERIFIED__ = false;
+    window.__APP_AUTH_LOCK_ACTIVE__ = true;
+    document.documentElement.classList.add("auth-lock");
+    if (document.body) document.body.classList.add("auth-lock");
+    if (typeof hideAllPages === "function") hideAllPages();
+}
+
+function releaseApplicationAuthLock() {
+    window.__APP_AUTH_LOCK_ACTIVE__ = false;
+    document.documentElement.classList.remove("auth-lock");
+    if (document.body) document.body.classList.remove("auth-lock");
+    console.log("APP UNLOCKED");
+}
+
+function requireAuthenticatedApplication() {
+    if (isApplicationAuthVerified()) return true;
+    activateApplicationAuthLock();
+    if (typeof openLoginModal === "function") openLoginModal();
+    return false;
+}
+
 const auditors = ["Catherine Rosales", "Joemel Perez", "Elmar Baria", "Troy De Guzman", "Dianne Armas", "Cijay Castro", "Bryan Panol", "Dean Mark Soledad"];
         
         const attendanceOptions = ["SELECT", "WAHO", "WFA", "SITE VISIT", "LEAVE", "HOLIDAY", "WAHO/LEAVE", "WFA/LEAVE", "SITE VISIT / LEAVE"];
@@ -8552,6 +8596,7 @@ async function logoutDueToInactivity() {
         resetInactivityLogoutTimer();
         return;
     }
+    activateApplicationAuthLock();
     try {
         if (window.auth && window.firebaseModules) {
             await window.firebaseModules.signOut(window.auth);
@@ -8571,6 +8616,7 @@ async function logoutUser() {
         logoutButton.disabled = true;
         logoutButton.setAttribute("aria-busy", "true");
     }
+    activateApplicationAuthLock();
     try {
         if (window.auth && window.firebaseModules?.signOut) {
             await window.firebaseModules.signOut(window.auth);
@@ -9109,6 +9155,7 @@ window.addEventListener('beforeunload', event => {
 });
 
         function initFirebaseListeners() {
+            if (!isApplicationAuthVerified()) return;
             if (!window.db) {
                 clearTimeout(appListenerRetry);
                 appListenerRetry = setTimeout(initFirebaseListeners, 500);
@@ -9625,6 +9672,10 @@ document.addEventListener("click", function (event) {
 
 function checkUserLogin() {
 
+    if (!window.__APP_AUTH_VERIFIED__) {
+        activateApplicationAuthLock();
+    }
+
     if (!window.auth || !window.firebaseModules) {
         setTimeout(checkUserLogin, 300);
         return;
@@ -9656,6 +9707,7 @@ function checkUserLogin() {
                         "currentLoggedAuditor"
                     );
 
+                    activateApplicationAuthLock();
                     openLoginModal();
 
                     return;
@@ -9671,6 +9723,9 @@ function checkUserLogin() {
                     currentLoggedAuditor
                 );
 
+                window.__APP_AUTH_VERIFIED__ = true;
+                console.log("AUTH VERIFIED");
+
                 updateLoggedUserDisplay();
 
                 const modal =
@@ -9680,6 +9735,22 @@ function checkUserLogin() {
 
                 if (modal) {
                     modal.style.display = "none";
+                }
+
+                releaseApplicationAuthLock();
+
+                applyWeeklyTeamConfig(weeklyTeamConfig, { render: false });
+                populateDropdowns();
+                openDashboard();
+
+                if (typeof window.renderWorkingDayDistributionV37 === "function") {
+                    window.renderWorkingDayDistributionV37(
+                        document.getElementById("dashboardMonthFilter")?.value || "ALL",
+                        document.getElementById("dashboardAuditorFilter")?.value || "ALL"
+                    );
+                }
+                if (typeof window.updateTeamActivityHeatmap === "function") {
+                    window.updateTeamActivityHeatmap();
                 }
 
                 startOnlinePresence();
@@ -9709,6 +9780,7 @@ function checkUserLogin() {
                     inactivityLogoutTimer
                 );
 
+                activateApplicationAuthLock();
                 openLoginModal();
             }
         }
@@ -11526,8 +11598,9 @@ async function resetAllDataToZero() {
         alert('Reset failed. Firebase did not confirm the reset. Reload to verify current data before trying again.');
     } finally { activeFirebaseSaves--;resetInProgress=false; }
 }
-        function openDashboard() { hideAllPages(); document.getElementById("dashboardPage").classList.remove("page-hidden"); updateDashboardCards(); }
+        function openDashboard() { if (!requireAuthenticatedApplication()) return false; hideAllPages(); document.getElementById("dashboardPage").classList.remove("page-hidden"); updateDashboardCards(); return true; }
         function openWeekly() {
+           if (!requireAuthenticatedApplication()) return false;
            hideAllPages();
 
            const today = new Date();
@@ -11546,11 +11619,11 @@ async function resetAllDataToZero() {
 
            renderWeeklyBlocks();
         }
-        function openSiteVisit() { hideAllPages(); document.getElementById("siteVisitPage").classList.remove("page-hidden"); populateProjectSitesDropdown(); checkAndAutoCompleteVisits(); renderSiteVisits(); }
-        function openMonthly() { hideAllPages(); document.getElementById("monthlyPage").classList.remove("page-hidden"); renderMonthlyCalendar(); }
-        function openMandays(auditorName = null) { selectedMandaysAuditor = auditorName || currentLoggedAuditor || selectedMandaysAuditor; hideAllPages(); document.getElementById("mandaysPage").classList.remove("page-hidden"); renderMandaysPage(); }
-function openOrganizationChart() { hideAllPages(); document.getElementById("organizationPage")?.classList.remove("page-hidden"); renderOrganizationChart(); updateWeeklyTeamAdminUI(); requestAnimationFrame(() => window.orgFitViewR6B?.()); }
-function openSettings() { hideAllPages(); document.getElementById("settingsPage").classList.remove("page-hidden"); renderAuditLogs(); if (typeof updateFirebaseDiagnosticsAccess === "function") updateFirebaseDiagnosticsAccess(); if (typeof renderWeeklyTeamSettings === "function") renderWeeklyTeamSettings(); }
+        function openSiteVisit() { if (!requireAuthenticatedApplication()) return false; hideAllPages(); document.getElementById("siteVisitPage").classList.remove("page-hidden"); populateProjectSitesDropdown(); checkAndAutoCompleteVisits(); renderSiteVisits(); return true; }
+        function openMonthly() { if (!requireAuthenticatedApplication()) return false; hideAllPages(); document.getElementById("monthlyPage").classList.remove("page-hidden"); renderMonthlyCalendar(); return true; }
+        function openMandays(auditorName = null) { if (!requireAuthenticatedApplication()) return false; selectedMandaysAuditor = auditorName || currentLoggedAuditor || selectedMandaysAuditor; hideAllPages(); document.getElementById("mandaysPage").classList.remove("page-hidden"); renderMandaysPage(); return true; }
+function openOrganizationChart() { if (!requireAuthenticatedApplication()) return false; hideAllPages(); document.getElementById("organizationPage")?.classList.remove("page-hidden"); renderOrganizationChart(); updateWeeklyTeamAdminUI(); requestAnimationFrame(() => window.orgFitViewR6B?.()); return true; }
+function openSettings() { if (!requireAuthenticatedApplication()) return false; hideAllPages(); document.getElementById("settingsPage").classList.remove("page-hidden"); renderAuditLogs(); if (typeof updateFirebaseDiagnosticsAccess === "function") updateFirebaseDiagnosticsAccess(); if (typeof renderWeeklyTeamSettings === "function") renderWeeklyTeamSettings(); return true; }
         
         function hideAllPages() { 
             ["dashboardPage", "weeklyPage", "monthlyPage", "siteVisitPage", "mandaysPage", "organizationPage", "settingsPage"].forEach(id => { 
@@ -11677,15 +11750,9 @@ function setActive(element) {
 }
 
         document.addEventListener("DOMContentLoaded", () => {
-            applyWeeklyTeamConfig(weeklyTeamConfig, { render: false });
-            populateDropdowns();
+            activateApplicationAuthLock();
             checkUserLogin();
             renderTodayDate();
-            
-            
-            renderMandaysPage();
-            populateProjectSitesDropdown();
-            openDashboard();
 
             const searchInput = document.getElementById("search");
             if (searchInput) searchInput.addEventListener("input", filterWeeklyTable);
@@ -13628,6 +13695,7 @@ function updateKpiTrend(
     }
 }
         function updateDashboardCards() {
+            if (!isApplicationAuthVerified()) return;
             const filterMonth = document.getElementById("dashboardMonthFilter")?.value || "ALL";
             const filterAuditor = document.getElementById("dashboardAuditorFilter")?.value || "ALL";
             let waho = 0, wfa = 0, site = 0, leave = 0, holiday = 0;
@@ -15327,6 +15395,7 @@ async function saveMandaysData(data, auditorName = selectedMandaysAuditor || cur
         }
 
         function renderMandaysPage() {
+            if (!isApplicationAuthVerified()) return;
             const userDisp = document.getElementById("mandaysUserDisplay");
             if (userDisp) userDisp.textContent = selectedMandaysAuditor || currentLoggedAuditor || "Not Selected";
 
@@ -16063,6 +16132,7 @@ Holiday: ${item.holiday.toFixed(1)}h
 }
 
         function renderMandaysChart(data) {
+    if (!isApplicationAuthVerified()) return;
     if (typeof window.Chart !== "function") {
         console.warn("Chart.js is unavailable; the mandays chart was skipped.");
         return;
@@ -17405,6 +17475,7 @@ let hangoutsMutationBusy = false;
     return config;
   };
   const make=(key,id,config)=>{
+    if(!isApplicationAuthVerified())return null;
     const canvas=document.getElementById(id);if(!canvas||typeof Chart!=='function')return null;
     if(document.getElementById('dashboardPage')?.classList.contains('page-hidden'))return charts[key]||null;
     config=harmonizeDashboardChartConfig(config||{});
@@ -18139,7 +18210,7 @@ let hangoutsMutationBusy = false;
     const upcomingEl=document.getElementById('mbKpi-upcoming'),completionEl=document.getElementById('mbKpi-completion');const schedules=filteredSchedules(),today=(typeof getIsoDate==='function'?getIsoDate(new Date()):new Date().toISOString().slice(0,10)),upcoming=schedules.filter(v=>v.status!=='Completed'&&v.status!=='Cancelled'&&String(v.date||'')>=today).length,completed=schedules.filter(v=>v.status==='Completed').length;if(upcomingEl)upcomingEl.textContent=upcoming;if(completionEl)completionEl.textContent=schedules.length?`${Math.round(completed/schedules.length*100)}%`:'0%';
   };
 
-  const refresh=()=>{if(typeof updateDashboardCards==='function'&&!document.getElementById('dashboardPage')?.classList.contains('page-hidden'))updateDashboardCards();};
+  const refresh=()=>{if(!isApplicationAuthVerified())return;if(typeof updateDashboardCards==='function'&&!document.getElementById('dashboardPage')?.classList.contains('page-hidden'))updateDashboardCards();};
   window.addEventListener('resize',()=>{clearTimeout(window.__refdashResizeTimer);window.__refdashResizeTimer=setTimeout(()=>Object.values(charts).forEach(c=>{try{c.resize()}catch(_){}}),90)},{passive:true});
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>setTimeout(refresh,0),{once:true});else setTimeout(refresh,0);
 })();
@@ -18296,6 +18367,7 @@ let hangoutsMutationBusy = false;
     }
 
     window.renderWorkingDayDistributionV37 = function(monthValue, selectedAuditor){
+        if (!isApplicationAuthVerified()) return false;
         const month = monthValue || document.getElementById("dashboardMonthFilter")?.value || "ALL";
         const auditor = selectedAuditor || document.getElementById("dashboardAuditorFilter")?.value || "ALL";
         const rows = buildRows(month,auditor);
@@ -18352,6 +18424,7 @@ let hangoutsMutationBusy = false;
     };
 
     const start = () => {
+        if (!isApplicationAuthVerified()) return;
         try {
             window.renderWorkingDayDistributionV37(
                 document.getElementById("dashboardMonthFilter")?.value || "ALL",
@@ -18464,6 +18537,7 @@ let hangoutsMutationBusy = false;
   };
 
   window.renderTeamActivityHeatmap=function renderTeamActivityHeatmap(){
+    if (!isApplicationAuthVerified()) return false;
     const grid=document.getElementById("teamActivityHeatmapGridV22");
     const monthLabel=document.getElementById("teamHeatmapMonthLabelV22");
     const mostActive=document.getElementById("teamHeatmapMostActiveV22");
@@ -18537,6 +18611,7 @@ let hangoutsMutationBusy = false;
   }
 
   function initTeamActivityHeatmapV22(){
+    if(!isApplicationAuthVerified()) return;
     if(window.__teamActivityHeatmapV22Initialized) return;
     window.__teamActivityHeatmapV22Initialized=true;
     ["dashboardMonthFilter","dashboardAuditorFilter"].forEach(id=>{
