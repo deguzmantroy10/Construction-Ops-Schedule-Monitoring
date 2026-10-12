@@ -9630,6 +9630,289 @@ body.auth-lock > #loginModal{display:flex!important;visibility:visible!important
   -webkit-text-fill-color:currentColor!important;
 }
 </style>
+<style id="h26r10-baseline-layout-fixes">
+/* H26-R10 baseline: presentation and account-security UI fixes; operational save flows retained. */
+body{font-size:15px;}
+#siteVisitPage .site-workspace-toolbar .site-month-label-v8,
+#siteVisitPage .site-workspace-toolbar .site-workspace-filter,
+#siteVisitPage .site-workspace-toolbar select,
+#siteVisitPage .site-workspace-toolbar input,
+#siteVisitPage .site-workspace-toolbar button{font-size:12px!important;line-height:1.35!important;min-height:38px;}
+#siteVisitPage .site-health-heading-v1 strong{font-size:14px!important;}
+#siteVisitPage .site-health-heading-v1 small{font-size:11px!important;line-height:1.45!important;}
+#siteVisitPage .site-health-metric-v1 span,#siteVisitPage .site-health-metric-v1 strong{font-size:11px!important;line-height:1.35!important;}
+#siteVisitPage .site-upcoming-title-v8{font-size:13px!important;line-height:1.4!important;overflow-wrap:anywhere;}
+#siteVisitPage .site-upcoming-meta-v8,#siteVisitPage .site-upcoming-auditor-v11,#siteVisitPage .site-upcoming-remarks-v11{font-size:11px!important;line-height:1.5!important;white-space:normal!important;overflow-wrap:anywhere;}
+#siteVisitPage .site-upcoming-badge-v8{height:auto!important;min-height:22px!important;max-width:none!important;padding:3px 8px!important;font-size:10px!important;line-height:1.25!important;white-space:normal!important;}
+#siteVisitPage .table-container>table:not(.calendar) thead th{font-size:11px!important;line-height:1.4!important;padding:12px 10px!important;white-space:normal!important;}
+#siteVisitPage .table-container>table:not(.calendar) tbody td{height:auto!important;min-height:56px;padding:12px 10px!important;font-size:12px!important;line-height:1.5!important;overflow-wrap:anywhere;}
+#siteVisitPage .table-container>table:not(.calendar) td:nth-child(4),#siteVisitPage .table-container>table:not(.calendar) td:nth-child(5),#siteVisitPage .table-container>table:not(.calendar) td:nth-child(8){white-space:normal!important;}
+#siteVisitPage form .form-group label{font-size:11px!important;line-height:1.4!important;}
+#siteVisitPage form input,#siteVisitPage form select{font-size:13px!important;min-height:42px;}
+#weeklyBlocksContainer th{font-size:10.5px!important;line-height:1.35!important;height:auto!important;min-height:50px;padding:12px 9px!important;white-space:normal!important;}
+#weeklyBlocksContainer td{height:auto!important;min-height:68px;padding:11px 9px!important;}
+#weeklyBlocksContainer select,#weeklyBlocksContainer input[type="text"]{font-size:12px!important;min-height:42px;line-height:1.35!important;}
+#weeklyBlocksContainer .weekly-auditor-name{font-size:12px!important;line-height:1.35!important;white-space:normal!important;overflow-wrap:anywhere;}
+#organizationPage .org-tree-v1{width:100%;display:flex;flex-direction:column;align-items:center;}
+#organizationPage .org-branch-grid-v1{justify-content:center!important;margin-left:auto!important;margin-right:auto!important;}
+.sidebar{z-index:9000!important;overflow:visible!important;}
+.sidebar-status-footer,.sidebar-online-wrap{position:relative!important;z-index:9100!important;overflow:visible!important;}
+.sidebar-online-wrap .online-users-panel,.online-users-panel.show{z-index:2147483647!important;isolation:isolate!important;pointer-events:auto!important;}
+#settingsPage .change-password-form-v1{display:grid;gap:14px;}
+#settingsPage .change-password-fields-v1{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;}
+#settingsPage .change-password-fields-v1 input{width:100%;min-width:0;height:42px;padding:0 12px;border:1px solid #c9d8ea;border-radius:9px;font-size:13px;color:#172033;background:#fff;}
+#settingsPage .change-password-fields-v1 label{font-size:10px!important;}
+.change-password-status-v1{align-self:center;color:#475569;font-size:12px;line-height:1.4;}
+.change-password-status-v1[data-state="success"]{color:#15803d;font-weight:700;}
+.change-password-status-v1[data-state="error"]{color:#b91c1c;font-weight:700;}
+.audit-detail-grid-h26r9 #auditDetailBeforeH26R9,.audit-detail-grid-h26r9 #auditDetailAfterH26R9,.audit-detail-context-h26r9 #auditDetailContextH26R9{font-size:12px!important;line-height:1.55!important;white-space:normal!important;overflow-wrap:anywhere;}
+.audit-diff-list-v1{display:grid;gap:8px;}
+.audit-diff-row-v1{display:grid;grid-template-columns:minmax(100px,.75fr) minmax(0,1.25fr);gap:10px;align-items:start;padding:8px 9px;border:1px solid #e2e8f0;border-radius:8px;background:#fff;}
+.audit-diff-label-v1{font-size:11px;font-weight:800;color:#475569;overflow-wrap:anywhere;}
+.audit-diff-value-v1{font-size:12px;line-height:1.45;color:#334155;overflow-wrap:anywhere;white-space:pre-wrap;}
+.audit-diff-value-v1.is-modified-before{background:#fff1f2;color:#9f1239;border:1px solid #fecdd3;border-radius:6px;padding:4px 6px;}
+.audit-diff-value-v1.is-modified-after{background:#ecfdf5;color:#166534;border:1px solid #bbf7d0;border-radius:6px;padding:4px 6px;font-weight:750;}
+.audit-diff-tag-v1{display:inline-block;margin-left:5px;padding:2px 5px;border-radius:5px;background:#d1fae5;color:#065f46;font-size:9px;font-weight:800;vertical-align:middle;}
+@media(max-width:900px){#settingsPage .change-password-fields-v1{grid-template-columns:1fr;}#siteVisitPage .site-v15-content-grid{min-width:0;}#siteVisitPage .site-upcoming-badges-v8{gap:5px;flex-wrap:wrap;}}
+</style>
+
+
+<style id="h26r13-layout-regression-fixes">
+/* Dashboard Upcoming Schedule: restore the original inherited scale; leave its design and spacing untouched. */
+#dashboardPage .schedule-reference-card-v25:not(.hangouts-reference-card-v25),
+#dashboardPage .schedule-reference-card-v25:not(.hangouts-reference-card-v25) #ms365UpcomingTimeline {
+  font-size: 14px !important;
+}
+/* Site & Meeting Schedule: compact, readable cards, badge ribbon, and pagination. */
+#siteVisitPage .site-v15-records-pane,
+#siteVisitPage .site-schedule-table-wrap,
+#siteVisitPage .site-upcoming-list-v8,
+#siteVisitPage .site-upcoming-copy-v8 { min-width: 0 !important; }
+#siteVisitPage .site-workspace-upcoming-head {
+  height: auto !important; min-height: 35px !important; padding: 7px 10px !important;
+  gap: 8px !important; flex-wrap: wrap !important; line-height: 1.3 !important;
+}
+#siteVisitPage .site-workspace-upcoming-head strong { font-size: 10px !important; line-height: 1.3 !important; }
+#siteVisitPage .site-workspace-upcoming-count { flex: 0 0 auto !important; font-size: 10px !important; min-width: 24px !important; min-height: 22px !important; height: auto !important; }
+#siteVisitPage .site-upcoming-card-v8 {
+  grid-template-columns: 30px 28px minmax(0, 1fr) 24px !important;
+  align-items: start !important; gap: 7px !important; min-height: 0 !important;
+  padding: 8px 9px !important; box-sizing: border-box !important; overflow: visible !important;
+}
+#siteVisitPage .site-date-tile-v8 { width: 30px !important; height: 38px !important; min-width: 30px !important; border-radius: 7px !important; }
+#siteVisitPage .site-date-tile-v8 span { font-size: 7px !important; line-height: 1.1 !important; }
+#siteVisitPage .site-date-tile-v8 strong { font-size: 12px !important; line-height: 1.1 !important; }
+#siteVisitPage .site-upcoming-avatar-v8 { width: 28px !important; height: 28px !important; min-width: 28px !important; }
+#siteVisitPage .site-upcoming-copy-v8 { display: flex !important; flex-direction: column !important; gap: 2px !important; overflow: visible !important; }
+#siteVisitPage .site-upcoming-title-v8 { font-size: 11px !important; line-height: 1.3 !important; white-space: normal !important; overflow: visible !important; overflow-wrap: anywhere !important; text-overflow: clip !important; }
+#siteVisitPage .site-upcoming-meta-v8,
+#siteVisitPage .site-upcoming-auditor-v11,
+#siteVisitPage .site-upcoming-remarks-v11 {
+  margin-top: 1px !important; font-size: 10px !important; line-height: 1.35 !important;
+  white-space: normal !important; overflow: visible !important; overflow-wrap: anywhere !important; text-overflow: clip !important;
+}
+#siteVisitPage .site-upcoming-meta-v8 { display: flex !important; align-items: flex-start !important; gap: 4px !important; }
+#siteVisitPage .site-upcoming-meta-v8 i { flex: 0 0 8px !important; width: 8px !important; font-size: 9px !important; margin-top: 2px !important; }
+#siteVisitPage .site-upcoming-badges-v8 {
+  display: flex !important; align-items: center !important; justify-content: flex-start !important;
+  flex-wrap: wrap !important; gap: 4px !important; margin-top: 4px !important;
+  min-width: 0 !important; overflow: visible !important;
+}
+#siteVisitPage .site-upcoming-badge-v8 {
+  display: inline-flex !important; align-items: center !important; justify-content: center !important;
+  flex: 0 1 auto !important; max-width: 100% !important; width: auto !important;
+  height: auto !important; min-height: 18px !important; padding: 2px 6px !important;
+  border-radius: 5px !important; font-size: 8.5px !important; line-height: 1.25 !important;
+  white-space: normal !important; overflow: visible !important; overflow-wrap: anywhere !important;
+}
+#siteVisitPage .site-upcoming-actions-v8 { width: 24px !important; min-width: 24px !important; gap: 4px !important; align-self: start !important; }
+#siteVisitPage .site-upcoming-actions-v8 .site-delete-btn { width: 24px !important; height: 24px !important; min-height: 24px !important; font-size: 10px !important; }
+#siteVisitPage .site-pagination {
+  display: flex !important; align-items: center !important; justify-content: space-between !important;
+  flex-wrap: wrap !important; gap: 8px !important; padding: 8px 10px !important;
+  font-size: 10px !important; line-height: 1.35 !important; box-sizing: border-box !important;
+}
+#siteVisitPage .site-pagination-info { flex: 1 1 150px !important; min-width: 0 !important; font-size: 10px !important; line-height: 1.35 !important; white-space: normal !important; }
+#siteVisitPage .site-pagination-info strong { font-size: inherit !important; }
+#siteVisitPage .site-pagination-controls,
+#siteVisitPage .site-page-numbers { display: flex !important; align-items: center !important; flex-wrap: wrap !important; gap: 4px !important; min-width: 0 !important; }
+#siteVisitPage .site-page-nav,
+#siteVisitPage .site-page-number {
+  height: auto !important; min-height: 28px !important; min-width: 28px !important;
+  padding: 4px 8px !important; font-size: 10px !important; line-height: 1.2 !important;
+  white-space: nowrap !important; box-sizing: border-box !important;
+}
+@media (max-width: 560px) {
+  #siteVisitPage .site-upcoming-card-v8 { grid-template-columns: 27px 23px minmax(0,1fr) 22px !important; gap: 4px !important; padding: 7px 5px !important; }
+  #siteVisitPage .site-date-tile-v8 { width: 27px !important; min-width: 27px !important; height: 35px !important; }
+  #siteVisitPage .site-upcoming-avatar-v8 { width: 23px !important; min-width: 23px !important; height: 23px !important; }
+  #siteVisitPage .site-upcoming-title-v8 { font-size: 10.5px !important; }
+  #siteVisitPage .site-upcoming-meta-v8,
+  #siteVisitPage .site-upcoming-auditor-v11,
+  #siteVisitPage .site-upcoming-remarks-v11 { font-size: 9.5px !important; }
+  #siteVisitPage .site-upcoming-actions-v8 { width: 22px !important; min-width: 22px !important; }
+  #siteVisitPage .site-pagination { justify-content: center !important; }
+  #siteVisitPage .site-pagination-info { flex: 1 1 100% !important; text-align: center !important; }
+  #siteVisitPage .site-pagination-controls { justify-content: center !important; }
+  #siteVisitPage .site-page-nav,
+  #siteVisitPage .site-page-number { font-size: 9px !important; min-height: 27px !important; min-width: 27px !important; padding: 4px 6px !important; }
+}
+</style>
+
+
+<style id="h26r14-targeted-layout-fixes">
+/* Dashboard Upcoming Schedule: original computed typography only; no card geometry changes. */
+/* The R13-only font enlargement rules were removed so the original dashboard rules apply. */
+
+/* Organization chart: hide the READ ONLY badge only; keep all chart controls/functions intact. */
+#organizationPage #orgReadOnlyBadgeV1 { display: none !important; }
+
+/* Site & Meeting Schedule: keep type/status/conflict badges in one readable row.
+   If the row is wider than its card, scroll only this badge strip instead of wrapping/overlapping. */
+#siteVisitPage .site-upcoming-badges-v8 {
+  display: flex !important; align-items: center !important; justify-content: flex-start !important;
+  flex-wrap: nowrap !important; gap: 3px !important; min-width: 0 !important; max-width: 100% !important;
+  overflow-x: auto !important; overflow-y: hidden !important; white-space: nowrap !important;
+  scrollbar-width: thin !important; overscroll-behavior-x: contain;
+}
+#siteVisitPage .site-upcoming-badge-v8 {
+  flex: 0 0 auto !important; width: auto !important; max-width: none !important;
+  min-height: 18px !important; height: auto !important; padding: 2px 3px !important;
+  font-size: 8.5px !important; line-height: 1.2 !important; white-space: nowrap !important;
+  overflow: visible !important; overflow-wrap: normal !important; text-overflow: clip !important;
+}
+
+/* Keep Showing X to Y and every pagination control consistently readable and inside padding. */
+#siteVisitPage .site-pagination {
+  box-sizing: border-box !important; max-width: 100% !important; gap: 8px !important;
+  padding: 8px 10px !important; align-items: center !important; flex-wrap: wrap !important;
+}
+#siteVisitPage .site-pagination-info,
+#siteVisitPage .site-pagination-info strong,
+#siteVisitPage .site-page-nav,
+#siteVisitPage .site-page-number {
+  font-size: 10px !important; line-height: 1.25 !important; box-sizing: border-box !important;
+}
+#siteVisitPage .site-pagination-info {
+  flex: 1 1 150px !important; min-width: 0 !important; max-width: 100% !important;
+  white-space: normal !important; overflow-wrap: anywhere !important;
+}
+#siteVisitPage .site-pagination-controls,
+#siteVisitPage .site-page-numbers {
+  min-width: 0 !important; max-width: 100% !important; display: flex !important;
+  align-items: center !important; flex-wrap: wrap !important; gap: 4px !important;
+}
+#siteVisitPage .site-page-nav,
+#siteVisitPage .site-page-number {
+  min-height: 28px !important; min-width: 28px !important; height: auto !important;
+  padding: 4px 7px !important; white-space: nowrap !important;
+}
+@media (max-width: 560px) {
+  #siteVisitPage .site-pagination-info { flex-basis: 100% !important; text-align: center !important; }
+  #siteVisitPage .site-pagination-controls { justify-content: center !important; }
+  #siteVisitPage .site-page-nav,
+  #siteVisitPage .site-page-number { font-size: 10px !important; min-height: 28px !important; min-width: 28px !important; padding: 4px 6px !important; }
+}
+</style>
+
+
+<style id="h26r15-site-badge-row-space-fix">
+/* H26-R15: use the otherwise-empty area below the avatar for the schedule badge ribbon.
+   The row starts beneath the avatar and spans its column plus the existing copy column.
+   Labels stay complete in one row; no horizontal scrollbar is introduced. */
+#siteVisitPage .site-upcoming-badges-v8 {
+  box-sizing: border-box !important;
+  margin-left: -35px !important;
+  width: calc(100% + 35px) !important;
+  max-width: none !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  flex-wrap: nowrap !important;
+  gap: 4px !important;
+  min-width: 0 !important;
+  overflow: visible !important;
+  overflow-x: visible !important;
+  overflow-y: visible !important;
+  white-space: nowrap !important;
+  scrollbar-width: none !important;
+}
+#siteVisitPage .site-upcoming-badges-v8::-webkit-scrollbar { display: none !important; }
+#siteVisitPage .site-upcoming-badge-v8 {
+  box-sizing: border-box !important;
+  flex: 0 0 auto !important;
+  width: auto !important;
+  max-width: none !important;
+  min-width: max-content !important;
+  min-height: 18px !important;
+  height: auto !important;
+  padding: 2px 5px !important;
+  font-size: 8.5px !important;
+  line-height: 1.2 !important;
+  white-space: nowrap !important;
+  overflow: visible !important;
+  overflow-wrap: normal !important;
+  text-overflow: clip !important;
+}
+@media (max-width: 560px) {
+  #siteVisitPage .site-upcoming-badges-v8 {
+    margin-left: -27px !important;
+    width: calc(100% + 27px) !important;
+    gap: 3px !important;
+  }
+  #siteVisitPage .site-upcoming-badge-v8 { padding-left: 4px !important; padding-right: 4px !important; }
+}
+</style>
+
+
+<style id="h26r16-site-badge-space-tune">
+/* H26-R16: use a little more of the blank area to the left of the status ribbon.
+   CSS only; keep all labels visible in one row without horizontal scrolling. */
+#siteVisitPage .site-upcoming-badges-v8 {
+  margin-left: -45px !important;
+  width: calc(100% + 45px) !important;
+  max-width: none !important;
+  box-sizing: border-box !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  flex-wrap: nowrap !important;
+  gap: 2px !important;
+  min-width: 0 !important;
+  overflow: visible !important;
+  overflow-x: visible !important;
+  overflow-y: visible !important;
+  white-space: nowrap !important;
+}
+#siteVisitPage .site-upcoming-badge-v8 {
+  box-sizing: border-box !important;
+  flex: 0 0 auto !important;
+  width: auto !important;
+  max-width: none !important;
+  min-width: max-content !important;
+  min-height: 18px !important;
+  height: auto !important;
+  padding: 2px 3px !important;
+  font-size: 8.2px !important;
+  line-height: 1.15 !important;
+  white-space: nowrap !important;
+  overflow: visible !important;
+  overflow-wrap: normal !important;
+  text-overflow: clip !important;
+}
+@media (max-width: 560px) {
+  #siteVisitPage .site-upcoming-badges-v8 {
+    margin-left: -35px !important;
+    width: calc(100% + 35px) !important;
+    gap: 2px !important;
+  }
+  #siteVisitPage .site-upcoming-badge-v8 {
+    font-size: 7.7px !important;
+    padding: 2px 2px !important;
+  }
+}
+</style>
+
 </head>
 <body class="auth-lock">
 
@@ -10533,15 +10816,7 @@ body.auth-lock > #loginModal{display:flex!important;visibility:visible!important
 </div>
 </div>
 </div>
-<section aria-label="Mandays activity allocation" class="mandays-activity-panel-v22">
-<div class="mandays-activity-head-v22">
-<div>
-<span class="mandays-activity-icon-v22"><i class="fa-solid fa-chart-column"></i></span>
-<div><small>Activity Allocation</small><strong>Mandays Hours Breakdown</strong></div>
-</div>
-<span class="mandays-activity-note-v22">Selected auditor · current month</span>
-</div>
-<div class="mandays-activity-canvas-v22"><canvas aria-label="Mandays activity allocation chart" id="mandaysActivityChart"></canvas></div>
+<!-- H26-R13: chart panel removed; controls and data table retained. -->
 <div class="page-toolbar mandays-toolbar">
 <div class="page-toolbar-left">
 <div class="page-toolbar-icon">
@@ -10568,7 +10843,7 @@ body.auth-lock > #loginModal{display:flex!important;visibility:visible!important
                 </button>
 </div>
 </div>
-</section>
+
 <div class="table-container">
 <table>
 <thead>
@@ -10626,6 +10901,21 @@ body.auth-lock > #loginModal{display:flex!important;visibility:visible!important
 <!-- SETTINGS PAGE -->
 <div class="page-hidden" id="settingsPage">
 <div class="settings-container settings-executive">
+<div class="settings-panel account-security-panel-v1" id="accountSecurityPanelV1">
+<div class="settings-panel-header">
+<div class="settings-panel-icon"><i class="fa-solid fa-key"></i></div>
+<div><div class="settings-panel-eyebrow">Account Security</div><h2>Change Password</h2><p>Update your signed-in Firebase account password. Your current password is required to confirm the change.</p></div>
+</div>
+<form class="change-password-form-v1" id="changePasswordFormV1" onsubmit="return changeCurrentUserPasswordV1(event)">
+<div class="change-password-fields-v1">
+<div class="settings-field"><label for="currentPasswordV1">Current Password</label><input id="currentPasswordV1" name="currentPassword" type="password" autocomplete="current-password" minlength="1" required placeholder="Enter current password"></div>
+<div class="settings-field"><label for="newPasswordV1">New Password</label><input id="newPasswordV1" name="newPassword" type="password" autocomplete="new-password" minlength="6" required placeholder="At least 6 characters"></div>
+<div class="settings-field"><label for="confirmNewPasswordV1">Confirm New Password</label><input id="confirmNewPasswordV1" name="confirmNewPassword" type="password" autocomplete="new-password" minlength="6" required placeholder="Re-enter new password"></div>
+</div>
+<div class="settings-action-row"><button class="settings-primary-btn" id="changePasswordSubmitV1" type="submit"><i class="fa-solid fa-shield-halved"></i><span>Update Password</span></button><span aria-live="polite" class="change-password-status-v1" id="changePasswordStatusV1"></span></div>
+</form>
+</div>
+
 <!-- =====================================================
              RESTRICTED SYSTEM CONTROL
         ====================================================== -->
@@ -10667,7 +10957,7 @@ body.auth-lock > #loginModal{display:flex!important;visibility:visible!important
 <!-- =====================================================
              CLOUD & BACKUP
         ====================================================== -->
-<div class="settings-panel">
+<div class="settings-panel" id="dataProtectionCardV1" data-sensitive-system-tools="true">
 <div class="settings-panel-header">
 <div class="settings-panel-icon cloud">
 <i class="fa-solid fa-cloud-arrow-up"></i>
@@ -10899,7 +11189,7 @@ body.auth-lock > #loginModal{display:flex!important;visibility:visible!important
                 For questions, recommendations and system concerns,
                 coordinate with the designated Dianne Armas and Troy De Guzman.
             </p>
-<div class="settings-release-meta-v11" aria-label="Dashboard release information"><strong>Dashboard v1.1 FINAL</strong><span>Production</span><code>SHA-256: b662d28d1c2b1a866d1746ae336224c5b584b2b5f5d0017f217dc4efcc034274</code></div>
+<div class="settings-release-meta-v11" aria-label="Dashboard release information"><strong>Dashboard v1.1 · H26-R10 BASELINE</strong><span>Production</span><code>SHA-256: See companion .sha256 file</code></div>
 </div>
 </div>
 </div>
@@ -11153,6 +11443,9 @@ const authorizedUsers = {
      "bcpanol@dmcihomes.com": "Bryan Panol",
      "ddarmas@dmcihomes.com": "Dianne Armas" ,
 "ccdelapena@dmcihomes.com" : "Catherine Rosales",
+"desoledad@dmcihomes.com" : "Dean Mark Soledad",
+"cmcastro@dmcihomes.com" : "Cijay Castro",
+"ejbaria@dmcihomes.com" : "Elmar Baria",
      
 };
 const WEEKLY_TEAM_ADMINS = new Set(["Catherine Rosales", "Joemel Perez", "Dianne Armas", "Troy De Guzman"]);
@@ -13235,22 +13528,26 @@ function isFirebaseDiagnosticsAdmin() {
         ? String(authorizedUsers[email] || '').trim().toLowerCase()
         : '';
     const loggedAuditor = String(currentLoggedAuditor || '').trim().toLowerCase();
-    return mappedAuditor === 'troy de guzman' && loggedAuditor === 'troy de guzman';
+    const allowedNames = new Set(['troy de guzman', 'dianne armas']);
+    return Boolean(mappedAuditor && loggedAuditor && mappedAuditor === loggedAuditor && allowedNames.has(mappedAuditor));
 }
 
 function updateFirebaseDiagnosticsAccess() {
-    const panel = document.getElementById('firebaseDiagnosticsPanel');
     const allowed = isFirebaseDiagnosticsAdmin();
-    if (panel) {
+    const panels = document.querySelectorAll('#settingsPage .settings-panel');
+    panels.forEach(panel => {
+        const eyebrow = String(panel.querySelector('.settings-panel-eyebrow')?.textContent || '').trim().toLowerCase();
+        const restricted = panel.id === 'firebaseDiagnosticsPanel' || panel.id === 'dataProtectionCardV1' || /diagnostic|firebase|data protection/.test(eyebrow);
+        if (!restricted) return;
         panel.hidden = !allowed;
         panel.style.display = allowed ? '' : 'none';
         panel.setAttribute('aria-hidden', allowed ? 'false' : 'true');
-    }
+    });
     return allowed;
 }
 
 function denyFirebaseDiagnosticsAccess() {
-    console.warn('Firebase Diagnostics is restricted to the Troy De Guzman administrator account.');
+    console.warn('Firebase Diagnostics and Data Protection tools are restricted to Troy De Guzman and Dianne Armas.');
     return false;
 }
 
@@ -23696,7 +23993,10 @@ window.openOrgBranchModalV1=function(mode='live'){
         setPersistence,
         browserLocalPersistence,
         browserSessionPersistence,
-        sendPasswordResetEmail
+        sendPasswordResetEmail,
+        EmailAuthProvider,
+        reauthenticateWithCredential,
+        updatePassword
     } = authModule;
 
     const firebaseConfig = {
@@ -23731,7 +24031,10 @@ window.openOrgBranchModalV1=function(mode='live'){
         setPersistence,
         browserLocalPersistence,
         browserSessionPersistence,
-        sendPasswordResetEmail
+        sendPasswordResetEmail,
+        EmailAuthProvider,
+        reauthenticateWithCredential,
+        updatePassword
     };
 })().catch(function(error){
     console.error("Firebase initialization failed:", error);
@@ -24154,5 +24457,153 @@ window.openOrgBranchModalV1=function(mode='live'){
   document.addEventListener("keydown",e=>{if(e.key==="Escape"&&$("exportCenterModalV1")?.classList.contains("show"))window.closeExportCenterModalV1();});
 })();
 </script>
+<script id="h26r10-baseline-behavior-fixes">
+(function(){
+  'use strict';
+
+  // Change Password uses Firebase Auth reauthentication. Passwords are never logged or persisted locally.
+  window.changeCurrentUserPasswordV1 = async function(event){
+    if(event && typeof event.preventDefault==='function') event.preventDefault();
+    const form=document.getElementById('changePasswordFormV1');
+    const status=document.getElementById('changePasswordStatusV1');
+    const submit=document.getElementById('changePasswordSubmitV1');
+    const say=(message,state)=>{if(status){status.textContent=message;status.dataset.state=state||'';}};
+    const current=document.getElementById('currentPasswordV1')?.value||'';
+    const next=document.getElementById('newPasswordV1')?.value||'';
+    const confirmNext=document.getElementById('confirmNewPasswordV1')?.value||'';
+    const user=window.auth?.currentUser;
+    const api=window.firebaseModules;
+    if(!user||!user.email){say('Please sign in again before changing your password.','error');return false;}
+    if(next.length<6){say('Use at least 6 characters for the new password.','error');return false;}
+    if(next!==confirmNext){say('The new password and confirmation do not match.','error');return false;}
+    if(next===current){say('The new password must be different from the current password.','error');return false;}
+    if(!api?.EmailAuthProvider?.credential||!api?.reauthenticateWithCredential||!api?.updatePassword){say('Password update is unavailable until Firebase Authentication finishes loading.','error');return false;}
+    if(submit)submit.disabled=true;
+    say('Verifying current password…','');
+    try{
+      const credential=api.EmailAuthProvider.credential(user.email,current);
+      await api.reauthenticateWithCredential(user,credential);
+      await api.updatePassword(user,next);
+      if(form)form.reset();
+      say('Password updated successfully.','success');
+      if(typeof window.addAuditLog==='function'){
+        try{await window.addAuditLog('Changed account password',{module:'Account Security',operation:'UPDATE',recordId:'Firebase Authentication'});}catch(logError){console.warn('Password change audit entry could not be recorded:',logError);}
+      }
+      return true;
+    }catch(error){
+      const code=String(error?.code||'');
+      if(code==='auth/wrong-password'||code==='auth/invalid-credential') say('Current password is incorrect. Please try again.','error');
+      else if(code==='auth/weak-password') say('Firebase rejected the new password as too weak. Use a stronger password.','error');
+      else if(code==='auth/requires-recent-login') say('Please sign out and sign in again, then retry the password change.','error');
+      else say('Password update failed. Check your connection and try again.','error');
+      console.error('Account password update failed:',code||error);
+      return false;
+    }finally{if(submit)submit.disabled=false;}
+  };
+
+  // Retain the user's vertical and horizontal position through Weekly Log save-triggered renders.
+  function isWeeklyVisible(){const page=document.getElementById('weeklyPage');return !!page&&!page.classList.contains('page-hidden');}
+  function captureWeeklyPosition(){
+    const scrolling=document.scrollingElement;
+    return {x:window.scrollX||0,y:window.scrollY||scrolling?.scrollTop||0,main:document.querySelector('.main')?.scrollTop||0,blocks:[...document.querySelectorAll('#weeklyBlocksContainer .table-container')].map(el=>({top:el.scrollTop,left:el.scrollLeft}))};
+  }
+  function restoreWeeklyPosition(pos){
+    if(!pos||!isWeeklyVisible())return;
+    const scrolling=document.scrollingElement;
+    if(scrolling)scrolling.scrollTop=pos.y;
+    try{window.scrollTo(pos.x,pos.y);}catch(_){ }
+    const main=document.querySelector('.main');if(main)main.scrollTop=pos.main;
+    document.querySelectorAll('#weeklyBlocksContainer .table-container').forEach((el,index)=>{const saved=pos.blocks[index];if(saved){el.scrollTop=saved.top;el.scrollLeft=saved.left;}});
+  }
+  function scheduleWeeklyRestore(pos){
+    if(!pos)return;
+    requestAnimationFrame(()=>{restoreWeeklyPosition(pos);requestAnimationFrame(()=>restoreWeeklyPosition(pos));});
+  }
+  const originalRender=window.renderWeeklyBlocks;
+  if(typeof originalRender==='function')window.renderWeeklyBlocks=function(){
+    const preserve=isWeeklyVisible()&&Date.now()<(window.__weeklyScrollPreserveUntilH26R10||0);
+    const pos=preserve?captureWeeklyPosition():null;
+    const result=originalRender.apply(this,arguments);
+    if(pos)scheduleWeeklyRestore(pos);
+    return result;
+  };
+  const originalSave=window.saveAttendanceData;
+  if(typeof originalSave==='function')window.saveAttendanceData=async function(options){
+    const preserve=isWeeklyVisible();
+    const pos=preserve?captureWeeklyPosition():null;
+    if(preserve)window.__weeklyScrollPreserveUntilH26R10=Date.now()+1800;
+    try{return await originalSave.apply(this,arguments);}
+    finally{if(pos){scheduleWeeklyRestore(pos);setTimeout(()=>scheduleWeeklyRestore(pos),120);setTimeout(()=>{if(Date.now()>=window.__weeklyScrollPreserveUntilH26R10)window.__weeklyScrollPreserveUntilH26R10=0;},1900);}}
+  };
+
+  // Human-readable before/after diff renderer for audit details.
+  function safeText(value){return String(value??'—').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));}
+  function stableValue(value){try{return JSON.stringify(value===undefined?null:value);}catch(_){return String(value);}}
+  function friendlyAuditLabel(path){
+    const attendance=String(path).match(/^(\d{4}-\d{2}-\d{2})_(.+)_day([1-5])$/);
+    if(attendance)return `Attendance Status · ${attendance[2]} · Day ${attendance[3]} (week of ${attendance[1]})`;
+    const remark=String(path).match(/^(\d{4}-\d{2}-\d{2})_(.+)_remark$/);
+    if(remark)return `Remarks · ${remark[2]} (week of ${remark[1]})`;
+    return String(path).replace(/\[(\d+)\]/g,' #$1').replace(/[._-]+/g,' ').replace(/([a-z])([A-Z])/g,'$1 $2').replace(/\s+/g,' ').trim().replace(/^./,c=>c.toUpperCase());
+  }
+  function flattenAudit(value,prefix,out){
+    if(value&&typeof value==='object'&&!Array.isArray(value)){
+      const keys=Object.keys(value);
+      if(!keys.length)out[prefix||'Value']='(empty)';
+      else keys.forEach(key=>flattenAudit(value[key],prefix?`${prefix}.${key}`:key,out));
+    }else if(Array.isArray(value)){
+      if(!value.length)out[prefix||'Value']='(empty list)';
+      else value.forEach((item,index)=>flattenAudit(item,`${prefix||'Value'}[${index+1}]`,out));
+    }else out[prefix||'Value']=value==null?'Not set':(typeof value==='string'?value:typeof value==='number'||typeof value==='boolean'?String(value):stableValue(value));
+    return out;
+  }
+  function auditDiffHtml(value,other,side){
+    if(value==null)value={};
+    if(typeof value!=='object')value={Value:value};
+    if(other==null)other={};
+    if(typeof other!=='object')other={Value:other};
+    const current=flattenAudit(value,'',{}), comparison=flattenAudit(other,'',{});
+    const keys=[...new Set([...Object.keys(current),...Object.keys(comparison)])];
+    if(!keys.length)return '<div class="audit-diff-row-v1"><span class="audit-diff-label-v1">Value</span><span class="audit-diff-value-v1">No details recorded</span></div>';
+    return `<div class="audit-diff-list-v1">${keys.map(key=>{
+      const hasCurrent=Object.prototype.hasOwnProperty.call(current,key), hasOther=Object.prototype.hasOwnProperty.call(comparison,key);
+      const changed=!hasCurrent||!hasOther||stableValue(current[key])!==stableValue(comparison[key]);
+      const text=hasCurrent?current[key]:'Not set';
+      const cl=changed?` is-modified-${side}`:'';
+      const tag=changed&&side==='after'?'<span class="audit-diff-tag-v1">Changed</span>':'';
+      return `<div class="audit-diff-row-v1"><span class="audit-diff-label-v1">${safeText(friendlyAuditLabel(key))}</span><span class="audit-diff-value-v1${cl}">${safeText(text)}${tag}</span></div>`;
+    }).join('')}</div>`;
+  }
+  function contextAuditHtml(value){
+    if(value==null)return '—';
+    if(typeof value!=='object')return safeText(value);
+    const fields=flattenAudit(value,'',{});
+    return `<div class="audit-diff-list-v1">${Object.entries(fields).map(([key,val])=>`<div class="audit-diff-row-v1"><span class="audit-diff-label-v1">${safeText(friendlyAuditLabel(key))}</span><span class="audit-diff-value-v1">${safeText(val)}</span></div>`).join('')}</div>`;
+  }
+  window.openAuditLogDetailH26R9=async function(detailDocId){
+    const modal=document.getElementById('auditDetailModalH26R9'),title=document.getElementById('auditDetailTitleH26R9'),meta=document.getElementById('auditDetailMetaH26R9'),before=document.getElementById('auditDetailBeforeH26R9'),after=document.getElementById('auditDetailAfterH26R9'),context=document.getElementById('auditDetailContextH26R9');
+    if(!modal||!meta||!before||!after||!context)return false;
+    modal.style.display='flex';if(title)title.textContent='Loading Change Details…';meta.textContent='Loading detailed audit record…';before.textContent=after.textContent=context.textContent='—';
+    try{
+      if(!window.db||!window.firebaseModules?.getDoc||!window.firebaseModules?.doc)throw new Error('Firebase is not ready.');
+      const snap=await window.firebaseModules.getDoc(window.firebaseModules.doc(window.db,'appData',String(detailDocId||'')));
+      if(!snap.exists())throw new Error('Detailed audit record has expired or was pruned by retention.');
+      const data=snap.data()||{};
+      if(title)title.textContent=data.action||'Change Details';
+      meta.innerHTML=[['Date & Time',data.timestamp||'—'],['User',data.user||'—'],['Module',data.module||'System'],['Operation',data.operation||'ACTIVITY'],['Record ID',data.recordId||'—'],['Retention',`Latest ${window.AUDIT_LOG_MAX_ITEMS||250} / ${window.AUDIT_LOG_RETENTION_DAYS||180} days`]].map(([label,value])=>`<span>${safeText(label)}<b>${safeText(value)}</b></span>`).join('');
+      before.innerHTML=auditDiffHtml(data.before,data.after,'before');
+      after.innerHTML=auditDiffHtml(data.after,data.before,'after');
+      context.innerHTML=contextAuditHtml(data.context);
+      return true;
+    }catch(error){if(title)title.textContent='Change Details Unavailable';meta.innerHTML=`<span>${safeText(error?.message||error)}</span>`;return false;}
+  };
+
+  // Ensure the visibility gate runs whenever Settings is entered and after auth state settles.
+  const originalOpenSettings=window.openSettings;
+  if(typeof originalOpenSettings==='function')window.openSettings=function(){const result=originalOpenSettings.apply(this,arguments);if(typeof window.updateFirebaseDiagnosticsAccess==='function')window.updateFirebaseDiagnosticsAccess();return result;};
+  document.addEventListener('DOMContentLoaded',()=>{if(typeof window.updateFirebaseDiagnosticsAccess==='function')window.updateFirebaseDiagnosticsAccess();});
+})();
+</script>
+
 </body>
 </html>
