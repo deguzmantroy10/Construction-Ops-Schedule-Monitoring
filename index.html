@@ -24647,5 +24647,1138 @@ window.openOrgBranchModalV1=function(mode='live'){
 })();
 </script>
 
+
+<style id="h26-r19-dashboard-density">
+/* H26-R19 — 100% Windows scaling / 100% browser zoom dashboard density pass.
+   Scoped to the dashboard; presentation-only. No save, data, graph, or rendering logic changes. */
+#dashboardPage.constructa-dashboard {
+  --h26-type-page-title: clamp(18px, 1.05vw, 22px);
+  --h26-type-section-title: clamp(15px, .84vw, 17px);
+  --h26-type-card-title: clamp(12px, .68vw, 14px);
+  --h26-type-kpi-value: clamp(20px, 1.12vw, 24px);
+  --h26-type-subtitle: clamp(10px, .56vw, 12px);
+  --h26-type-label: clamp(10px, .56vw, 12px);
+  --h26-type-table-head: clamp(10px, .56vw, 12px);
+  --h26-type-button: clamp(10px, .56vw, 12px);
+  --h26-type-empty: 11px;
+  --h26-type-empty-helper: 10px;
+  --h26-ds-control-h: 40px;
+  --h26-ds-control-compact: 36px;
+  --h26-ds-pill-h: 24px;
+  --h26-ds-font-control: 11px;
+  --h26-ds-font-input: 11px;
+  --h26-ds-icon: 12px;
+  --h26-ds-gap: 10px;
+  --h26-ds-section-gap: 12px;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  box-sizing: border-box !important;
+}
+
+/* Use the whole desktop canvas rather than leaving a gutter after the sidebar. */
+.main:has(#dashboardPage:not(.page-hidden)) {
+  min-height: 100vh !important;
+  height: auto !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+}
+@media (min-width: 1201px) {
+  .main:has(#dashboardPage:not(.page-hidden)) {
+    margin-left: 190px !important;
+    width: calc(100% - 190px) !important;
+    max-width: none !important;
+    padding: 12px 18px 20px 14px !important;
+  }
+  .main:has(#dashboardPage:not(.page-hidden)) .topbar {
+    padding: 14px 20px !important;
+    margin-bottom: 14px !important;
+    gap: 12px !important;
+  }
+}
+.main:has(#dashboardPage:not(.page-hidden)) #pageTitle {
+  font-size: clamp(18px, 1.05vw, 22px) !important;
+  line-height: 1.12 !important;
+}
+.main:has(#dashboardPage:not(.page-hidden)) #pageSubtitle {
+  font-size: clamp(10px, .62vw, 12px) !important;
+  line-height: 1.35 !important;
+}
+.main:has(#dashboardPage:not(.page-hidden)) .topbar-eyebrow {
+  font-size: 10px !important;
+  line-height: 1.2 !important;
+}
+
+/* KPI strip: larger labels and values while retaining its existing seven-column grid. */
+#dashboardPage .executive-kpi-grid-v25 {
+  gap: 10px !important;
+  margin: 0 0 10px !important;
+  align-items: stretch !important;
+}
+#dashboardPage .executive-kpi-grid-v25 > .executive-kpi-v25 {
+  height: 80px !important;
+  min-height: 80px !important;
+  max-height: 80px !important;
+  padding: 8px 10px !important;
+  gap: 9px !important;
+  border-radius: 12px !important;
+}
+#dashboardPage .executive-kpi-grid-v25 .executive-kpi-icon-v25 {
+  width: 32px !important;
+  height: 32px !important;
+  min-width: 32px !important;
+  flex-basis: 32px !important;
+  font-size: 13px !important;
+}
+#dashboardPage .executive-kpi-grid-v25 .executive-kpi-copy-v25 {
+  height: 64px !important;
+  min-height: 64px !important;
+  grid-template-rows: 25px 23px 15px !important;
+  row-gap: 1px !important;
+}
+#dashboardPage .executive-kpi-grid-v25 .executive-kpi-copy-v25 > small {
+  min-height: 24px !important;
+  max-height: 24px !important;
+  font-size: clamp(10px, .58vw, 11px) !important;
+  line-height: 1.12 !important;
+  letter-spacing: 0 !important;
+}
+#dashboardPage .executive-kpi-grid-v25 .executive-kpi-copy-v25 > strong {
+  height: 23px !important;
+  font-size: clamp(20px, 1.12vw, 24px) !important;
+  line-height: 1 !important;
+  letter-spacing: -.3px !important;
+}
+#dashboardPage .executive-kpi-grid-v25 .executive-kpi-trend-v25,
+#dashboardPage .executive-kpi-grid-v25 .executive-kpi-sub-v25 {
+  min-height: 15px !important;
+  height: 15px !important;
+  font-size: 8.5px !important;
+  line-height: 1.1 !important;
+  gap: 3px !important;
+}
+#dashboardPage .executive-kpi-grid-v25 .executive-kpi-trend-v25 span,
+#dashboardPage .executive-kpi-grid-v25 .executive-kpi-trend-v25 small {
+  font-size: 8.5px !important;
+  line-height: 1.1 !important;
+}
+#dashboardPage .executive-kpi-grid-v25 .executive-kpi-trend-v25 i {
+  font-size: 8px !important;
+}
+#dashboardPage .executive-kpi-grid-v25 .enterprise-kpi-target-v7 {
+  font-size: 7.5px !important;
+  min-height: 16px !important;
+  height: 16px !important;
+}
+
+/* Toolbar, filters and page controls: larger hit areas and legible text. */
+#dashboardPage .dashboard-command-panel-v47 {
+  min-height: 76px !important;
+  height: auto !important;
+  padding: 8px 12px !important;
+  margin: 0 0 9px !important;
+  overflow: visible !important;
+  border-radius: 14px !important;
+}
+#dashboardPage .dashboard-command-panel-v47 .dashboard-manpower-filters-v43 {
+  gap: 8px !important;
+  flex-wrap: wrap !important;
+  min-width: 0 !important;
+}
+#dashboardPage .dashboard-command-panel-v47 .dashboard-manpower-filters-v43 select {
+  height: 36px !important;
+  min-height: 36px !important;
+  max-height: 36px !important;
+  padding: 0 30px 0 30px !important;
+  font-size: 10.5px !important;
+  line-height: 1.2 !important;
+}
+#dashboardPage .dashboard-command-panel-v47 .dashboard-topbar-month select {
+  width: 190px !important;
+  max-width: 190px !important;
+}
+#dashboardPage .dashboard-command-panel-v47 .dashboard-topbar-auditor select {
+  width: 180px !important;
+  max-width: 180px !important;
+}
+#dashboardPage .dashboard-command-panel-v47 .dashboard-analytics-pager-controls-v40 {
+  min-height: 34px !important;
+  height: 34px !important;
+  gap: 6px !important;
+}
+#dashboardPage .dashboard-command-panel-v47 .dashboard-analytics-pager-btn-v40,
+#dashboardPage .dashboard-command-panel-v47 .dashboard-analytics-page-indicator-v40 {
+  min-height: 32px !important;
+  height: 32px !important;
+  max-height: 32px !important;
+  padding: 0 11px !important;
+  font-size: 10px !important;
+  line-height: 1 !important;
+  border-radius: 8px !important;
+}
+#dashboardPage .dashboard-command-panel-v47 .dashboard-analytics-page-indicator-v40 b {
+  font-size: 10px !important;
+}
+
+/* Existing dashboard grid remains intact; give cards and their charts more usable height. */
+#dashboardPage .dashboard-analytics-page-v40.is-active {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  box-sizing: border-box !important;
+}
+#dashboardPage .refdash-hero-grid {
+  width: 100% !important;
+  min-width: 0 !important;
+  gap: 14px !important;
+  margin-top: 10px !important;
+  margin-bottom: 12px !important;
+  grid-template-rows: repeat(2, minmax(315px, auto)) !important;
+  align-items: stretch !important;
+}
+#dashboardPage .refdash-hero-grid > .refdash-card,
+#dashboardPage .refdash-hero-grid .refdash-card {
+  min-width: 0 !important;
+  min-height: 315px !important;
+  max-width: 100% !important;
+  border-radius: 14px !important;
+}
+#dashboardPage .refdash-card {
+  min-width: 0 !important;
+  box-sizing: border-box !important;
+  border-radius: 14px !important;
+}
+#dashboardPage .refdash-card-head {
+  height: 54px !important;
+  min-height: 54px !important;
+  padding: 9px 13px !important;
+  gap: 10px !important;
+}
+#dashboardPage .refdash-card-title strong,
+#dashboardPage .refdash-rankings .refdash-card-title strong {
+  font-size: clamp(12px, .68vw, 14px) !important;
+  line-height: 1.15 !important;
+  letter-spacing: 0 !important;
+  max-width: 100% !important;
+}
+#dashboardPage .refdash-card-title small,
+#dashboardPage .refdash-card-title .dashboard-card-subtitle-v49,
+#dashboardPage .dashboard-card-subtitle-v49,
+#dashboardPage .schedule-reference-title-v25 small {
+  font-size: clamp(10px, .55vw, 11px) !important;
+  line-height: 1.25 !important;
+}
+#dashboardPage .refdash-card-title .refdash-icon,
+#dashboardPage .auditor-utilization-title-v28 .refdash-icon {
+  width: 28px !important;
+  height: 28px !important;
+  min-width: 28px !important;
+  flex-basis: 28px !important;
+  font-size: 11px !important;
+  border-radius: 8px !important;
+}
+#dashboardPage .dashboard-analytics-page-v40 .refdash-chart-body {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  padding: 9px 12px 11px !important;
+  box-sizing: border-box !important;
+}
+#dashboardPage .dashboard-analytics-page-v40 .refdash-chart-body.small {
+  max-height: none !important;
+  padding: 10px 12px 12px !important;
+}
+#dashboardPage .dashboard-analytics-page-v40 .refdash-chart-body canvas,
+#dashboardPage .dashboard-analytics-page-v40 .refdash-mandays-area-wrap-v26 canvas {
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  max-height: 270px !important;
+  box-sizing: border-box !important;
+}
+#dashboardPage .dashboard-analytics-page-v40 .refdash-mandays .refdash-mandays-area-wrap-v26,
+#dashboardPage .dashboard-analytics-page-v40 .refdash-mandays-area-wrap-v26 {
+  width: 100% !important;
+  height: clamp(165px, 19vh, 210px) !important;
+  min-height: 0 !important;
+  max-height: 210px !important;
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+}
+#dashboardPage .dashboard-analytics-page-v40 .productivity-body-v39 {
+  min-width: 0 !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+  padding: 8px 12px 12px !important;
+  gap: 8px !important;
+}
+#dashboardPage .dashboard-analytics-page-v40 .productivity-gauge-v39 {
+  position: relative !important;
+  width: min(100%, 320px) !important;
+  height: clamp(155px, 19vh, 205px) !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  max-width: 320px !important;
+  max-height: 205px !important;
+  justify-self: center !important;
+  align-self: center !important;
+  overflow: visible !important;
+  box-sizing: border-box !important;
+}
+#dashboardPage .dashboard-analytics-page-v40 .productivity-gauge-v39 canvas {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 320px !important;
+  max-height: 205px !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  margin: 0 auto !important;
+  box-sizing: border-box !important;
+}
+
+/* Readable chart legends, rankings, and schedule rows. */
+#dashboardPage .refdash-mandays-stats div,
+#dashboardPage .refdash-mandays-stats b,
+#dashboardPage .refdash-mandays-legend-v27 span,
+#dashboardPage .refdash-mandays-legend-v27 b,
+#dashboardPage .refdash-mandays-legend-v27 strong {
+  font-size: 10px !important;
+  line-height: 1.2 !important;
+}
+#dashboardPage .refdash-upcoming-item {
+  min-height: 52px !important;
+  grid-template-columns: 44px 10px minmax(0, 1fr) auto auto !important;
+  gap: 8px !important;
+  padding: 6px 0 !important;
+}
+#dashboardPage .refdash-upcoming-copy strong,
+#dashboardPage .refdash-upcoming-copy span,
+#dashboardPage .refdash-hangouts .ms365-hangout-copy strong,
+#dashboardPage .refdash-hangouts .ms365-hangout-copy span,
+#dashboardPage .refdash-hangouts .refdash-hangout-copy strong,
+#dashboardPage .refdash-hangouts .refdash-hangout-copy span {
+  font-size: 10px !important;
+  line-height: 1.2 !important;
+}
+#dashboardPage .refdash-rankings .v26-rank-row > strong,
+#dashboardPage .refdash-rankings .v26-rank-row > span:last-child {
+  font-size: 10px !important;
+  line-height: 1.2 !important;
+}
+#dashboardPage .refdash-rankings .v26-rank-row {
+  min-height: 28px !important;
+  padding: 4px 6px !important;
+  gap: 6px !important;
+}
+#dashboardPage .productivity-title-copy-v39 strong {
+  font-size: 12px !important;
+  line-height: 1.15 !important;
+}
+#dashboardPage .productivity-title-copy-v39 small {
+  font-size: 10px !important;
+  line-height: 1.2 !important;
+}
+#dashboardPage .productivity-stat-v39 {
+  min-height: 44px !important;
+  height: auto !important;
+  padding: 6px 4px !important;
+}
+#dashboardPage .productivity-stat-v39 strong,
+#dashboardPage .productivity-stat-v39 b {
+  font-size: 11px !important;
+  line-height: 1.15 !important;
+}
+#dashboardPage .productivity-stat-v39 small,
+#dashboardPage .productivity-stat-v39 span {
+  font-size: 9px !important;
+  line-height: 1.2 !important;
+}
+#dashboardPage table th {
+  font-size: 10.5px !important;
+  line-height: 1.25 !important;
+}
+#dashboardPage table td {
+  font-size: 10px !important;
+  line-height: 1.3 !important;
+}
+
+/* Medium-width laptops: balance readability with available space; scrolling is vertical only. */
+@media (min-width: 1201px) and (max-width: 1599px) {
+  #dashboardPage .refdash-hero-grid {
+    grid-template-rows: repeat(2, minmax(280px, auto)) !important;
+    gap: 11px !important;
+  }
+  #dashboardPage .refdash-hero-grid .refdash-card {
+    min-height: 280px !important;
+  }
+  #dashboardPage .executive-kpi-grid-v25 > .executive-kpi-v25 {
+    height: 76px !important;
+    min-height: 76px !important;
+    max-height: 76px !important;
+    padding: 7px 8px !important;
+  }
+  #dashboardPage .executive-kpi-grid-v25 .executive-kpi-copy-v25 > small {
+    font-size: 10px !important;
+  }
+  #dashboardPage .dashboard-command-panel-v47 .dashboard-manpower-filters-v43 select {
+    height: 34px !important;
+    min-height: 34px !important;
+    max-height: 34px !important;
+    font-size: 10px !important;
+  }
+  #dashboardPage .dashboard-command-panel-v47 .dashboard-topbar-month select {
+    width: 175px !important;
+    max-width: 175px !important;
+  }
+  #dashboardPage .dashboard-command-panel-v47 .dashboard-topbar-auditor select {
+    width: 160px !important;
+    max-width: 160px !important;
+  }
+}
+@media (min-width: 901px) and (max-width: 1200px) {
+  #dashboardPage .refdash-hero-grid {
+    grid-template-rows: repeat(2, minmax(250px, auto)) !important;
+    gap: 9px !important;
+  }
+  #dashboardPage .refdash-hero-grid .refdash-card {
+    min-height: 250px !important;
+  }
+  #dashboardPage .executive-kpi-grid-v25 {
+    gap: 6px !important;
+  }
+  #dashboardPage .executive-kpi-grid-v25 > .executive-kpi-v25 {
+    height: 72px !important;
+    min-height: 72px !important;
+    max-height: 72px !important;
+    padding: 6px !important;
+    gap: 5px !important;
+  }
+  #dashboardPage .executive-kpi-grid-v25 .executive-kpi-icon-v25 {
+    width: 27px !important;
+    height: 27px !important;
+    min-width: 27px !important;
+    flex-basis: 27px !important;
+  }
+  #dashboardPage .executive-kpi-grid-v25 .executive-kpi-copy-v25 > small {
+    font-size: 9.2px !important;
+  }
+  #dashboardPage .executive-kpi-grid-v25 .executive-kpi-copy-v25 > strong {
+    font-size: 18px !important;
+  }
+  #dashboardPage .dashboard-command-panel-v47 .dashboard-manpower-filters-v43 select {
+    height: 32px !important;
+    min-height: 32px !important;
+    max-height: 32px !important;
+    font-size: 9.5px !important;
+  }
+  #dashboardPage .dashboard-command-panel-v47 .dashboard-topbar-month select {
+    width: 155px !important;
+    max-width: 155px !important;
+  }
+  #dashboardPage .dashboard-command-panel-v47 .dashboard-topbar-auditor select {
+    width: 135px !important;
+    max-width: 135px !important;
+  }
+  #dashboardPage .refdash-card-title strong {
+    font-size: 11px !important;
+  }
+}
+@media (max-width: 900px) {
+  #dashboardPage .executive-kpi-grid-v25 {
+    gap: 6px !important;
+  }
+  #dashboardPage .executive-kpi-grid-v25 > .executive-kpi-v25 {
+    height: 70px !important;
+    min-height: 70px !important;
+    max-height: 70px !important;
+    padding: 5px !important;
+    gap: 5px !important;
+  }
+  #dashboardPage .executive-kpi-grid-v25 .executive-kpi-copy-v25 > small {
+    font-size: 9px !important;
+  }
+  #dashboardPage .executive-kpi-grid-v25 .executive-kpi-copy-v25 > strong {
+    font-size: 17px !important;
+  }
+  #dashboardPage .dashboard-command-panel-v47 {
+    padding: 8px !important;
+    overflow: visible !important;
+  }
+  #dashboardPage .dashboard-command-panel-v47 .dashboard-manpower-filters-v43 {
+    flex-wrap: wrap !important;
+  }
+  #dashboardPage .dashboard-command-panel-v47 .dashboard-manpower-filters-v43 select {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 34px !important;
+    min-height: 34px !important;
+    font-size: 10px !important;
+  }
+  #dashboardPage .dashboard-command-panel-v47 .dashboard-analytics-pager-controls-v40 {
+    flex-wrap: wrap !important;
+    justify-content: flex-start !important;
+  }
+  #dashboardPage .refdash-card-head {
+    padding: 8px 10px !important;
+  }
+  #dashboardPage .refdash-card-title strong {
+    font-size: 11px !important;
+    white-space: normal !important;
+  }
+  #dashboardPage .dashboard-analytics-page-v40 .refdash-chart-body,
+  #dashboardPage .dashboard-analytics-page-v40 .refdash-chart-body.small {
+    padding: 8px !important;
+  }
+  #dashboardPage .dashboard-analytics-page-v40 .productivity-gauge-v39 {
+    width: min(100%, 300px) !important;
+    height: clamp(145px, 26vw, 190px) !important;
+    max-width: 300px !important;
+    max-height: 190px !important;
+  }
+  #dashboardPage .dashboard-analytics-page-v40 .productivity-gauge-v39 canvas {
+    max-width: 300px !important;
+    max-height: 190px !important;
+  }
+}
+
+/* Final cascade guard: older versioned rules cap card rows and titles with higher specificity. */
+#dashboardPage.constructa-dashboard .dashboard-analytics-page-v40.refdash-hero-grid.is-active {
+  grid-template-rows: 315px 315px !important;
+  grid-auto-rows: 315px !important;
+  min-height: 642px !important;
+  height: auto !important;
+}
+#dashboardPage.constructa-dashboard .dashboard-analytics-page-v40.refdash-hero-grid.is-active .refdash-card {
+  height: auto !important;
+  min-height: 315px !important;
+  max-height: none !important;
+}
+#dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .refdash-card-head {
+  height: 56px !important;
+  min-height: 56px !important;
+  max-height: none !important;
+  padding: 10px 14px !important;
+  gap: 10px !important;
+}
+#dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .refdash-card .refdash-card-title > strong,
+#dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .refdash-card .schedule-reference-title-v25 > strong {
+  font-size: clamp(12px, .68vw, 14px) !important;
+  line-height: 1.18 !important;
+  letter-spacing: 0 !important;
+  white-space: normal !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+}
+#dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .refdash-card .refdash-card-title > small,
+#dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .refdash-card .dashboard-card-subtitle-v49,
+#dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .refdash-card .schedule-reference-title-v25 > small {
+  font-size: clamp(10px, .55vw, 11px) !important;
+  line-height: 1.25 !important;
+  white-space: normal !important;
+}
+#dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .schedule-reference-card-v25 .ms365-day-heading strong {
+  font-size: 10.5px !important;
+  line-height: 1.15 !important;
+}
+#dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .schedule-reference-card-v25 .ms365-day-heading span,
+#dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .schedule-reference-card-v25 .ms365-activity-copy strong,
+#dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .schedule-reference-card-v25 .ms365-activity-copy span,
+#dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .schedule-reference-card-v25 .upcoming-date-time-v8 {
+  font-size: 9.5px !important;
+  line-height: 1.2 !important;
+}
+#dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .refdash-chart-body canvas,
+#dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .refdash-mandays-area-wrap-v26 canvas {
+  max-height: 285px !important;
+}
+@media (min-width: 1201px) and (max-width: 1599px) {
+  #dashboardPage.constructa-dashboard .dashboard-analytics-page-v40.refdash-hero-grid.is-active {
+    grid-template-rows: 280px 280px !important;
+    grid-auto-rows: 280px !important;
+    min-height: 571px !important;
+  }
+  #dashboardPage.constructa-dashboard .dashboard-analytics-page-v40.refdash-hero-grid.is-active .refdash-card {
+    min-height: 280px !important;
+  }
+  #dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .refdash-card .refdash-card-title > strong,
+  #dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .refdash-card .schedule-reference-title-v25 > strong {
+    font-size: 12px !important;
+  }
+}
+@media (min-width: 901px) and (max-width: 1200px) {
+  #dashboardPage.constructa-dashboard .dashboard-analytics-page-v40.refdash-hero-grid.is-active {
+    grid-template-rows: 250px 250px !important;
+    grid-auto-rows: 250px !important;
+    min-height: 509px !important;
+  }
+  #dashboardPage.constructa-dashboard .dashboard-analytics-page-v40.refdash-hero-grid.is-active .refdash-card {
+    min-height: 250px !important;
+  }
+  #dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .refdash-card .refdash-card-title > strong,
+  #dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .refdash-card .schedule-reference-title-v25 > strong {
+    font-size: 11px !important;
+  }
+}
+@media (max-width: 900px) {
+  #dashboardPage.constructa-dashboard .dashboard-analytics-page-v40.refdash-hero-grid.is-active {
+    grid-template-rows: 220px 220px !important;
+    grid-auto-rows: 220px !important;
+    min-height: 449px !important;
+  }
+  #dashboardPage.constructa-dashboard .dashboard-analytics-page-v40.refdash-hero-grid.is-active .refdash-card {
+    min-height: 220px !important;
+  }
+  #dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .refdash-card .refdash-card-title > strong,
+  #dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .refdash-card .schedule-reference-title-v25 > strong {
+    font-size: 11px !important;
+  }
+}
+
+/* Final 100% scaling refinements: stronger type hierarchy and balanced desktop density. */
+@media (min-width: 1600px) {
+  #dashboardPage.constructa-dashboard .executive-kpi-grid-v25 > .executive-kpi-v25 {
+    height: 88px !important;
+    min-height: 88px !important;
+    max-height: 88px !important;
+    padding: 9px 11px !important;
+    gap: 9px !important;
+  }
+  #dashboardPage.constructa-dashboard .executive-kpi-grid-v25 .executive-kpi-icon-v25 {
+    width: 36px !important;
+    height: 36px !important;
+    min-width: 36px !important;
+    flex-basis: 36px !important;
+    font-size: 14px !important;
+  }
+  #dashboardPage.constructa-dashboard .executive-kpi-grid-v25 .executive-kpi-copy-v25 {
+    height: 70px !important;
+    min-height: 70px !important;
+    grid-template-rows: 27px 27px 15px !important;
+    row-gap: 1px !important;
+  }
+  #dashboardPage.constructa-dashboard .executive-kpi-grid-v25 .executive-kpi-copy-v25 > small {
+    min-height: 26px !important;
+    max-height: 27px !important;
+    font-size: 12px !important;
+    line-height: 1.12 !important;
+    white-space: normal !important;
+    overflow: hidden !important;
+    text-overflow: clip !important;
+  }
+  #dashboardPage.constructa-dashboard .executive-kpi-grid-v25 .executive-kpi-copy-v25 > strong {
+    height: 27px !important;
+    font-size: 27px !important;
+    line-height: 1 !important;
+    letter-spacing: -.2px !important;
+  }
+  #dashboardPage.constructa-dashboard .executive-kpi-grid-v25 .executive-kpi-trend-v25,
+  #dashboardPage.constructa-dashboard .executive-kpi-grid-v25 .executive-kpi-sub-v25,
+  #dashboardPage.constructa-dashboard .executive-kpi-grid-v25 .executive-kpi-trend-v25 span,
+  #dashboardPage.constructa-dashboard .executive-kpi-grid-v25 .executive-kpi-trend-v25 small {
+    font-size: 9.5px !important;
+    line-height: 1.1 !important;
+  }
+  #dashboardPage.constructa-dashboard .dashboard-command-panel-v47 {
+    min-height: 82px !important;
+    padding: 10px 14px !important;
+    margin-bottom: 10px !important;
+  }
+  #dashboardPage.constructa-dashboard .dashboard-command-panel-v47 .dashboard-manpower-filters-v43 select {
+    height: 40px !important;
+    min-height: 40px !important;
+    max-height: 40px !important;
+    font-size: 11.5px !important;
+  }
+  #dashboardPage.constructa-dashboard .dashboard-command-panel-v47 .dashboard-topbar-month select {
+    width: 205px !important;
+    max-width: 205px !important;
+  }
+  #dashboardPage.constructa-dashboard .dashboard-command-panel-v47 .dashboard-topbar-auditor select {
+    width: 190px !important;
+    max-width: 190px !important;
+  }
+  #dashboardPage.constructa-dashboard .dashboard-command-panel-v47 .dashboard-analytics-pager-btn-v40,
+  #dashboardPage.constructa-dashboard .dashboard-command-panel-v47 .dashboard-analytics-page-indicator-v40 {
+    min-height: 36px !important;
+    height: 36px !important;
+    max-height: 36px !important;
+    padding: 0 13px !important;
+    font-size: 11.5px !important;
+  }
+  html body #dashboardPage.constructa-dashboard section.refdash-hero-grid.dashboard-analytics-page-v40.is-active {
+    grid-template-rows: 335px 335px !important;
+    grid-auto-rows: 335px !important;
+    min-height: 684px !important;
+    gap: 14px !important;
+  }
+  html body #dashboardPage.constructa-dashboard section.refdash-hero-grid.dashboard-analytics-page-v40.is-active .refdash-card {
+    height: auto !important;
+    min-height: 335px !important;
+    max-height: none !important;
+  }
+  #dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .refdash-card-head {
+    height: 60px !important;
+    min-height: 60px !important;
+    max-height: none !important;
+    padding: 11px 15px !important;
+  }
+  #dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .refdash-card .refdash-card-title > strong,
+  #dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .refdash-card .schedule-reference-title-v25 > strong {
+    font-size: 14.5px !important;
+    line-height: 1.2 !important;
+  }
+  #dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .refdash-card .refdash-card-title > small,
+  #dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .refdash-card .dashboard-card-subtitle-v49,
+  #dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .refdash-card .schedule-reference-title-v25 > small {
+    font-size: 11.5px !important;
+    line-height: 1.25 !important;
+  }
+  #dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .refdash-chart-body {
+    padding: 12px 14px 14px !important;
+  }
+  #dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .refdash-chart-body canvas,
+  #dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .refdash-mandays-area-wrap-v26 canvas {
+    max-height: 300px !important;
+  }
+  #dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .refdash-mandays-area-wrap-v26 {
+    height: clamp(190px, 21vh, 235px) !important;
+    max-height: 235px !important;
+  }
+  #dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .productivity-gauge-v39 {
+    width: min(100%, 330px) !important;
+    height: clamp(180px, 21vh, 220px) !important;
+    max-width: 330px !important;
+    max-height: 220px !important;
+  }
+  #dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .productivity-gauge-v39 canvas {
+    max-width: 330px !important;
+    max-height: 220px !important;
+  }
+  #dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .refdash-mandays-stats div,
+  #dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .refdash-mandays-stats b,
+  #dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .refdash-mandays-legend-v27 span,
+  #dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .refdash-mandays-legend-v27 b,
+  #dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .refdash-mandays-legend-v27 strong,
+  #dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .refdash-upcoming-copy strong,
+  #dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .refdash-upcoming-copy span {
+    font-size: 11px !important;
+    line-height: 1.25 !important;
+  }
+  #dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .refdash-upcoming-item {
+    min-height: 56px !important;
+    grid-template-columns: 48px 11px minmax(0, 1fr) auto auto !important;
+    gap: 8px !important;
+    padding: 7px 0 !important;
+  }
+  #dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .ms365-time-block strong,
+  #dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .ms365-time-block small,
+  #dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .ms365-activity-title,
+  #dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .ms365-activity-location,
+  #dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .ms365-assigned-auditor,
+  #dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .ms365-status-pill {
+    font-size: 10.5px !important;
+    line-height: 1.2 !important;
+  }
+}
+
+@media (min-width: 1201px) and (max-width: 1599px) {
+  #dashboardPage.constructa-dashboard .executive-kpi-grid-v25 > .executive-kpi-v25 {
+    height: 84px !important;
+    min-height: 84px !important;
+    max-height: 84px !important;
+    padding: 8px !important;
+  }
+  #dashboardPage.constructa-dashboard .executive-kpi-grid-v25 .executive-kpi-copy-v25 > small {
+    font-size: 11px !important;
+    line-height: 1.12 !important;
+    white-space: normal !important;
+  }
+  #dashboardPage.constructa-dashboard .executive-kpi-grid-v25 .executive-kpi-copy-v25 > strong {
+    font-size: 23px !important;
+  }
+  html body #dashboardPage.constructa-dashboard section.refdash-hero-grid.dashboard-analytics-page-v40.is-active {
+    grid-template-rows: 290px 290px !important;
+    grid-auto-rows: 290px !important;
+    min-height: 594px !important;
+    gap: 11px !important;
+  }
+  html body #dashboardPage.constructa-dashboard section.refdash-hero-grid.dashboard-analytics-page-v40.is-active .refdash-card {
+    min-height: 290px !important;
+    max-height: none !important;
+  }
+  #dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .refdash-card-head {
+    height: 56px !important;
+    min-height: 56px !important;
+    padding: 9px 12px !important;
+  }
+  #dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .refdash-card .refdash-card-title > strong,
+  #dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .refdash-card .schedule-reference-title-v25 > strong {
+    font-size: 13px !important;
+  }
+  #dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .refdash-card .refdash-card-title > small,
+  #dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .refdash-card .dashboard-card-subtitle-v49,
+  #dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .refdash-card .schedule-reference-title-v25 > small {
+    font-size: 10.5px !important;
+  }
+}
+
+@media (min-width: 901px) and (max-width: 1200px) {
+  #dashboardPage.constructa-dashboard .executive-kpi-grid-v25 {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    gap: 8px !important;
+  }
+  #dashboardPage.constructa-dashboard .executive-kpi-grid-v25 > .executive-kpi-v25 {
+    height: 78px !important;
+    min-height: 78px !important;
+    max-height: 78px !important;
+    padding: 7px !important;
+  }
+  #dashboardPage.constructa-dashboard .executive-kpi-grid-v25 .executive-kpi-copy-v25 > small {
+    font-size: 10.5px !important;
+    white-space: normal !important;
+  }
+  #dashboardPage.constructa-dashboard .executive-kpi-grid-v25 .executive-kpi-copy-v25 > strong {
+    font-size: 21px !important;
+  }
+  #dashboardPage.constructa-dashboard .dashboard-analytics-page-v40.refdash-hero-grid.is-active {
+    grid-template-rows: 260px 260px !important;
+    grid-auto-rows: 260px !important;
+    min-height: 530px !important;
+  }
+  #dashboardPage.constructa-dashboard .dashboard-analytics-page-v40.refdash-hero-grid.is-active .refdash-card {
+    min-height: 260px !important;
+    max-height: none !important;
+  }
+  #dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .refdash-card .refdash-card-title > strong {
+    font-size: 12px !important;
+  }
+}
+
+/* Final desktop composition and chart bounds for a standard 100% Windows/browser scale. */
+@media (min-width: 1600px) {
+  html body #dashboardPage.constructa-dashboard section.refdash-hero-grid.dashboard-analytics-page-v40.is-active {
+    grid-template-rows: 350px 350px !important;
+    grid-auto-rows: 350px !important;
+    min-height: 714px !important;
+    gap: 14px !important;
+  }
+  html body #dashboardPage.constructa-dashboard section.refdash-hero-grid.dashboard-analytics-page-v40.is-active .refdash-card {
+    height: auto !important;
+    min-height: 350px !important;
+    max-height: none !important;
+  }
+  #dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .productivity-body-v39 {
+    padding: 6px 12px 8px !important;
+    gap: 6px !important;
+  }
+  #dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .productivity-gauge-v39 {
+    width: min(100%, 330px) !important;
+    height: 220px !important;
+    max-width: 330px !important;
+    max-height: 220px !important;
+  }
+  #dashboardPage.constructa-dashboard .productivity-card #attendanceChart {
+    width: 100% !important;
+    height: 220px !important;
+    max-width: 330px !important;
+    max-height: 220px !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+  }
+  #dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .productivity-stat-v39 {
+    min-height: 42px !important;
+    padding: 5px 5px !important;
+  }
+  #dashboardPage.constructa-dashboard table th {
+    font-size: 11.5px !important;
+  }
+  #dashboardPage.constructa-dashboard table td {
+    font-size: 11px !important;
+  }
+}
+
+/* Keep 901–1200px laptop layouts comfortable by reflowing KPIs instead of squeezing seven. */
+@media (min-width: 901px) and (max-width: 1200px) {
+  #dashboardPage.constructa-dashboard .executive-kpi-grid-v25 {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  }
+}
+
+/* Tablet widths remain readable without forcing the desktop seven-column KPI strip. */
+@media (min-width: 621px) and (max-width: 900px) {
+  #dashboardPage.constructa-dashboard .executive-kpi-grid-v25 .executive-kpi-copy-v25 > small {
+    font-size: 10px !important;
+    line-height: 1.15 !important;
+    white-space: normal !important;
+  }
+  #dashboardPage.constructa-dashboard .executive-kpi-grid-v25 .executive-kpi-copy-v25 > strong {
+    font-size: 20px !important;
+  }
+  #dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .refdash-card .refdash-card-title > strong {
+    font-size: 11.5px !important;
+  }
+  #dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .refdash-card .refdash-card-title > small,
+  #dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .refdash-card .dashboard-card-subtitle-v49 {
+    font-size: 10px !important;
+  }
+}
+
+/* Override the legacy ID-only chart cap so the productivity gauge can use its responsive wrapper. */
+@media (min-width: 1600px) {
+  #dashboardPage.constructa-dashboard #attendanceChart {
+    width: 100% !important;
+    height: 220px !important;
+    max-width: 330px !important;
+    max-height: 220px !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+  }
+}
+@media (min-width: 1201px) and (max-width: 1599px) {
+  #dashboardPage.constructa-dashboard #attendanceChart {
+    width: 100% !important;
+    height: 200px !important;
+    max-width: 300px !important;
+    max-height: 200px !important;
+  }
+}
+@media (min-width: 901px) and (max-width: 1200px) {
+  #dashboardPage.constructa-dashboard #attendanceChart {
+    width: 100% !important;
+    height: 180px !important;
+    max-width: 280px !important;
+    max-height: 180px !important;
+  }
+}
+@media (max-width: 900px) {
+  #dashboardPage.constructa-dashboard #attendanceChart {
+    width: 100% !important;
+    height: 170px !important;
+    max-width: 260px !important;
+    max-height: 170px !important;
+  }
+}
+
+/* A wide but shorter 1600×900 display should not force the same tall grid as 1920×1080. */
+@media (min-width: 1600px) and (max-height: 950px) {
+  html body #dashboardPage.constructa-dashboard section.refdash-hero-grid.dashboard-analytics-page-v40.is-active {
+    grid-template-rows: 292px 292px !important;
+    grid-auto-rows: 292px !important;
+    min-height: 598px !important;
+    gap: 14px !important;
+  }
+  html body #dashboardPage.constructa-dashboard section.refdash-hero-grid.dashboard-analytics-page-v40.is-active .refdash-card {
+    min-height: 292px !important;
+    max-height: none !important;
+  }
+  #dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .productivity-body-v39 {
+    padding: 6px 10px 7px !important;
+    gap: 5px !important;
+  }
+  #dashboardPage.constructa-dashboard .productivity-card #attendanceChart,
+  #dashboardPage.constructa-dashboard #attendanceChart {
+    height: 185px !important;
+    max-height: 185px !important;
+    max-width: 285px !important;
+  }
+}
+
+</style>
+
+<style>
+/* R20: Dashboard-only zoom overlap fix. No data, chart, save, or render logic changed. */
+#dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .refdash-heatmap-v22 .team-heatmap-body-v22 {
+  grid-template-rows: auto minmax(0, 1fr) auto !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
+}
+#dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .refdash-heatmap-v22 .team-heatmap-grid-v22 {
+  width: min(100%, 260px) !important;
+  max-width: 260px !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+  grid-auto-rows: minmax(0, 1fr) !important;
+  align-content: stretch !important;
+  overflow: hidden !important;
+}
+#dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .refdash-heatmap-v22 .team-heatmap-grid-v22 > .team-heatmap-cell-v22 {
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  aspect-ratio: auto !important;
+  align-self: stretch !important;
+  box-sizing: border-box !important;
+}
+#dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .refdash-mandays .refdash-mandays-body {
+  grid-template-rows: minmax(0, 1fr) 18px auto !important;
+  min-height: 0 !important;
+  align-items: stretch !important;
+}
+#dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .refdash-mandays .refdash-mandays-area-wrap-v26 {
+  width: 100% !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  align-self: stretch !important;
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+}
+#dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .refdash-mandays .refdash-mandays-area-wrap-v26 canvas,
+#dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .refdash-mandays #refdashMandaysChart {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  box-sizing: border-box !important;
+}
+</style>
+
+<style>
+/* R21: dashboard-only productivity zoom and schedule typography. CSS only. */
+#dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .refdash-productivity {
+  display: flex !important;
+  flex-direction: column !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
+}
+#dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .refdash-productivity .productivity-body-v39 {
+  flex: 1 1 auto !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+  grid-template-rows: minmax(0, 1fr) auto !important;
+  align-content: stretch !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  height: auto !important;
+  max-height: none !important;
+  padding: clamp(4px, .4vw, 8px) clamp(6px, .6vw, 12px) clamp(4px, .4vw, 8px) !important;
+  gap: clamp(3px, .3vw, 6px) !important;
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+}
+#dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .refdash-productivity .productivity-gauge-v39 {
+  width: min(100%, 330px) !important;
+  height: 100% !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  max-width: 330px !important;
+  max-height: 100% !important;
+  aspect-ratio: auto !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  align-self: stretch !important;
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+}
+#dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .refdash-productivity #attendanceChart {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  max-width: 330px !important;
+  max-height: 100% !important;
+  margin: 0 auto !important;
+  box-sizing: border-box !important;
+}
+#dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .refdash-productivity .productivity-stats-v39 {
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  flex: 0 0 auto !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  height: auto !important;
+  gap: clamp(3px, .3vw, 6px) !important;
+  margin: 0 !important;
+}
+#dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .refdash-productivity .productivity-stat-v39 {
+  min-width: 0 !important;
+  min-height: 38px !important;
+  height: auto !important;
+  padding: 4px clamp(2px, .25vw, 5px) !important;
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+}
+#dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .refdash-productivity .productivity-stat-v39 strong {
+  font-size: clamp(10px, .62vw, 12px) !important;
+  line-height: 1.12 !important;
+}
+#dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .refdash-productivity .productivity-stat-v39 small {
+  font-size: clamp(7.5px, .45vw, 8.8px) !important;
+  line-height: 1.15 !important;
+}
+
+/* Upcoming and Hangouts use a shared readable type scale at browser zoom 100–150%. */
+#dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .schedule-reference-card-v25:not(.hangouts-reference-card-v25) .upcoming-row-v8 .ms365-activity-title,
+#dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .hangouts-reference-card-v25 .ms365-presenter-name {
+  font-size: clamp(9px, .54vw, 10.5px) !important;
+  line-height: 1.15 !important;
+  font-weight: 850 !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  overflow: hidden !important;
+  white-space: nowrap !important;
+  text-overflow: ellipsis !important;
+}
+#dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .schedule-reference-card-v25:not(.hangouts-reference-card-v25) .upcoming-date-time-v8,
+#dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .schedule-reference-card-v25:not(.hangouts-reference-card-v25) .upcoming-row-v8 .ms365-assigned-auditor,
+#dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .schedule-reference-card-v25:not(.hangouts-reference-card-v25) .upcoming-row-v8 .upcoming-remarks-v11,
+#dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .hangouts-reference-card-v25 .ms365-meeting-details > span {
+  font-size: clamp(8.5px, .5vw, 9.5px) !important;
+  line-height: 1.15 !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  overflow: hidden !important;
+  white-space: nowrap !important;
+  text-overflow: ellipsis !important;
+}
+#dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .schedule-reference-card-v25:not(.hangouts-reference-card-v25) .upcoming-row-v8 .ms365-status-pill,
+#dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .hangouts-reference-card-v25 .ms365-next-pill {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex: 0 0 auto !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  min-height: 16px !important;
+  height: auto !important;
+  padding: 2px 5px !important;
+  border-radius: 6px !important;
+  font-size: clamp(8px, .44vw, 8.5px) !important;
+  line-height: 1.05 !important;
+  font-weight: 850 !important;
+  letter-spacing: 0 !important;
+  white-space: nowrap !important;
+  box-sizing: border-box !important;
+}
+#dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .schedule-reference-card-v25:not(.hangouts-reference-card-v25) .upcoming-row-v8 {
+  min-width: 0 !important;
+  grid-template-columns: 16px minmax(0, 1fr) max-content !important;
+  gap: 4px !important;
+  align-items: center !important;
+}
+#dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .schedule-reference-card-v25:not(.hangouts-reference-card-v25) .upcoming-row-v8 .ms365-activity-copy,
+#dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .hangouts-reference-card-v25 .ms365-presenter-card,
+#dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .hangouts-reference-card-v25 .hangout-card-main-v31,
+#dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .hangouts-reference-card-v25 .hangout-card-side-v31 {
+  min-width: 0 !important;
+  max-width: 100% !important;
+}
+#dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .schedule-reference-card-v25:not(.hangouts-reference-card-v25) #ms365UpcomingTimeline,
+#dashboardPage.constructa-dashboard .dashboard-analytics-page-v40 .hangouts-reference-card-v25 #ms365HangoutsTimeline {
+  min-width: 0 !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+}
+</style>
+
 </body>
 </html>
