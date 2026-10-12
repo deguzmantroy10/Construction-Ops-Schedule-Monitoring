@@ -1836,7 +1836,8 @@ body:has(#dashboardPage:not(.page-hidden)) .dashboard-quick-actions-v20{display:
   height:180px!important;max-height:180px!important;
 }
 
-  width:min(150px,70%)!important;height:auto!important;aspect-ratio:1/1!important;max-height:150px!important;
+#dashboardPage .dashboard-analytics-page-v40 .productivity-gauge-v39{
+  width:min(150px,100%)!important;height:auto!important;aspect-ratio:1/1!important;max-height:150px!important;
 }
 
 /* At browser zoom, CSS viewport width can drop below 1200px. Keep cards bounded there too. */
@@ -7223,12 +7224,14 @@ body.auth-lock > #loginModal{display:flex!important;visibility:visible!important
 #siteVisitPage .site-schedule-health-v1{
   display:grid;grid-template-columns:minmax(150px,190px) minmax(0,1fr) auto;align-items:center;gap:10px;
   margin:0 0 10px;padding:8px 10px;border:1px solid #dce7f3;border-radius:12px;
-  background:linear-gradient(180deg,#ffffff,#f9fcff);box-shadow:0 4px 14px rgba(15,23,42,.035);min-width:0;
+  background:linear-gradient(180deg,#ffffff,#f9fcff);box-shadow:0 4px 14px rgba(15,23,42,.035);
+  width:100%;max-width:100%;min-width:0;box-sizing:border-box;
 }
 #siteVisitPage .site-health-heading-v1{display:flex;align-items:center;gap:8px;min-width:0;}
+#siteVisitPage .site-health-heading-v1>div{min-width:0;flex:1 1 0;box-sizing:border-box;}
 #siteVisitPage .site-health-icon-v1{width:28px;height:28px;flex:0 0 28px;display:grid;place-items:center;border-radius:8px;background:#eff6ff;border:1px solid #d8e8fc;color:#2563eb;font-size:9px;}
 #siteVisitPage .site-health-heading-v1 strong{display:block;color:#17375f;font:850 9px/1.1 Inter,Arial,sans-serif;}
-#siteVisitPage .site-health-heading-v1 small{display:block;margin-top:2px;color:#8092a7;font:650 6.2px/1.2 Inter,Arial,sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+#siteVisitPage .site-health-heading-v1 small{display:block;min-width:0;max-width:100%;margin-top:2px;color:#8092a7;font:650 6.2px/1.2 Inter,Arial,sans-serif;white-space:normal;overflow:visible;overflow-wrap:anywhere;text-overflow:clip;}
 #siteVisitPage .site-health-metrics-v1{display:grid;grid-template-columns:repeat(5,minmax(66px,1fr));gap:6px;min-width:0;}
 #siteVisitPage .site-health-metric-v1{
   min-width:0;height:34px;min-height:34px;padding:4px 7px!important;display:grid!important;grid-template-columns:20px minmax(0,1fr);grid-template-rows:1fr 1fr;
@@ -9910,6 +9913,60 @@ body{font-size:15px;}
     font-size: 7.7px !important;
     padding: 2px 2px !important;
   }
+}
+</style>
+
+
+<style id="dmciR17FocusedReadabilityFixes">
+/* R17 — narrowly scoped fixes. No dashboard graph JS/render/save logic changed. */
+#dashboardPage .dashboard-analytics-page-v40.is-active {
+  width:100%!important; max-width:100%!important; min-width:0!important;
+}
+#dashboardPage .dashboard-analytics-page-v40.is-active > .refdash-card {
+  min-width:0!important; max-width:100%!important; box-sizing:border-box!important;
+}
+#dashboardPage .dashboard-analytics-page-v40 .refdash-chart-body,
+#dashboardPage .dashboard-analytics-page-v40 .refdash-mandays-area-wrap-v26 {
+  min-width:0!important; max-width:100%!important; box-sizing:border-box!important;
+}
+#dashboardPage .dashboard-analytics-page-v40 .productivity-gauge-v39 {
+  position:relative!important; min-width:0!important; min-height:0!important;
+  width:100%!important; height:100%!important; max-width:278px!important; max-height:190px!important;
+  justify-self:center!important; align-self:center!important; overflow:visible!important; box-sizing:border-box!important;
+}
+#dashboardPage .dashboard-analytics-page-v40 .refdash-chart-body canvas,
+#dashboardPage .dashboard-analytics-page-v40 .refdash-mandays-area-wrap-v26 canvas {
+  display:block!important; width:100%!important; max-width:100%!important;
+  min-width:0!important; box-sizing:border-box!important;
+}
+#dashboardPage .dashboard-analytics-page-v40 .productivity-gauge-v39 canvas {
+  display:block!important; width:100%!important; height:100%!important;
+  max-width:278px!important; max-height:190px!important; min-width:0!important; min-height:0!important;
+  margin:0 auto!important; box-sizing:border-box!important;
+}
+
+/* Weekly Log: highlights remain rendered, but the smart-position helper no longer scrolls. */
+
+/* Site & Meeting upcoming cards: fit status text within the card padding; wrap rather than clip/scroll. */
+#siteVisitPage .site-upcoming-card-v8 .site-upcoming-copy-v8 {
+  min-width:0!important; max-width:100%!important; overflow:visible!important;
+}
+#siteVisitPage .site-upcoming-card-v8 .site-upcoming-badges-v8 {
+  display:flex!important; flex-wrap:wrap!important; align-items:center!important;
+  justify-content:flex-start!important; gap:4px!important; margin-left:0!important;
+  width:100%!important; max-width:100%!important; min-width:0!important;
+  white-space:normal!important; overflow:visible!important; box-sizing:border-box!important;
+}
+#siteVisitPage .site-upcoming-card-v8 .site-upcoming-badge-v8 {
+  box-sizing:border-box!important; flex:0 1 auto!important; min-width:0!important;
+  width:auto!important; max-width:100%!important; height:auto!important; min-height:18px!important;
+  padding:2px 5px!important; font-size:8.2px!important; line-height:1.2!important;
+  white-space:normal!important; overflow:visible!important; overflow-wrap:anywhere!important;
+  word-break:normal!important; text-overflow:clip!important;
+}
+@media (max-width:560px) {
+  #siteVisitPage .site-upcoming-card-v8 .site-upcoming-badges-v8 {gap:3px!important;}
+  #siteVisitPage .site-upcoming-card-v8 .site-upcoming-badge-v8 {font-size:7.7px!important;padding:2px 4px!important;}
 }
 </style>
 
@@ -22615,24 +22672,9 @@ let hangoutsMutationBusy = false;
   /* P3.1-I — read-only Weekly Log smart positioning. No attendance/Firebase/render state is changed. */
   let weeklyPositionFrameV15=0;
   function positionWeeklyLogTodayV15(){
-    const page=$('#weeklyPage'),root=$('#weeklyBlocksContainer');
-    if(!page||page.classList.contains('page-hidden')||!root)return;
-    const today=root.querySelector('th.today-col');if(!today)return;
-    const wrap=today.closest('.table-container');if(!wrap)return;
-    const topGuard=72,bottomGuard=Math.max(topGuard+120,window.innerHeight-20);
-    const wr=wrap.getBoundingClientRect();
-    if(wr.bottom<topGuard||wr.top>bottomGuard||wr.top<topGuard-24)wrap.scrollIntoView({behavior:'smooth',block:'center'});
-    requestAnimationFrame(()=>{
-      const cr=wrap.getBoundingClientRect(),hr=today.getBoundingClientRect();
-      const stickyWidth=wrap.querySelector('th:first-child')?.getBoundingClientRect().width||0;
-      const visibleLeft=cr.left+Math.min(stickyWidth,cr.width*.36)+4,visibleRight=cr.right-8;
-      if(hr.left<visibleLeft||hr.right>visibleRight){
-        const desired=Math.max(0,today.offsetLeft-Math.max(0,(wrap.clientWidth-today.offsetWidth)/2));
-        wrap.scrollTo({left:desired,behavior:'smooth'});
-      }
-      const current=wrap.querySelector('tr.weekly-current-user');
-      if(current){const rr=current.getBoundingClientRect();if(rr.top<topGuard||rr.bottom>bottomGuard)current.scrollIntoView({behavior:'smooth',block:'center'});}
-    });
+    /* R17: automatic repositioning is intentionally disabled. Keep the existing
+       today-col highlight, but never move the user's chosen date or scroll position. */
+    return;
   }
   function scheduleWeeklySmartPositionV15(){cancelAnimationFrame(weeklyPositionFrameV15);weeklyPositionFrameV15=requestAnimationFrame(()=>requestAnimationFrame(positionWeeklyLogTodayV15));}
   window.positionWeeklyLogTodayV15=positionWeeklyLogTodayV15;
