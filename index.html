@@ -8590,6 +8590,20 @@ body.auth-lock > #loginModal{display:flex!important;visibility:visible!important
 <!-- SETTINGS PAGE -->
 <div class="page-hidden" id="settingsPage">
 <div class="settings-container settings-executive">
+<div class="settings-panel account-security-panel-v1" id="accountSecurityPanelV1">
+<div class="settings-panel-header">
+<div class="settings-panel-icon"><i class="fa-solid fa-key"></i></div>
+<div><div class="settings-panel-eyebrow">Account Security</div><h2>Change Password</h2><p>Update your signed-in Firebase account password. Your current password is required to confirm the change.</p></div>
+</div>
+<form class="change-password-form-v1" id="changePasswordFormV1" onsubmit="return changeCurrentUserPasswordV1(event)">
+<div class="change-password-fields-v1">
+<div class="settings-field"><label for="currentPasswordV1">Current Password</label><input id="currentPasswordV1" name="currentPassword" type="password" autocomplete="current-password" minlength="1" required placeholder="Enter current password"></div>
+<div class="settings-field"><label for="newPasswordV1">New Password</label><input id="newPasswordV1" name="newPassword" type="password" autocomplete="new-password" minlength="6" required placeholder="At least 6 characters"></div>
+<div class="settings-field"><label for="confirmNewPasswordV1">Confirm New Password</label><input id="confirmNewPasswordV1" name="confirmNewPassword" type="password" autocomplete="new-password" minlength="6" required placeholder="Re-enter new password"></div>
+</div>
+<div class="settings-action-row"><button class="settings-primary-btn" id="changePasswordSubmitV1" type="submit"><i class="fa-solid fa-shield-halved"></i><span>Update Password</span></button><span aria-live="polite" class="change-password-status-v1" id="changePasswordStatusV1"></span></div>
+</form>
+</div>
 <!-- =====================================================
              RESTRICTED SYSTEM CONTROL
         ====================================================== -->
@@ -8631,7 +8645,7 @@ body.auth-lock > #loginModal{display:flex!important;visibility:visible!important
 <!-- =====================================================
              CLOUD & BACKUP
         ====================================================== -->
-<div class="settings-panel">
+<div class="settings-panel" id="dataProtectionCardV1" data-sensitive-system-tools="true" hidden style="display:none;" aria-hidden="true">
 <div class="settings-panel-header">
 <div class="settings-panel-icon cloud">
 <i class="fa-solid fa-cloud-arrow-up"></i>
@@ -11210,6 +11224,7 @@ function updateFirebaseDiagnosticsAccess() {
         panel.style.display = allowed ? '' : 'none';
         panel.setAttribute('aria-hidden', allowed ? 'false' : 'true');
     }
+    if (typeof window.updateDataProtectionAccessV1 === 'function') window.updateDataProtectionAccessV1();
     return allowed;
 }
 
@@ -12760,13 +12775,23 @@ function setActive(element) {
             populateProjectSitesDropdown();
         }
 
+        /* Display-only A-Z ordering for Site & Meeting Schedule locations.
+           Keep source indexes so edit/delete handlers continue targeting the same item. */
+        function getProjectSitesSortedAZ() {
+            return (Array.isArray(projectSitesList) ? projectSitesList : [])
+                .map((name, index) => ({ name, index }))
+                .sort((a, b) => String(a.name ?? '').trim().localeCompare(
+                    String(b.name ?? '').trim(), 'en', { sensitivity: 'base', numeric: true }
+                ));
+        }
+
         function populateProjectSitesDropdown() {
             const siteLocSelect = document.getElementById("siteLocation");
             if (!siteLocSelect) return;
             const currentVal = siteLocSelect.value;
             siteLocSelect.innerHTML = '<option value="">Select Location</option>';
-            projectSitesList.forEach(proj => {
-                siteLocSelect.add(new Option(proj, proj));
+            getProjectSitesSortedAZ().forEach(({ name }) => {
+                siteLocSelect.add(new Option(name, name));
             });
             siteLocSelect.value = currentVal;
         }
@@ -12845,7 +12870,7 @@ function closeManageProjectsModal() {
             const tbody = document.getElementById("manageProjectsTableBody");
             if (!tbody) return;
             tbody.innerHTML = "";
-            projectSitesList.forEach((proj, idx) => {
+            getProjectSitesSortedAZ().forEach(({ name: proj, index: idx }) => {
                 tbody.innerHTML += `
                     <tr>
                         <td><input type="text" id="edit-proj-${idx}" value="${proj}" style="padding: 6px 10px; border-radius: 6px; border: 1px solid #cbd5e1; width: 100%;"></td>
@@ -21905,6 +21930,100 @@ window.openOrgBranchModalV1=function(mode='live'){
     return true;
   };
   document.addEventListener("keydown",e=>{if(e.key==="Escape"&&$("exportCenterModalV1")?.classList.contains("show"))window.closeExportCenterModalV1();});
+})();
+</script>
+<style id="r9p-settings-password-online-access-css">
+/* R9P targeted fixes: Settings Change Password, sidebar Online panel stacking. */
+#settingsPage .account-security-panel-v1{display:block;}
+#settingsPage .change-password-form-v1{display:grid;gap:14px;}
+#settingsPage .change-password-fields-v1{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;}
+#settingsPage .change-password-fields-v1 .settings-field{min-width:0;}
+#settingsPage .change-password-fields-v1 input{width:100%;min-width:0;height:42px;padding:0 12px;border:1px solid #c9d8ea;border-radius:9px;font-size:13px;color:#172033;background:#fff;}
+#settingsPage .change-password-fields-v1 label{font-size:10px!important;}
+#settingsPage .change-password-status-v1{align-self:center;color:#475569;font-size:12px;line-height:1.4;}
+#settingsPage .change-password-status-v1[data-state="success"]{color:#15803d;font-weight:700;}
+#settingsPage .change-password-status-v1[data-state="error"]{color:#b91c1c;font-weight:700;}
+@media(max-width:900px){#settingsPage .change-password-fields-v1{grid-template-columns:minmax(0,1fr);}}
+/* Keep the sidebar and its popup above the main content's stacking/paint layers. */
+.sidebar{z-index:9000!important;overflow:visible!important;}
+.sidebar-status-footer,.sidebar-online-wrap{position:relative!important;z-index:9100!important;overflow:visible!important;}
+.sidebar-online-wrap .online-users-panel,.online-users-panel.show{z-index:2147483647!important;isolation:isolate!important;pointer-events:auto!important;}
+</style>
+<script id="r9p-settings-password-data-protection-access">
+(function(){
+  'use strict';
+
+  // UI visibility rule: Data Protection is shown only when the Firebase account
+  // and the mapped signed-in auditor both match Troy De Guzman or Dianne Armas.
+  window.updateDataProtectionAccessV1 = function(){
+    const panel = document.getElementById('dataProtectionCardV1');
+    if(!panel) return false;
+    const email = String(window.auth?.currentUser?.email || '').trim().toLowerCase();
+    const mapped = (typeof authorizedUsers === 'object' && authorizedUsers)
+      ? String(authorizedUsers[email] || '').trim().toLowerCase() : '';
+    const logged = String(currentLoggedAuditor || '').trim().toLowerCase();
+    const allowedNames = new Set(['troy de guzman','dianne armas']);
+    const allowed = Boolean(mapped && mapped === logged && allowedNames.has(mapped));
+    panel.hidden = !allowed;
+    panel.style.display = allowed ? '' : 'none';
+    panel.setAttribute('aria-hidden', allowed ? 'false' : 'true');
+    return allowed;
+  };
+
+  // Settings password change: keep credentials in memory only and require 6 characters.
+  window.changeCurrentUserPasswordV1 = async function(event){
+    if(event && typeof event.preventDefault === 'function') event.preventDefault();
+    const form = document.getElementById('changePasswordFormV1');
+    const status = document.getElementById('changePasswordStatusV1');
+    const submit = document.getElementById('changePasswordSubmitV1');
+    const say = (message,state) => { if(status){ status.textContent = message; status.dataset.state = state || ''; } };
+    const current = document.getElementById('currentPasswordV1')?.value || '';
+    const next = document.getElementById('newPasswordV1')?.value || '';
+    const confirmNext = document.getElementById('confirmNewPasswordV1')?.value || '';
+    const user = window.auth?.currentUser;
+    if(!user || !user.email){ say('Please sign in again before changing your password.','error'); return false; }
+    if(next.length < 6){ say('Use at least 6 characters for the new password.','error'); return false; }
+    if(next !== confirmNext){ say('The new password and confirmation do not match.','error'); return false; }
+    if(next === current){ say('The new password must be different from the current password.','error'); return false; }
+    if(submit) submit.disabled = true;
+    say('Verifying current password…','');
+    try{
+      // Load only the Firebase Auth methods needed here; do not change the existing bootstrap/save modules.
+      const authApi = await import('https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js');
+      const EmailAuthProvider = authApi.EmailAuthProvider;
+      const reauthenticateWithCredential = authApi.reauthenticateWithCredential;
+      const updatePassword = authApi.updatePassword;
+      if(!EmailAuthProvider?.credential || !reauthenticateWithCredential || !updatePassword){
+        say('Password update is unavailable until Firebase Authentication finishes loading.','error'); return false;
+      }
+      const credential = EmailAuthProvider.credential(user.email,current);
+      await reauthenticateWithCredential(user,credential);
+      await updatePassword(user,next);
+      if(form) form.reset();
+      say('Password updated successfully.','success');
+      if(typeof window.addAuditLog === 'function'){
+        try{ await window.addAuditLog('Changed account password',{module:'Account Security',operation:'UPDATE',recordId:'Firebase Authentication'}); }
+        catch(logError){ console.warn('Password change audit entry could not be recorded:',logError); }
+      }
+      return true;
+    }catch(error){
+      const code = String(error?.code || '');
+      if(code === 'auth/wrong-password' || code === 'auth/invalid-credential') say('Current password is incorrect. Please try again.','error');
+      else if(code === 'auth/weak-password') say('Firebase rejected the new password as too weak. Use a stronger password.','error');
+      else if(code === 'auth/requires-recent-login') say('Please sign out and sign in again, then retry the password change.','error');
+      else say('Password update failed. Check your connection and try again.','error');
+      console.error('Account password update failed:',code || error);
+      return false;
+    }finally{ if(submit) submit.disabled = false; }
+  };
+
+  // Initial hidden state is already in markup. Reapply after page DOM is ready;
+  // the existing login/settings access refresh calls handle post-login changes.
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded',()=>window.updateDataProtectionAccessV1(),{once:true});
+  }else{
+    window.updateDataProtectionAccessV1();
+  }
 })();
 </script>
 </body>
