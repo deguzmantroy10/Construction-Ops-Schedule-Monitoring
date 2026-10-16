@@ -21951,6 +21951,7 @@ window.openOrgBranchModalV1=function(mode='live'){
 .sidebar{z-index:9000!important;overflow:visible!important;}
 .sidebar-status-footer,.sidebar-online-wrap{position:relative!important;z-index:9100!important;overflow:visible!important;}
 .sidebar-online-wrap .online-users-panel,.online-users-panel.show{z-index:2147483647!important;isolation:isolate!important;pointer-events:auto!important;}
+
 </style>
 <script id="r9p-settings-password-data-protection-access">
 (function(){
@@ -22029,5 +22030,42 @@ window.openOrgBranchModalV1=function(mode='live'){
   }
 })();
 </script>
+
+
+
+<style id="weekly-header-row-shade-final">
+/* Weekly Log: header row only — include Auditor, all dates, and Remarks. No body-cell or layout overrides. */
+#weeklyBlocksContainer thead th,
+#weeklyBlocksContainer thead th:first-child {
+  background: #c9def7 !important;
+  color: #1e426d !important;
+  box-shadow: inset 0 -1px 0 #b3cfee !important;
+}
+</style>
+
+<style id="weekly-auditor-rows-left-align-v2">
+/* Weekly Log: align auditor entries consistently to the left. Keep the Auditor and Remarks headers centered. */
+#weeklyBlocksContainer thead th:first-child,
+#weeklyBlocksContainer thead th:last-child {
+  text-align: center !important;
+}
+#weeklyBlocksContainer tbody tr:not(.weekly-division-row-v25) > td:first-child {
+  text-align: left !important;
+}
+#weeklyBlocksContainer .weekly-auditor {
+  justify-content: flex-start !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+/* Keep division rows (Site Warehousing / Inventory Management) left aligned as before. */
+#weeklyBlocksContainer .weekly-division-row-v25 > td {
+  text-align: left !important;
+}
+#weeklyBlocksContainer .weekly-division-row-v25 > td > span {
+  justify-content: flex-start !important;
+  text-align: left !important;
+}
+</style>
+
 </body>
 </html>
