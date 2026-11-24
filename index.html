@@ -128,6 +128,7 @@
 
 <style id="site-meeting-schedule-polish-v1">#siteVisitPage .site-calendar-event-v8{cursor:help;}#siteVisitPage .site-calendar-event-v8:focus-visible{outline:2px solid #1d4ed8;outline-offset:1px;}body>.site-schedule-modal .site-schedule-modal-card{width:min(860px,calc(100vw - 32px))!important;max-height:min(88vh,820px)!important;overflow:auto!important;border:1px solid #d8e3f1!important;border-radius:18px!important;background:#fff!important;box-shadow:0 28px 80px rgba(15,35,75,.28)!important;}body>.site-schedule-modal .site-schedule-modal-header{min-height:unset!important;padding:22px 26px 18px!important;align-items:flex-start!important;gap:18px!important;background:linear-gradient(135deg,#fff 0%,#f4f8ff 100%)!important;border-bottom:1px solid #e1e9f4!important;}body>.site-schedule-modal .site-schedule-modal-eyebrow{margin-bottom:6px!important;font-size:10px!important;letter-spacing:1.2px!important;color:#2563eb!important;}body>.site-schedule-modal .site-schedule-modal-header h3{font-size:22px!important;line-height:1.25!important;color:#102a56!important;letter-spacing:-.35px!important;}body>.site-schedule-modal .site-schedule-modal-header p{margin-top:7px!important;max-width:560px!important;font-size:12px!important;line-height:1.55!important;color:#64748b!important;}body>.site-schedule-modal .site-schedule-modal-close{width:36px!important;height:36px!important;min-width:36px!important;border-radius:10px!important;font-size:15px!important;}body>.site-schedule-modal .site-visit-form-container{padding:20px 24px 24px!important;}body>.site-schedule-modal form{padding:22px!important;border:1px solid #e0e8f3!important;border-radius:14px!important;background:#fff!important;box-shadow:0 4px 18px rgba(15,35,75,.045)!important;}body>.site-schedule-modal .form-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:17px 18px!important;}body>.site-schedule-modal .form-group{display:flex!important;flex-direction:column!important;gap:7px!important;min-width:0!important;}body>.site-schedule-modal .form-group label{font-size:11px!important;font-weight:750!important;letter-spacing:.1px!important;color:#263c5b!important;}body>.site-schedule-modal .form-group input,body>.site-schedule-modal .form-group select{width:100%!important;min-height:43px!important;height:43px!important;padding:0 12px!important;border:1px solid #cfd9e8!important;border-radius:9px!important;background:#fff!important;color:#172b4d!important;font-size:13px!important;box-shadow:0 1px 2px rgba(15,23,42,.025)!important;transition:border-color .15s ease,box-shadow .15s ease!important;}body>.site-schedule-modal .form-group input:focus,body>.site-schedule-modal .form-group select:focus{outline:none!important;border-color:#5b8def!important;box-shadow:0 0 0 3px rgba(59,130,246,.13)!important;}body>.site-schedule-modal .site-schedule-modal-actions{display:flex!important;justify-content:flex-end!important;gap:10px!important;padding-top:8px!important;margin-top:2px!important;border-top:1px solid #e7edf5!important;}body>.site-schedule-modal .site-schedule-modal-actions button{min-height:42px!important;height:42px!important;padding:0 18px!important;border-radius:9px!important;font-size:12px!important;font-weight:750!important;}body>.site-schedule-modal .site-schedule-conflict-notice-v1[hidden]{display:none!important;}body>.site-schedule-modal .site-schedule-conflict-notice-v1{padding:14px 16px!important;border:1px solid #b7e0c4!important;border-radius:11px!important;background:#f0fbf4!important;color:#245a37!important;font-size:12px!important;line-height:1.45!important;}body>.site-schedule-modal .site-schedule-conflict-notice-v1.has-conflict{border-color:#f2c27b!important;background:#fff8eb!important;color:#8a4b08!important;}body>.site-schedule-modal .site-schedule-conflict-title-v1{display:flex;align-items:center;flex-wrap:wrap;gap:8px;font-size:13px!important;}body>.site-schedule-modal .site-schedule-conflict-title-v1>i{font-size:15px!important;}body>.site-schedule-modal .site-schedule-conflict-title-v1>span{margin-left:auto;padding:3px 7px;border-radius:999px;background:#ffedc9;color:#8a4b08;font-size:10px;font-weight:800;}body>.site-schedule-modal .site-schedule-conflict-notice-v1 p{margin:7px 0 4px!important;}body>.site-schedule-modal .site-schedule-conflict-notice-v1 ul{margin:5px 0 6px!important;padding-left:20px!important;}body>.site-schedule-modal .site-schedule-conflict-notice-v1 li{margin:3px 0!important;}body>.site-schedule-modal .site-schedule-conflict-notice-v1 small{display:block;margin-top:7px!important;color:#80551c!important;font-size:11px!important;}@media(max-width:680px){body>.site-schedule-modal{padding:10px!important;}body>.site-schedule-modal .site-schedule-modal-card{width:calc(100vw - 20px)!important;max-height:94vh!important;}body>.site-schedule-modal .site-schedule-modal-header{padding:17px 16px 14px!important;}body>.site-schedule-modal .site-schedule-modal-header h3{font-size:19px!important;}body>.site-schedule-modal .site-visit-form-container{padding:12px!important;}body>.site-schedule-modal form{padding:14px!important;}body>.site-schedule-modal .form-grid{grid-template-columns:minmax(0,1fr)!important;gap:13px!important;}body>.site-schedule-modal .form-group[style*="grid-column"]{grid-column:1!important;}body>.site-schedule-modal .site-schedule-modal-actions{flex-wrap:wrap;}body>.site-schedule-modal .site-schedule-conflict-title-v1>span{margin-left:0;}}</style>
 
+<!-- SHA edit H26-R9AS: Mandays Activity Remarks now wrap and auto-grow; save, calculations, pagination, Firebase conflict handling, and export flows retained. -->
 </head>
 <body class="auth-lock">
 
@@ -9210,6 +9211,12 @@ async function saveMandaysData(data, auditorName = selectedMandaysAuditor || cur
             if (tableWrap) tableWrap.scrollTop = 0;
         }
 
+        function resizeMandaysRemarkFieldH26R(field) {
+            if (!field) return;
+            field.style.height = "auto";
+            field.style.height = `${Math.max(46, field.scrollHeight + 2)}px`;
+        }
+
         function renderMandaysPage() {
             if (!isApplicationAuthVerified()) return;
             const userDisp = document.getElementById("mandaysUserDisplay");
@@ -9244,6 +9251,13 @@ async function saveMandaysData(data, auditorName = selectedMandaysAuditor || cur
                 const row = entry.row;
                 const idx = entry.index;
                 const totalRowHrs = getMandaysRowHours(row);
+                const remarksHtml = String(row.remarks ?? "").replace(/[&<>"']/g, char => ({
+                    "&": "&amp;",
+                    "<": "&lt;",
+                    ">": "&gt;",
+                    '"': "&quot;",
+                    "'": "&#39;"
+                }[char]));
 
                 tbody.innerHTML += `
                     <tr>
@@ -9272,7 +9286,14 @@ async function saveMandaysData(data, auditorName = selectedMandaysAuditor || cur
                         <td style="text-align:center;"><input type="number" step="0.5" min="0" max="24" value="${Number(row.ld || 0) === 0 ? '' : row.ld}" class="mandays-hour-input" ${row.locked ? 'readonly' : ''} onchange="updateMandaysRow(${idx}, 'ld', parseFloat(this.value)||0)"></td>
                         <td style="text-align:center;"><input type="number" step="0.5" min="0" max="24" value="${Number(row.siteVisit || 0) === 0 ? '' : row.siteVisit}" class="mandays-hour-input" ${row.locked ? 'readonly' : ''} onchange="updateMandaysRow(${idx}, 'siteVisit', parseFloat(this.value)||0)"></td>
                         <td style="text-align:center;"><input type="number" step="0.5" min="0" max="24" value="${Number(row.qas || 0) === 0 ? '' : row.qas}" class="mandays-hour-input" ${row.locked ? 'readonly' : ''} onchange="updateMandaysRow(${idx}, 'qas', parseFloat(this.value)||0)"></td>
-                        <td><input type="text" value="${row.remarks || ''}" ${row.locked ? 'readonly' : ''} onchange="updateMandaysRow(${idx}, 'remarks', this.value)"></td>
+                        <td class="mandays-remarks-cell"><textarea
+                            class="mandays-remarks-input"
+                            rows="2"
+                            aria-label="Activity remarks"
+                            ${row.locked ? 'readonly' : ''}
+                            oninput="resizeMandaysRemarkFieldH26R(this)"
+                            onchange="updateMandaysRow(${idx}, 'remarks', this.value)"
+                        >${remarksHtml}</textarea></td>
                         <td style="text-align:center;">
     <span class="mandays-total-hours">
         ${totalRowHrs.toFixed(1)}
@@ -9304,6 +9325,9 @@ async function saveMandaysData(data, auditorName = selectedMandaysAuditor || cur
                     </tr>
                 `;
             });
+
+            // Fit saved, potentially long activity descriptions on initial render.
+            tbody.querySelectorAll(".mandays-remarks-input").forEach(resizeMandaysRemarkFieldH26R);
 
             const pagination = document.getElementById("mandaysPagination");
             if (pagination) {
@@ -14690,6 +14714,66 @@ table:has(> thead + tbody.weekly-block-tbody) > thead > tr > th:last-child {
 table:has(tbody.weekly-block-tbody) > thead > tr > th:first-child,
 table:has(tbody.weekly-block-tbody) > thead > tr > th:last-child {
   text-align: center !important;
+}
+
+/* H26-R9AS: Mandays long Remarks — readable wrapping with content-driven row height. */
+#mandaysPage table {
+    table-layout: auto;
+}
+#mandaysPage thead th:nth-child(10),
+#mandaysPage tbody td:nth-child(10) {
+    min-width: 260px !important;
+    width: 260px;
+}
+#mandaysPage tbody tr {
+    height: auto !important;
+}
+#mandaysPage tbody td.mandays-remarks-cell {
+    height: auto !important;
+    min-height: 0 !important;
+    padding: 7px 8px !important;
+    vertical-align: top !important;
+    overflow: visible !important;
+}
+#mandaysPage tbody td.mandays-remarks-cell .mandays-remarks-input {
+    display: block !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    min-height: 46px !important;
+    height: auto;
+    margin: 0;
+    padding: 8px 10px !important;
+    box-sizing: border-box !important;
+    border: 1px solid #cbd8e8 !important;
+    border-radius: 9px !important;
+    background: linear-gradient(180deg, #ffffff, #fbfdff) !important;
+    color: #334155 !important;
+    font: 500 9.5px/1.45 "Inter", sans-serif !important;
+    text-align: left !important;
+    white-space: pre-wrap !important;
+    overflow-wrap: anywhere !important;
+    word-break: normal !important;
+    resize: none !important;
+    overflow: hidden !important;
+    box-shadow: inset 0 1px 2px rgba(15, 23, 42, .025) !important;
+}
+#mandaysPage tbody td.mandays-remarks-cell .mandays-remarks-input:focus {
+    outline: none !important;
+    border-color: #60a5fa !important;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, .08) !important;
+}
+#mandaysPage tbody td.mandays-remarks-cell .mandays-remarks-input[readonly] {
+    background: #f8fbff !important;
+    color: #475569 !important;
+    cursor: default;
+}
+@media (max-width: 760px) {
+    #mandaysPage thead th:nth-child(10),
+    #mandaysPage tbody td:nth-child(10) {
+        min-width: 230px !important;
+        width: 230px;
+    }
 }
 </style>
 </body>
